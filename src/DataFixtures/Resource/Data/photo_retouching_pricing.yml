@@ -1,0 +1,141 @@
+# emmo_test.photo_retouching_pricing
+-
+  id: 1
+  retouch_id: 6
+  order_delivery_time_id: 1
+  price: 9.00
+-
+  id: 2
+  retouch_id: 6
+  order_delivery_time_id: 2
+  price: 13.50
+-
+  id: 3
+  retouch_id: 7
+  order_delivery_time_id: 1
+  price: 8.50
+-
+  id: 4
+  retouch_id: 7
+  order_delivery_time_id: 2
+  price: 12.75
+-
+  id: 5
+  retouch_id: 1
+  order_delivery_time_id: 1
+  price: 24.00
+-
+  id: 6
+  retouch_id: 1
+  order_delivery_time_id: 2
+  price: 36.00
+-
+  id: 7
+  retouch_id: 8
+  order_delivery_time_id: 3
+  price: 70.00
+-
+  id: 8
+  retouch_id: 3
+  order_delivery_time_id: 1
+  price: 2.50
+-
+  id: 9
+  retouch_id: 3
+  order_delivery_time_id: 2
+  price: 5.00
+-
+  id: 10
+  retouch_id: 2
+  order_delivery_time_id: 1
+  price: 13.00
+-
+  id: 11
+  retouch_id: 2
+  order_delivery_time_id: 2
+  price: 19.50
+-
+  id: 12
+  retouch_id: 5
+  order_delivery_time_id: 3
+  price: 75.00
+-
+  id: 13
+  retouch_id: 16
+  order_delivery_time_id: 1
+  price: 5.00
+-
+  id: 14
+  retouch_id: 16
+  order_delivery_time_id: 2
+  price: 7.50
+-
+  id: 15
+  retouch_id: 9
+  order_delivery_time_id: 1
+  price: 7.50
+-
+  id: 16
+  retouch_id: 9
+  order_delivery_time_id: 2
+  price: 11.25
+-
+  id: 17
+  retouch_id: 10
+  order_delivery_time_id: 1
+  price: 13.00
+-
+  id: 18
+  retouch_id: 10
+  order_delivery_time_id: 2
+  price: 15.00
+-
+  id: 19
+  retouch_id: 11
+  order_delivery_time_id: 1
+  price: 12.00
+-
+  id: 20
+  retouch_id: 11
+  order_delivery_time_id: 2
+  price: 18.00
+-
+  id: 21
+  retouch_id: 12
+  order_delivery_time_id: 4
+  price: 9.00
+-
+  id: 22
+  retouch_id: 12
+  order_delivery_time_id: 5
+  price: 13.50
+-
+  id: 23
+  retouch_id: 13
+  order_delivery_time_id: 5
+  price: 8.50
+-
+  id: 24
+  retouch_id: 13
+  order_delivery_time_id: 4
+  price: 12.75
+-
+  id: 25
+  retouch_id: 14
+  order_delivery_time_id: 4
+  price: 13.00
+-
+  id: 26
+  retouch_id: 14
+  order_delivery_time_id: 5
+  price: 19.50
+-
+  id: 27
+  retouch_id: 15
+  order_delivery_time_id: 4
+  price: 2.50
+-
+  id: 28
+  retouch_id: 15
+  order_delivery_time_id: 5
+  price: 5.00

@@ -1,0 +1,124 @@
+#####################################################
+#                                                   #
+#        Params form configuration                  #
+#                                                   #
+#####################################################
+parameters:
+  params_validation:
+      choice_type:
+          - choice
+          - radio
+          - checkbox
+      image_renovation_type:
+          - image_renovation
+  position:
+      left:                             form.position.left
+      right:                            form.position.right
+  form_type:
+      text_no_label:                    form.form_type.text_no_label
+      text:                             form.form_type.text
+      number:                           form.form_type.number
+      textarea:                         form.form_type.textarea
+      choice:                           form.form_type.choice
+      country:                          form.form_type.country
+      language:                         form.form_type.language
+      currency:                         form.form_type.currency
+      date:                             form.form_type.date
+      dateInterval:                     form.form_type.dateInterval
+      dateTime:                         form.form_type.dateTime
+      image:                            form.form_type.image
+      file:                             form.form_type.file
+      checkbox:                         form.form_type.checkbox
+      radio:                            form.form_type.radio
+      placement:                        form.form_type.placement
+      boolean:                          form.form_type.boolean
+      image_renovation:                 form.form_type.image_renovation
+  dynamic_form_types:
+    types:
+      text_no_label:                    App\Form\Shared\Type\TextType
+      text:                             Symfony\Component\Form\Extension\Core\Type\TextType
+      number:                           Symfony\Component\Form\Extension\Core\Type\NumberType
+      textarea:                         App\Form\Shared\Type\TextareaType
+      choice:                           Symfony\Component\Form\Extension\Core\Type\ChoiceType
+      country:                          Symfony\Component\Form\Extension\Core\Type\CountryType
+      language:                         Symfony\Component\Form\Extension\Core\Type\LanguageType
+      currency:                         Symfony\Component\Form\Extension\Core\Type\CurrencyType
+      date:                             Symfony\Component\Form\Extension\Core\Type\DateType
+      dateInterval:                     Symfony\Component\Form\Extension\Core\Type\DateIntervalType
+      dateTime:                         Symfony\Component\Form\Extension\Core\Type\DateTimeType
+      image:                            App\Form\Shared\Type\FileType
+      file:                             App\Form\Shared\Type\FileType
+      checkbox:                         App\Form\Shared\Type\CheckboxType
+      radio:                            App\Form\Shared\Type\RadioType
+      placement:                        App\Form\Shared\Type\PlacementType
+      boolean:                          App\Form\Shared\Type\BoolType
+      image_renovation:                 App\Form\Shared\Type\ImageRenovationType
+    choice_type:
+      - 'choice'
+      - 'radio'
+      - 'checkbox'
+    renovation_type:
+      - 'image_renovation'
+  dynamic_form_constraints:
+    boolean:
+      class:                            Symfony\Component\Validator\Constraints\Choice
+      options:
+        - "yes"
+        - "no"
+    image:
+      class:                            App\Validator\Constraints\URLAndFile
+      options:
+        maxSize:                        2048k
+        mimeTypes:
+          - image/*
+    file:
+      class:                            App\Validator\Constraints\URLAndFile
+      options:
+        maxSize:                        3048k
+        mimeTypes:
+          - application/pdf
+          - application/msword
+          - application/vnd.ms-powerpoint
+          - application/vnd.openxmlformats-officedocument.presentationml.presentation
+          - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+          - image/*
+    date:
+      class:                            Symfony\Component\Validator\Constraints\Date
+    text_no_label:
+      class:                            Symfony\Component\Validator\Constraints\Length
+      options:
+        min:                            0
+        max:                            250
+    text:
+      class:                            Symfony\Component\Validator\Constraints\Length
+      options:
+        min:                            0
+        max:                            250
+    textarea:
+      class:                            Symfony\Component\Validator\Constraints\Length
+      options:
+        min:                            0
+        max:                            1500
+    number:
+      class:                            Symfony\Component\Validator\Constraints\Regex
+      options:
+        pattern:                        '/\d/'
+        match:                          false
+  # bool type
+  bool_options:
+    form.type.bool.yes:                 "yes"
+    form.type.bool.no:                  "no"
+  # placement type
+  placement_options:
+    options:
+        - "lt"
+        - "lm"
+        - "lb"
+        - "mt"
+        - "mm"
+        - "mb"
+        - "rt"
+        - "rm"
+        - "rb"
+    default:                            "lt"
+    split_by:                           3

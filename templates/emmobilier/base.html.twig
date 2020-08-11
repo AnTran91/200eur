@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>
+        {% block title %}Emmobilier{% endblock %}
+    </title>
+
+    <!-- BEGIN META -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="author" content="rami2sfari@gmail.com"/>
+    <meta name="author" content="hamza.mahan.tn@gmail.com"/>
+    <meta name="description" content="L’Excellence de la Retouche Photo Immobilière."/>
+    <meta name="keywords" content="Retouche,Prestation,Immobilière,Photo">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico', 'local_icons') }}"/>
+    <!--End META -->
+
+    <!-- BEGIN STYLES -->
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('themes/pink/pace-theme-flash.min.css', 'pace') }}"/>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css', 'bootstrap') }}">
+        <link rel="stylesheet" href="{{ asset('css/alertify.min.css', 'alertify') }}"/>
+        <link rel="stylesheet" href="{{ asset('css/themes/default.min.css', 'alertify') }}"/>
+        <link rel="stylesheet" href="{{ asset('style.min.css', 'local_css') }}">
+        <link rel="stylesheet" href="{{ asset('custom.min.css', 'local_css') }}">
+    {% endblock %}
+    <!-- END STYLES -->
+</head>
+
+<!-- BEGIN BODY -->
+<body>
+<!-- BEGIN LOADER -->
+{% block loader %}
+    <div id="js-loader" class="loader-container" style="display: none;">
+        <div class="loader-content"></div>
+        <div class="pt-3">
+            <p class="loader-text">{{ "loader_msg"|trans }}</p>
+        </div>
+    </div>
+{% endblock %}
+<!-- END LOADER -->
+
+<div id="js-body-content">
+    <!-- BEGIN HEADER -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light light-blue-bg">
+            <a class="navbar-brand" href="{{ path('order_list') }}">
+                <img src="{{ asset('transparent-logo.png', 'local_icons') }}" class="nav-logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto pl-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('order_list') }}">{{ 'menu.order'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ path('fos_user_profile_edit') }}">{{ 'menu.edit_account'|trans }}</a>
+                    </li>
+                    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('dashboard', {'_switch_user': '_exit'}) }}">{{ 'menu.exit'|trans }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown my-2 my-lg-0">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% if app.user.imageName is null %}
+                                <img class="profile-img" src="{{ asset('profile.jpg', 'local_icons') }}">
+                            {% else %}
+                                <img class="profile-img" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+                            {% endif %}
+                            <span class="text-capitalize pl-1">
+                    {% if app.user.firstName is not empty or app.user.lastName is not empty %}
+                        {{ app.user.firstName ~ " " ~ app.user.lastName }}
+                    {% else %}
+                        {{ app.user.email }}
+                    {% endif %}
+                  </span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"
+                               href="{{ path('fos_user_profile_show') }}">{{ 'menu.profile'|trans }}</a>
+                            <a class="dropdown-item"
+                               href="{{ path('fos_user_change_password') }}">{{ 'menu.setting'|trans }}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item mb-logout"
+                               data-box="#logout-message-box">{{ 'menu.logout'|trans }}</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="tirelire-btn" href="#tirelire"
+                           id="js-wallet-show-modal">{{ 'menu.wallet'|trans({'%amount%' : app.user.wallet.currentAmount|price }) }}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- END HEADER -->
+
+    <!-- BEGIN BODY -->
+    <main class="center" role="main">
+        {% block body %}{% endblock %}
+    </main>
+    <!-- END BODY -->
+
+    <!-- BEGIN FOOTER-->
+    <footer class="page-footer">
+        <!-- BEGIN COPYRIGHT -->
+        <div class="footer-copyright text-center">
+            Version :
+            <span class="footer-version">{{ version }}</span>
+        </div>
+        <!-- END COPYRIGHT -->
+    </footer>
+    <!-- END FOOTER -->
+
+</div>
+
+<!-- BEGIN LOGOUT ALERT -->
+<div class="message-box animated fadeIn" id="logout-message-box">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title">
+                <i class="fas fa-sign-out-alt"></i>
+                {{ 'logout.question'|trans }}</div>
+            <div class="mb-content">
+                <p>{{ 'logout.info'|trans }}</p>
+            </div>
+            <div class="mb-footer">
+                <div class="float-right">
+                    <button class="btn btn-info js-mb-control-close">{{ 'logout.cancel'|trans }}</button>
+                    <a role="button" href="{{ url('fos_user_security_logout') }}"
+                       class="btn btn-danger">{{ 'logout.ok'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END LOGOUT ALERT -->
+
+<!-- BEGIN LOGOUT ALERT -->
+<div class="message-box animated fadeIn" id="js-logout-message-box">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title">
+                <i class="fas fa-sign-out-alt"></i>
+                {{ 'logout.title'|trans }}</div>
+            <div class="mb-content">
+                <p>{{ 'logout.info'|trans }}</p>
+                <p>Your session will expire in
+                    <span class="text-bold" id="js-session-seconds-remaining"></span>
+                    seconds.</p>
+            </div>
+            <div class="mb-footer">
+                <div class="float-right">
+                    <button id="js-logout-session" role="button" href="{{ url('fos_user_security_logout') }}"
+                            class="btn btn-danger">{{ 'logout.ok'|trans }}</button>
+                    <button id="js-stay-signed"
+                            class="btn btn-info js-mb-control-close">{{ 'logout.cancel'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END LOGOUT ALERT -->
+
+<!-- BEGIN JS SCRIPTS -->
+{% block javascripts %}
+    <script src="{{ asset('jquery-3.3.1.min.js', 'jquery') }}"></script>
+    <script src="{{ asset('popper.min.js', 'popper') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js', 'bootstrap') }}"></script>
+    <script src="{{ asset('alertify.min.js', 'alertify') }}"></script>
+    <script src="{{ asset('pace.min.js', 'pace') }}"></script>
+    <!-- default msg configs -->
+    <script>window.confirmText="{{ 'orders.confirm.title'|trans }}",window.ok="{{ 'orders.confirm.ok'|trans }}",window.cancel="{{ 'orders.confirm.cancel'|trans }}",window.deleteMsg="{{ 'orders.confirm.deletemsg'|trans }}",window.continueMsg="{{ 'orders.confirm.continuemsg'|trans }}",window.deleteError="{{ 'orders.msg.order_delete_error'|trans }}";</script>
+    <!-- BEGIN PiggyBank -->
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+    <script src="{{ asset('wallet.min.js', 'local_js') }}"></script>
+    <script src="{{ asset('main.min.js', 'local_js') }}"></script>
+
+    <!-- BEGIN FLASH MSG -->
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+        <script>
+            $(document).ready(function () {
+                {% if type == 'flash_msg_error' or type == 'error' %}
+                    alertify.error('{{ message }}', 20)
+                        .set({transition: 'pulse'});
+                {% else %}
+                    alertify.success('{{ message }}', 20)
+                        .set({transition: 'pulse'});
+                {% endif %}
+            });
+        </script>
+        {% endfor %}
+    {% endfor %}
+    <!-- END FLASH MSG -->
+{% endblock %}
+<!-- END JS SCRIPTS -->
+
+<!-- BEGIN WALLET SECTION -->
+<div class="js-wallet-modal"></div>
+<!-- END WALLET SECTION -->
+
+<!-- END LOGOUT -->
+</body>
+<!-- END BODY -->
+</html>

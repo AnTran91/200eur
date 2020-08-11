@@ -1,0 +1,114 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}
+  {{'admin.user.new_user'|trans}}
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/multi-select.min.css', 'multiselect')}}"/>
+  {{ parent()}}
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('admin_user_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.user.user_list'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    {{ 'admin.user.new_user'|trans }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="list-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        {% include('admin/user/_form.html.twig')with {
+          'title' : 'admin.user.new_user' | trans
+        } %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <!-- cdn -->
+  <script src="{{ asset('quicksearch/jquery.quicksearch.js', 'admin_vendor') }}"></script>
+  <script src="{{ asset('js/jquery.multi-select.min.js', 'multiselect')}}"></script>
+  <!-- Main JS-->
+  <script>
+    $(document).ready(function() {
+      function readURL(input, img) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $(img).css('background-image', "url(" + e.target.result + ")");
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      $(document).on("change", "input[type='file']", function() {
+        readURL(this, $(this).parents('div .media').find("#js-thumb-prev"));
+      });
+      $('.js-multi-select-selector').multiSelect({
+          keepOrder: true,
+          selectableHeader: "<input type='text' class='form-control selectable-input mb-2' autocomplete='off' placeholder='{{ 'admin.common.search'|trans }}'>",
+          selectionHeader: "<input type='text' class='form-control selectable-input mb-2' autocomplete='off' placeholder='{{ 'admin.common.search'|trans }}'>",
+          afterInit: function (ms) {
+              var that = this,
+                  $selectableSearch = that.$selectableUl.prev(),
+                  $selectionSearch = that.$selectionUl.prev(),
+                  selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+                  selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+              console.log(selectableSearchString);
+              that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                  .on('keydown', function (e) {
+                      if (e.which === 40) {
+                          that.$selectableUl.focus();
+                          return false;
+                      }
+                  });
+              console.log(selectionSearchString);
+              that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                  .on('keydown', function (e) {
+                      if (e.which == 40) {
+                          that.$selectionUl.focus();
+                          return false;
+                      }
+                  });
+          },
+          afterSelect: function () {
+              this.qs1.cache();
+              this.qs2.cache();
+          },
+          afterDeselect: function () {
+              this.qs1.cache();
+              this.qs2.cache();
+          }
+      });
+    });
+  </script>
+{% endblock %}

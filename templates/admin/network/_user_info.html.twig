@@ -1,0 +1,42 @@
+{% trans_default_domain 'admin' %}
+
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">{{ user.fullName() }}</h3>
+    <div class="card-options">
+      <a target="_blank" href="{{ path('admin_user_show', {'id': user.id}) }}" class="btn btn-primary btn-sm">
+        <i class="fe fe-eye"></i>
+        {{ 'admin.common.action.show'|trans }}
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="media">
+      <span class="avatar avatar-xxl mr-5" style="background-image: url({{ vich_uploader_asset(user, 'imageFile')|default(asset('default_profile.png', 'admin_images')) }})"></span>
+      <div class="media-body mb-4">
+        <h4 class="m-3">{{ user.fullName() }}</h4>
+        <p class="text-muted m-3">{{ user.email }}</p>
+      </div>
+    </div>
+    <table class="table table-top-campaign">
+      <tbody>
+        <tr>
+          <td>{{ 'admin.user.billing_address.first_name'|trans }}:</td>
+          <td>{{ user.billingAddress.firstName|default('admin.user.empty_field'|trans) }}</td>
+        </tr>
+        <tr>
+          <td>{{ 'admin.user.billing_address.last_name'|trans }}:</td>
+          <td>{{ user.billingAddress.lastName|default('admin.user.empty_field'|trans) }}</td>
+        </tr>
+        <tr>
+          <td>{{ 'admin.user.billing_address.address'|trans }}:</td>
+          <td>{{ user.billingAddress.address|default('admin.user.empty_field'|trans) }}</td>
+        </tr>
+        <tr>
+          <td>{{ 'admin.user.billing_address.phone'|trans }}:</td>
+          <td>{{ user.billingAddress.phone|default('admin.user.empty_field'|trans) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

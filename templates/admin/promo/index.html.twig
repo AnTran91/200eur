@@ -1,0 +1,142 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% form_theme filter_form with['_shared_components/form_layout.html.twig', '_shared_components/form_switch_layout.html.twig'] %}
+
+{% block stylesheets %}
+  {{ parent()}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('daterangepicker.min.css', 'daterangepicker') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datepicker.min.css', 'date_picker') }}"/>
+{% endblock %}
+
+{% block title %}
+  {{'admin.promo.promos_list'|trans}}
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                    <li class="list-inline-item active">
+                        <a href="#"><i class="fe fe-home"></i>
+                        {{'admin.promo.promos_list'|trans}}</a>
+                    </li>
+                    <li class="list-inline-item seprate">
+                        <span>/</span>
+                    </li>
+                </ul>
+              </div>
+              <div class="btn-list">
+                <a href="{{ path('admin_promo_new', {'type': 'counter'}) }}" class="btn btn-pill btn-primary">
+                  <i class="fe fe-plus-circle"></i>
+                  {{'admin.promo.promo_with_picture_counter_new'|trans}}
+                </a>
+                <a href="{{ path('admin_promo_new', {'type': 'discount'}) }}" class="btn btn-pill btn-primary">
+                  <i class="fe fe-plus-circle"></i>
+                  {{'admin.promo.promo_with_picture_discount_new'|trans}}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="list-content">
+    <div class="section__content section__content--p30" id="js-promo-list">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- DATA TABLE -->
+            <h3 class="title-5 m-b-35">{{'admin.promo.promos_list'|trans}}</h3>
+
+            <!-- ACTIONS -->
+            <div class="float-right pb-5 clearfix">
+              <button
+                type="button"
+                class="btn btn-danger"
+                id="js-delete-multiple-records"
+                data-href="{{ path('admin_promo_bulk_expire')}}"
+                data-token="{{ csrf_token('multiselect_promo') }}"
+                data-title="{{ 'admin.common.modal_title'|trans }}"
+                data-msg="{{ 'admin.common.mutiple_expire_msg'|trans }}">
+                <i class="fas fa-lock mr-2"></i>{{ 'admin.promo.actions.expired'|trans }}
+              </button>
+            </div>
+            <!-- END ACTIONS -->
+
+            {% include 'admin/promo/_filter_form.html.twig' %}
+
+            <div class="card">
+              <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap" id="js-card-table">
+                  <thead>
+                    <tr>
+                      <th>
+                        <label class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="js-select-all">
+                          <span class="custom-control-label"></span>
+                        </label>
+                      </th>
+                      <th>{{ js_sortable_render(promos, 'admin.promo.code'|trans, 'promoCode') }}</th>
+                      <th>{{ 'admin.promo.type'|trans }}</th>
+                      <th>{{ js_sortable_render(promos, 'admin.common.start_date'|trans, 'startDate') }}</th>
+                      <th>{{ js_sortable_render(promos, 'admin.common.end_date'|trans, 'endDate') }}</th>
+                      <th>{{ js_sortable_render(promos, 'admin.promo.expired'|trans, 'expired') }}</th>
+                      <th></th>
+                    </tr>
+                    <tr class="spacer"></tr>
+                  </thead>
+                  <tbody>
+                    {% include 'admin/promo/_list.html.twig' with {
+                      'promos' : promos
+                    }
+                    only %}
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer">
+                <div class="float-right">
+                  {{ js_pagination_render(promos) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('jquery.bootpag.min.js', 'admin_js') }}"></script>
+  <script src="{{ asset('selectize/selectize.min.js', 'admin_vendor') }}"></script>
+  <script src="{{ asset('moment.min.js', 'momentjs') }}"></script>
+  {# <script src="{{ asset('daterangepicker.min.js', 'daterangepicker') }}"></script> #}
+  <script src="{{ asset('js/bootstrap-datepicker.min.js' , 'date_picker') }}"></script>
+  <script src="{{ asset('paginator.min.js', 'admin_js') }}"></script>
+  <script>
+    (function($) {
+      // USE STRICT
+      "use strict";
+      var paginator = new Paginator($("#js-promo-list"));
+    })(jQuery);
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('.js-datepicker').datepicker({
+          format: 'dd/mm/yyyy'
+      });
+    });
+  </script>
+{% endblock %}

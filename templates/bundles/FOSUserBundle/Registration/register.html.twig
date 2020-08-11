@@ -1,0 +1,56 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+  <div id="js-registration-content">
+    {% include "@FOSUser/Registration/register_content.html.twig" %}
+  </div>
+{% endblock fos_user_content %}
+
+{% block title %}
+  {{ 'registration.registration'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/all.css', 'fontawesome') }}">
+  <link rel="stylesheet" href="{{ asset('css/intlTelInput.css', 'intl_tel_input') }}"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" />
+  {{ parent() }}
+{% endblock %}
+
+{% block return %}
+  <a class="login-back-btn" href="{{ path('fos_user_security_login') }}">
+    <i class="fas fa-arrow-left"></i>
+    {{ 'registration.back'|trans }}
+  </a>
+{% endblock %}
+
+{% block tutorialVideo %}
+  <div class="show-vimeo">
+    <a href="/uploads/videos/tutorial_video.mp4" class="popup-tutorial tutorial-btn">
+      <i class="fas fa-film"></i>
+      {{ 'registration.tutorial'|trans }}
+    </a>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="https://www.google.com/recaptcha/api.js?hl={{ app.request.locale }}"></script>
+  <script src="{{ asset('jquery-3.3.1.min.js', 'jquery') }}"></script>
+  <script src="{{ asset('js/intlTelInput.min.js', 'intl_tel_input') }}"></script>
+  <script src="{{ asset('js/bootstrap.min.js', 'bootstrap') }}"></script>
+  <script src="{{ asset('registration.min.js', 'local_js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+  <script type="text/javascript">
+    (function($) {
+      $registration = new Registration($('#js-registration-content'), {
+        tel_script_url: "{{ asset('js/utils.js', 'intl_tel_input') }}",
+        default_country: 'FR'
+      });
+    })(jQuery);
+    $('a.popup-tutorial').magnificPopup({
+      type: 'iframe'
+    });
+  </script>
+{% endblock javascripts %}

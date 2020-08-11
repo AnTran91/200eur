@@ -1,0 +1,111 @@
+{% extends 'emmobilier/base.html.twig' %}
+
+{% block title %}
+  {{ 'orders.recap.title'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent()}}
+  <!-- BEGIN PAGE STYLES -->
+  <link rel="stylesheet" href="{{ asset('css/all.css', 'fontawesome') }}" />
+  <link rel="stylesheet" href="{{ asset('image-picker.min.css', 'image_picker') }}" />
+  <!-- END PAGE STYLES -->
+{% endblock %}
+
+{% block body %}
+  <main class="center" role="main">
+    <section class="row main-title">
+      <div class="col-md-6">
+        <img src="{{ asset('icon_valider_image.svg', 'local_icons') }}" class="page-title-img">
+        <h2>{{ 'orders.recap.title'|trans }}</h2>
+      </div>
+    </section>
+
+    <div class="row lt-px-auto">
+      <section class="param-card">
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="pb-3">
+              {% if order is not waiting_for_payment %}
+                  {{ 'orders.recap.sub_title'|trans({'%order_num%': "%06s"|format(order.orderNumber) , '%date%' : order.creationDate|date('d/m/Y')})|raw }}
+              {% else %}
+                  {{ 'orders.recap.sub_title_not_paid'|trans({'%date%' : order.creationDate|date('d/m/Y')})|raw }}
+              {% endif %}
+            </h4>
+
+            <div class="lt-px-auto-small">
+              <table class="table table-hover price-table" id="js-recap-order-table">
+                {% include 'emmobilier/_shared_components/_uploaded_pictures_recap.html.twig' with {
+                  'response' : response,
+                  'order': order
+                } %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="row" id="js-upload-section">
+      {% for picture in order.pictures %}
+        <article class="param-card">
+          <div class="">
+            <div class="row">
+              <div class="col-md-3 lt-px-auto-small param-img-preview">
+                <img src="{{ picture.picturePathThumb }}">
+                <p class="small-link">{{ picture.pictureName }}</p>
+              </div>
+              <div class="col-md-9">
+                <div class="form-spacing-bottom js-retouch-form-section">
+                  <div class="form-row" id="js-picture-retouch">
+                    {% for pictureDetail in picture.pictureDetail %}
+                      <div class="col-lg-6 col-md-6 lt-px-auto-small">
+                        <p class="font-weight-bold">
+                          <i class="fas fa-check-square font-checkbox"></i>
+                          {{ pictureDetail.retouch.title|upper }}
+                          {{ pictureDetail.price|price }}</p>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div id="js-params-{{ picture.id }}">
+                <div id="accordion">
+                  {% for pictureDetail in picture.pictureDetail %}
+                    <div class="accordion" data-id="{{ pictureDetail.retouch.id }}" data-uuid="{{ picture.id }}">
+                      <div class="accordion-header" id="js-heading-{{ pictureDetail.retouch.id ~ '-' ~ picture.id }}">
+                        <a data-toggle="collapse" data-target="#js-collapse-{{ pictureDetail.retouch.id ~ '-' ~ picture.id }}" class="js-accordion-header collapsed" aria-expanded="true" aria-controls="js-collapse-{{ pictureDetail.retouch.id ~ '-' ~ picture.id }}">
+                          {{ pictureDetail.retouch.title|upper }}
+                        </a>
+                      </div>
+                      <div id="js-collapse-{{ pictureDetail.retouch.id ~ '-' ~ picture.id }}" class="collapse" aria-labelledby="js-heading-{{ pictureDetail.retouch.id ~ '-' ~ picture.id }}" data-parent="#accordion">
+                        <div class="accordion-content"></div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </section>
+  </main>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  <!-- START PAGE JS SCRIPTS -->
+  <script src="{{ asset('image-picker.min.js', 'image_picker') }}"></script>
+  <script src="{{ asset('param-form.min.js', 'local_js') }}"></script>
+  <script>
+    (function($) {
+      var uploader = new ParamDynamicForm($("#js-upload-section"), {new_param_form_url: 'edit_render_param_form'});
+    })(jQuery);
+  </script>
+  <!-- END PAGE JS SCRIPTS -->
+
+{% endblock %}

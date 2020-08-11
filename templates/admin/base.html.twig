@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="author" content="rami2sfari@gmail.com"/>
+    <meta name="author" content="hamza.mahan.tn@gmail.com"/>
+    <meta name="description" content="L’Excellence de la Retouche Photo Immobilière."/>
+    <meta name="keywords" content="Retouche,Prestation,Immobilière,Photo">
+
+    <link rel="icon" href="{{ asset('favicon.ico', 'admin_images') }}" type="image/x-icon"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico', 'admin_images') }}"/>
+
+    {% trans_default_domain 'admin' %}
+
+    <!-- Title Page-->
+    <title>
+      {% block title %}Emmobilier | Admin{% endblock %}
+    </title>
+    <!-- End Title Page-->
+
+    {% block stylesheets %}
+
+      <!-- Font -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+
+      <!-- Fontfaces CSS-->
+      <link href="{{ asset('font-face.min.css', 'admin_css') }}" rel="stylesheet" media="all">
+      <link href="{{ asset('css/all.css', 'fontawesome') }}" rel="stylesheet" media="all">
+      <link href="{{ asset('mdi-font/css/material-design-iconic-font.min.css', 'admin_vendor') }}" rel="stylesheet" media="all">
+      <!-- Vendor CSS-->
+      <link rel="stylesheet" href="{{ asset('perfect-scrollbar/perfect-scrollbar.css', 'admin_vendor')}}" media="all">
+      <link rel="stylesheet" href="{{ asset('css/alertify.min.css', 'alertify') }}"/>
+      <link rel="stylesheet" href="{{ asset('css/themes/default.min.css', 'alertify') }}"/>
+      <!-- Main CSS-->
+      <link href="{{ asset('theme.min.css', 'admin_css') }}" rel="stylesheet" media="all">
+      <link href="{{ asset('dashboard.min.css', 'admin_css') }}" rel="stylesheet" media="all">
+      <!-- custom CSS-->
+      <link href="{{ asset('custom.min.css', 'admin_css') }}" rel="stylesheet" media="all">
+    {% endblock %}
+
+  </head>
+
+  <body>
+    <div id="js-loader" class="show-loader"></div>
+
+    <div id="js-content" class="page-wrapper animated fadeIn hide-content">
+      <!-- MENU SIDEBAR-->
+      <aside class="menu-sidebar2" id="js-menu-sidebar-lg">
+        {% include 'admin/sidebar_menu.html.twig' %}
+      </aside>
+      <!-- END MENU SIDEBAR-->
+
+      <!-- PAGE CONTAINER-->
+      <div class="page-container2" id="js-page-container-lg">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop2">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              <div class="header-wrap2">
+                <div class="logo d-block d-lg-none">
+                  <a href="#">
+                    <img src="{{ asset('emmobilier-admin-logo.png', 'admin_images') }}"/>
+                  </a>
+                </div>
+                <div class="header-button">
+                  {#<div class="header-button-item">#}
+                    {#<div class="content">#}
+                      {#<a class="js-acc-btn" href="{{ path('order_list') }}">#}
+                        {#<i class="zmdi zmdi-home"></i> {{ 'space_client'|trans }}</a>#}
+                    {#</div>#}
+                  {#</div>#}
+                  <div class="account-wrap">
+                    <div class="account-item clearfix js-item-menu">
+                      <div class="image">
+                        {% if app.user.imageName is not empty %}
+                          <img src="{{ vich_uploader_asset(app.user, 'imageFile') }}"/>
+                        {% else %}
+                          <img src="{{ asset('default_profile.png', 'admin_images') }}"/>
+                        {% endif %}
+                      </div>
+                      <div class="content">
+                        <a class="js-acc-btn" href="#">{{ "admin.profile.show"|trans }}</a>
+                      </div>
+                      <div class="account-dropdown js-dropdown">
+                        <div class="account-dropdown__body clearfix">
+                          <div class="account-dropdown__item">
+                            <a href="{{ path('admin_profil_show') }}">
+                              <i class="zmdi zmdi-account"></i>{{ "admin.profile.show"|trans }}</a>
+                          </div>
+                          <div class="account-dropdown__item">
+                            <a href="{{ path('admin_profil_edit') }}">
+                              <i class="zmdi zmdi-settings"></i>{{ "admin.profile.setting"|trans }}</a>
+                          </div>
+                        </div>
+                        <div class="account-dropdown__footer">
+                          <a href="{{ path('admin_security_logout') }}">
+                            <i class="zmdi zmdi-power"></i>{{'admin.session.logout'|trans}}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <aside class="menu-sidebar2 js-right-sidebar d-block d-lg-none">
+          {% include 'admin/sidebar_menu.html.twig' %}
+        </aside>
+        <!-- END HEADER DESKTOP-->
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+
+    {% block javascripts %}
+      <!-- Jquery JS-->
+      <script src="{{ asset('jquery-3.2.1.min.js', 'admin_vendor') }}"></script>
+      <!-- Bootstrap JS-->
+      <script src="{{ asset('bootstrap-4.1/popper.min.js', 'admin_vendor') }}"></script>
+      <script src="{{ asset('bootstrap-4.1/bootstrap.min.js', 'admin_vendor') }}"></script>
+      <!-- Vendor JS -->
+      <script src="{{ asset('perfect-scrollbar/perfect-scrollbar.js', 'admin_vendor') }}"></script>
+      <script src="{{ asset('alertify.min.js', 'alertify') }}"></script>
+      <!-- Main JS-->
+      <script src="{{ asset('main.js', 'admin_js') }}"></script>
+    {% endblock %}
+
+    <!-- BEGIN FLASH MSG -->
+    {% for type, messages in app.session.flashbag.all() %}
+      {% for message in messages %}
+        <script>
+          $(document).ready(function() {
+            alertify.success('{{ message }}', 20).set({transition: 'pulse'});
+          });
+        </script>
+      {% endfor %}
+    {% endfor %}
+    <!-- END FLASH MSG -->
+
+    <script>
+      $(document).on('click', '.js-confirm-alert', function(event) {
+        event.preventDefault();
+        var $form = $(this).closest('form');
+        alertify.confirm('{{ "admin.common.modal_title"|trans }}', '{{ "admin.common.delete_msg"|trans }}', function() {
+          console.log('ho');
+          $form.submit();
+        }, function() {
+          console.log('cancelled');
+        });
+      });
+    </script>
+  </body>
+
+</html>
+<!-- end document-->

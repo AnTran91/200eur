@@ -1,0 +1,25 @@
+<div class="row lt-px-auto-small">
+  <div class="col-md-6 offset-md-6 promo-code">
+    <p>{{ 'orders.recap.promo.question'|trans }}</p>
+    {{ form_start(form, {'attr': {'id' : 'js-promo-code-form'}}) }}
+    <div class="input-group">
+      {% set class = form.promoCode.vars.value is not empty ? 'js-code-promo-input is-valid state-valid' : 'js-code-promo-input' %}
+      {{ form_widget(form.promoCode, {'attr' : {'class': class}}) }}
+      <span class="input-group-btn">
+        <button class="btn btn-dark promo-btn" type="submit">{{ 'orders.recap.promo.submit_button'|trans }}</button>
+      </span>
+    </div>
+    <div class="js-code-promo-txt">
+      {% if order.promotion is not null and order.promotion.promoCode is not null %}
+        <div class="valid-feedback d-block">
+          <span>
+            {{ 'orders.recap.promo.msg.success'|trans({'%promo_code': order.promotion.promoCode}) }}
+
+          </span>
+        </div>
+      {% endif %}
+    </div>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+  </div>
+</div>

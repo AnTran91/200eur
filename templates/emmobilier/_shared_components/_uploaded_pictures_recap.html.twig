@@ -1,0 +1,66 @@
+<tbody class="animated fadeIn" data-total="{{ response.total_including_tax_after_reduction }}" data-wallet="{{ app.user.wallet.currentAmount }}">
+  <tr>
+    <th class="normal-weight" scope="row">{{ 'orders.recap.table.picture_total_number'|trans }}</th>
+    <td>{{ response.total_pictures }}</td>
+  </tr>
+  {% for picture in response.uploads %}
+    <tr class="border-top-medium">
+      <th scope="row">{{ 'orders.recap.table.picture_number'|trans({'%title%' : picture.retouch.title }) }}</th>
+      <td>{{ picture.picture_number }}</td>
+    </tr>
+    <!-- <tr> <th class="normal-weight" scope="row">{{ 'orders.recap.table.unit_price'|trans({'%title%' : picture.retouch.title }) }}</th> <td>{{ picture.price_per_unit|price }}</td> </tr> -->
+    <tr>
+      <th scope="row">{{ 'orders.recap.table.retouch_total_price'|trans }}</th>
+      <td>{{ picture.picture_number }}
+        <i class="fas fa-times"></i>
+        {{  picture.price_per_unit|price }}</td>
+    </tr>
+    {% if picture.deliveryTime is defined and picture.deliveryTime is not null %}
+      <tr>
+        <th class="normal-weight">{{ 'orders.recap.table.delivery'|trans }}</th>
+        <td>{{ 'form.type.retouch.long_duration'|trans({'%time': picture.deliveryTime.time, '%unit': picture.deliveryTime.unit|trans }) }}</td>
+      </tr>
+    {% endif %}
+
+    <tr class="border-bottom-medium"></tr>
+  {% endfor %}
+  {% for param_price in response.params_prices %}
+    <tr class="border-top-medium">
+      <th scope="row">{{ 'orders.recap.table.param_price'|trans({'%title%' : param_price.field_group.labelText }) }}</th>
+      <td>{{ param_price.picture_number }}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'orders.recap.table.retouch_total_price'|trans }}</th>
+      <td>{{ param_price.picture_number }}
+        <i class="fas fa-times"></i>
+        {{ param_price.price_per_unit|price }}</td>
+    </tr>
+  {% endfor %}
+  <tr class="border-top-thick">
+    <th class="normal-weight" scope="row">{{ 'orders.recap.table.total_price_ht'|trans }}</th>
+    <td>{{ response.price_excluding_tax|price }}</td>
+  </tr>
+  <tr>
+    <th scope="row">{{ 'orders.recap.table.total_price_tva'|trans }}</th>
+    <td>{{ response.total_tva_price|price }}</td>
+  </tr>
+  <tr>
+    <th scope="row">{{ 'orders.recap.table.total_price_ttc'|trans }}</th>
+    <td>{{ response.total_including_tax|price }}</td>
+  </tr>
+  {% if response.total_reduction_price != 0 %}
+    <tr class="border-top-thick">
+      <th scope="row">{{ 'orders.recap.table.total_reduction_pictures'|trans }}</th>
+      <td>{{ response.total_reduction_pictures }} <i class="fas fe-p"></i> </td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'orders.recap.table.total_reduction_price'|trans }}</th>
+      <td>{{ response.total_reduction_price|price }}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'orders.recap.table.total_after_reduction_price_ttc'|trans }}</th>
+      <td>{{ response.total_including_tax_after_reduction|price }}</td>
+    </tr>
+  {% endif %}
+
+</tbody>

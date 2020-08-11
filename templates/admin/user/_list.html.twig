@@ -1,0 +1,54 @@
+{% trans_default_domain 'admin' %}
+<!-- DATA TABLE -->
+{% for user in users %}
+  <tr class="{% if not user.enabled %}text-danger{% elseif (app.user.isSuperAdmin() and user.isSuperAdmin()) or not user.isSuperAdmin() %}text-secondary{% else %}text-info{% endif %}">
+    <td>
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input js-select-ids" name="id[]" value="{{ user.id }}">
+        <span class="custom-control-label"></span>
+      </label>
+    </td>
+    <td class="text-center">
+      <div class="avatar d-block" style="background-image: url({{ vich_uploader_asset(user, 'imageFile')|default(asset('default_profile.png', 'admin_images')) }})">
+        <span class="avatar-status {% if not user.enabled %}bg-red{% elseif (app.user.isSuperAdmin() and user.isSuperAdmin()) or not user.isSuperAdmin() %}bg-green{% else %}bg-info{% endif %}"></span>
+      </div>
+    </td>
+    <td>
+      <div>{{ user.username }}</div>
+      <div class="small text-muted">
+        {{ 'admin.common.created_at'|trans }}: {{ user.dateCreated }}
+      </div>
+    </td>
+    <td>{{ user.firstName }}</td>
+    <td>{{ user.lastName }}</td>
+    <td>
+      <div class="small text-muted">{{ 'admin.common.last_login'|trans }}</div>
+      <div>{{ user.lastLogin is null ? user.createdAt|time_ago_in_words : user.lastLogin|time_ago_in_words }}</div>
+    </td>
+    <td>
+      {% if (app.user.isSuperAdmin() and user.isSuperAdmin()) or not user.isSuperAdmin() %}
+        <div class="table-data-feature">
+          <a href="{{ path('admin_user_show', {'id': user.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.show'|trans }}" data-original-title="More">
+            <i class="zmdi zmdi-eye"></i>
+          </a>
+          <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.edit'|trans }}" data-original-title="More">
+            <i class="fe fe-edit mr-1"></i>
+          </a>
+        </div>
+      {% else %}
+        <div class="table-data-feature">
+          <a href="#" disabled="" class="item disabled" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.show'|trans }}" data-original-title="More">
+            <i class="zmdi zmdi-eye"></i>
+          </a>
+          <a href="#" disabled="" class="item disabled" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.edit'|trans }}" data-original-title="More">
+            <i class="fe fe-edit mr-1"></i>
+          </a>
+        </div>
+      {% endif %}
+    </td>
+  </tr>
+{% else %}
+  <tr class="odd">
+    <td valign="top" colspan="10" class="text-center">{{ 'admin.paginator.empty_table'|trans|raw }}</td>
+  </tr>
+{% endfor %}

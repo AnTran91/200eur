@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico', 'local_icons') }}"/>
+
+    <title>{{ 'redirection_to_gateway'|trans }}</title>
+  </head>
+  <body>
+    <div style="text-align:center;padding: 5em;font-size: 2em;">
+      <h3 style="font-family: monospace;font-size: -webkit-xxx-large;">{{ 'redirection_to_gateway'|trans }}</h3>
+      <img src="{{ asset('waiting.gif', 'local_icons') }}" alt="Logo PSP"/>
+    </div>
+
+    <form action="{{ system_pay_configs.form_url }}" method="{{ system_pay_configs.form_method }}" id="js-payment-form">
+      {{ systempayForm(fields)|raw }}
+    </form>
+
+    <script type="text/javascript">
+      setTimeout(function() {
+        document.getElementById('js-payment-form').submit();
+      }, {{ system_pay_configs.redirection_time }});
+    </script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+{% extends 'emmobilier/base.html.twig' %}
+
+{% block title %}
+{{ 'user.profile.title'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/intlTelInput.css', 'intl_tel_input') }}"/>
+  {{ parent() }}
+{% endblock %}
+
+{% block body %}
+{% include "@FOSUser/Profile/edit_content.html.twig" %}
+{% endblock body %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script>
+  function readURL(input, img) {
+     if (input.files && input.files[0]) {
+       var reader = new FileReader();
+       reader.onload = function(e) {
+         img.attr('src', e.target.result);
+       }
+       reader.readAsDataURL(input.files[0]);
+     }
+   }  $(document).on("change", "input[type='file']", function() {
+     readURL(this, $(this).parents('div .profil-img-container').find(".prf-img"));
+   });
+  </script>
+
+  <script src="{{ asset('jquery-3.3.1.min.js', 'jquery') }}"></script>
+  <script src="{{ asset('js/intlTelInput.min.js', 'intl_tel_input') }}"></script>
+  <script>
+    var $telInput = $(".js-phone-validation");
+    var $errorMsg = $("#js-phone-error-validation");
+    var $validMsg = $("#js-phone-success-validation");
+    var $submitButton = $("#js-registration-button");
+
+    $telInput.intlTelInput({utilsScript: "{{ asset('js/utils.js', 'intl_tel_input') }}",
+                                          hiddenInput: $telInput.attr("name"),
+                                          initialCountry: "FR",
+                                          customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
+                                                return selectedCountryPlaceholder.replace(/[^a-zA-Z ]/g, "x");
+                                              }
+                                          });
+    $telInput.removeAttr("name");
+
+    var reset = function() {
+      $telInput.removeClass("is-valid");
+      $telInput.removeClass("is-invalid");
+      $errorMsg.addClass("hide");
+      $validMsg.addClass("hide");
+      $submitButton.attr("disabled", false);
+    };
+
+    // on blur: validate
+    $telInput.blur(function() {
+      reset();
+      if ($.trim($telInput.val())) {
+        if ($telInput.intlTelInput("isValidNumber")) {
+          $telInput.removeClass("is-invalid");
+          $telInput.addClass("is-valid");
+          $validMsg.removeClass("hide");
+          $("input[name='" + $telInput.attr("name") + "']").val($telInput.intlTelInput("getNumber"));
+          $submitButton.attr("disabled", false);
+        } else {
+          $telInput.removeClass("is-valid");
+          $telInput.addClass("is-invalid");
+          $errorMsg.removeClass("hide");
+          $submitButton.attr("disabled", true);
+        }
+      }
+    });
+
+    // on keyup / change flag: reset
+    $telInput.on("keyup change", reset);
+  </script>
+  <script>
+      // hide the message if country is set to france
+      if($('#fos_user_profile_form_billingAddress_country').val() == "FR"){
+            $("#req-tva").hide();
+      }
+
+      // if the user is not from france show the message to explain that the VAT is required
+      $('#fos_user_profile_form_billingAddress_country').change(function(){
+          if($(this).val() != "FR"){
+              $("#req-tva").show();
+          }else{
+              $("#req-tva").hide();
+          };
+      });
+  </script>
+{% endblock %}

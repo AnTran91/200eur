@@ -1,0 +1,76 @@
+{% extends 'emmobilier/base.html.twig' %}
+
+{% block title %}
+  {{ 'transaction.order.title'|trans }}
+{% endblock %}
+
+{% block body %}
+  <section class="row main-title">
+    <div class="col-md-6">
+      <img class="page-title-img" src="{{ asset('icon_CB.svg', 'local_icons') }}">
+      <h2>{{ 'transaction.order.title'|trans }}</h2>
+    </div>
+  </section>
+
+  <section class="row lt-px-auto">
+    <div class="col-md-7">
+      <div class="lt-px-auto">
+        <table class="table table-hover price-table">
+          <tbody>
+            <tr>
+              <th class="normal-weight" scope="row">{{ 'orders.recap.table.total_price_ht'|trans }}</th>
+              <td>{{ response.price_excluding_tax|price }}</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ 'orders.recap.table.total_price_tva'|trans }}</th>
+              <td>{{ response.total_tva_price|price }}</td>
+            </tr>
+            {% if response.total_reduction_price != 0 %}
+              <tr>
+                <th scope="row">{{ 'orders.recap.table.total_reduction_pictures'|trans }}</th>
+                <td>{{ response.total_reduction_pictures }}</td>
+              </tr>
+              <tr>
+                <th scope="row">{{ 'orders.recap.table.total_reduction_price'|trans }}</th>
+                <td>{{ response.total_reduction_price|price }}</td>
+              </tr>
+              <tr>
+                <th scope="row">{{ 'orders.recap.table.total_after_reduction_price_ttc'|trans }}</th>
+                <td>{{ response.total_including_tax_after_reduction|price }}</td>
+              </tr>
+            {% else %}
+              <tr>
+                <th scope="row">{{ 'orders.recap.table.total_price_ttc'|trans }}</th>
+                <td>{{ response.total_including_tax_after_reduction|price }}</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+      <div class="float-right">
+        <a href="#" data-href="{{ path('pay_now_action') }}" data-token="{{ csrf_token('create-order') }}" data-error-msg="{{ 'orders.msg.order_creation_error'|trans }}" class="btn btn-prime-payment square js-create-order">{{ 'transaction.field.submit'|trans }}</a>
+      </div>
+    </div>
+    <div class="col-md-5 facturation-adr">
+      <h5>{{ 'transaction.billing_address.title'|trans }}</h5>
+      <button type="button" class="btn btn-second" data-toggle="modal" data-target="#billing_address_modal">{{ 'transaction.billing_address.edit'|trans }}</button>
+    </div>
+
+    {{ render(controller('App\\Controller\\Emmobilier\\BillingAddressController::renderForm')) }}
+  </section>
+  <div>
+    <a href="{{ path('order_recap') }}" role="button" class="btn btn-next">
+      <i class="fa fa-angle-double-right"></i>
+      {% trans from "KnpPaginatorBundle" %}label_previous{% endtrans %}
+    </a>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <!-- START PAGE JS SCRIPTS -->
+  <script src="{{ asset('jquery.form.min.js', 'jquery_form') }}"></script>
+  <script src="{{ asset('billing_address.min.js', 'local_js') }}"></script>
+  <script src="{{ asset('order-loader.min.js', 'local_js') }}"></script>
+  <!-- END PAGE JS SCRIPTS -->
+{% endblock %}

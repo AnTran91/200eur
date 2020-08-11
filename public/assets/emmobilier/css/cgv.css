@@ -1,0 +1,19 @@
+.cgv-main{
+  max-width: 70%;
+  margin: 0 auto;
+}
+.cgv-h3{
+  text-align: center;
+  padding: 30px 40px;
+  color: #e93ebd;
+  font-weight: bold;
+  font-size: 42px;
+}
+.cgv-h5{
+  font-size: 26px;
+}
+.cgv-p{
+  color: grey;
+  font-size: 17px;
+  text-align: justify;
+}

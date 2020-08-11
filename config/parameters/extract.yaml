@@ -1,0 +1,7 @@
+#####################################################
+#                                                   #
+#        Extract configuration                      #
+#                                                   #
+#####################################################
+parameters:
+    extract_path:    '%kernel.project_dir%/public/extract'

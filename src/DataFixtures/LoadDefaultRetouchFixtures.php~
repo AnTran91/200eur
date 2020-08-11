@@ -1,0 +1,46 @@
+<?php
+
+namespace App\DataFixtures;
+
+use App\Entity\PhotoRetouchingPricing;
+use App\Entity\Retouch;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Yaml\Yaml;
+
+class LoadDefaultRetouchFixtures extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+	    foreach (self::getRetouchData() as $retouchData)
+	    {
+	    	$retouch = new Retouch();
+	    	
+		    $retouch->setTitle($retouchData['title'] ?? NULL);
+	    	$retouch->setDescription($retouchData['description'] ?? NULL);
+	    	$retouch->setOrderNumber($retouchData['order_number'] ?? NULL);
+	    	$retouch->setRetouchCode($retouchData['retouch_code'] ?? NULL);
+		    $retouch->setAppType($retouchData['app_type'] ?? NULL);
+		    
+		    $retouch->addPricing(
+			    (new PhotoRetouchingPricing())
+			    ->setPrice($retouch[''])
+			    ->setOrderDeliveryTime($orderDeliveryTime);
+		    );
+	    	
+		    $manager->persist($retouch);
+	    }
+
+        $manager->flush();
+    }
+	
+	/**
+	 * Get Users.
+	 *
+	 * @return array The users data.
+	 */
+	protected static function getRetouchData(): array
+	{
+		return Yaml::parseFile(__DIR__ . '/Resource/Data/retouch.yaml');
+	}
+}

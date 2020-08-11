@@ -1,0 +1,62 @@
+<!-- Modal -->
+{% form_theme form with['_shared_components/form_layout.html.twig', '_shared_components/form_switch_layout.html.twig'] %}
+
+{% if form|length == 0 %}
+  <div class="row">
+    <div class="col-sm-12">
+      <img alt='#' src="{{ asset('404.png', 'local_icons')}}"/>
+      <h1>{{ 'admin.param_form.empty'|trans({}, 'admin') }}</h1>
+    </div>
+  </div>
+{% else %}
+  {{ form_start(form, {'class': 'js-param-form', 'action': url('admin_edit_picure_param', {'id_picture_detail': pictureDetail.id , 'id_retouch': retouch.id})}) }}
+  <div class="row">
+    <div class="col-lg-6 col-sm-12 col-md-6">
+      {% for child in form if child.vars.attr.position is defined and child.vars.attr.position == "left" %}
+        {% if child.vars.attr.beginblock is defined and child.vars.attr.beginblock %}
+          <div class="form-row col">
+          {% endif %}
+
+          <div class="js-param-col {{ child.vars.attr.rowclass|default('col') }}">
+            {{ form_row(child) }}
+          </div>
+
+          {% if child.vars.attr.endblock is defined and child.vars.attr.endblock %}
+          </div>
+        {% endif %}
+
+      {% endfor %}
+    </div>
+    <div class="col-lg-6 col-sm-12 col-md-6">
+      {% for child in form if child.vars.attr.position is defined and child.vars.attr.position == "right" %}
+
+        {% if child.vars.attr.beginblock is defined and child.vars.attr.beginblock %}
+          <div class="form-row col">
+          {% endif %}
+
+          <div class="js-param-col {{ child.vars.attr.rowclass|default('col') }}">
+            {{ form_row(child) }}
+          </div>
+
+          {% if child.vars.attr.endblock is defined and child.vars.attr.endblock %}
+          </div>
+        {% endif %}
+
+      {% endfor %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      {{ form_rest(form) }}
+    </div>
+  </div>
+
+  {% if show_button is defined and show_button == true %}
+    <div class="pt-5 text-right">
+      <button type="submit" class="btn btn-primary">{{ 'admin.form.save'|trans({}, 'admin')}}</button>
+    </div>
+  {% endif %}
+
+  {{ form_end(form) }}
+
+{% endif %}

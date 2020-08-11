@@ -1,0 +1,69 @@
+## Titres
+page_title : "Demo de Paiement"
+title : "EXEMPLE D'IMPLEMENTATION DE LA SOLUTION DE PAIEMENT SYSTEMPAY"
+form_title : "FORMULAIRE DE PAIEMENT SIMPLE"
+
+##INFORMATIONS
+information : "INFORMATIONS"
+information_para1 : "Le paiement s'appuie sur l'envoi d'un formulaire de paiement en https vers l'URL de la plateforme de paiement Systempay. Ce formulaire est généré à partir du fichier config/api_configs/system_pay.yaml et des champs ci dessous."
+Fichier_conf : "config/api_configs/system_pay.yaml"
+information_para2 : "Avant la première utilisation vous devez impérativement renseigner les champs vads_site_id, key et vads_url_return du fichier config/api_configs/system_pay.yaml. Je vous invite à lire le fichier 'system_pay.yaml'. Ce fichier comporte des données sensibles. La sécurisation de ces données est de votre responsabilité."
+information_para3 : "Les champs sont renseignés à titre d'exemple, à votre charge de les valoriser en fonction de votre contexte."
+
+##CHAMPS DU FORMULAIRE
+CHAMPS_DU_FORMULAIRE : "CHAMPS DU FORMULAIRE DE PAIEMENT"
+url_plateforme : "Url de la plateforme de paiement"
+en_rouge : "En rouge les champs obligatoires"
+PARAMETRES_DE_LA_TRANSACTION : "PARAMETRES DE LA TRANSACTION"
+amount : "Montant de la commande exprimé dans la plus petite unité de la devise. Centimes pour EURO. Ex : 1000 pour 10 euros"
+PARAMETRES_CLIENT : "PARAMETRES CLIENT"
+reference : "Numéro de commande. Paramètre facultatif. Longueur du champ: 32 caractères maximum - Type Alphanumérique"
+customer_id : "Numéro client. Paramètre facultatif. Longueur du champ: 32 caractères maximum - Type Alphanumérique"
+customer_name : "Nom du client. Paramètre facultatif. Longueur du champ: 127 caractères maximum - Type Alphanumérique"
+customer_email : "Email du client. Paramètre facultatif."
+url_return : "Url de retour à la boutique. Lorsque le client clique sur retourner à la boutique cette url permet de faire un traitement affichage en indiquant l'état du paiement."
+language : "Langue dans laquelle s'affiche la page de paiement."
+submit : "Valider et envoyer les paramètres en mode POST"
+
+
+#		form
+redirection_to_gateway : "Redirection vers la plateforme de paiement"
+
+#		return payment
+redirection_to_shop : "Redirection vers la boutique"
+
+invalid_signature: "Signature Invalide, ne pas prendre en compte le résultat de ce paiement"
+
+STATUT : "Statut"
+status:
+    authorised: "Le paiement a été accepté"
+    abandonne : "Le paiement a été abandonné par le client. La transaction n’a pas été crée sur la plateforme de paiement."
+    accepted : "Le paiement a été accepté et est en attente de remise en banque."
+    refused : "Le paiement a été refusé."
+    waiting_manually_validated : "La transaction a été acceptée mais elle est en attente de validation manuelle. C'est à la charge du marchand de valider la transaction pour demander la remise en banque depuis le back office marchand ou par requête web service. La transaction pourra être validée tant que le délai de capture n’a pas été dépassé. Si ce délai est dépassé alors le paiement bascule dans le statut Expiré. Ce statut expiré est définitif."
+    waiting_for_authorisation : "La transaction est en attente d’autorisation. Lors du paiement uniquement un prise d’empreinte a été réalisée car le délai de remise en banque est strictement supérieur à 7 jours. Par défaut la demande d’autorisation pour le montant global sera réalisée à j-2 avant la date de remise en banque."
+    expired : "La transaction est expirée. Ce statut est définitif, la transaction ne pourra plus être remisée en banque. Une transaction expire dans le cas d'une transaction créée en validation manuelle ou lorsque le délai de remise en banque (capture delay) dépassé."
+    cancelled : "La transaction a été annulée au travers du back office marchand ou par une requête web service. Ce statut est définitif, la transaction ne sera jamais remise en banque."
+    waiting_for_authorisation_and_manually_validated: "La transaction est en attente d’autorisation et en attente de validation manuelle. Lors du paiement uniquement un prise d’empreinte a été réalisée car le délai de remise en banque est strictement supérieur à 7 jours et le type de validation demandé est « validation manuelle ». Ce paiement ne pourra être remis en banque uniquement après une validation du marchand depuis le back office marchand ou par un requête web services."
+    cashed: "La transaction a été remise en banque. Ce statut est définitif."
+
+RESULTAT : "Résultat"
+result:
+    success : "Paiement réalisé avec succès."
+    contact_bank_holder: "Le commerçant doit contacter la banque du porteur."
+    refused: "Paiement refusé."
+    cancel: "Paiement annulé par le client."
+    format_error: "Erreur de format de la requête. A mettre en rapport avec la valorisation du champ vads_extra_result."
+    technical_error: "Erreur technique lors du paiement."
+
+WARRANTY_PAYMENT : "Garantie de paiement"
+warranty:
+    guaranteed: "Le paiement est garanti."
+    not_guaranteed: "Le paiement n’est pas garanti."
+    technical_error: "Suite à une erreur technique, le paiement ne peut pas être garanti."
+    not_applicable: "Garantie de paiement non applicable."
+
+DELAY_PAYMENT : "Délai avant Remise en Banque"
+delay:
+    title: "Délai avant Remise en Banque"
+    days : "jours"

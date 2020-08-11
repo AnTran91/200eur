@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% block title %}Login{% endblock %}
+    </title>
+    <!-- BEGIN META -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="author" name="rami2sfari@gmail.com"/>
+    <meta content="author" name="hamza.mahan.tn@gmail.com"/>
+    <meta name="description" content="L’Excellence de la Retouche Photo Immobilière."/>
+    <meta property="locale" content="en_US"/>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico', 'local_icons') }}"/>
+    <!--End META -->
+    {% block stylesheets %}
+      <!-- BEGIN STYLES -->
+      <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css', 'bootstrap') }}">
+      <link rel="stylesheet" href="{{ asset('style.css', 'local_css') }}">
+      <link rel="stylesheet" href="{{ asset('css/alertify.min.css', 'alertify') }}"/>
+      <link rel="stylesheet" href="{{ asset('css/themes/default.min.css', 'alertify') }}"/>
+      <!-- END STYLES -->
+    {% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  </head>
+  <!-- BEGIN BODY --> 
+  <body class="login-layout">
+
+    <!-- BEGIN LOGO SECTION-->
+    {% block header %}
+      <div class="logo-container center-login">
+        <img src="{{ asset('emmobilier-logo.png', 'local_icons') }}" class="logo-img"/>
+      </div>
+      <div class="row m-0">
+        <div class="col-md-2">
+          <div class="lang center-login">
+            {% block return %}{% endblock %}
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="lang center-login">
+            <p>
+              <a class="small-link" href="{{ path('translate_index', {'lang' : 'fr'})}}">
+                {{ 'language.fr'|trans }}
+              </a>
+              |
+              <a class="small-link" href="{{ path('translate_index', {'lang' : 'en'})}}">
+                {{ 'language.en'|trans }}
+              </a>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="lang center-login">
+            {% block tutorialVideo %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    {% endblock %}
+    <!-- END LOGO SECTION-->
+    
+    {# <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal body -->
+          <div class="container-fluid">
+            <div class="row">
+              <div class="modal-body col-sm-8">
+                <p><b>Chers Clients, </b></p>
+                <p>En cette veille de l’Ascension 2019, et du pont de la fin de semaine, je vous informe qu’<b>EMMOBILIER</b> fait face aujourd’hui à un volume d’images confiées par ses clients, exceptionnel !</p>
+                <p>Aussi devant ce fux imprévisible, les délais de livraison de 48h et 24h ne peuvent être tenus pour tous. </p>
+                <p>L’estimation des nouveaux délais de livraison est augmentée de 3 à 4 jours.</p>
+
+                <p>Calendrier : J’en profite pour vous rapeler les jours non travaillés de la Production, demain le 30 mai et les 5 et 6 juin.</p>
+                <p>Le retour de la tenue des délais est prévu dès Lundi 10 juin.</p>
+                <p><b>Chers Clients</b>, je compte sur votre <b>Fidèle Bienveillante Compréhension</b> et vous en remercie.</p>
+                <p>Cordialement,</p>
+                <p class="title-footer"> <b>Emmanuelle Ledoux.</b></p>
+              </div>
+              <div class="logo-container center-login col-sm-4">
+                <img src="{{ asset('emmobilier-logo.png', 'local_icons') }}" class="logo-img"/>
+              </div>
+            </div>
+          </div>
+          <button class="close-popup">x</button>
+          
+        </div>
+      </div>
+    </div> #}
+    <!-- BEGIN ALREADY AUTH -->
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+      <div class="already-auth-center">
+        <p>{% trans with {
+            '%username%' : app.user.username
+          }
+          from "FOSUserBundle" %}layout.logged_in_as{% endtrans %}
+          <a href="{{ path('fos_user_security_logout') }}">
+            |
+            {% trans from "FOSUserBundle" %}layout.logout{% endtrans %}
+          </a>
+        </p>
+      </div>
+    {% endif %}
+    <!-- END ALREADY AUTH -->
+
+    <!-- BEGIN CONTENT -->
+    <div>
+      {% block fos_user_content %}{% endblock fos_user_content %}
+    </div>
+    <!-- END CONTENT -->
+
+    <!-- BEGIN FOOTER-->
+    <footer class="page-footer">
+      <!-- BEGIN COPYRIGHT -->
+      <div class="footer-copyright text-center">
+        Version :
+        <span class="footer-version">{{ version }}</span>
+      </div>
+      <!-- END COPYRIGHT -->
+    </footer>
+    <!-- END FOOTER -->
+
+    <!-- BEGIN JS SCRIPTS -->
+    {% block javascripts %}
+      <script src="{{ asset('alertify.min.js', 'alertify') }}"></script>
+    {% endblock %}
+    <!-- END JS SCRIPTS -->
+
+    {% if app.request.hasPreviousSession %}
+      {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+          <script>
+            alertify.success('{{ message }}');
+          </script>
+        {% endfor %}
+      {% endfor %}
+    {% endif %} 
+    
+  </body>
+  <!-- END BODY -->
+</html>

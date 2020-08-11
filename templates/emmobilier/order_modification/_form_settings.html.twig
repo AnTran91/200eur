@@ -1,0 +1,58 @@
+<form action="{{ url('edit_picure_settings', {'id': picture.id }) }}" novalidate="novalidate" data-picture-name="{{ picture.pictureName|length > 50 ? picture.pictureName|slice(0, 50) ~ '...' : picture.pictureName }}" data-id="{{ id }}" data-uuid="{{ picture.id }}" id="js-uuid-{{ picture.pictureDirectory }}" class="js-picture-detail param-card animated" method="post">
+  <article>
+    <div class="row">
+      <div class="col-md-3 lt-px-auto-small param-img-preview">
+        <img src="{{ picture.picturePathThumb }}">
+        <p class="small-link">{{ picture.pictureName|length > 20 ? picture.pictureName|slice(0, 20) ~ '...' : picture.pictureName }}</p>
+        <span data-id="{{ id }}" data-uuid="{{ picture.id }}" class="small-link color-black js-delete-one-picture">
+          <i class="fas fa-trash"></i>
+          {{ 'uploader.template.delete'|trans }}
+        </span>
+      </div>
+
+      <div class="col-md-9">
+        <div class="form-spacing-bottom js-retouch-form-section">
+          {{ form_rest(form) }}
+        </div>
+      </div>
+    </div>
+    <div class="row lt-px-auto-small">
+      <div class="col-md-12">
+        <h5 class="param-heading">{{ 'settings.title.param_options'|trans|raw }}</h5>
+        <a class="js-param-toggle panel-heading" role="button">
+          {{ 'settings.title.param'|trans|raw }}
+        </a>
+      </div>
+      <div class="col-md-12">
+        <div class="lt-px-auto-small" id="js-params-{{ picture.id }}">
+          <div class="form-spacing-bottom" id="js-param-section">
+            <div id="accordion">
+              {% for pictureDetail in picture.pictureDetail %}
+                <div class="accordion" data-id="{{ pictureDetail.retouch.id }}" data-uuid="{{ picture.id }}">
+                  <div class="accordion-header" id="js-heading-{{ pictureDetail.id }}">
+                    <a data-toggle="collapse" data-target="#js-collapse-{{ pictureDetail.id }}" class="js-accordion-header collapsed" aria-expanded="true" aria-controls="js-collapse-{{ pictureDetail.id }}">
+                      {{ pictureDetail.retouch.title|upper }}
+                    </a>
+                  </div>
+                  <div id="js-collapse-{{ pictureDetail.id }}" class="collapse" aria-labelledby="js-heading-{{ pictureDetail.id }}" data-parent="#accordion">
+                    <div class="accordion-content">
+                      <!-- on collapse we load the form here for better preformance -->
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row lt-px-auto float-right">
+      <div class="col-lg-12">
+        <button type="submit" disabled="disabled" class="js-save-settings btn btn-upload">
+          <i id="js-save-setting-icon" class="{{ picture.pictureDetail|length > 0 ? 'fas fa-check-circle' : '' }}"></i>
+          {{ 'settings.submit'|trans }}
+        </button>
+      </div>
+    </div>
+  </article>
+</form>

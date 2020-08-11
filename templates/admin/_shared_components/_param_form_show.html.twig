@@ -1,0 +1,45 @@
+<!-- Modal -->
+{% form_theme form with['_shared_components/form_layout.html.twig', 'admin/field_group/_form_template.html.twig'] %}
+
+{{ form_start(form) }}
+<div class="row">
+  <div class="col-lg-6 col-sm-12 col-md-6">
+    {% for child in form if child.vars.attr.position is defined and child.vars.attr.position == "left" %}
+      {% if child.vars.attr.beginblock is defined and child.vars.attr.beginblock %}
+        <div class="form-row col">
+        {% endif %}
+
+        <div class="js-param-col {{ child.vars.attr.rowclass|default('col') }}">
+          {{ form_row(child) }}
+        </div>
+
+        {% if child.vars.attr.endblock is defined and child.vars.attr.endblock %}
+        </div>
+      {% endif %}
+
+    {% endfor %}
+  </div>
+  <div class="col-lg-6 col-sm-12 col-md-6">
+    {% for child in form if child.vars.attr.position is defined and child.vars.attr.position == "right" %}
+
+      {% if child.vars.attr.beginblock is defined and child.vars.attr.beginblock %}
+        <div class="form-row col">
+        {% endif %}
+
+        <div class="js-param-col {{ child.vars.attr.rowclass|default('col') }}">
+          {{ form_row(child) }}
+        </div>
+
+        {% if child.vars.attr.endblock is defined and child.vars.attr.endblock %}
+        </div>
+      {% endif %}
+
+    {% endfor %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    {{ form_rest(form) }}
+  </div>
+</div>
+{{ form_end(form) }}

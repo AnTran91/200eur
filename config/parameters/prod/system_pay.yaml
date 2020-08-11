@@ -1,0 +1,319 @@
+#####################################################
+#                                                   #
+#        Payment form configuration file            #
+#                                                   #
+#####################################################
+parameters:
+    system_pay_payment_configs:
+        form_url: 'https://systempay.cyberpluspaiement.com/vads-payment/'
+        form_method: 'POST'
+        redirection_time: '1000'
+
+    system_pay_config:
+      #------------------------------------------
+      #******************************************
+      #* ACCES A LA PLATEFORME / GATEWAY ACCESS *
+      #******************************************
+      #------------------------------------------
+
+      #--------------
+      # site_id
+
+      # ------francais------
+      # Identifiant Boutique à récupérer dans le Back office de la solution de paiement.
+      # ------english------
+      # Shop ID to take out from the Systempay back office.
+
+      site_id:                   '54116712'
+      #--------------
+
+      #------
+      # keys
+
+      # ------francais------
+      # Certificat à récupérer dans le Back office de la solution de paiement.
+      # Attention ce certificat est différent en fonction de ctx_mode, TEST ou PRODUCTION.
+      # Le certificat n'est pas envoyé à la plateforme de paiement mais intervient dans le calcul de la signature.
+
+      # ------english------
+      # Certificate to take out from the Systempay back office.
+      # Warning, this certificate is different depending on the ctx_mode setting, TEST or PRODUCTION.
+      # The certificate is not sent to the gateway but is used to create the signature.
+
+      key_TEST:                  '9364990435713562'
+      key_PROD:                  '3380651080234056'
+      #------
+
+      #--------------
+      # version
+
+      # ------francais------
+      # Ce paramètre est obligatoire et doit être valorisé à V2.
+
+      # ------english------
+      # This setting is compulsory and must be set to V2
+
+      version:                   V2
+      #--------------
+
+      #---------------
+      # ctx_mode
+
+      # ------francais------
+      # Mode de fonctionnement. Valeur = TEST ou PRODUCTION
+
+      # ------english------
+      # Mode. TEST or PRODUCTION
+
+      ctx_mode:                  PRODUCTION
+      #---------------
+
+      #---------------
+      # language
+
+      # ------francais------
+      # Langue dans laquelle s'affiche la page de paiement.
+      # fr pour Français, en pour Anglais.
+
+      # ------english------
+      # Language of the payment page.
+      # fr for French, en for English.
+
+      #language:                  en
+      #---------------
+
+      #-------------------------------------------------------
+      #*******************************************************
+      #* PARAMETRES DE LA TRANSACTION / TRANSACTION SETTINGS *
+      #*******************************************************
+      #-------------------------------------------------------
+
+      #-----------
+      # signature
+
+      # ------francais------
+      # La signature est un paramètre obligatoire. Elle est calculée par la methode Get_signature du class
+      # API\Services\PaymentServiceProvider inclu dans ce pack.
+
+      # ------english------
+      # The signature is a mandatory setting. It is created by the Get_signature method of the class API\Services\PaymentServiceProvider
+      # file included in this package.
+
+      #signature:
+      #-----------
+
+
+      #-----------------
+      # vads_trans_date
+
+      # ------francais------
+      # Ce champ est obligatoire, il correspond à la date de la transaction exprimée sous la forme AAAAMMJJHHMMSS
+      # sur le fuseau UTC=0. Cette valeur sera calculée par le class API\Services\PaymentServiceProvider.
+
+      # ------english------
+      # This field is compulsory, it matches the transaction date with the following pattern YYYYMMDDHHMMSS on
+      # the UTC=0 time zone. This value is calculated by the class API\Services\PaymentServiceProvider.
+
+      #vads_trans_date:
+      #-----------------
+
+
+      #---------------
+      # vads_trans_id -
+
+      # ------francais------
+      # Ce champ est obligatoire, il correspond à l'identifiant de la transaction. Cet identifiant doit être:
+      # - unique sur une même journée.
+      # - sa longueur est obligatoirement de 6 caractères.
+      # - Sa valeur est doit être comprise entre 000000 et 899999.
+
+      # ------english------
+      # This field is mandatory, it matches the transaction ID. This ID must be:
+      # - unique on the day.
+      # - its length must be 6 characters.
+      # - its value must be between 000000 and 899999.
+
+      #vads_trans_id:
+      #--------------
+
+      #---------------
+      # currency
+
+      # ------francais------
+      # Code devise. 978 pour EURO.
+
+      # ------english------
+      # Currency code. 978 for EURO.
+      currency:                  '978'
+      #---------------
+
+      #------------------
+      # page_action
+
+      # ------francais------
+      # Ce paramètre est obligatoire et doit être valorisé à PAYMENT.
+
+      # ------english------
+      # This field is compulsory and must be set to PAYMENT.
+
+      page_action:               PAYMENT
+      #------------------
+
+      #------------------
+      # action_mode
+      # ------francais------
+      # Ce paramètre est valorisé à INTERACTIVE si la saisie de carte est réalisée sur la plateforme de paiement.
+
+      # ------english------
+      # This setting is set to INTERACTIVE if the card details are entered on the payment gateway.
+
+      action_mode:               INTERACTIVE
+      #------------------
+
+      #---------------------
+      # payment_config
+      # ------francais------
+      # Ce paramètre est valorisé à SINGLE pour un paiement simple.
+
+      # ------english------
+      # This parameter is set to SINGLE for unique payment.
+
+      payment_config:            SINGLE
+      #---------------------
+
+      #--------------------
+      # capture_delay
+
+      # ------francais------
+      # Ce Paramètre  facultatif indique le délai en nombre de jours avant remise en banque. Si ce
+      # paramètre n'est pas transmis, alors la valeur par défaut définie dans le back office marchand
+      # sera utilisée. Cette dernière est paramétrable dans loutil de gestion de caisse  Systempay  par
+      # toutes les personnes dûment habilitées.
+
+      # ------english------
+      # This setting is optional and matches with the capture delay. If this setting is not set, its value
+      # will be the one defined on the merchant back office. This value can be configured on the Systempay back
+      # office by duly authorized persons.
+
+      # capture_delay:           0
+      #--------------------
+
+
+      #----------------------
+      # validation_mode
+
+      # ------francais------
+      # Paramètre  facultatif précisant le mode de validation de la transaction.
+      # 1:                       Validation manuelle par le commerçant
+      # 0:                       Validation automatique par la plateforme
+      # Si ce paramètre nest pas transmis, alors la valeur par défaut définie
+      # dans le back-office marchand sera utilisée.
+
+      # ------english------
+      # Optional setting matching the transaction validation mode
+      # 1:                       Manual validation by the merchant
+      # 0:                       Automatic validation by the gateway
+      # If this setting is not set, its value will be the one defined on the merchant back office.
+
+      #validation_mode:          0
+      #----------------------
+
+      #---------------------------------------------
+      #*********************************************
+      #* RETOUR A LA BOUTIQUE / RETURN TO THE SHOP *
+      #*********************************************
+      #---------------------------------------------
+
+      #-----------------
+      # url_return
+
+      # ------francais------
+      # Url de retour à la boutique. Lorsque le client clique sur "retourner à la boutique"
+      # cette url permet de faire un traitement affichage en indiquant l'état du paiement.
+      # Il est fortement conseillé de ne pas faire de traitement en base de données
+      # (mise à jour commande, enregistrement commande) suite à l'analyse du résultat du paiement.
+      # C'est l'appel de l'url serveur qui doit vous permettre de mettre à jour la base de données.
+
+      # ------english------
+      # Shop return URL. When the customer clicks on "return to the shop" this URL permits to treat
+      # the data in order to display the payment details. It is strongly recommended NOT to treat
+      # the data in the database (order update, order record) after the payment analysis.
+      # The server URL must allow you to update the database.
+
+      #url_return:               ~
+      #-----------------
+
+      #------------------
+      # return_mode
+
+      # ------francais------
+      # Ce paramètre définit dans quel mode seront renvoyés les paramètres lors du retour à la boutique
+      # (3 valeurs possibles GET / POST / NONE). Si ce champ n'est pas posté alors la plateforme ne renvoie
+      # aucun paramètre lors du retour à la boutique par l'internaute.
+
+      # ------english------
+      # This setting defines the return mode by which the settings will be sent back to the shop
+      # (3 possible values GET / POST / NONE). If this field is not filled the gateway does not send back
+      # any data to the shop when the customer returns to the shop.
+
+      return_mode:               POST
+      #------------------
+
+      #-------------------------------
+      # redirect_success_timeout
+
+      # ------francais------
+      # Ce paramètre définit la durée avant un retour automatique à la boutique pour un paiement accepté
+      # (valeur exprimée en seconde).
+
+      # ------english------
+      # This setting defines the duration before an automatic return to the shop if the payment is accepted
+      # (unit:                   seconds).
+
+      redirect_success_timeout:  0
+      #-------------------------------
+
+
+      #-------------------------------
+      # redirect_success_message
+
+      # ------francais------
+      # Ce paramètre définit un message sur la page de paiement avant le retour automatique à la boutique
+      # dans le cas d'un paiement accepté.
+
+      # ------english------
+      # This setting defines a message displayed on the payment gateway before an automatic return to
+      # the shop if the payment is accepted.
+
+      redirect_success_message:  Redirection vers la boutique dans quelques instants
+      #-------------------------------
+
+
+      #-----------------------------
+      # redirect_error_timeout
+
+      # ------francais------
+      # Ce paramètre définit la durée avant un retour automatique à la boutique pour un paiement échoué
+      # (valeur exprimée en seconde).
+
+      # ------english------
+      # This setting defines the duration before an automatic return to the shop if the payment failed
+      # (unit:                   seconds).
+
+      redirect_error_timeout:    0
+      #-----------------------------
+
+
+      #-----------------------------
+      # redirect_error_message
+
+      # ------francais------
+      # Ce paramètre définit un message sur la page de paiement avant le retour automatique à la boutique
+      # dans le cas d'un paiement échoué.
+
+      # ------english------
+      # This setting defines a message displayed on the payment gateway before an automatic return to
+      # the shop if the payment failed.
+
+      redirect_error_message:    Redirection vers la boutique dans quelques instants
+      #-----------------------------

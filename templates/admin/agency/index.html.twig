@@ -1,0 +1,58 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{'admin.holidays.holidays_list'|trans}}
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('agency_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.agency.agency_list'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                </ul>
+              </div>
+              <a href="{{ path('agency_new') }}" class="btn btn-pill btn-primary">
+                <i class="fe fe-plus-circle"></i>
+                {{'admin.form.add'|trans}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="list-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- DATA TABLE -->
+            <h3 class="title-5 m-b-35">{{'admin.agency.agency_list'|trans}}</h3>
+
+            <!-- GLOBAL FILTER FORM -->
+            {{ search_pagination_render(agencies) }}
+            <!-- END GLOBAL FILTER FORM -->
+            {% include 'admin/agency/_list.html.twig' with {
+              'agencies' : agencies
+            }
+            only %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endblock %}

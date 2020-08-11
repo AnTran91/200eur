@@ -1,0 +1,74 @@
+#####################################################
+#                                                   #
+#        uploader configuration file                #
+#                                                   #
+#####################################################
+parameters:
+  # Uploader parameters
+  uploader_request:
+    inputName:                       'qqfile'
+    fileName:                        'qqfilename'
+    uuid:                            'qquuid'
+    totalparts:                      'qqtotalparts'
+    multipleUuid:                    'qqmultipleuuid'
+    partindex:                       'qqpartindex'
+    filesSize:                       'qqtotalfilesize'
+    chunkSize:                       'qqchunksize'
+    partByteOffset:                  'qqpartbyteoffset'
+    resume:                          'qqresume'
+  uploader_configs:
+    chunksFolder:                    'chunks'
+    uploadDirectory:                 '%kernel.project_dir%/public/uploads/files'
+    uriPrefix:                       '/uploads'
+    publicDirPath:                   '%kernel.project_dir%/public'
+    tempDir:                         'tmp'
+    zipDir:                          'zip'
+    finishDir:                       'done'
+    paramDir:                        'param'
+    thumbDir:                        'thumbnail'
+    watermarkDir:                    'watermark'
+    watermarkImgPath:                '%kernel.project_dir%/public/assets/admin/images/watermark.png'
+    watermarkResizePath:             '%kernel.project_dir%/public/assets/admin/images/watermark_resize.png'
+    paintDir:                        'painted'
+    fieldRenovationChoicesDirectory: '%kernel.project_dir%/public/uploads/images/renovation_choices'
+  # Validation parameters
+  validation_configs:
+    allowedMimeTypes:
+      - 'application/octet-stream'
+      - 'image/*'
+      - 'application/mp4'
+      - 'video/mp4'
+    allowedExtensions:
+      - 'jpeg'
+      - 'jpg'
+      - 'png'
+      - 'psd'
+      - 'arw'
+      - 'tiff'
+    allowedAnimateExtensions:
+      - 'gif'
+      - 'mp4'
+    sizeLimit:                       500000000 # 200M
+    chunkSize:                       2000000 # 2M
+    itemLimit:                       50
+  # thumbnail parameters
+  thumbnail_configs:
+    extension:                       'png' # jpeg or png
+    resolutionX:                     100
+    resolutionY:                     100
+    flatten:                         false
+    height:                          250
+    width:                           250
+    maxSize:                         1e+8 # 100M Don't create thumbs for files more than > 100M
+    webExtensions:
+      - 'giff'
+      - 'jpg'
+      - 'jpeg'
+      - 'bmp'
+      - 'png'
+      - 'tiff'
+    drawImg:
+      fontPath:                      '%kernel.project_dir%/public/fonts/thumbnail/Roboto-Black.ttf'
+      fontSize:                      35
+      backgroundColor:               '#ccc'
+      color:                         '#000'

@@ -1,0 +1,208 @@
+{% extends 'emmobilier/base.html.twig' %}
+
+{% block title %}
+    {{ 'orders.title.list'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent()}}
+  <!-- BEGIN PAGE STYLES -->
+  <link rel="stylesheet" href="{{ asset('css/all.css', 'fontawesome') }}">
+  <!-- END PAGE STYLES -->
+{% endblock %}
+
+{% block body %}
+  <section class="row main-title">
+    <div class="col-md-6">
+      <img src="{{ asset('icon_commande.svg', 'local_icons')}}" class="page-title-img">
+      <h2>{{ 'orders.title.list'|trans }}
+        <a class="right new-command-btn-small" href="">
+          <i class="fa fa-plus"></i>
+        </a>
+      </h2>
+    </div>
+    <div class="col-md-6 center-low-dev">
+      <a class="right new-command-btn" href="{{ path('order_new') }}">{{ 'orders.button.new'|trans }}</a>
+    </div>
+  </section>
+
+  {% if orderCount != 0 %}
+    <section class="row lt-px-auto-small">
+      {{ form_start(form) }}
+      {{ form_rest(form) }}
+      {{ form_end(form) }}
+    </section>
+  {% endif %}
+
+  <section class="row command-list">
+    <div class="search-no-results js-no-result" style="display: none;">
+      <img alt="" role="presentation" src="{{ asset('filtered-result-not-found.png', 'local_icons') }}" class="search-no-results-img">
+    </div>
+    {% for order in orders %}
+      <article class="command-card">
+        <header>
+          <div>
+            <h4>
+              {% if order.orderNumber %}
+                {{'orders.number'|trans}}
+                {{ "%04s"|format(order.orderNumber) }}
+              {% else %}
+                {{ order.creationDate|time_ago_in_words }}
+              {% endif %}
+            </h4>
+            <p>{{ 'orders.field.status'|trans }}
+              :
+              <span
+                class="
+              {% if order is waiting_for_payment %}
+                color-orange
+              {% elseif order is completed %}
+                color-green
+              {% elseif order is processing %}
+                color-purple
+              {% elseif order is valid %}
+                color-blue
+              {% elseif order is contained_errors %}
+                color-red
+              {% endif %}">
+                {{ order.orderStatus == "order.status.approvisionnement_tirelire" ? order.orderStatus|trans : order.orderStatus|trans|capitalize }}</span>
+            </p>
+          </div>
+          <div class="row command-info-container">
+            {% if order.orderStatus != "order.status.approvisionnement_tirelire" %}
+              <div class="col-md-5 command-info">
+                <div class="command-option-btn ">
+                  <i class="fa fa-calendar"></i>
+                  {{ order.creationDate|date('d/m/Y') }}
+                </div>
+                <div class="center">
+                  <i class="fa fa-image"></i>
+                  {{ 'orders.index.nb_pictures'|trans({'%nb_img%': order.pictures|length })}}
+                </div>
+              </div>
+              <div class="col-md-6">
+                {% if order is processing %}
+                  <a href="{{ path('order_show', {'id': order.id})}}" class="details-btn">{{ 'orders.button.show'|trans }}</a>
+                {% endif %}
+
+                {% if (order is valid or order is completed) and (order.invoices|length > 0) %}
+                  <a href="{{ path('invoice_download', {'id': order.id})}}" class="details-btn">{{ 'orders.button.invoice'|trans }}</a>
+                {% endif %}
+
+                {% if order is waiting_for_payment %}
+                  <a href="{{ path('order_edit', {'id': order.id})}}" class="details-btn">{{ 'orders.button.show'|trans }}</a>
+                  <a href="#" data-href="{{ url('order_delete', {'id': order.id}) }}" data-token="{{ csrf_token('delete-order-' ~ order.id) }}" class="details-btn js-delete-order">{{ 'orders.button.delete'|trans }}</a>
+                {% endif %}
+              </div>
+            {% else %}
+              <div class="col-md-2 command-info">
+                <div class="command-option-supply-btn">
+                  <i class="fa fa-calendar"></i>
+                  {{ order.creationDate|date('d/m/Y') }}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </header>
+        <div class="row command-card-main">
+          <div class="col-md-6">
+            <div class="row">
+              {% for picture in order.pictures|slice(0, picture_display_number) %}
+                {% if order is valid or order is completed %}
+                  {% for pictureDetail in picture.pictureDetail %}
+                    <div class="col-md-4">
+                      {% if pictureDetail.returnedPicture is not null and pictureDetail.returnedPicture.picturePathThumb is not null %}
+                        <img src="{{ pictureDetail.returnedPicture.picturePathThumb }}" alt="{{ pictureDetail.returnedPicture.pictureName }}" class="command-card-img">
+                      {% else %}
+                        {# <img src="{{ picture.picturePathThumb }}" class="command-card-img"> #}
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  <div class="col-md-4">
+                    <img src="{{ picture.picturePathThumb }}" class="command-card-img">
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="col-md-1 center">
+            {% if order.pictures|length > picture_display_number %}
+              <span>{{ 'orders.index.nb_pictures_not_displayed'|trans({'%nb_img%': (order.pictures|length - picture_display_number) })}}</span>
+            {% endif %}
+          </div>
+          <div class="col-md-5 payment-box">
+            <div class="payment-content">
+              <p class="command-price">{{ order.getAmountIncludingTaxAfterReduction()|price }} TTC</p>
+              {% if order is processing and(order is not completed) and (order is not valid) %}
+                {% if order.invoices|length > 0 %}
+                  <a href="{{ path('invoice_download', {'id': order.id})}}" class="pay-btn">{{ 'orders.button.invoice'|trans }}</a>
+                {% else %}
+                  <span class="color-green">{{ 'orders.button.no_invoice'|trans }}</span>
+                {% endif %}
+              {% endif %}
+
+              {% if order is waiting_for_payment %}
+                {% set payWithWallet = order.getAmountIncludingTaxAfterReduction() <= app.user.wallet.currentAmount %}
+                {% set freeOrder = order.getAmountIncludingTaxAfterReduction() == 0 %}
+
+                {% if freeOrder %}
+                  <button
+                    id="js-free-order"
+                    data-token="{{ csrf_token('create-free-order') }}"
+                    data-href="{{ path('save_free_order_action', {'id': order.id}) }}"
+                    data-error-msg="{{ 'orders.msg.order_creation_error'|trans }}"
+                    class="btn btn-prime-payment js-create-order float-left">
+                      {{ 'orders.recap.submit.free_order'|trans }}
+                  </button>
+                {% else %}
+                  <button class="pay-btn js-create-order"
+                     id="js-wallet-pay"
+                     {% if not payWithWallet %}disabled=""{% endif %}
+                     data-token="{{ csrf_token('pay-with-wallet') }}"
+                     data-href="{{ url('pay_now_with_wallet_action', {'id': order.id}) }}"
+                     data-error-msg="{{ 'orders.msg.order_creation_error'|trans }}">{{ 'orders.button.payment_by_wallet'|trans }}</button>
+                {% endif %}
+                <a class="pay-btn" href="{{ path('pay_saved_order_transaction', {'id': order.id}) }}">{{ 'orders.button.payment'|trans }}</a>
+              {% endif %}
+
+              {% if order is valid or order is completed %}
+                <a class="pay-btn pay-btn-verify" href="{{ path('order_verify', {'id': order.id}) }}">
+                  {% if order is valid %}
+                    {{ 'orders.button.verify'|trans }}
+                  {% else %}
+                      {{ 'orders.button.download'|trans }}
+                  {% endif %}
+                </a>
+              {% endif %}
+
+              {% if order is not_valid %}
+                <a href="#" class="pay-btn disabled" disabled="disabled">{{ 'orders.button.disabled'|trans }}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </article>
+    {% else %}
+      {% if orderCount != 0 %}
+        <div class="search-no-results">
+          <img alt="" role="presentation" src="{{ asset('filtered-result-not-found.png', 'local_icons') }}" class="search-no-results-img">
+        </div>
+      {% else %}
+        <div class="search-no-results">
+          <img alt="" role="presentation" src="{{ asset('result-not-found.png', 'local_icons') }}" class="search-no-results-img">
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+  {{ knp_pagination_render(orders) }}
+</section>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+  <!-- START PAGE JS SCRIPTS -->
+  <script src="{{ asset('order-index.min.js', 'local_js') }}"></script>
+  <script src="{{ asset('order-loader.min.js', 'local_js') }}"></script>
+  <!-- END PAGE JS SCRIPTS -->
+{% endblock %}

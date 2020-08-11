@@ -1,0 +1,8 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="col-md-6 center-login">
+      <p>{% trans with {'%username%': user.username} from "FOSUserBundle"  %}registration.confirmed{% endtrans %}</p>
+      <p><a href="{{ path('order_list') }}">{{ 'registration.back'|trans }}</a></p>
+    </div>
+{% endblock fos_user_content %}

@@ -1,0 +1,26 @@
+#####################################################
+#                                                   #
+#              API configuration file               #
+#                                                   #
+#####################################################
+parameters:
+  api_version: 'v0.2'
+  # immosquare notify params
+  nofify_immosquare_client:
+    base_url: "https://pixis.io/api/v1/emmobilier/orders/"
+    query:
+      apiKey: "50BNI36AsWvCB3i25mO18ts5Et9573lv"
+      apiToken: "Tl70H10R7sxQkrD10TH3QkXiDwoI768T"
+  # body listener
+  body_listener:
+    accepted_formats:
+      xml:                   ['application/xml', 'text/xml']
+      json:                  ['application/json']
+  # exceptions listeners
+  exception_listener:
+    response:
+      valid_format:
+      - json
+      - xml
+      format:                json # xml|json
+      content_type:          'application/problem+json'

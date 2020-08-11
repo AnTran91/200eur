@@ -1,0 +1,432 @@
+# language section
+language:
+    fr:                               Français
+    en:                               English
+# loading text
+loader_msg:                           Please wait, this may take a few seconds...
+# modal
+modal:
+    close:                            Close
+# error pages
+error:
+    return_button:                    Go to Home
+    error_500:
+        msg:                          Something goes wrong with our servers, please try again later.
+    error_404:
+        status_text:                  Oops Page Not Found
+        msg:                          The page you are looking for does not exist or has been moved.
+    error_403:
+        status_text:                  Access denied
+        msg:                          You don't have permission to access this page.
+
+# fos user section
+# login section
+login:
+    help:
+      login:                          Already have an account ?
+      forgot_password:                Forgot your password ?
+      create_accout:                  You do not have an account?
+    create_accout:                    Create an account
+# resetting section
+resetting:
+    title:                            Forgot your password ?
+    info:                             We took care to send you a link by email, in order to reset your password.
+# registration section
+registration:
+    back:                             Create your first order
+    tutorial:                         Registration Tutorial
+    rgpd_title:                       Data Protection
+    rgpd_content:                     In order to establish a relationship of trust with our customers regarding the protection of personal data,
+                                      we want you to understand what will be done of your emails.
+    rgpd_accept:                      'I wish to receive the Newsletter of '
+# logout section
+logout:
+    title:                            Log Out ?
+    question:                         Are you sure you want to log out?
+    info:                             Press Stay logged in if you don't want to quit. Press Logout to quit the current session.
+    ok:                               Logout
+    cancel:                           Stay logged in
+# menu section
+menu:
+    order:                            Orders
+    edit_account:                     My Account
+    profile:                          Profile
+    setting:                          Change the password
+    logout:                           Logout
+    wallet:                           Amount piggy bank %amount%
+    exit:                             'Exit'
+# user section
+user:
+    profile:
+      title:                          My account
+      account_info:                   Account Information
+      billing_address:                Billing address
+      wallet:                         Amount of piggy bank
+      change_password:                Change your Account password
+    account:
+      picture:                        Profile image
+      upload:                         Upload a profile image
+      change_password:                Change the password
+    field:
+      first_name:                     First Name
+      last_name:                      Last Name
+      email:                          Email address
+      email_secondary:                Secondary email address
+      language:                       Language
+      company:                        Company name
+      network_name:                   Network name
+      address:                        Address 1
+      secondary_address:              Address 2
+      zip_code:                       Postal code
+      city:                           City
+      country:                        Country
+      phone:                          Phone number
+      corporate_name:                 Social reason
+      TVA:                            Intra-community VAT
+      registerCode:                   Registration code
+      empty_field:                    ''
+      submit:                         Save changes
+    registration:
+      terms:                          By clicking on "Register" you accept </br> our terms and conditions.
+      fb_log:                         Connect with Facebook
+      gp_log:                         Connect with Google+
+# wallet section
+wallet:
+    field:
+      select_amount:                  Choose the amount of your piggy bank
+      custom_amount:                  Custom Amount
+      submit:                         Add Euros
+      reset:                          Cancel
+      not_refundable:                 The piggy bank is not refundable
+      current_amount:                 Current balance
+      quantity:                       Amount of €uros added
+      total_amount:                   Total TTC of your piggy bank
+    new:
+      title:                          Supply the piggy bank
+      button:                         Validate the payment
+# order section
+#		form
+redirection_to_gateway :              "Payment gateway redirection"
+# orders
+orders:
+    number:                           'N° of Order:'
+    msg:
+      new_wallet:                     The payment via your Wallet was successfully done.
+      new_transaction:                Payment accepted, order confirmed.
+      error_transaction:              "The payment has been abandoned. The command is not created. It is in memory in the HISTORY under the status: WAITING FOR PAYMENT"
+      new:                            Your order has been successfully created.
+      new_pay_later:                  Your order is waiting for payment in the Orders History.
+      delete:                         Your order has been successfully deleted.
+      token_error:                    CSRF token missing or incorrect.
+      order_creation_error:           Could not save The order. The order was cancelled, or server error encountered.
+      order_delete_error:             Cannot delete your order. The order was canceled or a server error happened.
+      wallet_error:                   Your sold is less than %amount%.
+      refused:                        This image was declined.
+      validated:                      Validation done.
+    confirm:
+      title:                          Confirmation
+      deletemsg:                      Are you sure you want to delete this order?
+      continuemsg:                    Are you sure you want to continue?
+      ok:                             Ok
+      cancel:                         Cancel
+    title:
+      recap:                          Payment
+      verify:                         Validate and Download your images
+      list:                           Orders
+      payment:                        Pay the order
+    button:
+      new:                            New order
+      show:                           View the order
+      payment:                        payment
+      invoice:                        Download the Invoice
+      delete:                         Delete
+      verify:                         Validate Images
+      download:                       Download Images
+      no_invoice:                     No invoice (Monthly payment)
+    verify:
+      sub_title:                      This is your images after been modified by our graphists.<br>
+                                      You can download your image(s) only after validating them .<br>
+                                      If you see any flaw in any image, refuse it. It will be resent to production and delivered to you as soon as possible.
+      download_all:                   Download All
+      download:                       Download
+      confirm:                        Validate and download image
+      refuse:                         Refuse
+    upload:
+      title:                          Upload your images
+      step_1:                         1 - Drag your images into the space below. Or load them from your computer.
+      step_2:                         2 - Select for each image the (or) provision (s) retouching you need.
+      step_2_info:                    1 service = 1 image.
+      step_2_subs:                    "Next, define their parameters and options in <i class='fa fa-angle-double-left'> </i> Parameter settings <i class='fas fa-angle-double-right'></i>."
+      contact_info:                   You will consider entrusting us with more than 50 images at a time, contact us on %email% We will open another mode of transfer.
+      param_select:                   Apply settings to all images
+    field:
+      status:                         Order status
+      delivery:                       "Delivery %time"
+      info:                           (except saturday, sunday, holidays and other days not worked)
+    index:
+      nb_pictures:                    '%nb_img% Picture(s)'
+      nb_pictures_not_displayed:      '%nb_img% More picture(s)'
+    refuse_modal:
+      title:                                   Image refusal
+      sub_title:                               Reasons of the refusal
+      commentary:                              Type here
+      close:                                   Close
+      confirm:                                 Confirm
+      not_found:
+        title:                        Welcome !
+        content:                      Welcome to the online order of EMMOBILIER
+        content_1:                    The Excellence of Real Estate Photo Retouching.
+        content_2:                    You can now order your first alterations by clicking on NEW ORDER.
+        content_3:                    This page will then contain the history of your orders.
+        content_4:                    Count on us to offer you a real estate photo editing experience, always more powerful.
+        footer:                       Emmanuelle Ledoux, Founding President.
+    recap:
+      title:                          Summary of your order
+      sub_title:                      'ORDER N° <span class="color-dark">%order_num% </span>, the %date%'
+      info:                           Your image will be retouched according to the following services.
+      info_mult:                      Your %nbr_img% images will be retouched according to the following services.
+      promo:
+        field:                        Promo code
+        question:                     Do you have a promo code?
+        submit_button:                Apply
+        msg:
+          success:                    Promo Code Found
+      submit:
+        free_order:                   Order
+        transaction:                  Pay the order
+        save:                         Pay the order later
+        monthly:                      Monthly Payment
+        wallet:                       pay with piggy bank
+      table:
+        picture_total_number:         Total number of images ordered
+        picture_number:               Number of image (s) (%title%)
+        unit_price:                   Unit price (%title%)
+        total_price:                  Total price (%title%)
+        retouch_total_price:          Duty Free Price
+        reduction:                    Reduction percentage
+        param_price:                  Additional parameter price
+        total_price_ht:               Total price HT
+        total_price_tva:              Total VAT
+        total_price_ttc:              Total price including tax
+      wallet:
+        error:                        The amount of your piggy bank is insufficient.
+        info:                         Thank you for supplying it now, to continue your request.
+      holiday:
+        info:
+          title:                      Reminder <strong> CALENDAR </ strong>.
+          message:                    <p> Delivery of orders depending on, we invite you to consult the day (s) not worked (s) of the designers. </ p> </br> <strong> Production </ strong>.
+        days_worked:                  In pink = worked days
+        days_off:                     In gray = days not worked (weekend, holidays and others ...)
+        cal_header:                   Calender of worked days
+# uploader section
+uploader:
+  msg:
+    setting:
+      success:                        The picture setting has been successfully updated.
+      error:                          Could not save The picture setting.
+      validate:                       You have to pick at least one retouch per image.
+      validate_img:                   You have to pick at least one retouch for this image.
+    param:
+      success:                        The picture params has been updated with success.
+  template:
+    upload:                           Browse your computer files
+    select_all:                       Check all
+    delete_all:                       Delete all images
+    dropzone:                         Drag and drop your images directly here.
+    retry:                            Retry
+    pause:                            Pause
+    continue:                         continue
+    delete:                           Delete
+    emptyError:                       '{file} is empty, please select files again without it.'
+    minSizeError:                     '{file} is too small, minimum file size is {minSizeLimit}.'
+    noFilesError:                     No images to upload.
+    onLeave:                          The images are being uploaded, if you leave now the upload will be canceled.
+    retryFailTooManyItemsError:       Retry failed - you have reached your images limit.
+    sizeError:                        '{file} is too large, maximum image size is {sizeLimit}.'
+    tooManyItemsError:                'Too many items ({netItems}) would be uploaded. Item limit is {itemLimit}.'
+    typeError:                       '{file} has an invalid extension. Valid extension(s): {extensions}.'
+    unsupportedBrowserIos8Safari:     Unrecoverable error - this browser does not permit file uploading of any kind due to serious bugs in iOS8 Safari. Please use iOS8 Chrome until Apple fixes these issues.
+    confirm:
+        title:                        Confirmation
+        deletemsg:                    Are you sure you want to delete this image ?
+        multipledeletemsg:            Are you sure you want to delete these images ?
+        ok:                           Ok
+        cancel:                       Cancel
+  request:
+      error:                          Parameters in request are not valid.
+  upload:
+      msg:
+        new:                          Image has been successfully uploaded.
+        delete:                       Image has been successfully deleted.
+        deleteMultiple:               The specified images has been successfully deleted.
+        error:                        Could not save uploaded images. The upload was cancelled, or server error encountered.
+  validation:
+      request:                        The request is invalid.
+      params:                         Parameters of the HTTP request either empty or does not exist.
+      file:
+          not_found:                  No images to upload.
+          error:                      Uploaded images Error
+          size:
+            empty:                    Chosen image size not valid.
+            large:                    Chosen image is too large.
+          extension:                  File has an invalid extension.
+          thumb:
+            generate:                 Cannot generate thumbnail
+            draw:                     Cannot Draw an picture
+settings:
+    submit:                           Apply settings
+    title:
+      retouch:                        Retouch setting
+      param:                          Services settings
+    msg:
+      error:                          You must select at least one picture to continue.
+param:
+    field:
+        width:                        Width
+        height:                       Height
+        logo:                         Would you like to insert your logo?
+        watermark:                    Would you like a watermark?
+        animated_GIF:                 Would you like an animated GIF before-after of your image?
+        renovation_project:           Non-contractual renovation project.
+        renovation_proposal:          Non-contractual renovation proposal.
+        planning_proposal:            Non contractual arrangement.
+        comment:                      Briefly describe your instructions, 1 line per need.
+        watermark_text:               Type your watermark
+        logo_placement:               Choose the position of the logo
+        animated_GIF_image_placement: Choose the position of the watermark
+        animated_GIF_text:            Type your text
+        watermark_placement:          Choose the position of the watermark
+        file:                         Choose Image
+        logoImageFile:                Choose your Logo
+        watermarkImageFile:           Choose your watermark
+        animatedGIFImageFile:         Choose your watermark
+        unit:                         Unit
+        submit:                       Apply settings
+        submitForAll:                 Apply settings to all %title% images
+form:
+  type:
+    bool:
+      yes:                            Yes
+      no:                           No
+    retouch:
+      small_duration:                Delay %time%unit
+      long_duration:                 Delay about %time %unit
+# transaction section
+transaction:
+  order:
+    title:                            Pay the order
+    button:                           Validate the payment
+  billing_address:
+    title:                            Billing address
+    edit:                             Edit
+    modal:
+        close:                        Close
+        validate:                     Validate
+  field:
+    reference:                        Name of the card holder
+    card_number:                      Card number
+    expiry_year:                      Year
+    expiry_month:                     Month
+    csc:                              CSC
+    card_type:                        Choose your payment method
+    submit:                           Validate the payment
+    payment_card:
+      master_card:                    MasterCard
+      cb:                             CB
+      e_blue:                         E-carte bleue
+      visa:                           Visa
+      visa_electron:                  Visa Electron
+      mestro:                         Maestro
+# fpdf invoice section
+invoice:
+  types:
+    ordinary:                                Ordinary
+    monthly:                                 Monthly
+fpdf_invoice:
+  invoice:                                   INVOICE N° %num% DU %date%
+  client:                                    Beneficiary
+  work:                                      Work completed
+  work_desc:                                 Retouch(s) of photo(s) Real Estate(s)
+  user_tva_info:                             'N° de TVA : %num'
+  order:                                     ORDER
+  order_info:                                'N°: %num%, the: %date%'
+  Designation:                               Designation
+  amount:                                    Qty
+  picture_number:                            Total images
+  order_num:                                 Order number
+  agent_name:                                Name of the agent
+  create_date:                               Creation date
+  promo_code:                                Promotional code
+  picture_unit:                              "%nb Image(s)"
+  unit_price:                                PU W.T.
+  vat:                                       TVA
+  total_wt:                                  Total W.T.
+  total_vat:                                 Total VAT
+  total_price:                               Total ATI
+  code_promo:                                'Paid with this promo code: %code_promo%'
+  total_reduction_price:                     Total reduction
+  total_reduction_picture:                   Total images with reduction
+  rate:                                      Rate
+  payed_with:                                'Paid with: %card_brand% N ° %card_number%'
+  selected_retouch:                          'Selected retouching service :'
+  selected_param:                            'Complementary parameter selected :'
+  currency:                                  All prices quoted are in Euros.
+  footer1:                                   -SAS with capital of 10,000 euros-RCS Versailles 821 693 900 - Intracommunity VAT no FR 51 821 693 900
+  footer2:                                   "Head Office: 13bis, rue Gambetta 78600 Le Mesnil le Roi - Tel .: +33 1 85 39 05 43 Contact: contact@emmobilier.fr"
+# order status
+order:
+  status:
+    all:                                     Display All
+    pending:                                 Pending
+    awaiting_for_payment:                    Waiting for payment
+    awaiting_for_verification:               Waiting for verification
+    awaiting_for_client_response:            Waiting for client response
+    awaiting_for_verification_by_production: Waiting for production verification
+    awaiting_complete_by_client:             Waiting for completion by client
+    in_production:                           In Production
+    send_to_client:                          Send to Client
+    delivery_short_time_ready:               Short delivery time done, long delivery time soon
+    completed:                               Completed
+    partially_completed:                     Partially Completed
+    cancelled:                               Cancelled
+    declined:                                Declined
+    declined_by_client:                      Declined by Client
+    failed_payment:                          Payment Error
+    error_cb:                                Bank Card error
+    declined_by_production:                  Declined by Production
+    cancelled_and_refound:                   Cancelled and refound
+    cancelled_and_partially_refound:         Cancelled and partially refound
+    approvisionnement_tirelire:              Piggy bank supply
+# Time
+time:
+  hour:                                      h
+  day:                                       days
+  week:                                      week
+  month:                                     month
+  year:                                      years
+# Months
+month:
+    april:                            April
+    august:                           August
+    december:                         December
+    february:                         February
+    january:                          January
+    july:                             July
+    june:                             June
+    march:                            March
+    may:                              May
+    november:                         November
+    october:                          October
+    september:                        September
+# Time ago in words
+'less than %seconds seconds ago':       'less than %seconds seconds ago'
+'half a minute ago':                    'half a minute ago'
+'less than a minute ago':               'less than a minute ago'
+'1 minute ago':                         '1 minute ago'
+'%minutes minutes ago':                 '%minutes minutes ago'
+'about 1 hour ago':                     'about 1 hour ago'
+'about %hours hours ago':               'about %hours hours ago'
+'1 day ago':                            '1 day ago'
+'%days days ago':                       '%days days ago'
+"{1} 1 month ago |]1,Inf[ %months months ago": "{1} 1 month ago |]1,Inf[ %months months ago"
+"{1} 1 year ago |]1,Inf[ %years years ago": "{1} 1 year ago |]1,Inf[ %years years ago"

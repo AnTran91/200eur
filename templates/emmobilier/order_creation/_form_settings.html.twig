@@ -1,0 +1,58 @@
+<form action="{{ url('new_picure_settings', {'uuid': picture.uuid})}}" novalidate="novalidate" data-picture-name="{{ picture.name|length > 50 ? picture.name|slice(0, 50) ~ '...' : picture.name }}" data-id="{{ id }}" data-uuid="{{ picture.uuid }}" id="js-uuid-{{ picture.uuid }}" class="js-picture-detail param-card animated" method="post">
+  <article>
+    <div class="row">
+      <div class="col-md-3 lt-px-auto-small param-img-preview">
+        <img src="{{ picture.thumbnailUrl }}">
+        <p class="small-link">{{ picture.name|length > 20 ? picture.name|slice(0, 20) ~ '...' : picture.name }}</p>
+        <span data-id="{{ id }}" data-uuid="{{ picture.uuid }}" class="small-link color-black js-delete-one-picture">
+          <i class="fas fa-trash"></i>
+          {{ 'uploader.template.delete'|trans }}
+        </span>
+      </div>
+
+      <div class="col-md-9">
+        <div class="form-spacing-bottom js-retouch-form-section">
+          {{ form_rest(form) }}
+        </div>
+      </div>
+    </div>
+    <div class="row lt-px-auto-small">
+      <div class="col-md-12">
+        <h5 class="param-heading">{{ 'settings.title.param_options'|trans|raw }}</h5>
+        <a class="js-param-toggle panel-heading" role="button">
+          {{ 'settings.title.param'|trans|raw }}
+        </a>
+      </div>
+      <div class="col-md-12">
+        <div class="lt-px-auto-small" id="js-params-{{ picture.uuid }}">
+          <div class="form-spacing-bottom" id="js-param-section">
+            <div id="accordion">
+              {% for retouch in retouchs %}
+                <div class="accordion" data-id="{{ retouch.id }}" data-uuid="{{ picture.uuid }}">
+                  <div class="accordion-header" id="js-heading-{{ retouch.id ~ "-" ~ picture.uuid }}">
+                    <a data-toggle="collapse" data-target="#js-collapse-{{ retouch.id ~ "-" ~ picture.uuid }}" class="js-accordion-header collapsed" aria-expanded="true" aria-controls="js-collapse-{{ retouch.id ~ "-" ~ picture.uuid }}">
+                      {{ retouch.title|upper }}
+                    </a>
+                  </div>
+                  <div id="js-collapse-{{ retouch.id ~ "-" ~ picture.uuid }}" class="collapse" aria-labelledby="js-heading-{{ retouch.id ~ "-" ~ picture.uuid }}" data-parent="#accordion">
+                    <div class="accordion-content">
+                      <!-- on collapse we load the form here for better preformance -->
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row lt-px-auto float-right">
+      <div class="col-lg-12">
+        <button type="submit" disabled="disabled" class="js-save-settings btn btn-upload">
+          <i id="js-save-setting-icon" class="{{ retouchs|length > 0 ? 'fas fa-check-circle' : '' }}"></i>
+          {{ 'settings.submit'|trans }}
+        </button>
+      </div>
+    </div>
+  </article>
+</form>

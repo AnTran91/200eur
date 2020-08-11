@@ -1,0 +1,72 @@
+{% set payWithWallet = response.total_including_tax_after_reduction <= user.wallet.currentAmount %}
+{% set freeOrder = response.total_including_tax_after_reduction == 0 %}
+
+<section class="row m-0 justify-content-around align-items-end">
+  <div class="promo-payment col-md-7">
+    {% if not payWithWallet and not freeOrder %}
+      <div class="lt-px-auto-small col-md-12 promo-code js-update-wallet">
+        <h5>{{ 'orders.recap.wallet.error'|trans }}</h5>
+        <p class="lightgrey">{{ 'orders.recap.wallet.info1'|trans }}</p>
+        <p class="lightgrey">{{ 'orders.recap.wallet.info2'|trans }}</p>
+      </div>
+    {% endif %}
+    <div class="col-md-6 p-0">
+      {% if not freeOrder %}
+        <a
+          id="js-pay-with-bank"
+          href="{{ path('pay_saved_order_transaction', {'id': order.id}) }}"
+          class="btn btn-prime-payment float-left">
+          {{ 'orders.recap.submit.transaction'|trans }}
+        </a>
+      {% endif %}
+
+      {% if freeOrder %}
+        <a
+          href="#"
+          id="js-free-order"
+          data-token="{{ csrf_token('create-free-order') }}"
+          data-href="{{ path('save_free_order_action', {'id': order.id}) }}"
+          data-error-msg="{{ 'orders.msg.order_creation_error'|trans }}"
+          class="btn btn-prime-payment js-create-order float-left">
+          {{ 'orders.recap.submit.free_order'|trans }}
+        </a>
+      {% endif %}
+    </div>
+    <div class="col-md-6 p-0">
+      {% if not payWithWallet and not freeOrder %}
+        <a
+          href="#"
+          id="js-wallet-show-modal"
+          class="btn btn-prime-payment float-right js-update-wallet">
+          {{ 'wallet.new.title'|trans }}
+        </a>
+      {% endif %}
+
+      {% if payWithWallet and not freeOrder %}
+        <a
+          href="#"
+          id="js-wallet-pay"
+          data-token="{{ csrf_token('pay-with-wallet') }}"
+          data-href="{{ url('pay_now_with_wallet_action', {'id': order.id}) }}"
+          data-error-msg="{{ 'orders.msg.order_creation_error'|trans }}"
+          class="btn btn-prime-payment float-right js-create-order">
+          {{ 'orders.recap.submit.wallet'|trans }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-md-5  promo-payment">
+      {% if user.type == monthly_type and not freeOrder %}
+        <div class="col-md-12 pt-2">
+          <a
+            href="#"
+            data-error-msg="{{ 'orders.msg.order_creation_error'|trans }}"
+            data-token="{{ csrf_token('create-monthly-order') }}"
+            data-href="{{ url('pay_order_monthly_action', {'id': order.id}) }}"
+            class="btn btn-prime-payment js-create-order">
+            {{ 'orders.recap.submit.monthly'|trans }}
+          </a>
+        </div>
+      {% endif %}
+  </div>
+</section>

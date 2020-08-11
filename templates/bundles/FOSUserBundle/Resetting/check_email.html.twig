@@ -1,0 +1,17 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block title %}
+  Check Resetting Password
+{% endblock %}
+
+{% block fos_user_content %}
+<div class="col-md-6 center-login">
+  <p class="center">{{'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime} , "FOSUserBundle")|nl2br }}</p>
+</div>
+<div class="password-lost center-login pt-5">
+  <a href="{{ path('fos_user_security_login') }}">{{ 'login.help.login'|trans }}</a>
+  <p>{{ 'login.help.create_accout'|trans }}
+    <a href="{{ path('fos_user_registration_register') }}">{{ 'login.create_accout'|trans }}</a>
+  </p>
+</div>
+{% endblock %}

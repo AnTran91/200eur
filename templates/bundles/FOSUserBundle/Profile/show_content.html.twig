@@ -1,0 +1,123 @@
+<section class="row main-title">
+  <div class="col-md-6">
+    <img src="{{ asset('icon_monCompte.svg', 'local_icons')}}" class="page-title-img">
+    <h2>{{ 'user.profile.title'|trans }}</h2>
+  </div>
+</section>
+
+<section class="row lt-px-auto">
+  <h4>{{ 'user.profile.account_info'|trans }}
+  </h4>
+</section>
+
+<section>
+  <div class="col-lg-5 col-md-6 form-container">
+    <div class="row profil-img-container">
+      <div class="col-sm-4">
+        {% if app.user.imageName is null %}
+          <img class="prf-img" src="{{ asset('profile.jpg', 'local_icons') }}">
+        {% else %}
+          <img src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+        {% endif %}
+      </div>
+      <div class="col-sm-8 profil-name">
+        <h4>{{ 'user.account.picture'|trans }}</h4>
+      </div>
+    </div>
+    <p>
+      <span class="profile-label">{{ 'user.field.first_name'|trans }}:</span>
+      <span class="profile-value">{{ user.firstName|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.last_name'|trans }}:</span>
+      <span class="profile-value">{{ user.lastName|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.email'|trans }}:</span>
+      <span class="profile-value">{{ user.email|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.email_secondary'|trans }}:</span>
+      <span class="profile-value">{{ user.emailSecondary|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.language'|trans }}:</span>
+      <span class="profile-value">{{ user.language|language(app.request.locale)|default('user.field.empty_field'|trans) }}</span>
+    </p>
+  </div>
+</section>
+
+<section class="profil-section">
+  <div>
+    <h4>
+      {{ 'user.profile.billing_address'|trans }}</h4>
+  </div>
+  <div class="col-lg-5 col-md-6 form-container">
+    <p>
+      <span class="profile-label">{{ 'user.field.first_name'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.firstName|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.last_name'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.lastName|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.company'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.company|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.network_name'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.networkName|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.address'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.address|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.secondary_address'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.secondaryAddress|default('user.field.empty_field'|trans) }}</span>
+    </p>
+
+    <p>
+      <span class="profile-label">{{ 'user.field.zip_code'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.zipCode|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.city'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.city|default('user.field.empty_field'|trans) }}</span>
+    </p>
+
+    <p>
+      <span class="profile-label">{{ 'user.field.country'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.country|country(app.request.locale)|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.phone'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.phone|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.corporate_name'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.corporateName|default('user.field.empty_field'|trans) }}</span>
+    </p>
+    <p>
+      <span class="profile-label">{{ 'user.field.TVA'|trans }}:</span>
+      <span class="profile-value">{{ user.billingAddress.TVA|default('user.field.empty_field'|trans) }}</span>
+    </p>
+  </div>
+</section>
+
+<section class="profil-section tirelire-section">
+  <div>
+    <h4>{{ 'user.profile.wallet'|trans }}</h4>
+  </div>
+  <div class="tirelire-content">
+    <div>
+      <p>
+        {{ 'wallet.field.current_amount'|trans }}:
+        <span class="tirelire-ammount">{{ app.user.wallet.currentAmount|price }}</span>
+        <span id="js-wallet-show-modal" class="update_wallet_link">{{ 'wallet.new.title'|trans }}</span>
+      </p>
+    </div>
+  </div>
+
+</section>

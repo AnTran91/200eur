@@ -1,0 +1,284 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="#">
+                      <i class="fe fe-home"></i>
+                      {{ 'admin.dashboard.dashboard_menu'|trans }}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="list-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 col-sm-6">
+            <div class="card">
+              <div class="card-body text-center">
+                <div class="h5">{{ 'admin.dashboard.year_profit'|trans }}</div>
+                <div class="display-4 font-weight-bold mb-4">{{ yearProfit|price }}</div>
+                <div class="progress progress-sm">
+                  <div class="progress-bar bg-green" style="width: 100%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="card">
+              <div class="card-body text-center">
+                <div class="h5">{{ 'admin.dashboard.month_profit'|trans }}</div>
+                <div class="display-4 font-weight-bold mb-4">{{ monthProfit|price }}</div>
+                <div class="progress progress-sm">
+                    {% if (yearProfit > 0 and monthProfit > 0) %}
+                      <div class="progress-bar bg-pink" style="width: {{ (monthProfit * 100)/yearProfit }}%"></div>
+                    {% else %}
+                      <div class="progress-bar bg-red" style="width: 100%"></div>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="card">
+              <div class="card-body text-center">
+                <div class="h5">{{ 'admin.dashboard.week_profit'|trans }}</div>
+                <div class="display-4 font-weight-bold mb-4">{{ weekProfit|price }}</div>
+                <div class="progress progress-sm">
+                  {% if (weekProfit > 0 and monthProfit > 0) %}
+                    <div class="progress-bar bg-azure" style="width: {{ (weekProfit * 100)/monthProfit }}%"></div>
+                  {% else %}
+                    <div class="progress-bar bg-red" style="width: 100%"></div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                {% if profit_statistics and profit_statistics|length > 1 %}
+                  <div
+                    class="echart-extra-large js-line-echarts"
+                    data-echarts-line="data-echarts-line"
+                    data-title="{{ 'admin.dashboard.profit_stats'|trans }}"
+                    data-legend="{{ 'admin.dashboard.legend_stats'|trans }}"
+                    data-values='{{ profit_statistics|array_column("profit")|json_encode|raw }}'
+                    data-dates='{{ profit_statistics|array_column("date")|json_encode|raw }}'></div>
+                {% else %}
+                  <div class="echart-large text-center">
+                    <img alt='#' src="{{ asset('404.png', 'local_icons') }}"/>
+                    <p class="uk-text-large">{{ 'admin.promo.statistics.not_found'|trans }}</p>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                {% if order_statistics %}
+                  <div
+                    class="echart-large js-pie-echarts"
+                    data-echarts-line="data-echarts-line"
+                    data-title="{{ 'admin.dashboard.order_stats'|trans }}"
+                    data-legend='{{ order_statistics|array_column("name")|json_encode|raw }}'
+                    data-series='{{ order_statistics|json_encode|raw }}'></div>
+                {% else %}
+                  <div class="echart-large">
+                    <span class="chart_icon">
+                      <p class="uk-text-large">{{ 'admin.promo.statistics.not_found'|trans }}</p>
+                    </span>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                {% if user_statistics %}
+                  <div
+                    class="echart-large js-pie-echarts"
+                    data-echarts-line="data-echarts-line"
+                    data-title="{{ 'admin.dashboard.user_stats'|trans }}"
+                    data-legend='{{ user_statistics|array_column("name")|json_encode|raw }}'
+                    data-series='{{ user_statistics|json_encode|raw }}'></div>
+                {% else %}
+                  <div class="echart-large">
+                    <span class="chart_icon">
+                      <p class="uk-text-large">{{ 'admin.promo.statistics.not_found'|trans }}</p>
+                    </span>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <!-- DATA TABLE -->
+            {% include 'admin/dashboard/_order_details.html.twig' with {
+              'orders' : todayDeliveredOrders,
+              'title': 'admin.order.done_today_list'|trans
+            }
+            only %}
+          </div>
+          <div class="col-md-4">
+            {% include 'admin/dashboard/_order_details.html.twig' with {
+              'orders' : thisWeekDeliveredOrders,
+              'title': 'admin.order.done_this_week'|trans
+            }
+            only %}
+          </div>
+          <div class="col-md-4">
+            {% include 'admin/dashboard/_order_details.html.twig' with {
+              'orders' : declinedOrders,
+              'title': 'admin.order.declined_list'|trans
+            }
+            only %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('echarts/echarts.min.js', 'admin_vendor') }}"></script>
+<script>
+  $(document).ready(function() {
+    // based on prepared DOM, initialize echarts instance
+
+    $('.js-line-echarts').each(function(index) {
+      var $element = $(this);
+      var chart = echarts.init($element[0]);
+
+      var option = {
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: $element.data('dates')
+        },
+        yAxis: {
+          type: 'value',
+          axisLabel: {
+            formatter: '{value} €'
+          }
+        },
+        tooltip: {
+          trigger: 'axis',
+          formatter: "{b} : {c} €"
+        },
+        title: {
+          text: $element.data('title'),
+          x: 'center'
+        },
+        legend: {
+          orient: 'vertical',
+          x: 'left'
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              show: true,
+              title: ' '
+            }
+          }
+        },
+        series: [
+          {
+            data: $element.data('values'),
+            type: 'line',
+            areaStyle: {}
+          }
+        ],
+        dataZoom: [
+          {
+            show: true
+          }
+        ]
+      };
+
+      chart.setOption(option);
+    });
+
+    $('.js-pie-echarts').each(function(index) {
+      var $element = $(this);
+
+      var option = {
+        title: {
+          text: $element.data('title'),
+          x: 'center'
+        },
+        tooltip: {
+          trigger: 'item'
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              show: true,
+              title: ' '
+            }
+          }
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+          x: 'center',
+          y: 'bottom',
+          data: $element.data('legend')
+        },
+        series: [
+          {
+            name: $element.data('title'),
+            radius : [30, 100],
+            type: 'pie',
+            data: $element.data('series'),
+            label: {
+                normal: {
+                    show: false
+                },
+                emphasis: {
+                    show: false
+                }
+            },
+          }
+        ]
+      };
+      var chart = echarts.init($element[0]);
+      // use configuration item and data specified to show chart
+      chart.setOption(option);
+    });
+  });
+</script>
+{% endblock %}

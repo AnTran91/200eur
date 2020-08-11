@@ -1,0 +1,10 @@
+#############################################################
+#                                                           #
+#        Exception Listener service configuration           #
+#                                                           #
+#############################################################
+services:
+    App\EventListener\ExceptionListener:
+      arguments: ['@serializer', '@monolog.logger.immosquare_api_channel', '%exception_listener%']
+      tags:
+      - { name: kernel.event_listener, event: kernel.exception }

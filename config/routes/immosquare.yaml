@@ -1,0 +1,12 @@
+#####################################################
+#                                                   #
+#       Immosquare section configuration file       #
+#                                                   #
+#####################################################
+
+# Immosquare controllers
+immosquare_controllers:
+  host: '%immosquare_domain%'
+  resource: ../../src/Controller/Immosquare/
+  type: annotation
+  prefix: /api

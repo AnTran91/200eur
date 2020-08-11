@@ -1,0 +1,306 @@
+# emmo_test.field
+-
+  id: 1
+  field_group_id: 1
+  name: "origin_size"
+  empty_data: "original"
+  mapped: 1
+  field_type: "radio"
+  order_number: 1
+  disabled: 0
+-
+  id: 2
+  disabled_on_id: 1
+  field_group_id: 1
+  name: "height"
+  label_text: "Hauteur"
+  mapped: 1
+  field_type: "text"
+  order_number: 2
+  disabled: 1
+-
+  id: 3
+  disabled_on_id: 1
+  field_group_id: 1
+  name: "Width"
+  label_text: "Largeur"
+  mapped: 1
+  field_type: "text"
+  order_number: 2
+  disabled: 1
+-
+  id: 4
+  disabled_on_id: 1
+  field_group_id: 1
+  name: "unit"
+  empty_data: "px"
+  mapped: 1
+  field_type: "radio"
+  order_number: 2
+  htmlclass: "form-unit"
+  disabled: 1
+-
+  id: 5
+  field_group_id: 2
+  name: "returned_format"
+  label_text: ""
+  mapped: 1
+  field_type: "choice"
+  order_number: 1
+  htmlclass: ""
+  disabled: 0
+-
+  id: 6
+  field_group_id: 3
+  name: "logo"
+  label_text: "Souhaitez vous insérer votre logo?"
+  empty_data: "no"
+  mapped: 1
+  field_type: "boolean"
+  order_number: 1
+  disabled: 0
+-
+  id: 7
+  disabled_on_id: 6
+  field_group_id: 3
+  name: "logo_file"
+  label_text: "Choisissez votre Logo"
+  mapped: 1
+  field_type: "image"
+  order_number: 2
+  disabled: 1
+-
+  id: 8
+  disabled_on_id: 6
+  field_group_id: 3
+  name: "logo_place"
+  label_text: "Choisissez la position du logo"
+  empty_data: "rb"
+  mapped: 1
+  field_type: "placement"
+  order_number: 3
+  disabled: 1
+-
+  id: 9
+  field_group_id: 4
+  name: "gif_animation"
+  label_text: "Souhaitez-vous un GIF animé Avant-Après de votre image?"
+  empty_data: "no"
+  mapped: 1
+  price: 5.00
+  add_the_price_when_value_equals_to: "yes"
+  field_type: "boolean"
+  order_number: 1
+  disabled: 0
+-
+  id: 10
+  disabled_on_id: 9
+  field_group_id: 4
+  name: "gif_animation_config"
+  empty_data: "original"
+  mapped: 1
+  field_type: "radio"
+  order_number: 2
+  disabled: 1
+-
+  id: 11
+  disabled_on_id: 10
+  field_group_id: 4
+  name: "gif_animation_watermark"
+  label_text: "Tapez votre texte personnalisé"
+  mapped: 1
+  field_type: "text_no_label"
+  order_number: 3
+  disabled: 1
+-
+  id: 12
+  disabled_on_id: 10
+  field_group_id: 4
+  name: "gif_animation_logo_file"
+  mapped: 1
+  field_type: "image"
+  order_number: 4
+  disabled: 1
+-
+  id: 13
+  disabled_on_id: 10
+  field_group_id: 4
+  name: "gif_animation_place"
+  label_text: "Choisissez la position"
+  empty_data: "rb"
+  mapped: 1
+  field_type: "placement"
+  order_number: 5
+  disabled: 1
+-
+  id: 14
+  field_group_id: 5
+  name: "comment"
+  label_text: "Si vous deviez avoir des directives particulières à nous transmettre, écrivez ici :"
+  mapped: 1
+  field_type: "textarea"
+  order_number: 1
+  htmlclass: ""
+  disabled: 0
+-
+  id: 15
+  field_group_id: 6
+  name: "watermark"
+  label_text: "Souhaitez-vous insérer un filigrane?"
+  empty_data: "no"
+  mapped: 1
+  field_type: "boolean"
+  order_number: 1
+  disabled: 0
+-
+  id: 16
+  disabled_on_id: 15
+  field_group_id: 6
+  name: "watermark_text"
+  label_text: "Tapez votre filigrane"
+  mapped: 1
+  field_type: "text_no_label"
+  order_number: 2
+  disabled: 1
+-
+  id: 17
+  disabled_on_id: 15
+  field_group_id: 6
+  name: "watermark_logo_file"
+  label_text: "Choisissez votre filigrane"
+  mapped: 1
+  field_type: "image"
+  order_number: 3
+  disabled: 1
+-
+  id: 18
+  disabled_on_id: 15
+  field_group_id: 6
+  name: "watermark_place"
+  label_text: "Choisissez la position du filigrane"
+  empty_data: "mm"
+  mapped: 1
+  field_type: "placement"
+  order_number: 4
+  disabled: 1
+-
+  id: 19
+  field_group_id: 7
+  name: "renovationProposal"
+  label_text: "Proposition de rénovation non contractuelle."
+  empty_data: "no"
+  mapped: 1
+  field_type: "boolean"
+  order_number: 1
+  disabled: 0
+-
+  id: 20
+  field_group_id: 7
+  name: "renovationProject"
+  label_text: "Projet de rénovation non contractuel."
+  empty_data: "no"
+  mapped: 1
+  field_type: "boolean"
+  order_number: 2
+  disabled: 0
+-
+  id: 22
+  field_group_id: 11
+  name: "planningProposal"
+  label_text: "Proposition d'aménagement non contractuelle."
+  empty_data: "no"
+  mapped: 1
+  field_type: "boolean"
+  order_number: 1
+  disabled: 0
+-
+  id: 23
+  field_group_id: 11
+  name: "planningProject"
+  label_text: "Projet d'aménagement non contractuel."
+  empty_data: "no"
+  mapped: 1
+  field_type: "boolean"
+  order_number: 2
+  disabled: 0
+-
+  id: 24
+  field_group_id: 9
+  name: "landscapingProposal"
+  label_text: "Proposition d'aménagement Extérieur."
+  empty_data: "no"
+  mapped: 1
+  field_type: "boolean"
+  order_number: 1
+  disabled: 0
+-
+  id: 25
+  field_group_id: 9
+  name: "landscapingProject"
+  label_text: "Projet d'aménagement Extérieur."
+  empty_data: "no"
+  mapped: 1
+  field_type: "boolean"
+  order_number: 2
+  disabled: 0
+-
+  id: 26
+  field_group_id: 10
+  name: "specifications"
+  label_text: "Décrivez succintement vos directives d'aménagement, 1 ligne par besoin."
+  mapped: 1
+  field_type: "textarea"
+  order_number: 1
+  disabled: 0
+-
+  id: 28
+  field_group_id: 12
+  name: "piscine"
+  label_text: "Voulez-vous éclairer votre piscine ?"
+  empty_data: "no"
+  mapped: 1
+  field_type: "boolean"
+  order_number: 1
+  disabled: 0
+-
+  id: 29
+  field_group_id: 13
+  name: "field_renovation"
+  mapped: 1
+  field_type: "image_renovation"
+  order_number: 1
+  disabled: 0
+-
+  id: 30
+  field_group_id: 14
+  name: "blue_sky"
+  label_text: "Souhaitez-vous un ciel bleu de saison ?"
+  empty_data: "no"
+  mapped: 1
+  price: 2.50
+  add_the_price_when_value_equals_to: "yes"
+  field_type: "boolean"
+  order_number: 1
+  disabled: 0
+-
+  id: 31
+  field_group_id: 15
+  name: "document"
+  label_text: "(formats : word, powerpoint, pdf, Photo)"
+  mapped: 1
+  field_type: "file"
+  order_number: 1
+  htmlclass: ""
+  disabled: 0
+-
+  id: 32
+  field_group_id: 16
+  name: "bed"
+  label_text: "Souhaitez-vous faire le lit?"
+  empty_data: "no"
+  mapped: 1
+  price: 2.00
+  add_the_price_when_value_equals_to: "yes"
+  field_type: "boolean"
+  order_number: 1
+  disabled: 0

@@ -1,0 +1,73 @@
+## Titres
+page_title : "Payment Demo"
+title : "SYSTEMPAY PAYMENT SOLUTION IMPLEMENTATION EXAMPLE"
+form_title : "SINGLE PAYMENT FORM"
+
+##INFORMATIONS
+information : "INFORMATION"
+
+information_para1 : "The payment uses the sending of a payment form to Systempay payment gateway URL. This form is created from the 'config/api_configs/system_pay.yaml' file and the below fields."
+Fichier_conf : "system_pay.yaml file"
+information_para2 : "Before the first use you have to fill the vads_site_id, key and vads_url_return fields of the system_pay.yaml file. I recommends to read the 'system_pay.yaml' file. This file contains secure data. This data securing is on your responsibility."
+information_para3 : "These fields are filled with examples, it is up to you to fill them depending on your context and configuration. Please make sure that the 'system_pay.yaml' file rights are set in read and write mode in order that the script works properly."
+
+##CHAMPS DU FORMULAIRE
+CHAMPS_DU_FORMULAIRE : "PAYMENT FORM FIELDS"
+
+url_plateforme : "Payment gateway URL"
+en_rouge : "Mandatory fields appear in red"
+PARAMETRES_DE_LA_TRANSACTION : "TRANSACTION SETTINGS"
+amount : "OrderCreation amount set in the smallest currency unit. Cents for EURO. Ex: 1000 for 10 euros"
+PARAMETRES_CLIENT : "CLIENT SETTINGS"
+reference : "OrderCreation number. Optional setting. Length of field: 32 characters max - Alphanumeric Type"
+customer_id : "Customer number. Optional setting. Length of field: 32 characters max - Alphanumeric Type"
+customer_name : "Customer name. Optional setting. Length of field: 127 characters max - Alphanumeric Type"
+customer_email : "Customer Email. Optional setting."
+url_return : "Shop return URL. When the customer clicks on 'return to the shop' this URL permits to treat the data in order to display the payment details."
+language : "Language of the payment page."
+submit : "Validate and send the settings by POST mode"
+
+
+#		form
+redirection_to_gateway : "Payment gateway redirection"
+
+#		return payment
+redirection_to_shop : "Redirection to the shop"
+
+invalid_signature: "Invalid Signature - do not take this payment result in account"
+
+status:
+    abandonne : "The payment was abandonned by the customer. The transaction was not created on the gateway and therefore is not visible on the merchant back office."
+    accepted : "The payment is accepted and is waiting to be cashed."
+    refused : "The payment was refused."
+    waiting_manually_validated : "The transaction is accepted but it is waiting to be manually validated. It is on the merchant responsability to validate the transaction in order that it can be cashed from the back office or by web service request. The transaction can be validated as long as the capture delay is not expired. If the delay expires the payment status change to Expired. This status is definitive."
+    waiting_for_authorisation : "The transaction is waiting for an authorisation. During the payment, just an imprint was made because the capture delay is higher than 7 days. By default the auhorisation demand for the global amount will be made 2 days before the bank deposit date."
+    expired : "The transaction expired. This status is definitive, the transaction will not be able to be cashed. A transaction expires when it was created in manual validation or when the capture delay is passed."
+    cancelled : "The payment was cancelled through the merchant back offfice or by a web service request. This status is definitive, the transaction will never be cashed."
+    waiting_for_authorisation_and_manually_validated : "The transaction is waiting for an authorisation and a manual validation. During the payment, just an imprint was made because the capture delay is higher than 7 days and the validation type is « manual validation ». This payment will be able to be cashed only after that the merchant validates it from the back office or by web service request."
+    cashed : "The payment was cashed. This status is definitive."
+
+    not_created: Transaction not created. The transaction has not been created and cannot be viewed in the BackOffice.
+    pending: "This status concerns all the payment methods that require integration via a payment form with redirection. This status is returned when no response has been returned by the acquirer or the delay of the response from the acquirer has exceeded the payment session on the payment gateway. This status is temporary. The final status will be displayed in the Back Office immediately after the synchronization has been completed."
+    cashed_faild: The transaction capture has failed. Contact the technical support.
+    under_verification: - Specific to PayPal
+
+result:
+    success : "Payment successfully completed."
+    contact_bank_holder : "The merchant must contact the holder’s bank."
+    refused : "Payment denied."
+    cancel : "Cancellation by customer."
+    format_error : "Request format error. To be linked with the value of the vads_extra_result field."
+    technical_error : "Technical error occurred during payment."
+
+WARRANTY_PAYMENT : "Payment Warranty"
+warranty:
+    guaranteed : "Payment is guaranteed."
+    not_guaranteed : "Payment is not guaranteed."
+    technical_error : "Payment cannot be guaranteed, due to a technical error."
+    not_applicable : "Payment guarantee not applicable."
+
+DELAI_PAYMENT : "Capture delay"
+delay:
+    title : "Capture delay"
+    days: "days"

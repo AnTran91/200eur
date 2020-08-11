@@ -1,0 +1,41 @@
+# emmobilier.order_delivery_time
+-
+  id: 1
+  time: 48
+  unit: "time.hour"
+  global: 1
+  selected_by_default: 1
+  order_delivery_code: "48_hours"
+  app_type: "application.type.emmobilier"
+-
+  id: 2
+  time: 24
+  unit: "time.hour"
+  global: 1
+  selected_by_default: 0
+  order_delivery_code: "24_hours"
+  app_type: "application.type.emmobilier"
+-
+  id: 3
+  time: 1
+  unit: "time.week"
+  global: 0
+  selected_by_default: 0
+  order_delivery_code: ""
+  app_type: "application.type.emmobilier"
+-
+  id: 4
+  time: 24
+  unit: "time.hour"
+  global: 1
+  selected_by_default: 0
+  order_delivery_code: "24_hours"
+  app_type: "application.type.immosquare"
+-
+  id: 5
+  time: 48
+  unit: "time.hour"
+  global: 1
+  selected_by_default: 0
+  order_delivery_code: "48_hours"
+  app_type: "application.type.immosquare"

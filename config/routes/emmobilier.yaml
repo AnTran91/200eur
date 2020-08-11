@@ -1,0 +1,60 @@
+#####################################################
+#                                                   #
+#       Emmobilier section configuration file       #
+#                                                   #
+#####################################################
+
+# Emmobilier controllers
+emmobilier_controllers:
+  # host: '%emmobilier_domain%'
+  resource: ../../src/Controller/Emmobilier/
+  type: annotation
+  prefix: /emmobilier
+
+# FOSUserBundle Configration
+fos_user_security:
+  # host: '%emmobilier_domain%'
+  resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+  prefix: /emmobilier
+
+fos_user_profile:
+  # host: '%emmobilier_domain%'
+  resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+  prefix: /emmobilier/profile
+
+fos_user_register:
+  # host: '%emmobilier_domain%'
+  resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+  prefix: /emmobilier/register
+
+fos_user_resetting:
+  # host: '%emmobilier_domain%'
+  resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+  prefix: /emmobilier/resetting
+
+fos_user_change_password:
+  # host: '%emmobilier_domain%'
+  resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+  prefix: /emmobilier/profile
+
+# Redirecting the homepage
+emmobilier_homepage:
+  path:       /
+  # host:       '%emmobilier_domain%'
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+  defaults:
+    path: /emmobilier/login
+    permanent: true
+
+# Add CGV page
+emmobilier_cgv:
+  path:             /cgv
+  # host:             '%emmobilier_domain%'
+  controller:       Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+  defaults:
+    template:       emmobilier/CGV/cgv.html.twig
+
+#Test
+transaction_response:
+  path: /transaction/validation/transaction-response-test
+  controller: App\Controller\transactionControllerTest::validateTransactionResponseTest

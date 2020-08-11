@@ -1,0 +1,30 @@
+<?php
+
+namespace App\DataFixtures;
+
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use App\Entity\Promo;
+
+class PromoFixtures extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+        $promo = new Promo();
+        $promo->setPromoCode("Test-Test")
+              ->setStartDate(new \DateTime('-30 day'))
+              ->setEndDate(new \DateTime('+30 day'))
+              ->setReduction(80)
+              ->setUseLimit(6)
+              ->setImageLimit(9)
+              ->setUserImageLimit(2)
+              ->setUserUseLimit(2)
+              ->setExpired(false)
+              ->setInvoiceType('type1')
+              ;
+
+        $manager->persist($promo);
+
+        $manager->flush();
+    }
+}

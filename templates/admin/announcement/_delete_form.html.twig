@@ -1,0 +1,8 @@
+{% trans_default_domain 'admin' %}
+
+<form class="item" method="post" action="
+{{ path('admin_holidays_delete', {'id': holiday.id}) }}">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ holiday.id) }}">
+    <button class="btn delete-btn  js-confirm-alert" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.delete'|trans }}" data-original-title="More"><i class="zmdi zmdi-delete"></i></button>
+</form>

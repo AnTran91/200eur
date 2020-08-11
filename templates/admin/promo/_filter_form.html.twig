@@ -1,0 +1,43 @@
+{% trans_default_domain 'admin' %}
+<!-- FILTER FORM -->
+{{ form_start(filter_form) }}
+<div class="card m-0">
+  <div class="card-header">
+    <h3 class="card-title">{{'admin.promo.promo_filter'|trans}}</h3>
+    <div class="card-options">
+      <a href="#" class="card-options-collapse" data-toggle="card-collapse">
+        <i class="fas fa-chevron-up"></i>
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        {{ form_row(filter_form.promoCode) }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form_row(filter_form.promoType) }}
+      </div>
+      <div class="col-md-4 form-inline-bottom mb-3">
+        {{ form_row(filter_form.expired) }}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        {{ form_row(filter_form.startDate) }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form_row(filter_form.endDate) }}
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="float-right">
+      <button type="submit" class="btn btn-primary">{{ 'admin.form.filter'|trans }}</button>
+      <a id="js-clear-paginator" href="#" class="btn btn-danger">{{ 'admin.form.reset'|trans }}</a>
+    </div>
+  </div>
+  {{ form_widget(filter_form) }}
+</div>
+{{ form_end(filter_form) }}
+<!-- END FILTER FORM -->

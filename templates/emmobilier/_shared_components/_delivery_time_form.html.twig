@@ -1,0 +1,9 @@
+{{ form_start(form, {'attr': {'id' : 'js-recap-form'}}) }}
+
+{% if display_form %}
+  {{ form_row(form.deliveryTime) }}
+  {{ form_rest(form) }}
+  {{ form_end(form) }}
+{% else %}
+   {{ '</form>' }}
+{% endif %}

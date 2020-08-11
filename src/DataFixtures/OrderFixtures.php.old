@@ -1,0 +1,68 @@
+<?php
+
+namespace App\DataFixtures;
+
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use App\Entity\Order;
+use App\Entity\Promo;
+
+class OrderFixtures extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+        $promo = new Promo();
+        $promo->setPromoCode("Test-Test")
+              ->setStartDate(new \DateTime('-30 day'))
+              ->setEndDate(new \DateTime('+3 day'))
+              ->setReduction(80)
+              ->setUseLimit(12)
+              ->setImageLimit(12)
+              ->setUserImageLimit(12)
+              ->setUserUseLimit(12)
+              ->setExpired(false)
+              ->setInvoiceType('type1')
+              ;
+
+        $manager->persist($promo);
+
+        $errorPromo = new Promo();
+        $errorPromo->setPromoCode("error-promo")
+                  ->setStartDate(new \DateTime('-30 day'))
+                  ->setEndDate(new \DateTime('-3 day'))
+                  ->setReduction(80)
+                  ->setUseLimit(1)
+                  ->setImageLimit(1)
+                  ->setUserImageLimit(1)
+                  ->setUserUseLimit(0)
+                  ->setExpired(true)
+                  ->setInvoiceType('type1')
+              ;
+
+        $manager->persist($errorPromo);
+
+        $order = new Order();
+        $order->setOrderStatus(1)
+              ->setTime('24')
+              ->setUploadFolder('order_upload')
+              ->setCreationDate(new \DateTime('2013-12-08'))
+              ->setSendEmail(true)
+              ->setPromotion($promo)
+              ;
+
+        $manager->persist($order);
+
+        $order2 = new Order();
+        $order2->setOrderStatus(1)
+              ->setTime('24')
+              ->setUploadFolder('order_upload')
+              ->setCreationDate(new \DateTime('2013-12-08'))
+              ->setSendEmail(true)
+              ->setPromotion($errorPromo)
+              ;
+
+        $manager->persist($order2);
+
+        $manager->flush();
+    }
+}

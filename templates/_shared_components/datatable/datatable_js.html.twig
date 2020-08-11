@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        var selector = "#{{ datatables_view.uniqueName }}";
+        var oTable;
+        var defaults = {};
+
+        var language = {
+            "language":
+                {% if app.request.getLocale() == "En" %}
+                  {% include 'datatable/i18n/en.json.twig' %}
+                {% else %}
+                  {% include 'datatable/i18n/fr.json.twig' %}
+                {% endif %}
+        };
+        var columns = {
+            "columns": {{ datatables_view.data|json_encode|raw }}
+        };
+        
+        var ajax = {
+          "processing": true,
+          "serverSide": true,
+          "ajax" : "{{ datatables_view.ajax }}"
+        };
+
+        function createDatatable() {
+            $.extend(defaults, language);
+            $.extend(defaults, ajax);
+            $.extend(defaults, columns);
+
+            if (!$.fn.dataTable.isDataTable(selector)) {
+                oTable = $(selector)
+                    .DataTable(defaults)
+                    ;
+            }
+        }
+        createDatatable();
+    });
+</script>

@@ -1,0 +1,12 @@
+#####################################################
+#                                                   #
+#       Admin section configuration file            #
+#                                                   #
+#####################################################
+
+# Residence controllers
+residence_controllers:
+  host: '%residence_domain%'
+  resource: ../../src/Controller/Residence/
+  type: annotation
+  prefix: /residence

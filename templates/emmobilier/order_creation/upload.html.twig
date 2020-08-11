@@ -1,0 +1,98 @@
+{% extends 'emmobilier/base.html.twig' %}
+
+{% block title %}{{ 'orders.upload.title'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <!-- BEGIN CUSTOM STYLES -->
+  <link rel="stylesheet" href="{{ asset('fine-uploader-gallery.min.css', 'fine_uploader') }}"/>
+  <link rel="stylesheet" href="{{ asset('custom-fine-uploader.min.css', 'local_css') }}"/>
+  <link rel="stylesheet" href="{{ asset('css/all.css', 'fontawesome') }}">
+  <link rel="stylesheet" href="{{ asset('image-picker.min.css', 'image_picker') }} " />
+  <!-- END CUSTOM STYLES -->
+{% endblock %}
+
+{% block body %}
+  <section class="row main-title">
+    <div class="col-md-12">
+      <img src="{{ asset('icon_telechargerImages.svg', 'local_icons') }}" class="page-title-img"/>
+      <h2>{{ 'orders.upload.title'|trans }}</h2>
+    </div>
+  </section>
+
+  <section class="row lt-px-auto-small">
+    <p class="lightgrey">{{ 'orders.upload.step_1'|trans }}</p>
+  </section>
+  <div id="js-upload-section">
+    <section class="row command-list">
+      <article class="command-card">
+        <!-- Fine Uploader DOM Element ====================================================================== -->
+        <div id="js-fine-uploader-gallery"></div>
+      </article>
+      <div class="lightgrey">
+        <p class="lightgrey pb-4">{{ "orders.upload.contact_info"|trans({"%email%": contact_mail})|raw }}</p>
+        <p class="lightgrey">{{ 'orders.upload.step_2'|trans }}</p>
+        <p class="lightgrey pl-4">{{ 'orders.upload.step_2_info'|trans }}</p>
+        <p class="lightgrey pl-4">{{ 'orders.upload.step_2_subs'|trans|raw }}</p>
+      </div>
+    </section>
+    <section class="row command-list js-pictrue-detail-section"></section>
+    <div class="row right">
+      <a data-href="{{ url('order_recap') }}" data-msg="{{ 'uploader.msg.setting.validate_img'|trans }}" id="js-next-step" role="button" class="btn btn-next">
+        {% trans from "KnpPaginatorBundle" %}label_next{% endtrans %}
+      </a>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  <!-- START PAGE JS SCRIPTS -->
+  {% include 'emmobilier/order_creation/_fine_uploader_layout.html.twig' %}
+
+  <script src="{{ asset('image-picker.min.js', 'image_picker') }}"></script>
+  <script src="{{ asset('all.fine-uploader.min.js', 'fine_uploader') }}"></script>
+
+  <script src="{{ asset('jquery.form.js', 'jquery_form') }}"></script>
+
+  <script src="{{ asset('fine-uploader.js', 'local_js') }}"></script>
+  <script src="{{ asset('param.js', 'local_js') }}"></script>
+  <script
+    id="js-uploader-script"
+    src="{{ asset('upload-page.min.js', 'local_js') }}"
+
+    picture-new-form-url="render_picture_detail"
+    param-list-url= "render_param_list_form"
+    param-new-form-url="render_param_form"
+    param-update-form-url="json_param_form"
+
+    init-url="{{ url('fine_uploader_index') }}"
+    upload-url="{{ url('fine_uploader_upload') }}"
+    chunking-url="{{ url('fine_uploader_chunking') }}"
+    delete-url="{{ url('fine_uploader_delete') }}"
+    mutiple-delete-url="{{ url('fine_uploader_multiple_delete') }}"
+
+    data-confirm="{{ 'uploader.template.confirm.title'|trans }}"
+    data-deletemsg="{{ 'uploader.template.confirm.deletemsg'|trans }}"
+    data-multipledeletemsg="{{ 'uploader.template.confirm.multipledeletemsg'|trans }}"
+    data-ok="{{ 'uploader.template.confirm.ok'|trans }}"
+    data-cancel="{{ 'uploader.template.confirm.cancel'|trans }}"
+    data-emptyerror="{{ 'uploader.template.emptyError'|trans }}"
+    data-minsizeerror="{{ 'uploader.template.minSizeError'|trans }}"
+    data-nofileserror="{{ 'uploader.template.noFilesError'|trans }}"
+    data-onleave="{{ 'uploader.template.onLeave'|trans }}"
+    data-retryfailtoomanyitemserror="{{ 'uploader.template.retryFailTooManyItemsError'|trans }}"
+    data-sizeerror="{{ 'uploader.template.sizeError'|trans }}"
+    data-toomanyitemserror="{{ 'uploader.template.tooManyItemsError'|trans }}"
+    data-typeerror="{{ 'uploader.template.typeError'|trans }}"
+    data-unsupportedbrowserios8safari="{{ 'uploader.template.unsupportedBrowserIos8Safari'|trans }}"
+    data-itemlimit="{{ validation_configs.itemLimit }}"
+    data-allowedextensions="{{ validation_configs.allowedExtensions|json_encode() }}"
+    data-sizelimit="{{ validation_configs.sizeLimit }}"></script>
+
+  <!-- END PAGE JS SCRIPTS -->
+
+{% endblock %}

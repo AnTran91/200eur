@@ -1,0 +1,53 @@
+
+<!-- search form -->
+{% trans_default_domain 'admin' %}
+<!-- DATA TABLE -->
+  <div class="card">
+    <div class="table-responsive">
+      <table class="table card-table table-vcenter text-nowrap">
+        <thead>
+          <tr>
+            <th>{{ pagination_sortable(networks, 'admin.network.name'|trans, 'network.name') }}</th>
+            <th>{{ pagination_sortable(networks, 'admin.common.owner'|trans, 'network.owner') }}</th>
+            <th>{{ pagination_sortable(networks, 'admin.network.number_of_users'|trans, 'network.number_of_users') }}</th>
+            <th></th>
+          </tr>
+          <tr class="spacer"></tr>
+        </thead>
+        <tbody>
+          {% for network in networks %}
+            <tr>
+              <td>{{ network.name }}</td>
+              <td><a href="{{ path('admin_user_show', {'id': network.owner.id}) }}">{{ network.owner }}</a></td>
+              <td>{{ network.numberOfUser }}</td>
+              <td>
+                <div class="table-data-feature">
+                  <a href="{{ path('network_show', {'id': network.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.show'|trans }}" data-original-title="More">
+                    <i class="zmdi zmdi-eye"></i>
+                  </a>
+                  <a href="{{ path('network_edit', {'id': network.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.download'|trans }}" data-original-title="More">
+                    <i class="fe fe-edit"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          {% else %}
+            <tr class="odd">
+              <td valign="top" colspan="3" class="text-center">{{ 'admin.paginator.empty_table'|trans|raw }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer p-0">
+      <div class="d-flex align-items-center p-2">
+        <div class="mr-auto p-2">
+          {{ pagination_info(networks) }}
+        </div>
+        <div class="p-2">
+
+          {{ knp_pagination_render(networks) }}
+        </div>
+      </div>
+    </div>
+  </div>

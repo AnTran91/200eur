@@ -1,0 +1,16 @@
+{% trans_default_domain 'admin' %}
+{{ form_start(form) }}
+<div class="card">
+  <div class="card-header">
+    <strong>{{'admin.holidays.holiday'|trans}}</strong>
+  </div>
+  <div class="card-body">
+    {{ form_rest(form) }}
+  </div>
+  <div class="card-footer text-right">
+    <a href="{{ path('admin_holidays_index') }}" class="btn btn-link">{{ button_label|default('admin.link.back'|trans) }}</a>
+    <button type="submit" class="btn btn-primary ml-auto">{{ button_label|default('admin.form.save'|trans) }}</button>
+  </div>
+</div>
+
+{{ form_end(form) }}

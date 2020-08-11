@@ -1,0 +1,97 @@
+{% extends 'emmobilier/base.html.twig' %}
+
+{% block title %}{{ 'orders.title.recap'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  <!-- BEGIN STYLES -->
+  <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css', 'date_picker')}}"/>
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('css/all.css', 'fontawesome') }}">
+{% endblock %}
+
+{% block body %}
+  <section class="main-title animate-bottom" id="myDiv">
+    <div class="col-md-12">
+      <img class="page-title-img" src="{{ asset('payment-header.png', 'local_icons') }}">
+      <h2>{{ 'orders.title.recap'|trans }}</h2>
+    </div>
+  </section>
+
+  <section class="lt-px-auto">
+    <h4>{{ 'orders.recap.title'|trans }}</h4>
+  </section>
+
+  <section class="row">
+    <div class="col-md-7">
+      <p class="lightgrey">
+        {{ 'orders.recap.sub_title'|trans({'%order_num%': orderNum, '%date%' : date('now')|date('d/m/Y')})|raw }}
+      </p>
+      <p class="lightgrey">
+        {% if response.total_pictures == 1 %}
+          {{ 'orders.recap.info'|trans() }}
+        {% else %}
+          {{ 'orders.recap.info_mult'|trans({'%nbr_img%' : response.total_pictures})|raw }}
+        {% endif %}
+      </p>
+
+      {{ render(controller('App\\Controller\\Emmobilier\\OrderCreation\\OrderStepsController::renderDeliveryTime')) }}
+
+      <div class="lt-px-auto-small">
+        <table class="table table-hover price-table" id="js-recap-order-table">
+          {% include 'emmobilier/_shared_components/_uploaded_pictures_recap.html.twig' with {
+            'response' : response
+          } %}
+        </table>
+      </div>
+
+      {{ render(controller('App\\Controller\\Emmobilier\\OrderCreation\\PromoController::renderPromoCodeForm')) }}
+    </div>
+
+    <div class="col-md-5 calendar-box">
+      <h5 class="center-login pb-3">{{ 'orders.recap.holiday.cal_header'|trans }}
+        <a href="#" class="retouch-icon js-trigger-alert" data-title="{{'orders.recap.holiday.info.title'|trans|raw}}" data-msg="{{'orders.recap.holiday.info.message'|trans|raw}}">
+          <i class="fas fa-info-circle"></i>
+        </a>
+      </h5>
+      <div id="datepicker" data-date="{{ date('now')|date('d-m-Y') }}"></div>
+      <div class="calendar-legend">
+        <p class="small-text lightgrey">{{ 'orders.recap.holiday.days_worked'|trans|raw }}</p>
+        <p class="small-text lightgrey">{{ 'orders.recap.holiday.days_off'|trans|raw }}</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="js-recap-order-actions">
+    {% include 'emmobilier/order_creation/_payment_actions.html.twig' with {'user' : app.user, 'response': response} %}
+  </section>
+  <div class="lt-px-auto-small">
+    <div class="float-left">
+      <a href="{{ path('order_new') }}" role="button" class="btn btn-next">
+        {% trans from "KnpPaginatorBundle" %}label_previous{% endtrans %}
+      </a>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  <!-- START PAGE JS SCRIPTS -->
+  <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+  <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+  <script src="{{ asset('handlebars.min.js', 'handlebars')}}" charset="UTF-8"></script>
+  <script src="{{ asset('js/bootstrap-datepicker.min.js', 'date_picker')}}" charset="UTF-8"></script>
+  <script src="{{ asset('locales/bootstrap-datepicker.fr.min.js', 'date_picker')}}"></script>
+
+  <script src="{{ asset('jquery.form.min.js', 'jquery_form') }}"></script>
+
+  <script src="{{ asset('calendar.min.js', 'local_js')}}"></script>
+  <script src="{{ asset('recap.min.js', 'local_js') }}"></script>
+  <script src="{{ asset('order-loader.min.js', 'local_js') }}"></script>
+
+  <script src="{{ asset('wallet.min.js', 'local_js') }}"></script>
+  <!-- END PAGE JS SCRIPTS -->
+{% endblock %}

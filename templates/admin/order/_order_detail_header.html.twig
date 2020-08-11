@@ -1,0 +1,155 @@
+{% trans_default_domain 'admin' %}
+
+<div class="col-lg-12">
+  <div class="float-right btn-list pb-3">
+    {% if order is order_has_mail_to_send and order is application_emmobilier %}
+      <a href="{{ path('admin_order_send_mails', {'id': order.id, 'token': csrf_token('send_mail' ~ order.id) }) }}" class="btn btn-pill btn-gray">
+        <i class="fas fa-envelope"></i>
+        {{ 'admin.order.actions.send_mails'|trans({'%status': order.orderStatus|trans }) }}
+      </a>
+    {% endif %}
+
+    {% if order is application_immosquare %}
+      <a href="{{ path('immosquare_notify', {'id': order.id, 'token': csrf_token('notify' ~ order.id) }) }}" class="btn btn-pill btn-gray">
+        <i class="fas fa-envelope"></i>
+        {{ 'admin.order.actions.send_ws_notification'|trans() }}
+      </a>
+    {% endif %}
+
+    <a href="{{ path('admin_order_regenerate_invoice', {'id': order.id, 'token': csrf_token('regenerate' ~ order.id) }) }}" class="btn btn-pill btn-danger">
+      {{ 'admin.order.actions.generate_invoice'|trans }}
+    </a>
+
+    {% if order.paymentDate < order.updatedAt %}
+      <a href="{{ path('admin_order_revert', {'id': order.id, 'token': csrf_token('revert' ~ order.id) }) }}" class="btn btn-pill btn-danger">
+        {{ 'admin.order.actions.restore'|trans }}
+      </a>
+    {% endif %}
+  </div>
+</div>
+<div class="col-lg-12">
+  <div class="float-right btn-list pb-5">
+    {% if order.totalAmount != order.invoices[0].totalAmount  or (order.isChange == true and order.updatedAt > order.creationDate) %}
+      <a href="{{ path('admin_order_regenerate_additional_invoice', {'id': order.id, 'token': csrf_token('additional_invoice' ~ order.id)}) }}" class="btn btn-pill btn-primary">
+          {{ 'admin.order.actions.generate_complementary_invoice'|trans }}
+      </a>
+    {% endif %}
+
+    {% for invoice in order.invoices %}
+      <a href="{{ path('admin_invoice_download', {'id': invoice.id}) }}" class="btn btn-pill btn-primary" title="{{ 'admin.order.actions.view_additional_invoice'|trans }}">
+        <i class="zmdi zmdi-collection-pdf"></i>
+        {% if invoice is additional %}
+          {{ 'admin.order.actions.view_additional_invoice'|trans }}
+        {% elseif invoice is monthly_per_organization %}
+          {{ 'admin.order.actions.view_monthly_organization_invoice'|trans }}
+        {% elseif invoice is monthly_per_user %}
+          {{ 'admin.order.actions.view_monthly_user_invoice'|trans }}
+        {% else %}
+          {{ 'admin.order.actions.view_invoice'|trans }}
+        {% endif %}
+      </a>
+
+    {% endfor %}
+
+    <a href="{{ path('admin_order_todo_zip', {'id': order.id}) }}" class="btn btn-pill btn-pink" title="{{ 'admin.order.actions.download_zip'|trans }}">
+      <i class="zmdi zmdi-download"></i>
+      {{ 'admin.order.actions.download_zip'|trans }}
+    </a>
+
+    {% if zipPathname is defined %}
+      {% if zipPathname %}
+        <a target="_blank" href="{{ zipPathname }}" class="btn btn-pill btn-primary">
+          <i class="fas fa-download"></i>
+          {{ 'admin.order.actions.download_ill_imagesnames'|trans }}
+        </a>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+<div class="col-sm-6 col-lg-3">
+  <div class="card p-3">
+    <div class="d-flex align-items-center">
+      <span class="stamp stamp-md bg-pink mr-3">
+        <i class="fas fa-hand-holding-usd"></i>
+      </span>
+      <div>
+        <small class="text-muted">{{'admin.order.amount_final'|trans}}</small>
+        <h4 class="m-0">
+          <a href="javascript:void(0)">
+            <small>{{ order.getAmountIncludingTaxAfterReduction()|price }}</small>
+          </a>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6 col-lg-2">
+  <div class="card p-3">
+    <div class="d-flex align-items-center">
+      <span class="stamp stamp-md bg-gray mr-3">
+        <i class="fas fa-calendar"></i>
+      </span>
+      <div>
+        <small class="text-muted">{{'admin.order.creation_date'|trans}}</small>
+        <h4 class="m-0">
+          <a href="javascript:void(0)">
+            <small>{{ order.creationDate ? order.creationDate|date('d/m/Y H:i:s') : '' }}</small>
+          </a>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6 col-lg-3">
+  <div class="card p-3">
+    <div class="d-flex align-items-center">
+      <span class="stamp stamp-md bg-azure mr-3">
+        <i class="fas fa-calendar"></i>
+      </span>
+      <div>
+        <small class="text-muted">{{'admin.order.updated_at'|trans}}</small>
+        <h4 class="m-0">
+          <a href="javascript:void(0)">
+            <small>{{ order.updatedAt ? order.updatedAt|date('d/m/Y H:i:s') : '' }}</small>
+          </a>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6 col-lg-2">
+  <div class="card p-3">
+    <div class="d-flex align-items-center">
+      <span class="stamp stamp-md {{ order.sendEmail ?  'bg-green' : 'bg-danger' }} mr-3">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <div>
+        <small class="text-muted">{{'admin.order.send_mail'|trans}}</small>
+        <h4 class="m-0">
+          <a href="javascript:void(0)">
+            <small>{{ order.sendEmail ? 'admin.common.yes'|trans : 'admin.common.no'|trans }}</small>
+          </a>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-lg-2">
+  <div class="card p-3">
+    <div class="d-flex align-items-center">
+      <span class="stamp stamp-md bg-green mr-3">
+        <i class="fas fa-truck-moving"></i>
+      </span>
+      <div>
+        <small class="text-muted">{{'admin.application.type'|trans}}</small>
+        <h4 class="m-0">
+          <a href="javascript:void(0)">
+            <small>{{ order.appType|trans }}</small>
+          </a>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>

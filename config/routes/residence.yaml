@@ -1,0 +1,14 @@
+#####################################################
+#                                                   #
+#       Residence section configuration file        #
+#                                                   #
+#####################################################
+
+# Redirecting old residence login
+residence_login:
+  path:       /residence-login
+  host:       '%residence_domain%'
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+  defaults:
+    path: /emmobilier/login
+    permanent: true

@@ -1,0 +1,57 @@
+{% trans_default_domain 'admin' %}
+
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">{{ title }}</h3>
+    {% if user is not null %}
+      <div class="card-options">
+        <a target="_blank" href="{{ path('admin_user_show', {'id': user.id}) }}" class="btn btn-primary btn-sm">
+          <i class="fe fe-eye"></i>
+          {{ 'admin.common.action.show'|trans }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+  <div class="card-body">
+    {% if user is not null %}
+      <div class="media">
+        <span class="avatar avatar-xxl mr-5" style="background-image: url({{ vich_uploader_asset(user, 'imageFile')|default(asset('default_profile.png', 'admin_images')) }})"></span>
+        <div class="media-body mb-4">
+          <h4 class="m-3">{{ user.fullName() }}</h4>
+          <p class="text-muted m-3">{{ user.email }}</p>
+        </div>
+      </div>
+      <table class="table table-top-campaign">
+        <tbody>
+          <tr>
+            <td>{{ 'admin.user.billing_address.first_name'|trans }}:</td>
+            <td>{{ user.billingAddress.firstName }}</td>
+          </tr>
+          <tr>
+            <td>{{ 'admin.user.billing_address.last_name'|trans }}:</td>
+            <td>{{ user.billingAddress.lastName }}</td>
+          </tr>
+          <tr>
+            <td>{{ 'admin.user.billing_address.company'|trans }}:</td>
+            <td>{{ user.billingAddress.company }}</td>
+          </tr>
+          <tr>
+            <td>{{ 'admin.user.billing_address.address'|trans }}:</td>
+            <td>{{ user.billingAddress.address }}</td>
+          </tr>
+          <tr>
+            <td>{{ 'admin.user.billing_address.phone'|trans }}:</td>
+            <td>{{ user.billingAddress.phone }}</td>
+          </tr>
+        </tbody>
+      </table>
+    {% else %}
+      <div class="media">
+        <span class="avatar avatar-xxl mr-5" style="background-image: url({{ asset('default_profile.png', 'admin_images') }})"></span>
+        <div class="media-body mb-4 mt-4">
+          <h4 class="m-3">{{ 'admin.common.none'|trans }}</h4>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

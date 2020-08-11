@@ -1,0 +1,10 @@
+<div class="col-md-5 center">
+{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset login-center' } }) }}
+{{ form_widget(form) }}
+</div>
+<div class="form-check center-login ">
+  <button type="submit" id="_submit" name="_submit" class="btn btn-prime">
+    {% trans from "FOSUserBundle" %}resetting.reset.submit{% endtrans %}
+  </button>
+</div>
+{{ form_end(form) }}

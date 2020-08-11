@@ -1,0 +1,189 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{ 'admin.invoice.invoice'|trans }}:
+  {{ invoice.currentOrder.orderNumber|default('admin.order.unpaid'|trans) }}
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('admin_invoice_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.invoice.invoice_list'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                  <li class="list-inline-item">{{'admin.invoice.invoice'|trans}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="form-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 col-lg-3">
+            <div class="card p-3">
+              <div class="d-flex align-items-center">
+                <span class="stamp stamp-md bg-pink mr-3">
+                  <i class="fas fa-home"></i>
+                </span>
+                <div>
+                  <small class="text-muted">{{'admin.application.type'|trans}}</small>
+                  <h4 class="m-0">
+                    <a href="javascript:void(0)">
+                      <small>{{ invoice.appType|trans }}</small>
+                    </a>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-3">
+            <div class="card p-3">
+              <div class="d-flex align-items-center">
+                <span class="stamp stamp-md bg-pink mr-3">
+                  <i class="fas fa-hand-holding-usd"></i>
+                </span>
+                <div>
+                  <small class="text-muted">{{'admin.invoice.types'|trans}}</small>
+                  <h4 class="m-0">
+                    <a href="javascript:void(0)">
+                      <small>{{ invoice.type|trans|default('admin.order.unpaid'|trans) }}</small>
+                    </a>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-3">
+            <div class="card p-3">
+              <div class="d-flex align-items-center">
+                <span class="stamp stamp-md bg-pink mr-3">
+                  <i class="fas fa-hand-holding-usd"></i>
+                </span>
+                <div>
+                  <small class="text-muted">{{'admin.invoice.payment_date'|trans}}</small>
+                  <h4 class="m-0">
+                    <a href="javascript:void(0)">
+                      <small>{{ invoice.paymentDate|date('d/m/Y H:i:s') }}</small>
+                    </a>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-3">
+            <div class="card p-3">
+              <div class="d-flex align-items-center">
+                <span class="stamp stamp-md bg-gray mr-3">
+                  <i class="fas fa-calendar"></i>
+                </span>
+                <div>
+                  <small class="text-muted">{{'admin.common.created_at'|trans}}</small>
+                  <h4 class="m-0">
+                    <a href="javascript:void(0)">
+                      <small>{{ invoice.creationDate|date('d/m/Y H:i:s')}}</small>
+                    </a>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            {% if invoice is monthly_per_organization %}
+              {% include 'admin/invoice/_client_info.html.twig' with {
+                'user' : invoice.organization.owner
+              } %}
+            {% else %}
+              {% include 'admin/invoice/_client_info.html.twig' with {
+                'user' : invoice.client
+              } %}
+            {% endif %}
+          </div>
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-header">
+                <strong class="card-title">
+                  {{'admin.invoice.invoice'|trans}}:
+                  {{ invoice.invoiceNumber|default('admin.order.unpaid'|trans) }}
+                </strong>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-top-campaign">
+                    <tbody>
+                      <tr>
+                        <td>{{'admin.invoice.invoice'|trans}}</td>
+                        <td>{{ invoice.invoiceNumber|default('admin.order.unpaid'|trans) }}</td>
+                      </tr>
+                      <tr>
+                        <td>{{'admin.invoice.amount'|trans}}</td>
+                        <td>{{ invoice.totalAmount|price }}</td>
+                      </tr>
+                      <tr>
+                        <td>{{'admin.invoice.tax'|trans}}</td>
+                        <td>{{ invoice.taxPercentage|default('00') ~ " %" }}</td>
+                      </tr>
+                      <tr>
+                        <td>{{'admin.order.reduction_on_pictures'|trans}}</td>
+                        <td>{{ invoice.totalReductionOnPictures|default('00') ~ " " ~ 'admin.common.unit.image'|trans }}</td>
+                      </tr>
+                      <tr>
+                        <td>{{'admin.order.reduction_amount'|trans}}</td>
+                        <td>-
+                          {{ invoice.totalReductionAmount|default('00')|price }}</td>
+                      </tr>
+                      <tr>
+                        <td>{{'admin.invoice.total_amount'|trans}}</td>
+                        <td>
+                          <i class="fas fa-equals"></i>
+                          {{ invoice.totalAmountPaid|price }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          {% for order in orders %}
+            <div class="col-md-12">
+              {% include 'admin/invoice/_order_info.html.twig' with {'order' : order}%}
+            </div>
+          {% endfor %}
+          <div class="col-md-12">
+            <div class="d-flex align-items-center p-2">
+              <div class="mr-auto p-2">
+                {{ pagination_info(orders) }}
+              </div>
+              <div class="p-2">
+                {{ knp_pagination_render(orders) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

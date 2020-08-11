@@ -1,0 +1,20 @@
+#####################################################
+#                                                   #
+#       Admin section configuration file            #
+#                                                   #
+#####################################################
+# Admin controllers
+admin_controllers:
+  host: '%admin_domain%'
+  resource: ../../src/Controller/Admin/
+  type: annotation
+  prefix: /admin
+
+# redirecting the homepage
+admin_homepage:
+  path: /
+  host: '%admin_domain%'
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+  defaults:
+    path:       /admin/login
+    permanent:  true

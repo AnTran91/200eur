@@ -1,0 +1,10 @@
+#####################################################
+#                                                   #
+#        Picture configuration file                 #
+#                                                   #
+#####################################################
+parameters:
+    picture_status_options:
+      picture.status.awaiting_for_verification: picture.status.awaiting_for_verification
+      picture.status.completed: picture.status.completed
+      picture.status.refused: picture.status.refused

@@ -1,0 +1,143 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{'admin.agency.agency'|trans}}
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('agency_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.agency.agency_list'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                  <li class="list-inline-item">{{'admin.agency.agency'|trans}}:
+                    {{ agency.name }}</li>
+                </ul>
+              </div>
+              <a href="{{ path('agency_edit', {'id' : agency.id}) }}" class="btn btn-pill btn-primary">
+                {{ 'admin.form.edit'|trans }}
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+  <section class="form-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-4">
+            {% include 'admin/agency/_user_info.html.twig' with {
+              'user' : agency.owner
+            }
+            only %}
+          </div>
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-header">
+                <strong class="card-title">
+                  {{'admin.agency.agency'|trans }}:
+                  {{ agency.name }}
+                </strong>
+              </div>
+              <div class="card-body">
+                <table class="table table-top-campaign">
+                  <tbody>
+                    <tr>
+                      <td>{{'admin.agency.name'|trans}}</td>
+                      <td>{{ agency.name }}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'admin.agency.phone'|trans}}</td>
+                      <td>{{ agency.phone }}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'admin.agency.address'|trans}}</td>
+                      <td>{{ agency.address }}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'admin.common.registration_code'|trans}}</td>
+                      <td>{{ agency.registrationCode }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <strong class="card-title">
+                  {{ 'admin.network.network'|trans }}
+                </strong>
+                <div class="card-options">
+                  {% if agency.network %}
+                  <a target="_blank" href="{{ path('network_show', {'id': agency.network.id}) }}" class="btn btn-primary btn-sm">
+                    <i class="fe fe-eye"></i>
+                    {{ 'admin.common.action.show'|trans }}
+                  </a>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="card-body">
+                {% if agency.network %}
+                  <table class="table table-top-campaign">
+                    <tbody>
+                      <tr>
+                        <td>{{'admin.network.name'|trans}}</td>
+                        <td>
+                          {{ agency.network }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>{{'admin.common.registration_code'|trans}}</td>
+                        <td>{{ agency.network.registrationCode }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                {% else %}
+                  <p>{{'admin.agency.no_network'|trans}}</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3>{{ 'admin.agency.agents'|trans }}</h3>
+        <div class="row">
+          {% for employee in employees %}
+            <div class="col-md-4">
+              {% include 'admin/agency/_user_info.html.twig' with {'user' : employee}%}
+            </div>
+          {% else %}
+            <p>{{'admin.agency.no_agent'|trans}}</p>
+          {% endfor %}
+          <div class="col-md-12">
+            <div class="d-flex align-items-center p-2">
+              <div class="mr-auto p-2">
+                {{ pagination_info(employees) }}
+              </div>
+              <div class="p-2">
+                {{ knp_pagination_render(employees) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

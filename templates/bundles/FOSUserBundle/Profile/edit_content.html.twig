@@ -1,0 +1,110 @@
+{{ form_start(form, { 'action': path('fos_user_profile_edit')}) }}
+<section class="row main-title">
+    <div class="col-md-6">
+        <img src="{{ asset('icon_monCompte.svg', 'local_icons') }}" class="page-title-img">
+        <h2>{{ 'user.profile.title'|trans }}</h2>
+    </div>
+</section>
+
+<section class="row lt-px-auto">
+    <h4>{{ 'user.profile.account_info'|trans }}
+    </h4>
+</section>
+<section>
+    <div class="col-lg-5 col-md-6 form-container">
+        <div class="row profil-img-container">
+            {{ form_errors(form) }}
+            <div class="col-sm-4">
+                {% if app.user.imageName is null %}
+                    <img class="prf-img" src="{{ asset('profile.jpg', 'local_icons') }}">
+                {% else %}
+                    <img class="prf-img" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+                {% endif %}
+            </div>
+            <div class="col-sm-8 profil-name">
+                <h4>{{ 'user.account.picture'|trans }}</h4>
+                {{ form_label(form.imageFile) }}
+                <div class="image-uploader-ctn">
+                    <span class="image-uploader-label">{{ 'user.account.upload'|trans }}</span>
+                    {{ form_widget(form.imageFile) }}
+                    {{ form_errors(form.imageFile) }}
+                </div>
+            </div>
+        </div>
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.email) }}
+        <div class="form-group">
+            {#{ form_label(form.current_password) }#}
+            {#{ form_widget(form.current_password) }#}
+            {{ form_label(form.emailSecondary) }}
+            {{ form_widget(form.emailSecondary) }}
+            <a href="{{ path('fos_user_change_password') }}"
+               class="change_password">{{ 'user.account.change_password'|trans }}
+                <a>
+                    {{ form_errors(form.emailSecondary) }}
+        </div>
+        {{ form_row(form.language) }}
+</section>
+<section class="profil-section">
+    <div>
+        <h4>{{ 'user.profile.billing_address'|trans }}</h4>
+    </div>
+    <div class="col-lg-5 col-md-6 form-container">
+        {{ form_row(form.billingAddress.firstName) }}
+        {{ form_row(form.billingAddress.lastName) }}
+        {{ form_row(form.billingAddress.company) }}
+        {{ form_row(form.billingAddress.networkName) }}
+        {{ form_row(form.billingAddress.address) }}
+        {{ form_row(form.billingAddress.secondaryAddress) }}
+
+        <div class="row">
+            <div class="col-md-4 form-group">
+                {{ form_row(form.billingAddress.zipCode) }}
+            </div>
+            <div class="col-md-8 form-group">
+                {{ form_row(form.billingAddress.city) }}
+            </div>
+        </div>
+
+        {{ form_row(form.billingAddress.country) }}
+
+
+        <div class="form-group position-relative">
+            {{ form_label(form.billingAddress.phone) }}
+            {{ form_widget(form.billingAddress.phone, {"attr" : {"class" : "form-control js-phone-validation"}}) }}
+            <div id="js-phone-success-validation" class="valid-feedback feedback-icon hide">
+                <i class="fa fa-check"></i>
+            </div>
+            <div id="js-phone-error-validation" class="invalid-feedback feedback-icon hide">
+                <i class="fa fa-times"></i>
+            </div>
+            {{ form_errors(form.billingAddress.phone) }}
+        </div>
+
+        {{ form_row(form.billingAddress.corporateName) }}
+        {{ form_row(form.billingAddress.TVA) }}
+        <p id="req-tva" class="small-text">{{ 'registration.tva_info'|trans }}</p>
+    </div>
+</section>
+
+<section class="profil-section tirelire-section">
+    <div>
+        <h4>{{ 'user.profile.wallet'|trans }}</h4>
+    </div>
+    <div class="tirelire-content">
+        <div>
+            <p>
+                {{ 'wallet.field.current_amount'|trans }}:
+                <span class="tirelire-ammount">{{ app.user.wallet.currentAmount|price }}</span>
+                <span id="js-wallet-show-modal" class="update_wallet_link">{{ 'wallet.new.title'|trans }}</span>
+            </p>
+        </div>
+        <div>
+            <button id="_update" type="submit" class="btn btn-prime">{{ 'user.field.submit'|trans }}</button>
+        </div>
+    </div>
+
+</section>
+
+{{ form_end(form) }}

@@ -1,0 +1,24 @@
+#####################################################
+#                                                   #
+#        Custom form configuration                  #
+#                                                   #
+#####################################################
+parameters:
+  # month type
+  month_options:
+    month.january   : 01
+    month.february  : 02
+    month.march     : 03
+    month.april     : 04
+    month.may       : 05
+    month.june      : 06
+    month.july      : 07
+    month.august    : 08
+    month.september : 09
+    month.october   : 10
+    month.november  : 11
+    month.december  : 12
+  # language type
+  language_options:
+    language.en: "en"
+    language.fr: "fr"

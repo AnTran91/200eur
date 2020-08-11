@@ -1,0 +1,251 @@
+{% trans_default_domain 'admin' %}
+
+<div class="row">
+  {% include 'admin/order/_order_detail_header.html.twig' with {'order': order} %}
+  <div class="col-lg-4">
+    {#{% include 'admin/order/_user_info.html.twig' with {'user': order.client, 'title': 'admin.order.client'|trans} %}#}
+    {% include 'admin/order/_user_info.html.twig' with {'user': order.affectedTo, 'title': 'admin.order.in_charge'|trans} %}
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{'admin.production.production'|trans}}</h3>
+        {% if order.production is not null %}
+          <div class="card-options">
+            <a target="_blank" href="{{ path('admin_production_show', {'id': order.production.id}) }}" class="btn btn-primary btn-sm">
+              <i class="fe fe-eye"></i>
+              {{ 'admin.common.action.show'|trans }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <table class="table table-top-campaign">
+          <tbody>
+            <tr>
+              <td>{{'admin.production.country'|trans}}</th>
+              <td>{{ order.production.country|default('admin.production.empty_field'|trans) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{'admin.order.order'|trans}}</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table table-top-campaign">
+              <tbody>
+                <tr>
+                  <td>{{ 'admin.order.id'|trans }}</td>
+                  <td>{{ "%06s"|format(order.orderNumber) }}</td>
+                </tr>
+                <tr>
+                  <td>{{ 'admin.common.status'|trans }}</td>
+                  <td>{{ order.orderStatus|trans }}</td>
+                </tr>
+                <tr>
+                  <td>{{'admin.common.last_update'|trans}}</td>
+                  <td>{{ order.updatedAt|date('d/m/Y H:i:s')|default('admin.common.none'|trans) }}</td>
+                </tr>
+                <tr>
+                  <td>{{'admin.order.payment_date'|trans}}</td>
+                  <td>{{ order.paymentDate and order is not contained_errors and order is not waiting_for_payment ? order.paymentDate|date('d/m/Y H:i:s')|default('admin.common.none'|trans) : '' }}</td>
+                </tr>
+                <tr>
+                  <td>{{'admin.order.deliverance_date'|trans}}</td>
+                  <td>{{ order.deliveranceDate and order is valid or order is completed ? order.deliveranceDate|date('d/m/Y H:i:s')|default('admin.common.none'|trans) : '' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6 border-left">
+            <table class="table table-top-campaign">
+              <tbody>
+                <tr>
+                  <td>{{'admin.order.amount'|trans}}</td>
+                  <td>{{ order.totalAmount|price }}</td>
+                </tr>
+                <tr>
+                  <td>{{'admin.order.tax'|trans}}</td>
+                  <td>{{ order.taxPercentage|default('00') ~ " %" }}</td>
+                </tr>
+                <tr>
+                  <td>{{'admin.order.reduction_on_pictures'|trans}}</td>
+                  <td>{{ order.totalReductionOnPictures|default('00') ~ 'admin.common.unit.image'|trans }}</td>
+                </tr>
+                <tr>
+                  <td>{{'admin.order.reduction_amount'|trans}}</td>
+                  <td>-
+                    {{ order.totalReductionAmount|default('00')|price }}</td>
+                </tr>
+                <tr>
+                  <td>{{'admin.order.amount_final'|trans}}</td>
+                  <td>
+                    <i class="fas fa-equals"></i>
+                    {{ order.amountIncludingTaxAfterReduction|price }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% for invoice in order.invoices %}
+      {% include 'admin/order/_invoice_show.html.twig' with {'invoice': invoice} %}
+    {% endfor %}
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{'admin.promo.promo'|trans}}</h3>
+        {% if order.promotion is not null %}
+          <div class="card-options">
+            <a href="{{ path('admin_promo_show', {'id': order.promotion.id}) }}" class="btn btn-primary btn-sm">
+              <i class="fe fe-eye"></i>
+              {{'admin.form.show'|trans}}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <table class="table table-top-campaign">
+          <tbody>
+            {% if order.promotion is not null %}
+              <tr>
+                <td>{{ 'admin.promo.type'|trans }}</td>
+                <td>
+                  {% if order.promotion is promo_with_discount %}
+                    {{ 'admin.promo.type.discount'|trans }}
+                  {% elseif order.promotion is promo_with_counter %}
+                    {{ 'admin.promo.type.counter'|trans }}
+                  {% endif %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ 'admin.promo.code'|trans }}</td>
+                <td>
+                  {{ order.promotion.promoCode }}
+                </td>
+              </tr>
+              <tr>
+                <td>{{'admin.common.end_date'|trans}}</td>
+                <td>
+                  {{ order.promotion.endDate ? order.promotion.endDate|date('Y-m-d') }}
+                </td>
+              </tr>
+              <tr>
+                <td>{{'admin.common.start_date'|trans}}</td>
+                <td>
+                  {{ order.promotion.startDate ? order.promotion.startDate|date('Y-m-d') }}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ 'admin.promo.expired'|trans}}</td>
+                <td>
+                  <i class="{{ order.promotion.expired ? 'fe fe-check' : 'fe fe-x' }}"></i>
+                </td>
+              </tr>
+              {% if order.promotion.hasNumberOfUse is defined and order.promotion.hasNumberOfUse %}
+                <tr>
+                  <td>{{'admin.promo.use_limit'|trans}}</td>
+                  <td>
+                    {{ order.promotion.useLimit }}
+                    {{ 'admin.common.unit.times'|trans }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>{{'admin.promo.use_limit_pre_user'|trans}}</td>
+                  <td>
+                    {{ order.promotion.useLimitPerUser|default(0) }}
+                    {{ 'admin.common.unit.times'|trans }}
+                  </td>
+                </tr>
+              {% endif %}
+            {% else %}
+              <tr>
+                <td>{{'admin.order.promo_used'|trans}}</td>
+                <td>{{ 'admin.order.no_promo_used'|trans }}</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{'admin.order.payment_type'|trans}}</h3>
+        {% if order.transaction is not null %}
+          <div class="card-options">
+            <a target="_blank" href="{{ path('admin_transaction_show', {'id': order.transaction.id}) }}" class="btn btn-primary btn-sm">
+              <i class="fe fe-eye"></i>
+              {{ 'admin.common.action.show'|trans }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <table class="table table-top-campaign">
+          <tbody>
+            {% if order.isPayed %}
+              <tr>
+                <td>{{'admin.common.status'|trans}}</td>
+                <td>{{ 'admin.order.unpaid'|trans }}</td>
+              </tr>
+            {% elseif order.transaction is not null %}
+              <tr>
+                <td>{{'admin.order.paid_by'|trans}}</td>
+                <td>{{'admin.transaction.transaction'|trans}}</td>
+              </tr>
+              <tr>
+                <td>{{'admin.transaction.amount'|trans}}</td>
+                <td>{{ order.transaction.amount|price }}</td>
+              </tr>
+              <tr>
+                <td>{{'admin.common.date'|trans}}</td>
+                <td>{{ order.transaction.date ? order.transaction.date|date('d-m-Y H:i:s') : '' }}</td>
+              </tr>
+              <tr>
+                <td>{{'admin.transaction.number'|trans}}</td>
+                <td>{{ order.transaction.transactionNumber }}</td>
+              </tr>
+              <tr>
+                <td>{{'admin.common.status'|trans}}</td>
+                <td>{{ order.transaction.status }}</td>
+              </tr>
+              <tr>
+                <td>{{'admin.transaction.card_number'|trans}}</td>
+                <td>{{ order.transaction.cardNumber }}</td>
+              </tr>
+              <tr>
+                <td>{{'admin.transaction.card_brand'|trans}}</td>
+                <td>{{ order.transaction.cardBrand }}</td>
+              </tr>
+            {% else %}
+              <tr>
+                <td>{{'admin.order.paid_by'|trans}}</td>
+                <td>{{'admin.wallet.wallet'|trans}}</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="js-picture-content" class="row row-cards row-deck">
+  {% for picture in pictures %}
+    {% include 'admin/order/_picture_show.html.twig' with {'picture': picture} %}
+  {% endfor %}
+  <div class="d-flex align-items-center p-2">
+    <div class="mr-auto p-2">
+      {{ pagination_info(pictures) }}
+    </div>
+    <div class="p-2">
+      {{ knp_pagination_render(pictures) }}
+    </div>
+  </div>
+</div>

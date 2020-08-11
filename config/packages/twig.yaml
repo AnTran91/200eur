@@ -1,0 +1,23 @@
+twig:
+    paths:                             ['%kernel.project_dir%/templates']
+    debug:                             '%kernel.debug%'
+    strict_variables:                  '%kernel.debug%'
+    globals:
+        monthly_type:                  '%monthly_type%'
+        validation_configs :           '%validation_configs%'
+        picture_display_number:        '%picture_display_number%'
+        order_status:                  '%order_status_options%'
+        version:                       '%version%'
+        session_life_time:             '%session_life_time%'
+        admin_paginator_item_per_page: '%admin_paginator_item_per_page%'
+        uploader_request:              '%uploader_request%'
+        contact_mail:                  '%default_contact_mail%'
+        role_hierarchy:                '%role_hierarchy%'
+        params_validation:             '%params_validation%'
+
+        #payment form
+        system_pay_configs: '%system_pay_payment_configs%'
+    form_themes:
+        - "bootstrap_4_layout.html.twig"
+        - "_shared_components/form_layout.html.twig"
+        - "_shared_components/admin_form_layout.html.twig"

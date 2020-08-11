@@ -1,0 +1,49 @@
+You need to add at least one choice.: Vous devez ajouter au moins un choix.
+You need to add at least one renovation option.: Vous devez ajouter au moins une option de rénovation.
+
+recaptcha:
+    msg:                      Recaptcha vérification a échoué s'il vous plaît essayez à nouveau.
+not_blank:                    Ce champ ne doit pas être vide.
+promo:
+    msg:
+      error:                  Impossible de trouver le code promotionnel ou l'erreur du serveur rencontrés.
+      max_use_per_user_error: La limite maximum d’utilisation du Code Promo est atteinte sur ce compte.
+      max_use_error:          La limite maximum d’utilisation du Code Promo est atteinte.
+      max_picture_use_error:  La limite maximum du nombre d’images autorisées est atteinte.
+      expired_error:          Ce code promo `{{ string }}` a expiré.
+      date_interval_error:    Le délai d’utilisation du Code Promo `{{ string }}` a expiré.
+      promo_not_found:        Ce code promo n'existe pas.
+      not_valid_promo_error:  Le code promo ne doit pas être vide.
+      wrong_account_error:    Ce code promo n'est pas valable pour ce compte.
+      wrong_agency_error:     Ce code promo n'est pas valable pour cette agence.
+      wrong_network_error:    Ce code promo n'est pas valable pour ce réseau.
+      use_limit:              La limite d'utilisation totale doit être divisible par la limite d'utilisation par utilisateur.
+      image_limit:            La limite des images totale doit être divisible par la limite des images.
+fos_user:
+    username:
+        already_used:         'Le nom d''utilisateur est déjà utilisé.'
+        blank:                'Entrez un nom d''utilisateur s''il vous plaît.'
+        short:                'Le nom d''utilisateur est trop court.'
+        long:                 'Le nom d''utilisateur est trop long.'
+    email:
+        already_used:         'L''adresse e-mail est déjà utilisée.'
+        blank:                'Entrez une adresse e-mail s''il vous plaît.'
+        short:                'L''adresse e-mail est trop courte.'
+        long:                 'L''adresse e-mail est trop longue.'
+        invalid:              'L''adresse e-mail est invalide.'
+    password:
+        blank:                'Entrez un mot de passe s''il vous plaît.'
+        short:                'Le mot de passe est trop court.'
+        mismatch:             'Les deux mots de passe ne sont pas identiques.'
+    new_password:
+        blank:                'Entrez un nouveau mot de passe s''il vous plaît.'
+        short:                'Le nouveau mot de passe est trop court.'
+    current_password:
+        invalid:              'Le mot de passe est invalide.'
+    group:
+        blank:                'Entrez un nom s''il vous plaît.'
+        short:                'Le nom est trop court.'
+        long:                 'Le nom est trop long.'
+fos_group:
+    name:
+        already_used:         'Le nom est déjà utilisé.'

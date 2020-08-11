@@ -1,0 +1,389 @@
+{% block beelab_recaptcha2_widget %}
+    {% spaceless %}
+        <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
+    {% endspaceless %}
+{% endblock %}
+
+{# better disposition of each elements #}
+
+{% block beelab_recaptcha2_errors %}
+  {%- if errors|length > 0 -%}
+      <div class="{% if form is not rootform %}invalid-feedback d-block{% else %}alert alert-danger{% endif %}">
+          {%- for error in errors -%}
+              <span class="d-flex justify-content-center">{{ error.message }}</span>
+          {%- endfor -%}
+      </div>
+  {%- endif %}
+{% endblock %}
+
+{% block vich_file_row -%}
+  {% set force_error = true %}
+  {{- block('form_row') }}
+{%- endblock %}
+
+{% block vich_file_widget %}
+  {% spaceless %}
+    <div class="vich-file">
+      {{ form_widget(form.file) }}
+      {% if form.delete is defined %}
+        {{ form_row(form.delete) }}
+      {% endif %}
+
+      {% if download_uri is defined and download_uri %}
+        <a href="{{ download_uri }}">{{ 'download'|trans({}, 'VichUploaderBundle') }}</a>
+      {% endif %}
+    </div>
+  {% endspaceless %}
+{% endblock %}
+
+{% block vich_image_row -%}
+  {% set force_error = true %}
+  {{- block('form_row') }}
+{%- endblock %}
+
+{% block vich_image_widget %}
+  {% spaceless %}
+    {{ form_widget(form.file) }}
+    {% if form.delete is defined %}
+      {{ form_row(form.delete) }}
+    {% endif %}
+
+    {% if show_download_link and download_uri is defined and download_uri %}
+      <a href="{{ download_uri }}">{{ 'download'|trans({}, 'VichUploaderBundle') }}</a>
+    {% endif %}
+
+  {% endspaceless %}
+{% endblock %}
+
+{% block form_widget_simple %}
+  {% if type is not defined or type != 'hidden' %}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) -%}
+  {% endif %}
+
+  {% if type is defined and (type == 'file') %}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' custom-file-input lt-input')|trim}) -%}
+  {% endif %}
+
+  <input type="{{ type|default('text') }}" {{ block('widget_attributes') }} {% if value is not empty %} value="{{ value }}" {% endif %}/>
+{% endblock form_widget_simple %}
+
+{% block form_start %}
+  {% set method = method | upper %}
+  {% if method in ["GET", "POST"] %}
+    {%- set form_method = method -%}
+  {% else %}
+    {%- set form_method = "POST" -%}
+  {% endif %}
+  <form novalidate="novalidate" name="{{ name }}" method="{{ form_method|lower }}" {% if action != '' %} action="{{ action }}" {% endif %} {% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %} {% if multipart %} enctype="multipart/form-data" {% endif %}>
+  {%- if form_method != method -%}
+    <input type="hidden" name="_method" value="{{ method }}"/>
+  {%- endif -%}
+{% endblock form_start %}
+
+{% block checkbox_widget -%}
+<div class="form-check">
+  <label class="control control--checkbox">
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %} {% if checked %} checked="checked"{% endif %}/>
+    {{- label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}
+    <div class="control__indicator"></div>
+  </label>
+</div>
+{%- endblock checkbox_widget %}
+
+{% block radio_widget -%}
+<div class="form-check form-check-inline">
+  <label class="control control--radio">
+    <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %} {% if checked %} checked="checked"{% endif %}/>
+    {{- label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}
+    <div class="control__indicator"></div>
+  </label>
+</div>
+{%- endblock radio_widget %}
+
+{% block retouchs_block_row %}
+<div class="form-row" id="js-picture-retouch" {{ block('widget_container_attributes') }}>
+{%- for retouch in retouchs %}
+    <div class="col-lg-{{- row }}  col-md-{{- row }} pb-3">
+      <div class="form-check">
+        <label class="control control--checkbox js-retouch-checkbox">
+          {%- set attr = attr|merge({ class: (attr.class|default('') ~ ' js-retouch-form')|trim }) -%}
+          <input type="checkbox" {{ block('widget_attributes') }} {% if retouch.value is defined %} value="{{ retouch.value }}"{% endif %} {% if retouch.value in value %} checked="checked"{% endif %} />
+          <span class="js-retouch-label retouch-title">{{ retouch.label|upper }}</span>
+          <!-- Button trigger modal -->
+          {% if retouch.info is not empty %}
+            {% if retouch.link is not empty %}
+              {% set info = "<iframe width='420' height='250' src='" ~ retouch.link ~ "' allow='autoplay;encrypted-media'></iframe>" ~ retouch.info %}
+            {% else %}
+              {% set info = retouch.info %}
+            {% endif %}
+            <a href="#" class="retouch-icon js-trigger-alert" data-title="{{- retouch.label -}}" data-msg="{{- info|e('html')|raw -}}">
+              <i class="fas fa-info-circle"></i>
+            </a>
+          {% endif %}
+
+          {% for pricing in retouch.pricing %}
+              {% if pricing.orderDeliveryTime.unit|trans|length == 1 %}
+                <div style="max-width: 115px;">
+                  <span class="d-block retouch-info left inline" >{{ pricing.price|price }}</span>
+                  <span class="d-block retouch-info right inline" >{{ 'form.type.retouch.small_duration'|trans({'%time': pricing.orderDeliveryTime.time, '%unit': pricing.orderDeliveryTime.unit|trans }) }}</span>
+                </div><br>
+              {% else %}
+                <span class="d-block retouch-info">{{ pricing.price|price }}</span>
+                <span class="d-block retouch-info">{{ 'form.type.retouch.long_duration'|trans({'%time': pricing.orderDeliveryTime.time, '%unit': pricing.orderDeliveryTime.unit|trans }) }}</span>
+              {% endif %}
+
+          {% endfor %}
+          <div class="control__indicator"></div>
+        </label>
+      </div>
+    </div>
+{% endfor -%}
+</div>
+{% endblock retouchs_block_row %}
+
+{% block param_image_row %}
+    <div class="image-uploader-ctn">
+        {% set filePath = file_exists(value) ? value : asset('no-image.png', 'local_icons') %}
+        <input type="file" class="custom-file-input js-file-input lt-input" {{ block('widget_attributes') }} data-src="{{ filePath }}" data-default="{{ asset('no-image.png', 'local_icons') }}" />
+        <label class="js-file-label custom-file-label lt-input" for="{{ id }}" lang="{{ app.request.locale }}">
+            {{- label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}
+        </label>
+    </div>
+    {% if value is not empty and file_exists(value) %}
+        <div class="fileuploader-items">
+            <ul class="fileuploader-items-list">
+                <li class="fileuploader-item file-has-popup file-type-image file-ext-png">
+                    <div class="columns">
+                        <div class="column-thumbnail">
+                            <div class="fileuploader-item-image fileuploader-no-thumbnail">
+                                <div style="background-color: #fab6c0" class="fileuploader-item-icon">
+                                    <i>{{ filePath|file_extension|upper }}</i>
+                                </div>
+                            </div>
+                            <span class="fileuploader-action-popup"></span>
+                        </div>
+                        <div class="column-title">
+                            <div title="{{ value|file_name}}">{{ value|file_name|truncate(10)}}</div>
+                            <span>{{ filePath|file_size|number_format }} KB</span></div>
+                        <div class="column-actions">
+                            <a target="_blank" href="{{ value }}" download="{{ value|file_name }}" class="fileuploader-action fileuploader-action-success" title="{{ 'download'|trans({}, 'VichUploaderBundle') }}"><i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                    <div class="progress-bar2">
+                        <span></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+{% endblock param_image_row %}
+
+{% block image_renovation_type_row %}
+<div class="row">
+  {%- for child in form %}
+    {% set random = random() %}
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 js-renovation-section">
+      <div class="text-img-container" data-toggle="modal" data-target="#js-modal-{{ random }}">
+        <img class="text-img js-renovation-img-thumb" src="{{ asset('no-image.png', 'local_icons') }}">
+        <div class="text-img-centered js-default-text">{{- form_label(child) -}}</div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="js-modal-{{ random }}" tabindex="-1" role="dialog" aria-labelledby="js-title-{{ random }}">
+        <div style="max-width:365px;" class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="js-title-{{ random }}">{{- form_label(child) -}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              {{- form_widget(child) -}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ "modal.close"|trans }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Modal -->
+    </div>
+  {% endfor -%}
+</div>
+{% endblock image_renovation_type_row %}
+
+{% block image_placement_row %}
+<div class="lt-px-auto-small  placement-section row">
+  <div class="col-md-4">
+    <img class="param-img js-img-preview" src="{{ asset('no-image.png', 'local_icons') }}">
+  </div>
+  <div class="col-md-6">
+    <p class="text-center small-text no-margin">{{- label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}</p>
+    <div class="lt-px-auto-small text-center js-placement-list">
+      {% for row in options|batch(split_by) %}
+          {% for option in row %}
+              <span class="round-button js-placement-button {% if value|default(default) == option %}pink-r-button{% endif %}" data-value="{{ option }}">&nbsp;</span>
+          {% endfor %}
+          <br>
+      {% endfor %}
+      <input type="hidden" class="placement-input" {{ block('widget_attributes') }} value="{{ value|default(default) }}" />
+    </div>
+  </div>
+</div>
+{% endblock image_placement_row %}
+
+{% block payment_card_row %}
+<h4 class="no-padding-left">{{- label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}</h4>
+<div class="row lt-px-auto-small no-padding-left">
+  {% for row in options %}
+  <div class="form-check card-check form-check-inline">
+    <label class="control control--radio">
+      <input type="radio" {{ block('widget_attributes') }} value="{{ row.value }}" {% if value|default(default) == row.value %}checked="checked"{% endif %}>
+      <img src="{{ asset(row.img) }}">
+      {{ row.label|trans({}, translation_domain) }}
+      <div class="control__indicator "></div>
+    </label>
+  </div>
+  {% endfor %}
+</div>
+{% endblock payment_card_row %}
+
+{% block choices_checkbox_radiobox_row -%}
+    {{- form_label(form) -}}
+    <div class="lt-px-auto-small">
+      {%- if '-inline' in label_attr.class|default('') -%}
+          {%- for child in form %}
+              {{- form_widget(child, {
+                  parent_label_class: label_attr.class|default(''),
+                  translation_domain: choice_translation_domain,
+              }) -}}
+          {% endfor -%}
+      {%- else -%}
+          <div {{ block('widget_container_attributes') }}>
+              {%- for child in form %}
+                  {{- form_widget(child, {
+                      parent_label_class: label_attr.class|default('lt-px-auto-small'),
+                      translation_domain: choice_translation_domain,
+                  }) -}}
+              {%- endfor -%}
+          </div>
+      {%- endif -%}
+    </div>
+{%- endblock choices_checkbox_radiobox_row %}
+
+{% block bool_radiobox_row -%}
+    {{- form_label(form) -}}
+    <div class="lt-px-auto-small">
+          <div {{ block('widget_container_attributes') }}>
+              {%- for label,key in options %}
+                <div class="form-check form-check-inline">
+                  <label class="control control--radio">
+                    <input type="radio" {{ block('widget_attributes') }} value="{{ key }}" {% if value|default(default) == key %} checked="checked"{% endif %}/>
+                    {{- label|trans -}}
+                    <div class="control__indicator"></div>
+                  </label>
+                </div>
+              {%- endfor -%}
+          </div>
+    </div>
+{%- endblock bool_radiobox_row %}
+
+{% block block_title_row %}
+  <h5 class="color-black">{{- label is not same as(false) ? label -}}</h5>
+{% endblock block_title_row %}
+
+{% block _order_delivery_time_row %}
+<h4 class="no-padding-left">{{- label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}</h4>
+<div class="lt-px-auto-small">
+  {% for choice in choices %}
+  <div class="form-check lt-px-auto-xm pl-0">
+    <label class="control control--radio">
+      <p class="lightgrey">{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</p>
+      <span class="small-text lightgrey">{{ "orders.field.info"|trans({}, translation_domain) }}</span>
+      <input type="radio" {{ block('widget_attributes') }} value="{{ choice.value }}"{% if choice.attr %}{% with { attr: choice.attr } %}{{ block('attributes') }}{% endwith %}{% endif %}{% if choice is selectedchoice(value) %} checked="checked"{% endif %}/>
+      <div class="control__indicator"></div>
+    </label>
+  </div>
+  {% endfor %}
+</div>
+{% endblock _order_delivery_time_row %}
+
+{# Labels #}
+
+{% block form_label -%}
+    {% if label is not same as(false) -%}
+        {%- if compound is defined and compound -%}
+            {%- set element = 'legend' -%}
+            {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' col-form-label')|trim}) -%}
+        {%- else -%}
+            {%- set label_attr = label_attr|merge({for: id, class: (label_attr.class|default('') ~ ' form-control-label')|trim}) -%}
+        {%- endif -%}
+
+        {% if required -%}
+            {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif -%}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+
+        <{{ element|default('label') }}{% if label_attr %}{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}{% endif %}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}{% if label_attr.required is defined  and label_attr.required -%}*{%- endif -%}</{{ element|default('label') }}>
+    {%- endif -%}
+{%- endblock form_label %}
+
+{% block form_row -%}
+    {%- if compound is defined and compound -%}
+        {%- set element = 'fieldset' -%}
+    {%- endif -%}
+    <{{ element|default('div') }} class="form-group {% if errors|length > 0 %} is-invalid{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        <div id="{{ id }}_errors" class="mb-2">
+            {{- form_errors(form) -}}
+        </div>
+    </{{ element|default('div') }}>
+{%- endblock form_row %}
+
+{% block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <span class="{% if form is not rootform %}invalid-feedback d-block{% else %}alert alert-danger{% endif %}">
+            {%- for error in errors -%}
+                <span class="mb-0 d-block">
+                    <span class="form-error-message">{{ error.message }}</span>
+                </span>
+            {%- endfor -%}
+        </span>
+    {%- endif %}
+{%- endblock form_errors %}
+
+{% block amount_wallet_row %}
+  <p>{{- label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}</p>
+  <div id="check-wallet-list" class="row center">
+    {% for row in options %}
+    <div class="form-check-wallet">
+      <label class="radio-box {% if value|default(default) == row %}checked{% endif %}">
+        <input class="Radio-Group" type="radio" {{ block('widget_attributes') }} value="{{ row }}" {% if value|default(default) == row %}checked="checked"{% endif %}>
+        <span>{{ row }} Euros</span>
+      </label>
+    </div>
+    {%- endfor -%}
+    <div class="form-check-wallet">
+      <label class="radio-box" data-toggle="amount-section">
+        <input class="Radio-Group js-custom-amount" type="radio" {{ block('widget_attributes') }} value="{{ value|default(default) }}">
+        <span> {{ "wallet.field.custom_amount"|trans }} </span>
+      </label>
+    </div>
+
+    <div id="js-custom-amount-section" class="form-group hide pt-3">
+      <label for="js-custom-amount-field">{{ "wallet.field.custom_amount"|trans }}</label>
+      <input type="number" class="form-control" id="js-custom-amount-field">
+    </div>
+  </div>
+{% endblock amount_wallet_row %}

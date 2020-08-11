@@ -1,0 +1,286 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{'admin.user.user'|trans}}:
+  {{user.username}}
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('admin_user_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.user.user_list'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                  <li class="list-inline-item">{{ 'admin.user.user'|trans }}</li>
+                </ul>
+              </div>
+              <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn btn-pill btn-primary">
+                <i class="fe fe-edit mr-1"></i>{{'admin.form.edit'|trans}}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+  <section class="list-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        {% if (user.userDirectory is null) %}
+          <div class="alert alert-icon alert-danger" role="alert">
+            <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i>
+            <p>{{ 'admin.user.directory_info'|trans }}</p>
+            <div class="btn-list">
+              <a class="btn btn-sm btn-success" href="{{ path('generate_client_directory', {'id': user.id, '_token': csrf_token('generate_client_directory' ~ user.id)}) }}">
+                <i class="fe fe-folder"></i>
+                  {{ 'admin.user.generate_client_directory'|trans }}
+              </a>
+            </div>
+          </div>
+        {% endif %}
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card card-profile">
+              <div class="card-body">
+                <div class="media">
+                  <span id="js-thumb-prev" class="avatar avatar-xxl mr-5" style="background-image: url({{ vich_uploader_asset(user, 'imageFile')|default(asset('default_profile.png', 'admin_images')) }})"></span>
+                  <div class="media-body mt-4">
+                    <div class="profil-name">
+                      <h4>{{ user.getFullName()|default(user.username) }}</h4>
+                      <div class="image-uploader-ctn">
+                        <span class="image-uploader-label">{{ user.username }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ul class="list-unstyled leading-loose text-left mt-4">
+                  <li>
+                    <i class="fe fe-clock text-success mr-2" aria-hidden="true"></i>
+                    {{ 'admin.common.last_update'|trans }}
+                    {{ user.updatedAt|date('d/m/Y H:m:s') }}
+                  </li>
+                  <li>
+                    <i class="fe fe-clock text-success mr-2" aria-hidden="true"></i>
+                    {{ 'admin.common.last_login'|trans }}
+                    {{ user.lastLogin|date('d/m/Y H:m:s') }}</li>
+                  <li>
+                    <i class="fe fe-clock text-success mr-2" aria-hidden="true"></i>
+                    {{ 'admin.common.created_at'|trans }}
+                    {{ user.createdAt|date('d/m/Y H:m:s') }}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">{{ 'admin.user.user_folder'|trans }}</h3>
+                <div class="card-options">
+                  <a href="{{ path('generate_client_directory', {'id': user.id, '_token': csrf_token('generate_client_directory' ~ user.id)}) }}" class="btn btn-primary btn-sm">
+                    <i class="fe fe-folder"></i>
+                      {{ 'admin.user.generate_client_directory'|trans }}
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+                <table class="table table-top-campaign">
+                  <tbody>
+                  <tr>
+                    <td>{{ 'admin.user.user_folder'|trans }}</td>
+                    <td>{{ user.userDirectory|default('admin.common.none'|trans) }}</td>
+                  </tr>
+                  <tr>
+                    <td>{{ 'admin.user.directory_has'|trans }}</td>
+                    <td>{{ user.userDirectory|file_numbers }} {{ 'admin.common.unit.directory'|trans }}</td>
+                  </tr>
+                  <tr>
+                    <td>{{ 'admin.user.directory_size'|trans }}</td>
+                    <td>{{ user.userDirectory|directory_size }}</td>
+                  </tr>
+                  <tr>
+                    <td>{{ 'admin.user.tmp_directory_size'|trans }}</td>
+                    <td>{{ user.userDirectory|tmp_directory_size }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer">
+                <a href="{{ path('admin_user_clear_tmp_dir', {'id': user.id, '_token': csrf_token('clear_client_tmp_directory' ~ user.id)}) }}" class="btn btn-primary btn-sm">
+                  <i class="fe fe-trash-2"></i>
+                    {{ 'admin.user.clear_tmp_client_directory'|trans }}
+                </a>
+              </div>
+            </div>
+            {% if (is_granted('ROLE_IMMOSQUARE_USER')) %}
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">{{ 'admin.user.api_key'|trans }}</h3>
+                <div class="card-options">
+                  <a href="{{ path('generate_api_token', {'id': user.id, '_token': csrf_token('generate_api_token' ~ user.id)}) }}" class="btn btn-primary btn-sm">
+                    <i class="fe fe-lock"></i>
+                      {{ 'admin.user.api_key_regnerate'|trans }}
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+                <table class="table table-top-campaign">
+                  <tbody>
+                  <tr>
+                    <td>{{ 'admin.user.api_key'|trans }}</td>
+                    <td>{{ user.apiToken|default('admin.common.none'|trans) }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            {% endif %}
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">{{ 'admin.user.account_info'|trans }}</h3>
+              </div>
+              <div class="card-body">
+                <table class="table table-top-campaign">
+                  <tbody>
+                    <tr>
+                      <td>{{ 'admin.order.payment_type'|trans }}</td>
+                      <td>{{ user.type|trans|default('admin.common.none'|trans) }}</td>
+                    </tr>
+                    <tr>
+                      <td>{{ 'admin.user.wallet'|trans }}</td>
+                      <td>{{ user.wallet.currentAmount|price }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">{{ 'admin.user.roles'|trans }}</h3>
+              </div>
+              <div class="card-body">
+                <table class="table table-top-campaign">
+                  <tbody>
+                    {% for role in user.roles if role|array_search(role_hierarchy) is not empty %}
+                      <tr>
+                        <td>{{ role|array_search(role_hierarchy)|trans }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">{{ 'admin.group.group'|trans }}</h3>
+              </div>
+              <div class="card-body">
+                <table class="table table-top-campaign">
+                  <tbody>
+                    {% for group in user.groups %}
+                      <tr>
+                        <td>{{ group.name }}</td>
+                      </tr>
+                    {% else %}
+                      <tr>
+                        <td>{{ 'admin.common.none'|trans }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">{{ 'admin.common.action.show'|trans }}</h3>
+              </div>
+              <div class="card-body">
+                <div class="container-fluid">
+                  <div class="table-responsive">
+                    <table class="table table-top-campaign">
+                      <tbody>
+                        <tr>
+                          <td>{{ 'admin.user.email'|trans }}</td>
+                          <td>{{ user.email|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.enabled'|trans }}</td>
+                          <td>{{ user.enabled ? 'admin.common.yes'|trans : 'admin.common.no'|trans }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.first_name'|trans }}</td>
+                          <td>{{ user.firstName|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.last_name'|trans }}</td>
+                          <td>{{ user.lastName|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.email_secondary'|trans }}</td>
+                          <td>{{ user.emailSecondary|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.language'|trans }}</td>
+                          <td>{{ user.language|language(app.request.locale)|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.billing_address.first_name'|trans }}</td>
+                          <td>{{ user.billingAddress.firstName|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.billing_address.last_name'|trans }}</td>
+                          <td>{{ user.billingAddress.lastName|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.billing_address.address'|trans }}</td>
+                          <td>{{ user.billingAddress.address|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.billing_address.country'|trans }}</td>
+                          <td>{{ user.billingAddress.country|country(app.request.locale)|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.billing_address.city'|trans }}</td>
+                          <td>{{ user.billingAddress.city|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.billing_address.zip'|trans }}</td>
+                          <td>{{ user.billingAddress.zipCode|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.billing_address.phone'|trans }}</td>
+                          <td>{{ user.billingAddress.phone|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.billing_address.secondary_address'|trans }}</td>
+                          <td>{{ user.billingAddress.secondaryAddress|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                        <tr>
+                          <td>{{ 'admin.user.billing_address.vat'|trans }}</td>
+                          <td>{{ user.billingAddress.TVA|default('admin.user.empty_field'|trans) }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,9 @@
+#############################################################
+#                                                           #
+#        knp paginator service configuration                #
+#                                                           #
+#############################################################
+services:
+    # Create an alias, so that - by default - if you type-hint SiteUpdateManager,
+    # the site_update_manager.superadmin will be used
+    Knp\Bundle\PaginatorBundle\Helper\Processor: '@knp_paginator.helper.processor'

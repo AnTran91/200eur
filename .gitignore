@@ -1,0 +1,38 @@
+
+###> symfony/framework-bundle ###
+.env
+.idea
+/public/bundles/
+/var/
+/vendor/
+domain_config.yaml
+###< symfony/framework-bundle ###
+
+###> symfony/web-server-bundle ###
+.web-server-pid
+###< symfony/web-server-bundle ###
+
+###> archives ###
+*.zip
+*.xlsx
+/public/*.zip
+/public/*.xlsx
+###< archives ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/composer.lock ###
+composer.lock
+.lock
+###< symfony/composer.lock ###
+
+###> picture ###
+/public/uploads/**
+###< picture/uploads ###
+
+###> invoices ###
+/public/invoices/**
+###< picture/uploads ###

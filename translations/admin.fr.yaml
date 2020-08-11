@@ -1,0 +1,644 @@
+# ADMIN-BackOffice section
+language:                                       En langue
+language.fr:                                    Français
+language.en:                                    Anglais
+
+Year:                                           Année
+Month:                                          Mois
+Day:                                            Jour
+
+dashboard:                                      Tableau de bord
+space_client:                                   Espace client
+
+admin:
+  application:
+    type:                                     Type d'application
+  email:
+    title:                                    Envoyer un Courriel
+    send:                                     Envoyer
+    to:                                       À
+    subject:                                  Sujet
+    msg:                                    votre email a été envoyé avec succès
+  profile:
+    show:                                   Mon compte
+    setting:                                Paramètre
+    profile:                                Profile
+    edit:                                   Modification de Profile
+    user:                                   Mon Compte
+  paginator:
+    title:                                  "Nombre de commandes affichées"
+    all:                                    "Toutes"
+    search:                                 "Rechercher :"
+    lengthPage:                             "Afficher %total% &eacute;l&eacute;ments"
+    info:                                   "Affichage de l'&eacute;l&eacute;ment %start% &agrave; %end% sur %total% &eacute;l&eacute;ments"
+    info_empty:                             "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment"
+    zero_records:                           "Aucun &eacute;l&eacute;ment &agrave; afficher"
+    empty_table:                            "Aucune donn&eacute;e disponible dans le tableau"
+  session:
+    login:                                  Se Connecter
+    logout:                                 Se Déconnecter
+  form:
+    add:                                    Ajouter
+    save:                                   Enregistrer
+    edit:                                   Modifier
+    show:                                   Plus Details
+    display:                                Afficher
+    delete:                                 Supprimer
+    reset:                                  Annuler
+    filter:                                 Filtrer
+    send:                                   Envoyer le message
+  link:
+    next:                                   Suivant
+    back:                                   Retour
+  param_form:
+    param_form:                             Paramètres Liste
+    field:                                  Champs de groupe
+    empty:                                  Le paramètre actuel ne contient que des données par défaut
+    new:                                    Nouveau Paramètres de groupe
+    param_form_filter:                      Paramètres
+    param_form_menu:                        Paramètres formulaire
+    alert:                                  "Attention : cette fonctionnalité est délicate, veuillez lire la documentation avant de l'utiliser ."
+    edit:                                   Modifier ce paramètres de groupe
+    field_creation_info:                    Informations sur le création de ce champ
+    field_info:                             Informations sur ce champ
+    field_price_info:                       Prix sur ce champ
+    field_choices_info:                     Les choix
+    field_renovation_info:                  Les rénovation
+    flash:
+      updated:                            'Le paramètres de groupe a été mis à jour.'
+      created:                            'Le paramètres de groupe a été créé.'
+      deleted:                            'Le paramètres de groupe a été supprimé.'
+  renovation:
+    type_name:                              Nom de groupe (en français)
+    type_name_en:                           Nom de groupe (en anglais)
+  field_renovation_choice:
+    picture_path:                           Chemin du fichier
+  field_group:
+    label_text:                             Nom de groupe (en français) *
+    label_text_en:                          Nom de groupe (en anglais) *
+    position:                               Position *
+    order_number:                           Ordre d'affichage *
+    retouch:                                Liste des prestations
+  field_choice:
+    choice_label:                           Text (en français) *
+    choice_label_en:                        Text (en anglais) *
+    choice_value:                           Valeur *
+  field:
+    field_list:                             Liste des champs
+    name:                                   Nom de champ *
+    label_text:                             Étiquette de champ (en français)
+    label_text_en:                          Étiquette de champ (en anglais)
+    empty_data:                             Valeur par défaut
+    mapped:                                 Enregistrer la valeur de ce champ ?
+    price:                                  Prix supplémentaire
+    field_price_equal_to:                   Ajouter le prix supplémentaire lorsque ce champ est égal =
+    field_type:                             Type de champ *
+    order_number:                           Ordre d'affichage *
+    html_class:                             Classe css personnalisée
+    disabled:                               Désactivé par défaut
+    disabled_on:                            Désactivé lorsque
+  common:
+    search:                               'Recherche'
+    file_upload:                            Parcourir le fichier
+    last_update:                         'Dernière modification: '
+    last_login:                          'Dernière connexion: '
+    created_at:                          'Crée le: '
+    owner:                                  Propriétaire
+    client:                                 Informations client
+    registration_code:                      Code d'inscription
+    unit:
+      times:                              Fois
+      file:                               fichier(s)
+      image:                              Image(s)
+      uploaded_image:                     Image(s) téléversée
+      role:                               rôle(s)
+      directory:                          Répertoire (s)
+    no:                                     Non
+    yes:                                    Oui
+    clear:                                  Réinitialiser
+    default_name:                           Sans nom
+    status:                                 Statut
+    date:                                   Date
+    start_date:                             Date début
+    end_date:                               Date fin
+    actions:                                Actions
+    empty_field:                            Information non disponible
+    delete_msg:                             Êtes-vous sûr de vouloir supprimer cette élément ?
+    mutiple_expire_msg:                     Êtes-vous sûr de vouloir expiré / non expiré ces éléments ?
+    mutiple_delete_msg:                     Êtes-vous sûr de vouloir supprimer ces éléments ?
+    mutiple_un_delete_msg:                  Êtes-vous sûr de vouloir restaurer des éléments ?
+    modal_title:                            Confirmation
+    show_all:                               Afficher Tout
+    select:                                 Veuillez sélectionner une option valide
+    error_msg:                              Quelque chose a mal tourné désolé pour ce désaggrément. Veuillez réessayer plus tard
+    error_invalidMax:                       Cette chaîne est trop longue. Elle doit avoir au maximum 1000 caractères.
+    action:
+      show:                                 Plus details
+      edit:                                 Modifier
+      delete:                               Supprimer
+      download:                             Télécharger
+      switch:                               Utiliser cet utilisateur
+    all:                                    Tout
+    all_except_wallet_invoice:              Toutes les factures
+    none:                                   Aucun(e)
+    filter: 'admin'
+  group:
+    group_list:                             Liste des groupes
+    group_show:                             plus de détails sur le groupe
+    group_new:                              Créer un nouveau groupe
+    group_menu:                             Groupe
+    group:                                  Groupe
+    name:                                   nom du groupe
+    roles:                                  Les permissions
+    count_roles:                            Nombre des permissions
+    flash:
+      updated:                            'Le groupe a été mis à jour.'
+      created:                            'Le groupe a été créé.'
+      deleted:                            'Le groupe a été supprimé.'
+  dashboard:
+    dashboard_menu:                         Tableau de bord
+    emmobilier:                             Emmobilier
+    immosquare:                             Immosquare
+    residence:                              La résidence
+    order_stats:                            Plus d'informations sur les commandes
+    user_stats:                             Plus d'informations sur les utilisateurs
+    profit_stats:                           Plus d'informations sur le chiffre d'affaires de cette année
+    user_active_this_week:                  Les utilisateurs actifs cette semaine
+    user_active_this_month:                 Les utilisateurs actifs ce mois-ci
+    user_active_this_year:                  Les utilisateurs actifs cette année
+    year_profit:                            Chiffre d'affaires de cette année
+    month_profit:                           Chiffre d'affaires de ce mois
+    week_profit:                            Chiffre d'affaires de cette semaine
+  user:
+    users:                                  Utilisateurs
+    user:                                   Utilisateur
+    users_filter:                           Filtrer les utilisateurs
+    users_menu:                             Utilisateurs
+    user_menu:                              Utilisateurs
+    api_key:                                API token
+    user_folder:                            Client folder
+    account_info:                           Account info
+    picture:                                Photo de Profil
+    upload:                                 Télecharger une image
+    permission:                             Permission de l'utilisateur
+    user_list:                              Liste des Utilisateurs
+    new_user:                               Créer un Nouveau Utilisateur
+    edit_user:                              Modifier un Utilisateur
+    user_modified:                          Utilisateur Modifié!
+    disabled_enabled:                       Utilisateur désactivé / activé
+    username:                               login
+    first_name:                             Prénom
+    last_name:                              Nom
+    language:                               Langue
+    email:                                  Courriel
+    email_secondary:                        Courriel secondaire
+    enabled:                                Activé
+    password:                               Mot de passe
+    register_code:                          Code d'inscription
+    image:                                  Avatar
+    roles:                                  Permission(s)
+    directory_info:                         "Chaque client doit avoir son propre répertoire sinon il ne peut pas passer de commande
+                                            S'il vous plaît générer un répertoire pour cet utilisateur"
+    directory_has:                          Répertoire contient
+    directory_size:                         Taille du répertoire
+    empty_field:                            Champ vide
+    updated_at:                             Mis à jour le
+    billing_address:
+      first_name:                         Prènom
+      last_name:                          Nom
+      address:                            Adresse de Facturation
+      secondary_address:                  Adresse de Facturation secondaire
+      country:                            Pays
+      city:                               Ville
+      zip:                                Code postal
+      phone:                              Téléphone
+      company:                            Société
+      network:                            Réseaux
+      corporate:                          Corporate
+      vat:                                TVA
+    wallet:                                 Tirelire
+    extract_emails:                         Extraire les emails
+    api_key_regnerate:                      'Générer une clé api'
+    generate_client_directory:              'Générer un répertoire'
+    send_emails:                            'Envoyer manuellement des emails'
+    tmp_directory_size:                     'Taille du répertoire temporaire'
+    clear_tmp_client_directory:             'Effacer le contenu du répertoire temporaire'
+    activity:                               'Activité'
+  promo:
+    minimum:
+        image:                              'Minimum images commandées'
+        prestation:                         'Minimum prestations commandées'
+    promos_list:                            Liste des Promotions
+    promo_detail:                           Détails de la promotion
+    promo_menu:                             Promotions
+    promo_filter:                           Filtrer les promotions
+    promo_with_picture_counter_new:         Ajouter une nouvelle promotion (avec compteur)
+    promo_with_picture_discount_new:        Ajouter une nouvelle promotion (avec remise)
+    statistics:                             Statistiques
+    statistics.not_found:                   Pas assez de données
+    promo:                                  Promotion
+    organization_detail:                    Détail un réseau ou agence immobilièr
+    client_detail:                          Liste des clients
+    statistics.promo_total_img:             Number des images totale utiliser Par order
+    code:                                   Code promo
+    promo_type:                             Type de promo
+    generate_promo_code:                    Générer un code promo sécurisé
+    has_promo_detail:                       Par type de prestation ou toute prestations confondues
+    reduction:                              Pourcentage de réduction
+    use_limit:                              Limite d'utilisation Totale
+    use_limit_pre_user:                     Limite d'utilisation par utilisateur
+    has_number_of_use:                      Par Nombre d'utilisation
+    number_of_use:                          Nombre d'utilisation
+    number_of_pictures:                     Nombre d'images
+    image_limit:                            Limite d'images totale
+    image_limit_per_retouch:                Limite d'images par prestation
+    user_image_limit:                       Limite d'images par utilisateur
+    clients:                                Attribuer à clients spécifique
+    clients_select:                         Sélectionner les clients spécifiques
+    network:                                Attribuer à un réseau immobilière
+    network_select:                         sélectionnez un réseau immobilière
+    agency:                                 Attribuer à une agence immobilière
+    agency_select:                          Sélectionner une agence immobilière
+    expired:                                Expiré
+    image_counter_limit_with_reduction:     Limite de compteur d'image avec réduction
+    image_counter_limit:                    Limite de compteur d'image sans réduction
+    image_counter_reduction:                Réduction sur le compteur d'image
+    retouchs:                               Liste des Prestations
+    image_limit_pre_user:                   Limite d'images par compte
+    image_limit_pre_order:                  Limite d'images par commande
+    type:                                   Type de promo
+    type.counter:                           Promotion (avec compteur)
+    type.discount:                          Promotion (avec remise)
+    actions:
+      expired:                            Expirer / Non expire
+    msg:
+      edit:                               Votre code promo a été modifié avec succès
+      new:                                Votre code promo a été créé avec succès
+  param:
+    list:                                   Paramètre Délais
+  order:
+    orders_list:                            Liste des Commandes
+    orders_filter:                          Filtrer les commandes
+    orders_in_prod:                         Liste des Commandes en Production
+    order_edit:                             Modifier Commande
+    order_detail_edit:                      Mettre à jour les détails de la commande
+    order_paint:                            Dessiner sur l’image et mettre des indications textuel et graphique.
+    order:                                  Commande
+    order_menu:                             Commandes
+    order_type:                             Type d'ordre
+    id:                                     N° Cde
+    deliverance_date:                       Date de livraison
+    reduction_on_pictures:                  Réduction sur les images
+    reduction_amount:                       Montant de la réduction
+    tax:                                    Taxe
+    pictures_number:                        Nbre d'images
+    amount:                                 Montant HT
+    amount_final:                           Montant TTC
+    client:                                 Client
+    placeholder_client:                     Selectionnez le client
+    client_type:                            Type client
+    payment_type:                           Type de paiement
+    status:                                 Statut
+    time:                                   Délais
+    placeholder_time:                       Selectionnez le Délais
+    creation_date:                          Créee le
+    payment_date:                           Date de paiement
+    send_mail:                              Courriel envoyé
+    updated_at:                             Modifié le
+    unpaid:                                 Non payée
+    paid_by:                                Payeé par
+    promo_used:                             Promo utiliser
+    no_promo_used:                          Aucune Promo utiliser
+    not_affected:                           Aucune Personne en charge
+    in_charge:                              En charge
+    placeholder_in_charge:                  Selectionnez le graphiste En charge
+    retouched_file_upload:                  Uploader
+    param_show:                             Afficher le paramètre
+    param_edit:                             Mettre à jour le paramètre
+    done_today_list:                        Commandes livrées aujourd'hui
+    done_this_week:                         Commandes livrées cette semaine
+    declined_list:                          Commandes Refusées
+    new_picture_detail:                     Nouveaux prestation
+    actions:
+      update_order:                       Mettre à jour la commande
+      update_and_recalculate_order_price: Mettre à jour et recalculer le prix de la commande
+      send_mails:                         "Envoyer un email au client avec le statut actuel: %status"
+      download_delivered_picture:         Télécharger l'image livrée au client
+      download_painted_picture:           Télécharger l'image illustrative
+      download_picture:                   Télécharger l'image du client
+      download_ill_imagesnames:           Télécharger toutes les images illustratives
+      paint_picture:                      Dessiner sur l’image
+      delete_paint_picture:               Supprimer l'image illustrative
+      show:                               Plus details
+      restore:                            Revenir en arrière (Ignorer la modification)
+      generate_complementary_invoice:     Générer une facture complementaire
+      generate_monthly_invoice:           Régénérer la facture mensuel
+      generate_invoice:                   Régénérer les factures
+      view_additional_invoice:            Télécharger la facture complementaire
+      view_monthly_organization_invoice:  Télécharger la facture mensuel (Par un réseau ou une agence immobilière)
+      view_monthly_user_invoice:          Télécharger la facture mensuel (Par utilisateur)
+      edit:                               Edition
+      delete:                             Supprimer
+      undelete:                           Relancer
+      download_zip:                       Télécharger les images (.zip)
+      view_invoice:                       Télécharger la facture
+      send_ws_notification:               'Informer le client ws'
+      compare:                            Comparer
+    msg:
+      send_mail:                          "Un email a été envoyé avec ce statut : %status"
+      edit:                               Votre commande a été modifiée avec succès
+      delete:                             Votre commande a été supprimée avec succès
+      undelete:                           Votre commande a été restauré avec succès
+  holidays:
+    holiday:                                Congé
+    holidays_list:                          Liste des Congés
+    holidays_edit:                          Modification d'un congé
+    holiday_menu:                           Congés
+    holiday_new:                            Nouveau Congé
+    title:                                  Titre
+    type:                                   Type
+    flash:
+      updated:                            'Le Congé a été mis à jour.'
+      created:                            'Le Congé a été créé.'
+      deleted:                            'Le Congé a été supprimé.'
+  announcement:
+    title:                                  Titre
+    content:                                Contenue
+    announcement:                           Annonce
+    edit:                                   Modification de l'annonce
+    flash:
+      updated:                              'Annonce mise à jour'
+      created:                              'Annonce créée'
+  wallet:
+    wallet:                                 Tirelire
+  transaction:
+    amount:                                 Montant
+    transaction_list:                       Liste des Transactions
+    transaction_filter:                     Filter des Transactions
+    transaction_show:                       Information-transfer transaction
+    transaction_menu:                       Transactions
+    transaction:                            Transaction
+    card_number:                            Numero de carte
+    card_brand:                             Marque de carte
+    number:                                 Numero de transaction
+    log_response:                           'System-pay réponse'
+    log_response_not_found:                 'Transaction en attente (pas de System-pay réponse)'
+  retouch:
+    retouch_new:                            Nouvelle Prestation
+    retouch_edit:                           Modification de Prestation
+    retouch:                                Prestation
+    retouches_list:                         Liste des Prestations
+    price_list:                             'Listes de prix'
+    retouch_menu:                           Prestations
+    pricings:                               Les prix des Prestations
+    order_delivery_time:                    Délais de livraison
+    price:                                  Prix
+    delivery:                               "Livraison %time %unit"
+    title:                                  Titre
+    title_fr:                               Titre (en français)
+    title_en:                               Titre (en anglais)
+    retouch_code:                           Retouch Code (Identifiant de l'API)
+    order:                                  Commande
+    retouch_type:                           Type d'application
+    description_fr:                         Description (en français)
+    description_en:                         Description (en anglais)
+    standard_price:                         Prix 48h
+    boosted_price:                          Prix 24h
+    order_number:                           Ordre d'affichage
+    flash:
+      updated:                              'Le Prestation a été mis à jour.'
+      created:                              'Le Prestation a été créé.'
+      deleted:                              'Le Prestation a été supprimé.'
+  picture:
+    pictures_list:                          Liste des Images
+    picture_edit:                           Modifier l'image
+    picture:                                Image
+    painted:                                Image illustrative
+    done:
+    name:                                   Nom de l'image
+    gif_name:                               Nom de l'image (.GIF)
+    mp4_name:                               Nom de l'image (.MP4)
+    commentary:                             Raison du refus
+    status:                                 Statut de l'image
+    picture_number:                         Nombre d'image(s)
+    picture_total_price:                    Prix Total HT
+    price:                                  Prix
+    msg:
+      edit:                                 Votre image a été modifiée avec succès
+      delete:                               Votre image a été supprimée avec succès
+      update_setting:                       Le paramètre d'image a été mis à jour avec succès.
+      error_setting:                        Le réglage de l'image n'est pas valide.
+  invoice:
+    invoice:                                Facture
+    invoice_menu:                           Facturation
+    invoice_new:                            Nouvelle Facture
+    invoice_list:                           Liste des Factures
+    invoices_filter:                        Filter les Factures
+    extract:                                Extraction de factures
+    not_found:                              Aucune Facture Trouvée!
+    id:                                     Numéro de facture
+    amount:                                 Prix Total de la Commande HT
+    total_amount:                           Prix Total de la Commande TTC
+    tax:                                    TVA pourcentage
+    organization:                           Sélectionner un réseau ou une agence immobilière
+    reduction:                              Réduction pourcentage
+    payment_date:                           Date de payment
+    creation_date:                          Date Création
+    types:                                  Type de facture
+    types.ordinary:                         Ordinaire
+    types.monthly:                          Mensuelle
+  production:
+    productions_list:                       Liste des locaux de Production
+    production_new:                         Nouveau Locale de Production
+    production:                             Production
+    country:                                Pays
+    empty_field:                            Production non specifier
+  delivery_time:
+    delivery_time_list:                     Liste des Temps de livraison
+    delivery_time_new:                      Nouveau temps de livraison
+    delivery_time:                          Livraison
+    time:                                   Temps
+    unit:                                   Unité
+    order_delivery_code:                    Code de livraison de la commande (Identifiant de l'API)
+    globals:                                Global
+    default:                                Defaut
+    flash:
+      updated:                              'Le Temps de livraison a été mis à jour.'
+      created:                              'Le Temps de livraison a été créé.'
+      deleted:                              'Le Temps de livraison a été supprimé.'
+  network:
+    network_list:                           Liste des Réseaux
+    network_edit:                           Modification d'un Réseaux
+    network_new:                            Nouveau Réseau
+    network_menu:                           Réseaux
+    network:                                Réseau
+    name:                                   Nom du Réseau
+    no_agency:                              Aucune agence affectée à ce réseau!
+    no_agent:                               Aucun agent affectée à ce réseau!
+    agents:                                 Liste des Agents
+    agencys:                                Liste des Agences
+    number_of_users:                        Nombre d'utilisateurs
+    active_monthly_invoice:                 Activer la facturation mensuelle au Propriétaire
+  agency:
+    agency_list:                            Liste des Agences
+    agency_new:                             Nouvelle Agence
+    agency_show:                            Informations sur l'agence
+    agency_edit:                            Modification d'une Agence
+    agency_menu:                            Agences
+    agency:                                 Agence
+    name:                                   Nom de l'agence
+    phone:                                  Téléphone de l'agence
+    address:                                Adresse de l'agence
+    owner:                                  Propriétaire de l'agence
+    no_network:                             Cette agence n'est affectée à aucun réseau
+    no_agent:                               Aucun agent affectée à ce réseau!
+    agents:                                 Liste des Agents
+    registration_code:                      Code d'inscription
+    number_of_users:                        Nombre d'utilisateurs
+    active_monthly_invoice:                 Activer la facturation mensuelle au Propriétaire
+  payment:
+    types:                                  Type de paiement
+    ordinary:                               Ordinaire
+    monthly:                                Mensuelle
+  extract:
+    extract_menu:                           Extractions
+  roles:
+    emmobilier_user:                        Utilisateur simple (Emmobilier Client)
+    immosquare_user:                        Utilisateur simple (Immosquare Client)
+    super_admin:                            Super administrateur
+    agency_manager:                         Gestionnaire d'agence
+    delivery_time_manager:                  Gestionnaire de délai de livraison
+    holidays_manager:                       Gestionnaire de congés
+    invoice_manager:                        Gestionnaire de facture
+    network_manager:                        Gestionnaire de réseau
+    order_manager:                          Gestionnaire de commandes
+    production_manager:                     Gestionnaire de production
+    promo_manager:                          Gestionnaire de promotion
+    retouch_manager:                        Gestionnaire de prestation
+    transaction_manager:                    Gestionnaire de transaction
+    user_manager:                           Gestionnaire d'utilisateurs
+invoice:
+  types:
+    ordinary:                               Ordinaires
+    organization_monthly:                   Factures mensuelles (Par un réseau ou une agence immobilière)
+    user_monthly:                           Factures mensuelles (Par utilisateur)
+    additional_invoice:                     Factures supplémentaires
+    wallet_invoice:                         Commandes Tirelire
+    recharge_invoice:                       Factures Tirelire
+file_name:
+  invoice:
+    types:
+      ordinary:                              Ordinaires
+      organization_monthly:                  Fact Mensu par reseau agence
+      user_monthly:                          Fact Mensu par Utilisateur
+      additional_invoice:                    Factures supplémentaires
+      wallet_invoice:                        Commandes Tirelire
+      recharge_invoice:                      Factures Tirelire
+user:
+  types:
+    ordinary:                               Ordinaire
+    monthly:                                Mensuelle
+
+picture:
+  status:
+    pending:                                    En Attente
+    completed:                                  Terminé
+    refused:                                    Refusé
+    awaiting_for_verification:                  En attente de vérification par le client
+    cancel:                                     Annulée
+
+application:
+  type:
+    emmobilier: Emmobilier App
+    immosquare: Immosquare App
+
+order:
+  status:
+    none:                                       Afficher tout
+    pending:                                    En attente
+    awaiting_for_payment:                       En attente de paiement
+    awaiting_for_verification:                  En attente de vérification
+    awaiting_for_client_response:               En attente de réponse client
+    send_to_client:                             Livrée au client
+    delivery_short_time_ready:                  Délai court livré, délai long prochainement
+    awaiting_for_verification_by_production:    En attente de vérification par la production
+    awaiting_complete_by_client:                En attente de finalisation par le client
+    declined_by_production:                     Refusée par la production
+    in_production:                              En Production
+    completed:                                  Validée
+    partially_completed:                        Validation partielle
+    cancelled:                                  Annulée
+    declined:                                   Refusé
+    declined_by_client:                         Refusée par le Client
+    failed_payment:                             Erreur de paiement
+    error_cb:                                   Erreur Carte Bancaire
+    approvisionnement_tirelire:                 Approvisionnement TIRELIRE
+
+promo:
+  type:
+    assign_to_all_customers:                    Pouvoir attribué à Tous clients
+    assign_to_specific_customers:               Pouvoir attribué à un client spécifique
+    assign_to_network:                          Pouvoir attribué à un réseau immobilier
+    assign_to_agency:                           Pouvoir attribué à une agence immobilière
+
+# Time
+time:
+  hour:                                       heures
+  day:                                        jours
+  week:                                       semaine
+  month:                                      mois
+  year:                                       années
+# role
+ROLE_EMMOBILIER_USER:                           Utilisateur simple (Emmobilier Client)
+ROLE_IMMOSQUARE_USER:                           Utilisateur simple (Immosquare Client)
+ROLE_USER:                                      Utilisateur simple
+ROLE_SUPER_ADMIN:                               Un super administrateur a tout les privilèges sur le system et peut en accorder à d'autres utilisateurs.
+ROLE_AGENCY_MANAGER:                            Gestion d'agences (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_DELIVERY_TIME_MANAGER:                     Gestion des délai de livraison (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_HOLIDAYS_MANAGER:                          Gestion de congés (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_INVOICE_MANAGER:                           Gestion des factures (vous permet télécharger le fichier PDF, lire, mettre à jour)
+ROLE_NETWORK_MANAGER:                           Gestion des réseaux (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_ORDER_MANAGER:                             Gestion des commandes (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_PRODUCTION_MANAGER:                        Gestion des locaux de productions (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_PROMO_MANAGER:                             Gestion des promotions (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_RETOUCH_MANAGER:                           Gestion des prestations (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_TRANSACTION_MANAGER:                       Gestion des transactions (vous permet consulter)
+ROLE_USER_MANAGER:                              Gestion des utilisateurs (vous permet créer, lire, mettre à jour et désactiver le utitlsateur)
+
+system_pay_status:
+  none: Afficher tout
+  authorised: "Le paiement a été accepté"
+  pending: "en attendant"
+  abandonne: "Le paiement a été abandonné par le client."
+  accepted: "Le paiement a été accepté et est en attente de remise en banque."
+  refused: "Le paiement a été refusé."
+  waiting_manually_validated: "La transaction a été acceptée mais elle est en attente de validation manuelle."
+  waiting_for_authorisation: "La transaction est en attente d’autorisation."
+  expired: "La transaction est expirée. Ce statut est définitif, la transaction ne pourra plus être remisée en banque."
+  cancelled: "La transaction a été annulée au travers du back office marchand ou par une requête web service."
+  waiting_for_authorisation_and_manually_validated: "La transaction est en attente d’autorisation et en attente de validation manuelle."
+  cashed: "La transaction a été remise en banque. Ce statut est définitif."
+
+form:
+  position:
+    left:                                   Gauche
+    right:                                  Droite
+  form_type:
+    text_no_label:                          Champ de texte sans étiquette
+    text:                                   Champ de texte
+    number:                                 Champ de numéro
+    textarea:                               Zone de texte
+    choice:                                 Liste de choix (select)
+    country:                                Pays
+    language:                               La langue
+    currency:                               Champ monétaire
+    date:                                   Champ de date
+    dateInterval:                           Date Champ Interval
+    dateTime:                               champ date / heure
+    image:                                  Champ de téléchargement d'image
+    file:                                   Champ de téléchargement de fichier
+    checkbox:                               Champ case à cocher
+    radio:                                  Champ bouton radio
+    placement:                              Champ de placement d'image
+    boolean:                                Champ bouton radio (oui ou non)
+    image_renovation:                       Champ de la rénovation image

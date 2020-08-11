@@ -1,0 +1,33 @@
+{% trans_default_domain 'admin' %}
+
+{% for invoice in invoices %}
+  <tr>
+    <td>
+      {% if invoice.invoiceNumber > 0 %}
+        {{ invoice.invoiceNumber }}
+      {% else %}
+        {# {{'admin.order.unpaid'|trans}} #}
+      {% endif %}
+    </td>
+    <td>
+        {{ invoice.type|trans }}
+    </td>
+    <td>{{ invoice.totalAmountPaid|price }}</td>
+    <td>{{ invoice.taxPercentage|default(00) ~ " %" }}</td>
+    <td>{{ invoice.paymentDate|date('d/m/Y H:i:s') }}</td>
+    <td>
+      <div class="table-data-feature">
+        <a href="{{ path('admin_invoice_show', {'id': invoice.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.show'|trans }}" data-original-title="More">
+          <i class="zmdi zmdi-eye"></i>
+        </a>
+        <a href="{{ path('admin_invoice_download', {'id': invoice.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.download'|trans }}" data-original-title="More">
+          <i class="zmdi zmdi-download"></i>
+        </a>
+      </div>
+    </td>
+  </tr>
+{% else %}
+  <tr class="odd">
+    <td valign="top" colspan="7" class="text-center">{{ 'admin.paginator.empty_table'|trans|raw }}</td>
+  </tr>
+{% endfor %}

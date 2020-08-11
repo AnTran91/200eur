@@ -1,0 +1,16 @@
+{% trans_default_domain 'admin' %}
+
+{{ form_start(form) }}
+<div class="card">
+  <div class="card-header">
+    <strong>{{'admin.production.production'|trans}}</strong>
+  </div>
+  <div class="card-body card-block">
+    {{ form_widget(form) }}
+  </div>
+  <div class="card-footer text-right">
+    <a href="{{ path('admin_production_index') }}" class="btn btn-link">{{ 'admin.link.back'|trans }}</a>
+    <button type="submit" class="btn btn-primary ml-auto">{{ 'admin.form.save'|trans }}</button>
+  </div>
+</div>
+{{ form_end(form) }}

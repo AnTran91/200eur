@@ -1,0 +1,59 @@
+{% trans_default_domain 'admin' %}
+
+{% form_theme form with['_shared_components/form_layout.html.twig', '_shared_components/form_switch_layout.html.twig'] %}
+
+<div class="card">
+  {{ form_start(form) }}
+  <div class="card-header">
+    {{'admin.promo.promo'|trans}}
+    <div class="card-options">
+      {{ form_widget(form.promoType) }}
+    </div>
+  </div>
+  {% for type, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+      <div class="card-alert alert alert-success mb-0">
+        <i class="fe fe-bell mr-2" aria-hidden="true"></i>
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endfor %}
+  {{ form_errors(form) }}
+  <div class="card-body">
+    {{ form_errors(form.promoType) }}
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          {{ form_label(form.promoCode) }}
+          <div class="input-group">
+            {{ form_widget(form.promoCode) }}
+            <span class="input-group-append">
+              <button class="btn btn-primary" id="js-promo-code-secure" type="button">{{ 'admin.promo.generate_promo_code'|trans }}</button>
+            </span>
+          </div>
+          {{ form_errors(form.promoCode) }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        {{ form_row(form.startDate) }}
+      </div>
+      <div class="col-md-4">
+        {{ form_row(form.endDate) }}
+      </div>
+      {% if form.expired is defined %}
+        <div class="col-md-4 form-inline-bottom">
+          {{ form_row(form.expired) }}
+        </div>
+      {% endif %}
+    </div>
+
+    {{ form_rest(form) }}
+  </div>
+  <div class="card-footer text-right">
+    <a href="{{ path('admin_promo_index') }}" class="btn btn-link">{{ button_label|default('admin.link.back'|trans) }}</a>
+    <button type="submit" class="btn btn-primary ml-auto">{{ button_label|default('admin.form.save'|trans) }}</button>
+  </div>
+  {{ form_end(form) }}
+</div>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="{{ _charset }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{{ 'error.error_403.status_text'|trans }}</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('error_favicon.ico', 'local_icons') }}"/>
+    <link href="{{ asset('errors.min.css', 'local_css') }}" rel="stylesheet">
+  </head>
+  <body class="app">
+    <div class='pos-a t-0 l-0 bgc-white w-100 h-100 d-f fxd-r fxw-w ai-c jc-c pos-r p-30'>
+      <div class='mR-60'>
+        <img alt='#' src='{{ asset('403.jpg', 'local_icons')}}' />
+      </div>
+
+      <div class='d-f jc-c fxd-c'>
+        <h1 class='mB-30 fw-900 lh-1 c-red-500' style="font-size: 60px;">{{ status_code }}</h1>
+        <h3 class='mB-10 fsz-lg c-grey-900 tt-c'>{{ 'error.error_403.status_text'|trans }}</h3>
+        <p class='mB-30 fsz-def c-grey-700'>{{ 'error.error_403.msg'|trans }}</p>
+        <div>
+          <a href="{{ path('fos_user_security_login') }}" type="primary" class="btn btn-primary">{{ 'error.return_button'|trans }}</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

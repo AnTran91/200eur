@@ -1,0 +1,23 @@
+# FOSUserBundle Configuration
+fos_user:
+    service:
+        mailer:                fos_user.mailer.twig_swift
+    db_driver:                 orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name:             main
+    user_class:                App\Entity\User
+    group:
+        group_class:           App\Entity\Group
+    from_email:
+        address:               '%sender_address%'
+        sender_name:           '%sender_name%'
+    registration:
+        form:
+            type:              'App\Form\Emmobilier\RegistrationFormType'
+            validation_groups: [EmmobilierRegistration]
+    resetting:
+        email:
+            template:          '@FOSUser/Resetting/email.txt.twig'
+    profile:
+        form:
+            type:              App\Form\Emmobilier\ProfileFormType
+            validation_groups: [EmmobilierProfile]

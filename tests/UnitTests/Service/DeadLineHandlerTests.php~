@@ -1,0 +1,72 @@
+<?php
+
+/*
+ * This file is part of the Emmobilier project.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace Tests\UnitTests\Service;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+use App\Entity\Holidays;
+use App\Services\HolidayHandler;
+
+/**
+ * File System Storage Tests
+ */
+class DeadlineHandlerHandlerTest extends WebTestCase
+{
+
+    private $holidayHandler;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUp()
+    {
+        $this->holidayHandler = static::createClient()
+                                    ->getContainer()
+                                    ->get('test.holiday_handler');
+    }
+
+    // public function testHoursToDays()
+    // {
+    //     $days1 = $this->holidayHandler->hoursToDays(24);
+    //     $this->assertEquals(1, $days1);
+    //
+    //     $days2 = $this->holidayHandler->hoursToDays(48);
+    //     $this->assertEquals(2, $days2);
+    //
+    //     $days3 = $this->holidayHandler->hoursToDays(72);
+    //     $this->assertNotEquals(1, $days3);
+    // }
+    //
+    // public function testIsHoliday()
+    // {
+    //     $date = new \DateTime('now');
+    //     $date->setTime('0', '0', '0');
+    //     $this->assertEquals('2', $this->holidayHandler->isHoliday($date));
+    // }
+    //
+    // public function testIsWeekend()
+    // {
+    //     $date = new \DateTime('2018-04-08');
+    //     $this->assertEquals('+ 1', $this->holidayHandler->isWeekend($date));
+    //
+    //     $date = new \DateTime('2018-04-07');
+    //     $this->assertEquals('+ 2', $this->holidayHandler->isWeekend($date));
+    //
+    //     $date = new \DateTime('2018-04-09');
+    //     $this->assertEquals('0', $this->holidayHandler->isWeekend($date));
+    // }
+    //
+    // public function testGetDeadLine()
+    // {
+    //     $date = new \DateTime('2018-04-16');
+    //     $this->assertEquals($date, $this->holidayHandler->getDeadline(24));
+    //
+    //
+    // }
+}

@@ -1,0 +1,17 @@
+#####################################################
+#                                                   #
+#        Wallet configuration file                  #
+#                                                   #
+#####################################################
+parameters:
+  # max amount
+  wallet_configs_threshold:      9999999
+  # wallet type
+  wallet_amount_options:
+    options:
+        - 100
+        - 150
+        - 200
+        - 300
+        - 350
+    default: 100

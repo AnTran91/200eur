@@ -1,0 +1,66 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{'admin.user.user'|trans}}{% endblock %}
+
+{% block content %}
+<!-- BREADCRUMB-->
+<section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="au-breadcrumb-content">
+                        <div class="au-breadcrumb-left">
+                            <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                <li class="list-inline-item active">
+                                    <a href="{{ path('admin_production_index') }}"><i class="fe fe-home"></i>
+                                    {{ 'admin.production.productions_list'|trans }}</a>
+                                </li>
+                                <li class="list-inline-item seprate">
+                                    <span>/</span>
+                                </li>
+                                <li class="list-inline-item">{{ 'admin.production.production'|trans }}: {{ production }}</li>
+                            </ul>
+                        </div>
+                        <a href="{{ path('admin_production_edit', {'id': production.id}) }}" class="btn btn-pill btn-primary">
+                            <i class="fe fe-edit mr-1"></i>{{'admin.form.edit'|trans}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END BREADCRUMB-->
+
+<section class="form-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+          <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">{{ 'admin.production.production'|trans }}: {{ production }}</h3>
+          </div>
+          <div class="card-body">
+          <div class="container-fluid">
+              <div class="table-responsive">
+                <table class="table table-top-campaign">
+                  <tbody>
+                    <tr>
+                      <td>{{ 'admin.production.country'|trans }}</td>
+                      <td>{{ production.country }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <a class="btn-primary btn" href="{{ path('admin_production_index') }}">{{'admin.link.back'|trans}}</a>
+          </div>
+        </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

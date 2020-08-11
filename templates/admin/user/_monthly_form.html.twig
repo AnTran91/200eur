@@ -1,0 +1,30 @@
+<!-- EXTRACT FORM -->
+<div class="card m-0 small-margin">
+  <div class="card-header">
+    <h3 class="card-title">{{'admin.invoice.extract'|trans}}</h3>
+    <div class="card-options">
+      <a href="#" class="card-options-collapse" data-toggle="card-collapse">
+        <i class="fas fa-chevron-up"></i>
+      </a>
+    </div>
+  </div>
+  {{ form_start(form) }}
+  {{ form_errors(form) }}
+  {{ form_widget(form._token) }}
+  <div class="card-body">
+    {{ form_start(form) }}
+    <div class="form-row">
+
+      <div class="col-md-4 mb-3">
+        {{ form_row(form.from) }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form_row(form.to) }}
+      </div>
+
+    </div>
+    {{ form_widget(form) }}
+  </div>
+  {{ form_end(form) }}
+</div>
+<!-- END FILTER FORM -->

@@ -1,0 +1,559 @@
+{% block retouch_price_row %}
+    <div class="row pt-2">
+        <div class="col-md-4 col-sm-12">
+            {{ form_row(form.price) }}
+        </div>
+        <div class="col-md-6 col-sm-12">
+            {{ form_row(form.orderDeliveryTime) }}
+        </div>
+        <div class="col-md-2 col-sm-12">
+            <div class="pt-6 {% if value is not null %}btn-list{% endif %}">
+                <a href="#" class="collection-up btn btn-icon btn-primary" title="Move element up"><span
+                            class="fas fa-arrow-up"></span></a>
+                <a href="#" class="collection-down btn btn-icon btn-primary" title="Move element down"><span
+                            class="fas fa-arrow-down"></span></a>
+                <a href="#" class="collection-remove btn btn-icon btn-danger" title="Delete element"><span
+                            class="fas fa-trash"></span></a>
+                <a href="#" class="collection-add btn btn-icon btn-success" title="Add element"><span
+                            class="fas fa-plus"></span></a>
+                <a href="#" class="collection-duplicate btn btn-icon btn-purple" title="Duplicate element"><span
+                            class="fas fa-th-large"></span></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block field_renovation_choice_row %}
+    <div class="js-upload-section border-top">
+        <div class="row">
+            <div class="col-lg-2 col-sm-12 border-right">
+                <div class="pt-2 pb-2 ">
+                    {% if value is not null and value.id is not null and file_exists(value.picturePath) %}
+                        <img class="h-10 js-file-display" src="{{ value.picturePath }}">
+                    {% else %}
+                        <img class="h-10 js-file-display" src="{{ asset('no-img.png', 'admin_images') }}">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-12">
+                <div class="pt-3">
+                    {{ form_row(form.picturePath) }}
+                    {{ form_row(form.uuid) }}
+                </div>
+                <input
+                        {% if value is not null and value.id is not null and value.picturePath is not null and file_exists(value.picturePath) %}
+                            data-init-uuid="{{ value.uuid }}"
+                            data-init-files='[{"name": "{{ value.picturePath|file_name }}","extension": "{{ value.picturePath|file_extension }}","size": {{ value.picturePath|file_size }} }]'
+                        {% endif %}
+
+                        data-upload-url="{{ url('admin_upload_renovation_choices') }}"
+                        data-delete-url="{{ url('admin_delete_renovation_choices') }}"
+
+                        data-label="{{ 'admin.common.file_upload'|trans({}, 'admin') }}"
+                        data-chunk-size="{{ validation_configs.chunkSize }}"
+                        data-allowed-extensions="{{ validation_configs.allowedExtensions|json_encode() }}"
+                        data-size-limit="{{ validation_configs.sizeLimit }}"
+                        class="js-file-upload"
+                        type="file"
+                        name="file">
+                <div class="pt-3 pb-3">
+                    <a href="#" class="renovations-child-collection-up btn btn-icon btn-primary"
+                       title="Move element up"><span class="fas fa-arrow-up"></span></a>
+                    <a href="#" class="renovations-child-collection-down btn btn-icon btn-primary"
+                       title="Move element down"><span class="fas fa-arrow-down"></span></a>
+                    <a href="#" class="renovations-child-collection-remove btn btn-icon btn-danger"
+                       title="Delete element"><span class="fas fa-trash"></span></a>
+                    <a href="#" class="renovations-child-collection-add btn btn-icon btn-success"
+                       title="Add element"><span class="fas fa-plus"></span></a>
+                    <a href="#" class="renovations-child-collection-duplicate btn btn-icon btn-purple"
+                       title="Duplicate element"><span class="fas fa-th-large"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block field_renovation_type_row %}
+    <div class="pt-5 js-renovation-choice-section">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(form.typeName) }}
+            </div>
+            <div class="col-md-6 border-left">
+                {{ form_row(form.typeNameEn) }}
+            </div>
+        </div>
+        <div class="row pt-3 border-top">
+            <div class="col-md-12 pb-4">
+                <h4 class="d-block">{{ 'admin.param_form.field_choices_info'|trans({}, 'admin') }}</h4>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+                {{ form_row(form.fieldRenovationChoices) }}
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="pt-5 pb-5 {% if value is not null %}btn-list{% endif %}">
+                <a href="#" class="renovations-collection-up btn btn-icon btn-primary" title="Move element up"><span
+                            class="fas fa-arrow-up"></span></a>
+                <a href="#" class="renovations-collection-down btn btn-icon btn-primary" title="Move element down"><span
+                            class="fas fa-arrow-down"></span></a>
+                <a href="#" class="renovations-collection-remove btn btn-icon btn-danger" title="Delete element"><span
+                            class="fas fa-trash"></span></a>
+                <a href="#" class="renovations-collection-add btn btn-icon btn-success" title="Add element"><span
+                            class="fas fa-plus"></span></a>
+                <a href="#" class="renovations-collection-duplicate btn btn-icon btn-purple"
+                   title="Duplicate element"><span class="fas fa-th-large"></span></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block choices_type_row %}
+    <div class="pt-5 js-choice-section">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(form.choiceLabel) }}
+            </div>
+            <div class="col-md-6 border-left">
+                {{ form_row(form.choiceLabelEn) }}
+            </div>
+        </div>
+        <div class="row pt-3 border-top">
+            <div class="col-sm-6">
+                {{ form_row(form.choiceValue) }}
+            </div>
+            <div class="col-sm-6">
+                <div class="pt-6 {% if value is not null %}btn-list{% endif %}">
+                    <a href="#" class="choices-collection-up btn btn-icon btn-primary" title="Move element up"><span
+                                class="fas fa-arrow-up"></span></a>
+                    <a href="#" class="choices-collection-down btn btn-icon btn-primary" title="Move element down"><span
+                                class="fas fa-arrow-down"></span></a>
+                    <a href="#" class="choices-collection-remove btn btn-icon btn-danger" title="Delete element"><span
+                                class="fas fa-trash"></span></a>
+                    <a href="#" class="choices-collection-add btn btn-icon btn-success" title="Add element"><span
+                                class="fas fa-plus"></span></a>
+                    <a href="#" class="choices-collection-duplicate btn btn-icon btn-purple"
+                       title="Duplicate element"><span class="fas fa-th-large"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block field_type_row %}
+    <div class="card">
+        <div class="card-header">
+            <strong>{{ 'admin.param_form.field'|trans({}, 'admin') }}</strong>
+            <div class="card-options">
+                <div class="{% if value is not null %}btn-list{% endif %}">
+                    <a href="#" class="fields-collection-up btn btn-sm btn-icon btn-primary"
+                       title="Move element up"><span class="fas fa-arrow-up"></span></a>
+                    <a href="#" class="fields-collection-down btn btn-sm btn-icon btn-primary"
+                       title="Move element down"><span class="fas fa-arrow-down"></span></a>
+                    <a href="#" class="fields-collection-remove btn btn-sm btn-icon btn-danger"
+                       title="Delete element"><span class="fas fa-trash"></span></a>
+                    <a href="#" class="fields-collection-add btn btn-sm btn-icon btn-success" title="Add element"><span
+                                class="fas fa-plus"></span></a>
+                    <a href="#" class="fields-collection-duplicate btn btn-sm btn-icon btn-purple"
+                       title="Duplicate element"><span class="fas fa-th-large"></span></a>
+                </div>
+            </div>
+        </div>
+        {{ form_errors(form) }}
+        <div class="card-body js-field-section">
+            <div class="row pt-5">
+                <div class="col-md-6">
+                    {{ form_row(form.labelText) }}
+                </div>
+                <div class="col-md-6 border-left">
+                    {{ form_row(form.labelTextEn) }}
+                </div>
+            </div>
+            <div class="row pt-3 border-top">
+                <!-- <div class="col-md-12">
+        <h4 class="d-block">{{ 'admin.param_form.field_creation_info'|trans({}, 'admin') }}</h4>
+      </div> -->
+                <div class="col-md-6 col-sm-12">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    {{ form_row(form.fieldType) }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    {{ form_row(form.orderNumber) }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    {{ form_row(form.HTMLClass) }}
+                </div>
+            </div>
+            <div class="row pt-3 border-top">
+                <!-- <div class="col-md-12">
+        <h4 class="d-block">{{ 'admin.param_form.field_info'|trans({}, 'admin') }}</h4>
+      </div> -->
+
+                <div class="col-md-6 col-sm-12">
+                    {{ form_row(form.emptyData) }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    {{ form_row(form.disabledOn) }}
+                </div>
+                <div class="col-md-6 col-sm-12  form-inline-bottom">
+                    {{ form_row(form.mapped) }}
+                </div>
+                <div class="col-md-6 col-sm-12  form-inline-bottom">
+                    {{ form_row(form.disabled) }}
+                </div>
+            </div>
+            <div class="row pt-3 border-top">
+                <div class="col-md-6 col-sm-12">
+                    {{ form_row(form.price) }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    {{ form_row(form.addThePriceWhenValueEqualsTo) }}
+                </div>
+            </div>
+            <div class="row pt-3 border-top js-choices-section">
+                <div class="col-md-12">
+                    <h4 class="d-block">{{ 'admin.param_form.field_choices_info'|trans({}, 'admin') }}</h4>
+                </div>
+
+                <div class="col-md-12 col-sm-12">
+                    {{ form_row(form.choices) }}
+                </div>
+            </div>
+            <div class="row pt-3 border-top js-renovation-choices-section">
+                <div class="col-md-12 pb-4">
+                    <h4 class="d-block">{{ 'admin.param_form.field_renovation_info'|trans({}, 'admin') }}</h4>
+                </div>
+
+                <div class="col-md-12 col-sm-12">
+                    {{ form_row(form.renovations) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block picture_counter_per_retouch_row %}
+    <div class="row pt-2">
+        <div class="col-md-6 col-sm-12">
+            {{ form_row(form.imageCounterLimit) }}
+        </div>
+        <div class="col-md-6 col-sm-12">
+            {{ form_row(form.imageCounterLimitWithReduction) }}
+        </div>
+        <div class="col-md-6 col-sm-12">
+            {{ form_row(form.imageCounterReduction) }}
+        </div>
+        <div class="col-md-4 col-sm-12">
+            {{ form_row(form.retouch) }}
+        </div>
+        <div class="col-md-2 col-sm-12">
+            <div class="pt-6 {% if value is not null %}btn-list{% endif %}">
+                <a href="#" class="collection-up btn btn-icon btn-primary" title="Move element up"><span
+                            class="fas fa-arrow-up"></span></a>
+                <a href="#" class="collection-down btn btn-icon btn-primary" title="Move element down"><span
+                            class="fas fa-arrow-down"></span></a>
+                <a href="#" class="collection-remove btn btn-icon btn-danger" title="Delete element"><span
+                            class="fas fa-trash"></span></a>
+                <a href="#" class="collection-add btn btn-icon btn-success" title="Add element"><span
+                            class="fas fa-plus"></span></a>
+                <a href="#" class="collection-duplicate btn btn-icon btn-purple" title="Duplicate element"><span
+                            class="fas fa-th-large"></span></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block picture_discount_per_retouch_row %}
+    <div class="row pt-2">
+        <div class="col-md-4 col-sm-12">
+            {{ form_row(form.reduction) }}
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    {{ form_row(form.imageLimitPerOrder) }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    {{ form_row(form.imageLimitPerUser) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            {{ form_row(form.imageLimit) }}
+        </div>
+        <div class="col-md-4 col-sm-12">
+            {{ form_row(form.retouch) }}
+        </div>
+        <div class="col-md-2 col-sm-12">
+            <div class="pt-6 {% if value is not null %}btn-list{% endif %}">
+                <a href="#" class="collection-up btn btn-icon btn-primary" title="Move element up"><span
+                            class="fas fa-arrow-up"></span></a>
+                <a href="#" class="collection-down btn btn-icon btn-primary" title="Move element down"><span
+                            class="fas fa-arrow-down"></span></a>
+                <a href="#" class="collection-remove btn btn-icon btn-danger" title="Delete element"><span
+                            class="fas fa-trash"></span></a>
+                <a href="#" class="collection-add btn btn-icon btn-success" title="Add element"><span
+                            class="fas fa-plus"></span></a>
+                <a href="#" class="collection-duplicate btn btn-icon btn-purple" title="Duplicate element"><span
+                            class="fas fa-th-large"></span></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block done_picture_row %}
+    <div class="col-lg-12 col-md-12 col-sm-12 border-top pt-3">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                {{ form_row(form.pictureName) }}
+            </div>
+            <div class="col-md-6 col-sm-12">
+                {{ form_row(form.status) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block picture_row %}
+    {% set class = 'border-bottom p-4' %}
+    {% if id|last is not odd %}
+        {% set class = class ~ ' border-right' %}
+    {% endif %}
+    <div class="col-lg-6 col-md-12 col-sm-12 {{ class }}">
+        <div class="row">
+            {% if value is not null %}
+                <div class="col-md-4 col-sm-12">
+                    <img class="h-10" src="{{ value.picturePathThumb }}">
+                </div>
+            {% endif %}
+            <div class="col-md-8 col-sm-12">
+                {{ form_row(form.pictureName) }}
+            </div>
+            <div class="pt-4 col-12">
+                <div class="accordion" id="js-accordion">
+                    {{ form_row(form.pictureDetail) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block picture_detail_row %}
+    <div class="card card-collapsed">
+        <div class="card-status card-status-left bg-pink"></div>
+        <div class="card-header">
+            <h3 class="card-title">
+                {% if value is not null %}
+                    {{ value.retouch.title }}
+                {% else %}
+                    {{ 'admin.order.new_picture_detail'|trans({}, 'admin') }}
+                {% endif %}
+            </h3>
+            <div class="card-options">
+                <a href="#" class="card-options-collapse" data-toggle="card-collapse">
+                    <i class="fe fe-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row js-picture-detail-section"
+                    {% if value is not null and value.id is not null %}
+                        data-token="{# csrf_token('delete' ~ value.id) #}"
+                        data-href="{# url('admin_picure_delete', {'id' : value.id}) #}"
+                        data-title="{{ 'admin.common.modal_title'|trans({}, 'admin') }}"
+                        data-msg="{{ 'admin.common.delete_msg'|trans({}, 'admin') }}"
+                        data-id="{{ value.id }}"
+                    {% endif %} >
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    {{ form_row(form.price) }}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    {{ form_row(form.retouch) }}
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <div class="pt-6">
+                        <a href="#" class="js-picture-detail-param"
+                                {% if value is not null and value.id is not null %}
+                            data-picture-detail-id="{{ value.id }}"
+                        {% else %}
+                            disabled="true"
+                                {% endif %}>
+                            <i class="fe fe-settings  text-success mr-2"></i>
+                            {{ 'admin.order.param_edit'|trans({}, 'admin') }}
+                        </a>
+                    </div>
+                </div>
+                {{ form_row(form.returnedPicture) }}
+                <div class="col-lg-12 col-sm-12 js-retouch-upload-col pb-3">
+                    <div class="upload-section">
+                        {% if value is not null and value.id is not null %}
+                            <input
+                                    {% if value.returnedPicture is not null and value.returnedPicture.picturePath is not null %}
+                                        data-init-files='[{"name": "{{ value.returnedPicture.pictureName }}","extension": "{{ value.returnedPicture.picturePath|file_extension }}","size": {{ value.returnedPicture.picturePath|file_size }} }]'
+                                    {% endif %}
+                                    data-upload-url="{{ url('admin_upload_done_img', {'id': value.id}) }}"
+                                    data-delete-url="{{ url('admin_delete_done_img', {'id': value.id}) }}"
+                                    data-label="{{ 'admin.order.retouched_file_upload'|trans({}, 'admin') }}"
+
+                                    data-chunk-size="{{ validation_configs.chunkSize }}"
+                                    data-allowed-extensions="{{ validation_configs.allowedExtensions|json_encode() }}"
+                                    data-size-limit="{{ validation_configs.sizeLimit }}"
+                                    class="js-file-upload"
+                                    type="file"
+                                    name="file">
+                        {% else %}
+                            <input class="js-disabled-file-upload" disabled
+                                data-label="{{ 'admin.order.retouched_file_upload'|trans({}, 'admin') }}"
+                                type="file">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="row js-picture-detail-section">
+                {{ form_row(form.returnedGifPicture) }}
+                <div class="col-lg-12 col-sm-12 js-gif-upload-col pb-3">
+                    <div class="upload-section">
+                        {% if value is not null and value.id is not null %}
+                            <input
+                                {% if value.returnedGifPicture is not null and value.returnedGifPicture.picturePath is not null %}
+                                    data-init-files='[{"name": "{{ value.returnedGifPicture.pictureName }}","extension": "{{ value.returnedGifPicture.picturePath|file_extension }}","size": {{ value.returnedGifPicture.picturePath|file_size }} }]'
+                                {% endif %}
+                                data-upload-url="{{ url('admin_upload_gif_img', {'id': value.id}) }}"
+                                data-delete-url="{{ url('admin_delete_gif_img', {'id': value.id}) }}"
+                                data-label="{{ 'admin.order.retouched_file_upload'|trans({}, 'admin') }}"
+
+                                data-chunk-size="{{ validation_configs.chunkSize }}"
+                                data-allowed-extensions="{{ validation_configs.allowedAnimateExtensions|json_encode() }}"
+                                data-size-limit="{{ validation_configs.sizeLimit }}"
+                                class="js-file-upload"
+                                type="file"
+                                name="file">
+                        {% else %}
+                            <input class="js-disabled-file-upload" disabled
+                                data-label="{{ 'admin.order.retouched_file_upload'|trans({}, 'admin') }}"
+                                type="file">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="row js-picture-detail-section">
+                {{ form_row(form.returnedMP4Picture) }}
+                <div class="col-lg-12 col-sm-12 js-mp4-upload-col pb-3">
+                    <div class="upload-section">
+                        {% if value is not null and value.id is not null %}
+                            <input
+                                {% if value.returnedMP4Picture is not null and value.returnedMP4Picture.picturePath is not null %}
+                                    data-init-files='[{"name": "{{ value.returnedMP4Picture.pictureName }}","extension": "{{ value.returnedMP4Picture.picturePath|file_extension }}","size": {{ value.returnedMP4Picture.picturePath|file_size }} }]'
+                                {% endif %}
+                                data-upload-url="{{ url('admin_upload_mp4_file', {'id': value.id}) }}"
+                                data-delete-url="{{ url('admin_delete_mp4_file', {'id': value.id}) }}"
+                                data-label="{{ 'admin.order.retouched_file_upload'|trans({}, 'admin') }}"
+
+                                data-chunk-size="{{ validation_configs.chunkSize }}"
+                                data-allowed-extensions="{{ validation_configs.allowedAnimateExtensions|json_encode() }}"
+                                data-size-limit="{{ validation_configs.sizeLimit }}"
+                                class="js-file-upload"
+                                type="file"
+                                name="file">
+                        {% else %}
+                            <input class="js-disabled-file-upload" disabled
+                                data-label="{{ 'admin.order.retouched_file_upload'|trans({}, 'admin') }}"
+                                type="file">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#<div id="accordion">#}
+    {#<div class="accordion">#}
+    {#<div class="accordion-header" id="js-heading-{{ id }}">#}
+    {#<a data-toggle="collapse" data-target="#js-collapse-{{ id }}" class="js-accordion-header collapsed"#}
+    {#aria-expanded="false" aria-controls="js-collapse-{{ id }}">#}
+    {#{% if value is not null %}#}
+    {#{{ value.retouch.title }}#}
+    {#{% else %}#}
+    {#{{ 'admin.order.new_picture_detail'|trans({}, 'admin') }}#}
+    {#{% endif %}#}
+    {#</a>#}
+    {#</div>#}
+    {#<div id="js-collapse-{{ id }}" class="collapse" aria-labelledby="js-heading-{{ id }}"#}
+    {#data-parent="#accordion">#}
+    {#<div class="accordion-content">#}
+    {#<div class="row js-picture-detail-section"#}
+    {#{% if value is not null and value.id is not null %}#}
+    {#data-token="#}{# csrf_token('delete' ~ value.id) #}{#"#}
+    {#data-href="#}{# url('admin_picure_delete', {'id' : value.id}) #}{#"#}
+    {#data-title="{{ 'admin.common.modal_title'|trans({}, 'admin') }}"#}
+    {#data-msg="{{ 'admin.common.delete_msg'|trans({}, 'admin') }}"#}
+    {#data-id="{{ value.id }}"#}
+    {#{% endif %} >#}
+    {#<div class="col-lg-3 col-md-6 col-sm-12">#}
+    {#{{ form_row(form.price) }}#}
+    {#</div>#}
+    {#<div class="col-lg-4 col-md-6 col-sm-12">#}
+    {#{{ form_row(form.retouch) }}#}
+    {#</div>#}
+    {#<div class="col-lg-5 col-md-6 col-sm-12">#}
+    {#<div class="pt-6">#}
+    {#<a href="#" class="js-picture-detail-param"#}
+    {#{% if value is not null and value.id is not null %}#}
+    {#data-picture-detail-id="{{ value.id }}"#}
+    {#{% else %}#}
+    {#disabled="true"#}
+    {#{% endif %}>#}
+    {#<i class="fe fe-settings  text-success mr-2"></i>#}
+    {#{{ 'admin.order.param_edit'|trans({}, 'admin') }}#}
+    {#</a>#}
+    {#</div>#}
+    {#</div>#}
+    {#{{ form_rest(form) }}#}
+    {#<div class="col-lg-12 col-sm-12 js-retouch-upload-col pb-3">#}
+    {#<div class="upload-section">#}
+    {#{% if value is not null and value.id is not null %}#}
+    {#<input#}
+    {#{% if value.returnedPicture is not null and value.returnedPicture.picturePath is not null %}#}
+    {#data-init-files='[{"name": "{{ value.returnedPicture.pictureName }}","extension": "{{ value.returnedPicture.picturePath|file_extension }}","size": {{ value.returnedPicture.picturePath|file_size }} }]'#}
+    {#{% endif %}#}
+    {#data-upload-url="{{ url('admin_upload_done_img', {'id': value.id}) }}"#}
+    {#data-delete-url="{{ url('admin_delete_done_img', {'id': value.id}) }}"#}
+    {#data-label="{{ 'admin.order.retouched_file_upload'|trans({}, 'admin') }}"#}
+
+    {#data-chunk-size="{{ validation_configs.chunkSize }}"#}
+    {#data-allowed-extensions="{{ validation_configs.allowedExtensions|json_encode() }}"#}
+    {#data-size-limit="{{ validation_configs.sizeLimit }}"#}
+    {#class="js-file-upload"#}
+    {#type="file"#}
+    {#name="file">#}
+    {#{% else %}#}
+    {#<input class="js-disabled-file-upload" disabled#}
+    {#data-label="{{ 'admin.order.retouched_file_upload'|trans({}, 'admin') }}"#}
+    {#type="file">#}
+    {#{% endif %}#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
+
+{% endblock %}
+
+{% block collection_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_row(prototype)}) %}
+            {% set attr = attr|merge({'data-prototype-name': prototype.vars.name}) %}
+        {% endif %}
+        {% set attr = attr|merge({'data-allow-add': allow_add ? 1 : 0}) %}
+        {% set attr = attr|merge({'data-allow-remove': allow_delete ? 1 : 0 }) %}
+        {% set attr = attr|merge({'data-name-prefix': full_name}) %}
+        {{ block('form_widget') }}
+    {% endspaceless %}
+{% endblock collection_widget %}

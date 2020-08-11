@@ -1,0 +1,143 @@
+<?php
+
+namespace App\DataFixtures;
+
+use App\Entity\Wallet;
+use App\Handlers\FileHandler;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use App\Entity\User;
+
+class UserFixtures extends Fixture
+{
+    /**
+     * @var array
+     */
+    private static $users;
+
+    /**
+     * @var FileHandler
+     */
+    private $dirHandler;
+
+    /**
+     * @var array
+     */
+    private $emmobilierRoles;
+
+    /**
+     * Constructor
+     *
+     * @param \App\Handlers\FileHandler $uploader
+     * @param array $emmobilierRoles
+     */
+    public function __construct(FileHandler $uploader, array $emmobilierRoles)
+    {
+        $this->dirHandler = $uploader;
+        $this->emmobilierRoles = $emmobilierRoles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function load(ObjectManager $manager)
+    {
+        foreach (self::getBuiltIn() as $oldUser){
+
+            $isUserExsite = $manager->getRepository(User::class)->findOneBy(['email' => $oldUser['email']]);
+
+            if (!is_null($isUserExsite)){
+                continue;
+            }
+
+            $user = new User();
+            $user->setUsername($oldUser['username']);
+            $user->setEmail($oldUser['email']);
+
+            $user->setFirstName($oldUser['nom']);
+            $user->setLastName($oldUser['prenom']);
+
+            $user->setLanguage($oldUser['langue']);
+
+            $user->getBillingAddress()->setAddress($oldUser['Adresse']);
+            $user->getBillingAddress()->setCountry($oldUser['pays']);
+            $user->getBillingAddress()->setCity($oldUser['ville']);
+            $user->getBillingAddress()->setZipCode($oldUser['cp']);
+            $user->getBillingAddress()->setSecondaryAddress($oldUser['adresse2']);
+            $user->getBillingAddress()->setCompany($oldUser['compagnie']);
+            $user->getBillingAddress()->setCorporateName($oldUser['raisonSociale']);
+            $user->getBillingAddress()->setTVA($oldUser['numeroTva']);
+            $user->getBillingAddress()->setPhone($oldUser['telephone']);
+
+            $user->setPassword($oldUser['password']);
+            $user->setSalt($oldUser['salt']);
+
+            $user->setEnabled($oldUser['enabled']);
+
+            $this->onCreateUserWallet($user);
+            $this->onCreateUserDir($user, $manager);
+            $this->onSetUserRole($user);
+
+            $manager->persist($user);
+        }
+
+        $manager->flush();
+    }
+
+    /**
+     * Create wallet after the user creation.
+     *
+     * @param User $user
+     */
+    private function onCreateUserWallet(User &$user): void
+    {
+        $wallet = (new Wallet())
+            ->setClient($user)
+            ->setLastUpdate(new \DateTime('now'))
+            ->setCurrentAmount(0);
+
+        $user->setWallet($wallet);
+    }
+
+    /**
+     * Create unique dir after the user creation.
+     *
+     * @param User $user
+     * @param ObjectManager $em
+     */
+    private function onCreateUserDir(User &$user, ObjectManager $em): void
+    {
+        if (!empty($user->getFirstName())){
+            $username = $user->getFirstName();
+        }else{
+            list($username) = explode('@', $user->getEmail());
+        }
+
+        do {
+            $userUniqueDir = $this->dirHandler->getUserUniqueDir($username);
+        } while (!is_null($em->getRepository(User::class)->findOneBy(['userDirectory' => $userUniqueDir])));
+
+        $user->setUserDirectory($userUniqueDir);
+    }
+
+    private function onSetUserRole(User &$user)
+    {
+        foreach ($this->emmobilierRoles as $role){
+            $user->addRole($role);
+        }
+    }
+
+    /**
+     * Get the built-in mapping.
+     *
+     * @return array The built-in mapping.
+     */
+    protected static function getBuiltIn(): array
+    {
+        if (self::$users === null) {
+            self::$users = require(__DIR__ . '/users.v1.php');
+        }
+
+        return self::$users;
+    }
+}

@@ -1,0 +1,57 @@
+
+<!-- search form -->
+{% trans_default_domain 'admin' %}
+<!-- DATA TABLE -->
+  <div class="card">
+    <div class="table-responsive">
+      <table class="table card-table table-vcenter text-nowrap">
+        <thead>
+          <tr>
+            <th>{{ pagination_sortable(agencies, 'admin.agency.name'|trans, 'agency.name') }}</th>
+            <th>{{ pagination_sortable(agencies, 'admin.common.owner'|trans, 'agency.owner') }}</th>
+            <th>{{ pagination_sortable(agencies, 'admin.agency.phone'|trans, 'agency.phone') }}</th>
+            <th>{{ pagination_sortable(agencies, 'admin.agency.number_of_users'|trans, 'agency.number_of_users') }}</th>
+            <th></th>
+          </tr>
+          <tr class="spacer"></tr>
+        </thead>
+        <tbody>
+          {% for agency in agencies %}
+            <tr>
+              <td>{{ agency.name }}</td>
+              {% if agency.owner is not null %}
+                <td><a href="{{ path('admin_user_show', {'id': agency.owner.id}) }}">{{ agency.owner }}</a></td>
+              {% endif %}
+              <td>{{ agency.phone }}</td>
+              <td>{{ agency.numberOfUser }}</td>
+              <td>
+                <div class="table-data-feature">
+                  <a href="{{ path('agency_show', {'id': agency.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.show'|trans }}" data-original-title="More">
+                    <i class="zmdi zmdi-eye"></i>
+                  </a>
+                  <a href="{{ path('agency_edit', {'id': agency.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.edit'|trans }}" data-original-title="More">
+                    <i class="fe fe-edit mr-1"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          {% else %}
+            <tr class="odd">
+              <td valign="top" colspan="7" class="text-center">{{ 'admin.paginator.empty_table'|trans|raw }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer p-0">
+      <div class="d-flex align-items-center p-2">
+        <div class="mr-auto p-2">
+          {{ pagination_info(agencies) }}
+        </div>
+        <div class="p-2">
+
+          {{ knp_pagination_render(agencies) }}
+        </div>
+      </div>
+    </div>
+  </div>

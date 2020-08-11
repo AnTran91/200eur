@@ -1,0 +1,9 @@
+{% extends 'emmobilier/base.html.twig' %}
+
+{% block title %}
+{{ 'user.profile.title'|trans }}
+{% endblock %}
+
+{% block body %}
+{% include "@FOSUser/Profile/show_content.html.twig" %}
+{% endblock body %}

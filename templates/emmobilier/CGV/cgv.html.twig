@@ -1,0 +1,416 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block title %}
+{{ 'cgv'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{parent()}}
+  <link rel="stylesheet" href="{{ asset('cgv.min.css', 'local_css') }}">
+{% endblock %}
+
+{% block fos_user_content %}
+<section class="cgv-main">
+    <div>
+        <h3 class="cgv-h3">Conditions Générale de Vente de Emmobilier Online</h3>
+        <!-- PREAMBULE -->
+        <h5 class="cgv-h5">Préambule:</h5>
+
+        <p class="cgv-p">
+          Les présentes conditions générales ont pour objet de régir les conditions de la fourniture par la société EMMOBILIER (ci-après dénommée « EMMOBILIER ») de services de retouche d’images ou photographies (ci-après désignés les « Prestations ») à ses clients (ci-après dénommés indistinctement «Utilisateur/s» ou «Client/s»), via les sites internet www.Emmobilier.fr, www.emmobilier-online.com, via des commandes par emails, ou par tous autres moyens de communication (ci-après dénommés indistinctement le « Site Internet »).
+        </p>
+
+        <p class="cgv-p">
+          Toute commande portant sur les Prestations implique l’acceptation par le Client des présentes conditions générales de vente.
+        </p>
+
+        <p class="cgv-p">
+          En cas de contradiction entre les conditions générales de vente et des conditions particulières, ces dernières prévaudront.
+        </p>
+
+        <p class="cgv-p">
+          Les présentes conditions générales, sauf accord écrit préalable d’EMMOBILIER, prévalent sur toutes autres conditions générales (en ce incluant les conditions générales d’achat du Client) ou clauses contraires mentionnées par le Client dans quelque document et sous quelque forme que ce soit.
+        </p>
+
+        <p class="cgv-p">
+          Le contrat sera constitué par le formulaire en ligne renvoyant aux conditions générales de vente.
+        </p>
+        <!-- END PREAMBULE -->
+
+        <!-- ARTICLE 1 -->
+        <h5 class="cgv-h5">Article 1: Objet</h5>
+
+        <p class="cgv-p">
+          EMMOBILIER organise pour ses Clients des Prestations visant à retoucher des images ou
+          photographies de biens immobiliers.
+          Le Client souhaite bénéficier de ces Prestations.
+        </p>
+        <!-- END ARTICLE 1 -->
+
+
+        <!-- ARTICLE 2 -->
+        <h5 class="cgv-h5">Article 2: Durée</h5>
+
+        <p class="cgv-p">
+          Le contrat est conclu pour une période déterminée dans les conditions particulières du formulaire en ligne, et à défaut de précision, pour la durée de réalisation des Prestations.
+        </p>
+        <!-- END ARTICLE 2 -->
+
+        <!-- ARTICLE 3 -->
+        <h5 class="cgv-h5">Article 3 – Obligations et collaboration du Client</h5>
+
+        <p class="cgv-p">
+          3.1 Le Client déclare avoir la capacité juridique de conclure le présent contrat.
+        </p>
+
+        <p class="cgv-p">
+          Le Client garantit la véracité et l’exactitude des informations qu’il enregistre sur le Site Internet, notamment les données à caractères personnels.
+        </p>
+
+        <p class="cgv-p">
+          Le Client s’engage à ne pas effectuer de commandes de prestations d’EMMOBILIER en vue de leur revente au public ou d’en faire le commerce, sauf accord préalable.
+        </p>
+
+        <p class="cgv-p">
+          3.2 Afin de pouvoir commander des Prestations sur le Site Internet, l’Utilisateur devra créer un « Compte personnel » et enregistrer les informations nécessaires à son identification.
+        </p>
+
+        <p class="cgv-p">
+          L’Utilisateur pourra voir annulée ou refusée sa commande, en cas de violations antérieures des présentes conditions générales de vente ou d’existence d’un litige entre lui-même et EMMOBILIER.
+        </p>
+
+        <p class="cgv-p">
+          3.3 Le Client veillera à fournir tous les éléments et informations nécessaires ou utiles à la réalisation des Prestations. Il collaborera avec EMMOBILIER en vue d’assurer la bonne exécution du contrat.
+        </p>
+        <!-- END ARTICLE 3 -->
+
+        <!-- ARTICLE 4 -->
+        <h5 class="cgv-h5">Article 4 – Modification de la commande</h5>
+
+        <p class="cgv-p">
+          Les corrections ou modifications demandées après l’exécution ou la livraison de la Prestation sont entendues comme de nouveaux travaux et seront donc facturés en supplément, sauf faute établie et non contestée d’EMMOBILIER. De même, les Prestations déjà engagées qui seraient modifiées ou annulées par la suite seront facturées dans les termes du formulaire en ligne initial.
+        </p>
+
+        <p class="cgv-p">
+          Les présentes conditions générales de vente peuvent faire l’objet de modifications. En conséquence, le Client est invité à consulter ces conditions générales à chaque commande.
+        </p>
+        <!-- END ARTICLE 4 -->
+
+        <!-- ARTICLE 5 -->
+        <h5 class="cgv-h5">Article 5 – Annulation / Rétractation de la commande</h5>
+
+        <p class="cgv-p">
+          L’annulation de la commande par le Client dûment notifiée à EMMOBILIER entraînera dans tous les cas l’exigibilité immédiate du montant des Prestations, sauf accord sur un avoir à valoir sur de nouvelles prestations à commander.
+        </p>
+
+        <p class="cgv-p">
+          Conformément à l’article L.221-28, 3° du Code de la consommation, tout Client consommateur ne pourra exercer de droit de rétractation.
+        </p>
+        <!-- END ARTICLE 5 -->
+
+        <!-- ARTICLE 6 -->
+        <h5 class="cgv-h5">Article 6 – Refus d’images confiées</h5>
+
+        <p class="cgv-p">
+          EMMOBILIER se réserve le droit de refuser certains types d’images qui présentent des défauts majeurs quant à la résolution, la dimension et la qualité, ou d’images complexes à retoucher. Elle contactera le Client afin d’établir un devis spécifique pour ces images.
+        </p>
+        <!-- END ARTICLE 6 -->
+
+        <!-- ARTICLE 7 -->
+        <h5 class="cgv-h5">Article 7 – Tarifs et modalités de paiement</h5>
+
+        <p class="cgv-p">
+          7.1 Toute commande est facturée aux prix et conditions figurant dans le formulaire en ligne.
+        </p>
+
+        <p class="cgv-p">
+          Les prix sont indiqués en euros, hors taxes et hors participation aux frais de port si nécessaire, qui seront facturés en sus à l’Utilisateur. Seuls les règlements en euros sont acceptés.
+        </p>
+
+        <p class="cgv-p">
+          La société EMMOBILIER se réserve le droit de modifier ses prix à tout moment. Toutefois, les Prestations seront facturées à l’Utilisateur sur la base des tarifs en vigueur, au moment de la validation de la commande.
+        </p>
+
+        <p class="cgv-p">
+          Sauf accord particulier, le paiement est dû à la commande.
+        </p>
+
+        <p class="cgv-p">
+          7.2 Pénalités de retard
+        </p>
+
+        <p class="cgv-p">
+          Tout retard de paiement donnera lieu à l’application de pénalités correspondant au taux d’intérêt appliqué par la Banque centrale européenne (BCE) à son opération de refinancement la plus récente majoré de 10 %, avec un minimum correspondant à trois fois le taux d’intérêt légal en vigueur à la date d’échéance de la facture impayée, conformément à la réglementation (article L.441-6 du code de commerce).
+        </p>
+
+        <p class="cgv-p">
+          A cette pénalité, s’ajoute une indemnité forfaitaire de 40€ pour frais de recouvrement en application des dispositions de l’article L.441-6 Code de commerce.
+        </p>
+
+        <p class="cgv-p">
+          7.3 Moyens de paiement
+        </p>
+
+        <p class="cgv-p">
+          Les commandes effectuées sur le Site Internet peuvent être acquittées par le biais des moyens de paiement suivants :
+          Carte bleue, carte bleue virtuelle, Visa, Mastercard, PayPal.
+        </p>
+
+        <p class="cgv-p">
+          7.4 Sécurité des paiements
+        </p>
+
+        <p class="cgv-p">
+          La confidentialité et la sécurité des données transmises par les Utilisateurs du Site Internet sont assurées au moyen du système de paiement en ligne sécurisé PAYBOX by VERIFONE, qui recourt au système SSL (Secure Socket Layers).
+        </p>
+
+        <p class="cgv-p">
+          Ce système permet de crypter les informations pendant leur transfert entre le support informatique utilisé par l’Utilisateur et le serveur de paiements. Il permet ainsi de protéger les coordonnées bancaires de l’Utilisateur.
+        </p>
+        <!-- END ARTICLE 7 -->
+
+        <!-- ARTICLE 8 -->
+        <h5 class="cgv-h5">Article 8 – Réserve de propriété et propriété intellectuelle des Prestations</h5>
+
+        <p class="cgv-p">
+          8.1 Les fichiers retouchés issus de la Prestation demeurent la propriété d’EMMOBILIER jusqu’au complet paiement du prix indiqué dans le formulaire en ligne par le Client.
+        </p>
+
+        <p class="cgv-p">
+          8.2 En outre et sous réserve de l’article 12.1, l’étendue des cessions des droits patrimoniaux d’auteur dont EMMOBILIER est investie le cas échéant au titre des retouches réalisées dans le cadre des Prestations sera mentionnée dans le formulaire en ligne. Les droits sur ces créations demeurent la propriété entière et exclusive d’EMMOBILER jusqu’au complet paiement du prix indiqué dans le formulaire en ligne par le Client.
+        </p>
+        <!-- END ARTICLE 8 -->
+
+        <!-- ARTICLE 9 -->
+        <h5 class="cgv-h5">Article 9 – Délais d’exécution et de livraison</h5>
+
+        <p class="cgv-p">
+          9.1 EMMOBILIER fera ses meilleurs efforts pour réaliser les Prestations dans les délais indicatifs précisés sur le Site Internet, soit entre 24 heures et 48 heures selon les options choisies.
+        </p>
+
+        <p class="cgv-p">
+          Le Client recevra un courriel l’informant que sa commande est prête.
+        </p>
+
+        <p class="cgv-p">
+          Il disposera alors de 30 jours pour récupérer sa commande sur le Site Internet. Passé ce délai, les images sont automatiquement supprimées.
+        </p>
+
+        <p class="cgv-p">
+          Le non-respect de ces délais qui ne serait pas dû à une faute d’EMMOBILIER ne saurait par conséquent donner droit au Client à une réduction des coûts des Prestations ou à une indemnité.
+        </p>
+
+        <p class="cgv-p">
+          En toute hypothèse, la livraison dans les délais ne peut intervenir que si le Client est à jour de ses obligations envers EMMOBILIER.
+        </p>
+
+        <p class="cgv-p">
+          9.3 EMMOBILIER est dégagée de plein droit de tout engagement relatif aux délais de livraison, et par conséquent de toutes pénalités ou dommages et intérêts pour retard :
+          a. dans le cas où le retard proviendrait d’un cas de force majeure ou d’évènements tels que notamment : grève, épidémie, inondation, ou tous autres faits indépendants de la volonté d’EMMOBILIER ;
+          b. dans le cas où les échéances de paiement n’auraient pas été observées par le Client ;
+          c. dans le cas où le Client n’aurait pas respecté son obligation de collaboration conformément à l’article 3 ci-dessus. Dans pareil cas, les délais de livraison seront prorogés d’une durée au moins égale à celle de l’événement et de ses conséquences.
+        </p>
+
+        <p class="cgv-p">
+          9.4 Dans l’hypothèse où le retard dans la réalisation des Prestations serait dû à un manquement d’EMMOBILIER, sa responsabilité ne saurait qu’être limitée au montant global des Prestations, et sous réserve pour le Client de rapporter la preuve de la faute d’EMMOBILIER et du préjudice personnel et direct subi du fait de ce retard.
+        </p>
+
+        <p class="cgv-p">
+          Les retards de livraison ne peuvent en aucun cas justifier une demande de résolution du contrat par le Client.
+        </p>
+
+        <p class="cgv-p">
+          9.5 En cas de modification de la commande conformément à l’article 4 ci-dessous, les nouveaux délais d’exécution seront précisés dans l’avenant de modification à la commande et se substitueront alors aux délais initiaux.
+        </p>
+        <!-- END ARTICLE 9 -->
+
+        <!-- ARTICLE 10 -->
+        <h5 class="cgv-h5">Article 10 – Garanties et responsabilités</h5>
+
+        <p class="cgv-p">
+          10.1 Garanties et responsabilités du Client
+        </p>
+
+        <p class="cgv-p">
+          Le Client garantit EMMOBILIER qu’il dispose de tous les droits et/ou autorisations nécessaires sur les documents, fichiers, images transmis à EMMOBILIER pour la réalisation des Prestations (en ce compris notamment les droits de propriété intellectuelle, droits à l’image, etc.), et garantit de ce fait EMMOBILIER contre toute réclamation éventuelle d’un tiers.
+        </p>
+
+        <p class="cgv-p">
+          Le Client garantit également que les images, photographies ou tous autres documents transmis pour la réalisation des Prestations ne seront pas illégaux, et notamment contrefaisants, portant atteintes à la vie privée ou à l’image d’autrui, autrement répréhensibles ou plus généralement susceptibles de porter atteinte à l’Ordre public et aux bonnes mœurs, et/ou susceptibles de conduire à l’engagement de la responsabilité d’EMMOBILIER.
+        </p>
+
+        <p class="cgv-p">
+          Le Client garantit EMMOBILIER contre les conséquences pécuniaires (incluant tous frais d’avocat et frais de procédure éventuels) de tous recours, réclamations ou actions qui pourraient être dirigés contre EMMOBILIER au titre des éléments fournis par le Client.
+        </p>
+
+        <p class="cgv-p">
+          Le Client est de ce fait responsable des informations et documents qu’il transmet à EMMOBILIER. Il est également responsable du respect des législations spécifiques à son activité.
+        </p>
+
+        <p class="cgv-p">
+          10.2 Garanties et responsabilités d’EMMOBILIER
+        </p>
+
+        <p class="cgv-p">
+          EMMOBILIER apporte un soin particulier à la qualité des Prestations qu’elle offre au Client, étant entendu qu’il s’agit d’une obligation de moyens dans la limite de l’état actuel de la technique.
+        </p>
+
+        <p class="cgv-p">
+          EMMOBILIER ne garantit au Client que ses seuls éléments de création, et ne saurait être tenue responsable des éléments apportés directement par le Client ou par tout tiers à sa demande.
+        </p>
+
+        <p class="cgv-p">
+          La responsabilité d’EMMOBILIER ne pourra être engagée qu’en cas de faute grave de sa part, étant entendu que sa responsabilité ne pourra excéder, quel que soit la nature du dommage, le coût de la facturation des Prestations. Ainsi, EMMOBILIER ne saurait être responsable des pertes directes ou indirectes (incluant le manque à gagner et les pertes d’exploitation), ni des dommages consécutifs dont le Client pourrait souffrir, résultants des Prestations, d’une faute ou d’une négligence de la société EMMOBILIER (faute lourde exceptée).
+        </p>
+
+        <p class="cgv-p">
+          Tout travail défectueux provenant d’une erreur ou d’une malfaçon d’EMMOBILIER sera remplacé par ses soins lorsque cela est possible, sans indemnité de quelque nature que ce soit.
+        </p>
+
+        <p class="cgv-p">
+          La responsabilité d’EMMOBILIER ne saurait être recherchée en cas de :
+          – faute, négligence, omission ou défaillance du Client,
+          – Force majeure, événements ou incidents indépendants de la volonté
+          d’EMMOBILIER,
+          – faute, négligence ou omission d’un tiers sur lequel EMMOBILIER n’a aucun
+          pouvoir de contrôle ou de surveillance.
+        </p>
+
+        <p class="cgv-p">
+          10.3 Responsabilité technique
+        </p>
+
+        <p class="cgv-p">
+          La société EMMOBILIER ne saurait être tenue pour responsable en cas de dommages résultants de causes techniques et notamment de l’indisponibilité des serveurs, des connexions internet permettant les transferts des fichiers (photographies et/ou documents) et de tout défaut affectant le fonctionnement de ceux-ci.
+        </p>
+
+        <p class="cgv-p">
+          10.4 Responsabilité des fichiers transmis pour la réalisation des Prestations
+        </p>
+
+        <p class="cgv-p">
+          EMMOBILIER n’est pas responsable de la qualité initiale des images ou des photographies fournies par le Client pour la réalisation des Prestations de retouches.
+        </p>
+
+        <p class="cgv-p">
+          Le Client s’engage à conserver des copies des fichiers numériques remis à EMMOBILIER pour la réalisation des Prestations.
+        </p>
+
+        <p class="cgv-p">
+          EMMOBILIER ne saurait par conséquent être tenu pour responsable de la perte des fichiers fournis (en ce compris les photographies / images ou tout autre documents), ou de dégradation de toutes sortes, pouvant survenir à l’issue de la réalisation de la Prestation et suivant livraison.
+        </p>
+
+        <p class="cgv-p">
+          Il appartient au Client de s’assurer pour ce type de dommages.
+        </p>
+        <!-- END ARTICLE 10 -->
+
+        <!-- ARTICLE 11 -->
+        <h5 class="cgv-h5">Article 11 – Confidentialité</h5>
+
+        <p class="cgv-p">
+          La société EMMOBILIER et le Client s’engagent à considérer comme confidentiels les documents et informations dont elles pourraient avoir eu connaissance à l’occasion de l’exécution des Prestations, et à ne pas les utiliser en dehors des besoins desdites Prestations.
+        </p>
+
+        <p class="cgv-p">
+          Les parties s’engagent à ne pas revendiquer de droits de propriété industrielle, littéraire ou artistique, sur les informations confidentielles et sur les connaissances établies à partir de ces informations confidentielles.
+        </p>
+
+        <p class="cgv-p">
+          Les documents de toutes sortes fournis par les parties demeurent la propriété de chacune des parties qui les a fournis, exception faite des images et photographies retouchées qui demeurent la propriété de la société EMMOBILIER jusqu’au paiement complet du prix de la Prestation.
+        </p>
+
+        <p class="cgv-p">
+          Les parties s’engagent à se restituer mutuellement sur simple demande, ou en cas de résiliation des relations contractuelles, tous les documents, pièces ou produits communiqués, et à ne pas en garder de copie ou de reproduction.
+        </p>
+
+        <p class="cgv-p">
+          Les obligations définies par le présent article resteront en vigueur aussi longtemps que les informations confidentielles ne seront pas tombées dans le domaine public.
+        </p>
+        <!-- END ARTICLE 11 -->
+
+        <!-- ARTICLE 12 -->
+        <h5 class="cgv-h5">Article 12 – Promotion</h5>
+
+        <p class="cgv-p">
+           12.1 Utilisation des images / photographies issues des Prestations
+        </p>
+
+        <p class="cgv-p">
+          Le Client autorisent EMMOBILIER, à titre gratuit et pendant une durée de quinze ans à compter de la réalisation de la Prestation, à utiliser, exploiter ou reproduire les photographies ou images issues de la Prestation, sur tous supports connus ou inconnus à ce jour, et en particulier sur son Site Internet, sa newsletter, les réseaux sociaux, dans le monde entier, aux fins de promotion de l’activité d’EMMOBILIER.
+        </p>
+
+        <p class="cgv-p">
+          Pour les professionnels de l’immobilier mandatés, l’utilisation des images ou des photographies doit être entendue sur le temps de validité du mandat.
+        </p>
+
+        <p class="cgv-p">
+          12.2 Autorisation de l’utilisation de la dénomination sociale, du logo et des marques propriétés de la société EMMOBILIER ou du Client
+        </p>
+
+        <p class="cgv-p">
+          Le Client et la société EMMOBILIER s’autorisent mutuellement à citer leurs dénominations sociales en tant que référence commerciale et à réaliser toute action publicitaire ou promotionnelle, visuelle ou sonore, relative aux Prestations délivrées.
+        </p>
+
+        <p class="cgv-p">
+          Dans ce cadre, chaque partie s’engage à citer, s’il y a lieu, la dénomination sociale de l’autre partie dans les conditions usuelles de son exploitation en respectant sa charte graphique.
+        </p>
+
+        <p class="cgv-p">
+          À cet effet, le Client fournira sur simple demande de la société EMMOBILIER, tous visuels ou toutes informations à son activité.
+        </p>
+        <!-- END ARTICLE 12 -->
+
+        <!-- ARTICLE 13 -->
+        <h5 class="cgv-h5">Article 13 – Traitement des données</h5>
+
+        <p class="cgv-p">
+           EMMOBILIER est amenée à recueillir des informations personnelles à différentes occasions : commandes ou création d’un compte.
+        </p>
+
+        <p class="cgv-p">
+          Toutes les données transmises par l’Utilisateur sur le site, relatives à ses données personnelles, ne seront pas réutilisées à des fins diverses.
+        </p>
+
+        <p class="cgv-p">
+          Conformément aux dispositions de la loi Informatiques et Libertés du 6 janvier 1978, l’Utilisateur dispose d’un droit d’accès, de modification et de suppression des données personnelles le concernant.
+        </p>
+        <!-- END ARTICLE 13 -->
+
+        <!-- ARTICLE 14 -->
+        <h5 class="cgv-h5">Article 14 – Site Internet</h5>
+
+        <p class="cgv-p">
+           EMMOBILIER s’efforce, au mieux de sa disponibilité, d’assurer l’exactitude et la mise à jour des informations diffusées sur le Site Internet.
+        </p>
+
+        <p class="cgv-p">
+          A cette fin, la société EMMOBILIER se réserve le droit de corriger, à tout moment et sans préavis, le contenu dudit Site Internet. Toutefois, il est possible que pour des besoins de maintenance, d’intervention sur le site ou le réseau, ou par suite d’autres imprévus ou perturbations indépendants de la volonté d’EMMOBILIER, l’accès au service EMMOBILIER Online soit modifié, suspendu ou interrompu.
+        </p>
+
+        <p class="cgv-p">
+          EMMOBILIER décline toute responsabilité pour les dommages qui résultent de l’utilisation et de l’impossibilité d’utiliser le Site Internet, ou de toutes inexactitudes concernant les éléments dudit Site Internet.
+        </p>
+        <!-- END ARTICLE 14 -->
+
+        <!-- ARTICLE 15 -->
+        <h5 class="cgv-h5">Article 15 – Nullité</h5>
+
+        <p class="cgv-p">
+          Si l’une des clauses des présentes conditions générales de vente était contraire à une loi d’ordre public, nationale ou internationale, seule la clause en question sera réputée non écrite, le contrat demeurant valable pour le surplus. Les parties négocieront de bonne foi la rédaction d’une nouvelle clause destinée à remplacer celle qui était nulle.
+        </p>
+        <!-- END ARTICLE 15 -->
+
+        <!-- ARTICLE 16 -->
+        <h5 class="cgv-h5">Article 16 – Loi applicable et tribunal compétent</h5>
+
+        <p class="cgv-p">
+          Les présentes conditions générales de vente sont soumises à la loi française. Elles sont disponibles dans la langue de consultation du Site Internet.
+En cas de litige, les tribunaux français seront seuls compétents. Tout litige avec un client professionnel sera soumis aux tribunaux compétents de Versailles.
+        </p>
+        <!-- END ARTICLE 16 -->
+
+
+    </div>
+</section>
+{% endblock fos_user_content %}

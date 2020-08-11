@@ -1,0 +1,233 @@
+<?php
+
+/*
+ * This file is part of the Emmobilier project.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace App\Handlers\FileHandlers;
+
+use App\Exception\FileSystemException;
+use Imagine\Image\ImageInterface;
+use FFMpeg;
+
+
+/**
+ * ThumbHandler Provides basic utility to handle pictures thumbnails.
+ */
+class ThumbnailHandler extends BaseFileHandler
+{
+	/**
+     * Create picture thumbnail using GD lib.
+     *
+     * @param string $fileFullPath
+     * @param string $imgDir
+     * @param string $fileName
+     * @return string
+     *
+     */
+    public function doGenerateThumbnail(string $fileFullPath, string $imgDir, string $fileName): string
+    {
+       
+ $image = new \SplFileInfo($fileFullPath);
+        if ('gif' == $image->getExtension()) {
+            $thumbnailImgPath = $this->generateGifThumbnail($fileFullPath, $imgDir, $fileName);
+        }
+        elseif ('mp4' == $image->getExtension()) {
+            $thumbnailImgPath = $this->generateMP4Thumbnail($fileFullPath, $imgDir, $fileName);
+        }
+        else {
+            $thumbnailImgPath = $this->generateThumbnail($fileFullPath, $imgDir, $fileName);
+        }
+
+        if ($this->storage->doExiste($thumbnailImgPath)) {
+            return substr($thumbnailImgPath, strpos($thumbnailImgPath, $this->uriPrefix));
+        }
+
+        throw new FileSystemException($thumbnailImgPath);
+    }
+
+    /**
+     * Create picture thumbnail usig GD lib.
+     *
+     * @param  string   $imgPath
+     *
+     * @return string
+     *
+     * @throws   FileSystemException  Throw FileSystemException an exception on failure
+     */
+    public function doGenerateThumbnailFromPath(string $imgPath): string
+    {
+        $thumbnailImgPath = $this->generateThumbnail($imgPath, dirname($imgPath), basename($imgPath));
+
+        if ($this->storage->doExiste($thumbnailImgPath)) {
+            return substr($thumbnailImgPath, strpos($thumbnailImgPath, $this->uriPrefix));
+        }
+
+        throw new FileSystemException($this->translator->trans("uploader.validation.file.thumb.draw"));
+    }
+
+    /**
+     * Create picture thumbnail usig GD lib.
+     *
+     * @param string $fileFullPath
+     * @param string $imgDir
+     * @param  string $fileName The image name
+     * @return string
+     *
+     */
+    private function generateThumbnail(string $fileFullPath, string $imgDir, string $fileName): string
+    {
+	    $image = new \SplFileInfo($fileFullPath);
+	    $thumbnailImgPath = join(DIRECTORY_SEPARATOR, [$imgDir, $this->thumbDir, sprintf('%s.%s',basename($fileName, '.'.$image->getExtension()), $this->extension)]);
+	
+	    try {
+		    $this->storage->doCreateDirIfNotExists(join(DIRECTORY_SEPARATOR, [$imgDir, $this->thumbDir]));
+		
+		    if ($image->getSize() > $this->maxSize || in_array(mb_strtoupper($image->getExtension()), $this->webExtensions)){
+			    throw new \Imagine\Exception\NotSupportedException('Not valid image');
+		    }
+		    
+            $size = new \Imagine\Image\Box($this->width, $this->height);
+            $thumbOptions = [
+               'flatten'          => $this->flatten,
+               'resolution-units' => ImageInterface::RESOLUTION_PIXELSPERINCH,
+               'resolution-x'     => $this->resolutionX,
+               'resolution-y'     => $this->resolutionY,
+               'resampling-filter' => ImageInterface::FILTER_LANCZOS
+            ];
+	
+	        $this->imagineGD->open($image->getRealPath())
+                ->thumbnail($size)
+                ->save($thumbnailImgPath, $thumbOptions)
+            ;
+        } catch (\Imagine\Exception\Exception $e) {
+            $this->drawTextOnImg(mb_strtoupper($image->getExtension()), $thumbnailImgPath);
+        } catch (\Throwable $e) {
+            throw new FileSystemException($e->getMessage());
+        } finally {
+            return $thumbnailImgPath ?? $image;
+        }
+    }
+
+    /**
+     * Create GIF picture thumbnail usig Imagick lib.
+     *
+     * @param string $fileFullPath
+     * @param string $imgDir
+     * @param  string $fileName The image name
+     * @return string
+     *
+     */
+    private function generateGifThumbnail(string $fileFullPath, string $imgDir, string $fileName): string
+    {
+        $image = new \SplFileInfo($fileFullPath);
+        $thumbnailImgPath = join(DIRECTORY_SEPARATOR, [$imgDir, $this->thumbDir, $fileName]);
+	
+	    try {
+		    $this->storage->doCreateDirIfNotExists(join(DIRECTORY_SEPARATOR, [$imgDir, $this->thumbDir]));
+		
+		    if ($image->getSize() > $this->maxSize || in_array(mb_strtoupper($image->getExtension()), $this->webExtensions)){
+			    throw new \Imagine\Exception\NotSupportedException('Not valid image');
+		    }
+		    
+            $size = new \Imagine\Image\Box($this->width, $this->height);
+            $thumbOptions = [
+               'flatten' => false,
+               'resolution-units' => ImageInterface::RESOLUTION_PIXELSPERINCH,
+               'resolution-x'     => $this->resolutionX,
+               'resolution-y'     => $this->resolutionY,
+               'resampling-filter' => ImageInterface::FILTER_LANCZOS,
+               'animated' => true
+            ];
+
+            $imagineImagick = new \Imagine\Imagick\Imagine();
+            $originImg = $imagineImagick->open($image->getRealPath());
+            $thumbnailSize = $originImg->thumbnail($size)->getSize();
+            $thumbnailImg = $imagineImagick->create($thumbnailSize);
+            foreach ($originImg->layers() as $layer) {
+                $thumbnailImg->layers()->add($layer->thumbnail($size));
+            }
+            
+            $thumbnailImg->save($thumbnailImgPath, $thumbOptions);
+            
+        } catch (\Imagine\Exception\Exception $e) {
+            $this->drawTextOnImg(mb_strtoupper($image->getExtension()), $thumbnailImgPath);
+        } catch (\Throwable $e) {
+            throw new FileSystemException($e->getMessage());
+        } finally {
+            return $thumbnailImgPath ?? $image;
+        }
+    }
+
+    /**
+     * Create GIF picture thumbnail usig Imagick lib.
+     *
+     * @param string $fileFullPath
+     * @param string $imgDir
+     * @param  string $fileName The image name
+     * @return string
+     *
+     */
+    private function generateMP4Thumbnail(string $fileFullPath, string $imgDir, string $fileName): string
+    {
+        $video = new \SplFileInfo($fileFullPath);
+        $thumbnailVideoPath = join(DIRECTORY_SEPARATOR, [$imgDir, $this->thumbDir, $fileName]);
+    
+        try {
+            $this->storage->doCreateDirIfNotExists(join(DIRECTORY_SEPARATOR, [$imgDir, $this->thumbDir]));
+
+            if ($video->getSize() > $this->maxSize || in_array(mb_strtoupper($video->getExtension()), $this->webExtensions)){
+                throw new \Imagine\Exception\NotSupportedException('Not valid video');
+            }
+            
+            $ffmpeg = FFMpeg\FFMpeg::create(array(
+                'ffmpeg.binaries'  => '/opt/local/ffmpeg/bin/ffmpeg',
+                'ffprobe.binaries' => '/opt/local/ffmpeg/bin/ffprobe',
+                'timeout'          => 3600, // The timeout for the underlying process
+                'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
+            ));
+
+            $video_thumb = $ffmpeg->open($video->getRealPath());
+            // create thumb video
+            $video_thumb
+                ->filters()
+                ->resize(new FFMpeg\Coordinate\Dimension($this->width, $this->height))
+                ->synchronize();
+            $video_thumb
+                ->save(new FFMpeg\Format\Video\X264('libmp3lame', 'libx264'), $thumbnailVideoPath);
+        } catch (\Imagine\Exception\Exception $e) {
+            $this->drawTextOnImg(mb_strtoupper($video->getExtension()), $thumbnailVideoPath);
+        } catch (\Throwable $e) {
+            throw new FileSystemException($e->getMessage());
+        } finally {
+            return $thumbnailVideoPath ?? $video;
+        }
+    }
+
+    /**
+     * Draw text on picture thumbnail usig GD lib.
+     *
+     * @param  string $text             The image text
+     * @param  string $thumbnailImgPath The thumbnail path
+     *
+     * @return void
+     */
+    private function drawTextOnImg(string $text, string $thumbnailImgPath):void
+    {
+        $palette = new \Imagine\Image\Palette\RGB();
+
+        $imageBox = new \Imagine\Image\Box($this->width, $this->height);
+        $imageCenterPosition = new \Imagine\Image\Point\Center($imageBox);
+
+        $textFont = new \Imagine\Gd\Font($this->fontPath, $this->fontSize, $palette->color($this->color, 100));
+        $textCenterPosition = new \Imagine\Image\Point\Center($textFont->box($text));
+        $centeredTextPosition = new \Imagine\Image\Point($imageCenterPosition->getX() - $textCenterPosition->getX(), $imageCenterPosition->getY() - $textCenterPosition->getY());
+
+        $image = $this->imagineGD->create($imageBox, $palette->color($this->backgroundColor, 100));
+        $image->draw()->text($text, $textFont, $centeredTextPosition);
+        $image->save($thumbnailImgPath);
+    }
+}

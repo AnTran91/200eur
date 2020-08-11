@@ -1,0 +1,77 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}
+  {{ 'admin.param_form.new'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/multi-select.min.css', 'multiselect')}}"/>
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('css/kendo.bootstrap-v4.min.css', 'kendo_ui') }}"/>
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('admin_field_group_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.param_form.param_form'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                </ul>
+              </div>
+              <a href="{{ path('admin_field_group_index') }}" class="btn btn-pill btn-info">
+                {{ 'admin.link.back'|trans }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="form-content" id="js-page-section">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="alert alert-icon alert-primary" role="alert">
+          <i class="fe fe-bell mr-2" aria-hidden="true"></i>
+          {{ 'admin.param_form.alert'|trans }}
+        </div>
+        {% include 'admin/field_group/_form.html.twig' with {'title': 'admin.param_form.new'|trans} %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <!-- cdn -->
+  <script src="{{ asset('jquery.collection.min.js', 'admin_js') }}"></script>
+  <script src="{{ asset('js/jquery.multi-select.min.js', 'multiselect')}}"></script>
+
+  <script src="{{ asset('js/kendo.core.min.js', 'kendo_ui') }}"></script>
+  <script src="{{ asset('js/kendo.upload.min.js', 'kendo_ui') }}"></script>
+  <!-- main JS-->
+  <script src="{{ asset('param.handler.min.js', 'admin_js') }}"></script>
+
+  <script type="text/javascript">
+    (function($) {
+      // USE STRICT
+      "use strict";
+      var params = new ParamHandler({$wrapper: $("#js-page-section"), choiceType: {{ params_validation.choice_type|json_encode()|raw }}, imageRenovationType: {{ params_validation.image_renovation_type|json_encode()|raw }}});
+    })(jQuery);
+  </script>
+{% endblock %}

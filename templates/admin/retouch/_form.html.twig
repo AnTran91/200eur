@@ -1,0 +1,75 @@
+{% trans_default_domain 'admin' %}
+
+{{ form_start(form) }}
+<div class="card">
+    <div class="card-header">
+        <strong>{{ title }}</strong>
+        <div class="card-options">
+            {{ form_widget(form.appType) }}
+        </div>
+    </div>
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="card-alert alert alert-success mb-0">
+                <i class="fe fe-bell mr-2" aria-hidden="true"></i>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div id="dynamic-body" class="card-body">
+        {{ form_errors(form) }}
+        {{ form_errors(form.appType) }}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(form.title) }}
+                {{ form_row(form.description) }}
+            </div>
+            <div class="col-md-6 border-left">
+                {{ form_row(form.title_en) }}
+                {{ form_row(form.description_en) }}
+            </div>
+        </div>
+        {% if invalidMax is defined %}
+            <div id="max_description_errors" class="mb-2">
+                <span class="invalid-feedback d-block">
+                    <span class="mb-0 d-block">
+                        <span class="form-error-message">{{ 'admin.common.error_invalidMax'|trans({}, 'admin') }}</span>
+                    </span>
+                </span>
+            </div>
+        {% endif %}
+        <div class="border-top pt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.helpLink) }}
+                </div>
+            </div>
+        </div>
+        <div class="border-top pt-5">
+            <div class="row">
+                {% if form.orderNumber is defined %}
+                <div class="col-md-6">
+                    {{ form_row(form.orderNumber) }}
+                </div>
+                {% endif %}
+                {% if form.retouchCode is defined %}
+                <div class="col-md-6">
+                    {{ form_row(form.retouchCode) }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="pt-2">
+            <fieldset class="form-fieldset">
+            {{ form_row(form.pricings) }}
+            </fieldset>
+        </div>
+    </div>
+</div>
+{{ form_rest(form) }}
+<div class="md-fab-wrapper">
+    <button class="md-fab md-fab-primary md-fab-wave-light">
+        <i class="fas fa-save"></i>
+    </button>
+</div>
+{{ form_end(form) }}

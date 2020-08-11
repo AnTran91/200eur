@@ -1,0 +1,26 @@
+<div class="col-md-4 form-container">
+
+  <div class="row no-margin">
+    <div class="text-left">
+      <h2 class="header-2">{{ 'resetting.title'|trans }}</h2>
+      <p class="boxy-text-color">{{ 'resetting.info'|trans }}</p>
+    </div>
+  </div>
+  <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+    <div class="form-group">
+      <label for="password">{% trans from "FOSUserBundle" %}resetting.request.username{% endtrans %}</label>
+      <input class="form-control form-input lt-input" type="text" id="username" name="username">
+    </div>
+    <div class="center-login">
+      <button type="submit" id="_submit" name="_submit" class="btn btn-prime">
+        {% trans from "FOSUserBundle" %}resetting.request.submit{% endtrans %}
+      </button>
+    </div>
+    <div class="password-lost center-login">
+      <a href="{{ path('fos_user_security_login') }}">{{ 'login.help.login'|trans }}</a>
+      <p>{{ 'login.help.create_accout'|trans }}
+        <a href="{{ path('fos_user_registration_register') }}">{{ 'login.create_accout'|trans }}</a>
+      </p>
+    </div>
+  </form>
+</div>

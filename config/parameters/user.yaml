@@ -1,0 +1,45 @@
+#####################################################
+#                                                   #
+#        User configuration file                    #
+#                                                   #
+#####################################################
+parameters:
+  role_hierarchy:
+    admin.roles.emmobilier_user:               ROLE_EMMOBILIER_USER
+    admin.roles.immosquare_user:               ROLE_IMMOSQUARE_USER
+    admin.roles.super_admin:                   ROLE_SUPER_ADMIN
+#    admin.roles.residence_user:                ROLE_RESIDENCE_USER
+    admin.roles.agency_manager:                ROLE_AGENCY_MANAGER
+    admin.roles.delivery_time_manager:         ROLE_DELIVERY_TIME_MANAGER
+    admin.roles.holidays_manager:              ROLE_HOLIDAYS_MANAGER
+    admin.roles.invoice_manager:               ROLE_INVOICE_MANAGER
+    admin.roles.network_manager:               ROLE_NETWORK_MANAGER
+    admin.roles.order_manager:                 ROLE_ORDER_MANAGER
+    admin.roles.production_manager:            ROLE_PRODUCTION_MANAGER
+    admin.roles.promo_manager:                 ROLE_PROMO_MANAGER
+    admin.roles.retouch_manager:               ROLE_RETOUCH_MANAGER
+    admin.roles.transaction_manager:           ROLE_TRANSACTION_MANAGER
+    admin.roles.user_manager:                  ROLE_USER_MANAGER
+  # user in charge on the order section
+  user_in_charge_on_the_order_section:
+  - ROLE_ORDER_MANAGER
+  - ROLE_SUPER_ADMIN
+  emmobilier_roles:
+  - ROLE_EMMOBILIER_USER
+  immosquare_roles:
+  - ROLE_IMMOSQUARE_USER
+  residence_roles:
+  - ROLE_RESIDENCE_USER
+  admin_roles:
+  - ROLE_SUPER_ADMIN
+  - ROLE_AGENCY_MANAGER
+  - ROLE_DELIVERY_TIME_MANAGER
+  - ROLE_HOLIDAYS_MANAGER
+  - ROLE_INVOICE_MANAGER
+  - ROLE_NETWORK_MANAGER
+  - ROLE_ORDER_MANAGER
+  - ROLE_PRODUCTION_MANAGER
+  - ROLE_PROMO_MANAGER
+  - ROLE_RETOUCH_MANAGER
+  - ROLE_TRANSACTION_MANAGER
+  - ROLE_USER_MANAGER

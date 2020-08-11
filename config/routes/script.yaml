@@ -1,0 +1,11 @@
+#####################################################
+#                                                   #
+#       Admin section configuration file            #
+#                                                   #
+#####################################################
+# Script controllers
+script_controllers:
+  resource: ../../src/Controller/script/
+  type: annotation
+  prefix: /script
+

@@ -1,0 +1,24 @@
+services:
+    _defaults:
+        public: true
+
+    # If you need to access services in a test, create an alias
+    # and then fetch that alias from the container. As a convention,
+    # aliases are prefixed with test.
+    #
+    test.file_system_storage: '@App\Storage\FileSystemStorage'
+
+    #test.holiday_handler: '@App\Services\HolidayHandler'
+
+    test.builder: '@App\Handlers\OrderBuilder'
+    test.picture_handler: '@App\Handlers\PictureHandler'
+    # #test.holiday_handler: '@App\Services\HolidayHandler'
+    # test.promo_handler: '@App\Services\PromoHandler'
+    #
+    # test.builder: '@App\Services\OrderBuilder'
+    # test.transaction_service: '@transaction_service'
+    # test.picture_handler: '@App\Services\PictureHandler'
+
+    test.mailer_handler: '@App\Handlers\MailerHandler'
+    test.invoice_factory: '@App\Handlers\InvoiceBuilder'
+    test.extractor: '@App\Handlers\Extractable\Extractor'

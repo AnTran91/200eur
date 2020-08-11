@@ -1,0 +1,18 @@
+{{ form_start(form, {'attr': { 'name': random() }}) }}
+<div class="row">
+
+  <div class="col-md-4">
+    <img class="reound" src="{{ picture.picturePathThumb }}">
+  </div>
+
+  <div class="col-md-8">
+    {{ form_row(form.pictureName) }}
+    {{ form_row(form.status) }}
+  </div>
+
+  <div class="pt-4 col-md-12">
+    {{ form_row(form.pictureDetail) }}
+  </div>
+  {{ form_rest(form) }}
+</div>
+{{ form_end(form) }}

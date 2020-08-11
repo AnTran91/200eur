@@ -1,0 +1,9 @@
+# uploader configuration file control the settings of this application
+# Put parameters here that don't need to change on each machine where the app is deployed
+parameters:
+  # Uploader configs
+  uploader_configs:
+    chunksFolder:              'chunks'
+    uploadDirectory:           '%kernel.cache_dir%/test/uploads/files'
+    uriPrefix:                 '/uploads/files'
+    tempDir:                   'tmp'

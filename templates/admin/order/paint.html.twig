@@ -1,0 +1,112 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}
+  {{ 'admin.order.orders_list'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent()}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('daterangepicker.min.css', 'daterangepicker') }}"/>
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item">
+                    <a href="{{ path('admin_order_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.order.orders_list'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="{{ path('admin_order_show', {'id': pictureDetail.picture.order.id}) }}">
+                      <i class="fas fa-shopping-basket"></i>
+                      {{'admin.order.order'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                  <li class="list-inline-item">{{'admin.order.order_paint'|trans}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="list-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div id="js-paint-section"></div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('painterro/painterro-0.2.68.min.js', 'admin_vendor') }}"></script>
+  <script src="{{ asset('file-uploader.min.js', 'admin_js') }}"></script>
+  <script>
+    (function($) {
+      // USE STRICT
+      "use strict";
+
+      var fileUploader = new ChunkedFileUploader({
+        $wrapper: $(document),
+        // These are the defaults.
+        slice_size: "{{ validation_configs.chunkSize }}",
+        file_uuid: "{{ pictureDetail.picture.pictureDirectory }}",
+        chunking_url: "{{ url('admin_painted_picture_upload', {'id': pictureDetail.id }) }}"
+      });
+      var ptro = Painterro({
+        saveHandler: function(image, done) {
+          $(document).trigger("ON_UPLOAD_FILE", [image]);
+          done(false);
+        },
+        defaultTool: 'select'
+      });
+      {% if pictureDetail.returnedPicture is not null and pictureDetail.returnedPicture.paintedPicturePath is not null and file_exists(pictureDetail.returnedPicture.paintedPicturePath) %}
+        ptro.show("{{ pictureDetail.returnedPicture.paintedPicturePath }}");
+        updateZoomFactor(ptro);
+      {% else %}
+        var url = "{{ pictureDetail.picture.picturePath }}";
+        var pat = /^https?:\/\//i;
+        if (pat.test(url))
+        {
+          ptro.show(window.location.origin + '/admin/order/load-external-image?url='+ url);
+        }
+        else {
+          ptro.show(url);
+        }
+        updateZoomFactor(ptro);
+      {% endif %}
+
+      function updateZoomFactor(A) {
+        var timeOut = setTimeout(function () {
+          updateZoomFactor(A);
+        }, 100);
+        if (A.shown && A.size != undefined) {
+          A.zoomFactor = Math.min(A.wrapper.documentClientWidth / A.size.w, A.wrapper.documentClientHeight / A.size.h);
+          clearTimeout(timeOut);
+        }
+      }
+
+    })(jQuery);
+  </script>
+{% endblock %}

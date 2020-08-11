@@ -1,0 +1,46 @@
+{% trans_default_domain 'admin' %}
+
+<!-- DATA TABLE -->
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title">{{ title }}</h4>
+  </div>
+  <div class="card-body p-0 o-auto" style="height: 15rem">
+    <table class="table card-table table-vcenter text-nowrap">
+      <thead>
+        <tr>
+          <th>{{ 'admin.order.id'|trans }}</th>
+          <th>{{ 'admin.order.amount'|trans }}</th>
+          <th>{{ 'admin.order.time'|trans }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          <tr>
+            <td>{{ order.orderNumber|default('admin.order.unpaid'|trans)}}</td>
+            <td>{{ order.amountIncludingTaxAfterReduction|price }}</td>
+            {% if order.deliveryTime is not null %}
+              <td>{{ order.deliveryTime.time ~ " " ~ order.deliveryTime.unit|trans }}</td>
+            {% endif %}
+            <td>
+              <div class="table-data-feature">
+                <a href="{{ path('admin_order_show', {'id': order.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="View" data-original-title="More">
+                  <i class="zmdi zmdi-eye"></i>
+                </a>
+                <a href="{{ path('admin_holidays_edit', {'id': order.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="View" data-original-title="More">
+                  <i class="fe fe-edit mr-1"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        {% else %}
+          <tr class="odd">
+            <td valign="top" colspan="7" class="text-center">{{ 'admin.paginator.empty_table'|trans|raw }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,257 @@
+{% trans_default_domain 'admin' %}
+
+{% form_theme form with['_shared_components/form_layout.html.twig', '_shared_components/form_switch_layout.html.twig'] %}
+
+{{ form_start(form) }}
+<div class="md-fab-wrapper">
+    <button role="button" type="submit" class="md-fab md-fab-accent md-fab-primary">
+        <i class="fas fa-save"></i>
+    </button>
+</div>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card card-profile">
+            <div class="card-body">
+                <div class="media">
+                    <span id="js-thumb-prev" class="avatar avatar-xxl mr-5"
+                          style="background-image: url({{ vich_uploader_asset(user, 'imageFile')|default(asset('default_profile.png', 'admin_images')) }})"></span>
+                    <div class="media-body mt-4">
+                        <div class="profil-name">
+                            <h4>{{ 'admin.user.picture'|trans }}</h4>
+                            {{ form_label(form.imageFile) }}
+                            <div class="image-uploader-ctn">
+                                <span class="image-uploader-label">{{ 'admin.user.upload'|trans }}</span>
+                                {{ form_widget(form.imageFile) }}
+                                {{ form_errors(form.imageFile) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-unstyled leading-loose text-left mt-4">
+                    <li>
+                        <i class="fe fe-clock text-success mr-2" aria-hidden="true"></i>
+                        {{ 'admin.common.last_update'|trans }}
+                        {{ user.updatedAt|date('d/m/Y H:m:s') }}
+                    </li>
+                    <li>
+                        <i class="fe fe-clock text-success mr-2" aria-hidden="true"></i>
+                        {{ 'admin.common.last_login'|trans }}
+                        {{ user.lastLogin|date('d/m/Y H:m:s') }}</li>
+                    <li>
+                        <i class="fe fe-clock text-success mr-2" aria-hidden="true"></i>
+                        {{ 'admin.common.created_at'|trans }}
+                        {{ user.createdAt|date('d/m/Y H:m:s') }}</li>
+                </ul>
+            </div>
+        </div>
+        {% if user.id is not empty %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'admin.user.user_folder'|trans }}</h3>
+                <div class="card-options">
+                    <a href="{{ path('generate_client_directory', {'id': user.id, '_token': csrf_token('generate_client_directory' ~ user.id)}) }}"
+                       class="btn btn-primary btn-sm">
+                        <i class="fe fe-folder"></i>
+                        {{ 'admin.user.generate_client_directory'|trans }}
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-top-campaign">
+                    <tbody>
+                    <tr>
+                        <td>{{ 'admin.user.user_folder'|trans }}</td>
+                        <td>{{ user.userDirectory|default('admin.common.none'|trans) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'admin.user.directory_has'|trans }}</td>
+                        <td>{{ user.userDirectory|file_numbers }} {{ 'admin.common.unit.directory'|trans }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'admin.user.directory_size'|trans }}</td>
+                        <td>{{ user.userDirectory|directory_size }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'admin.user.tmp_directory_size'|trans }}</td>
+                        <td>{{ user.userDirectory|tmp_directory_size }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a href="{{ path('admin_user_clear_tmp_dir', {'id': user.id, '_token': csrf_token('clear_client_tmp_directory' ~ user.id)}) }}"
+                   class="btn btn-primary btn-sm">
+                    <i class="fe fe-trash-2"></i>
+                    {{ 'admin.user.clear_tmp_client_directory'|trans }}
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        {% if (user.id is not empty and is_granted_user('ROLE_IMMOSQUARE_USER', user)) %}
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'admin.user.api_key'|trans }}</h3>
+                    <div class="card-options">
+                        <a href="{{ path('generate_api_token', {'id': user.id, '_token': csrf_token('generate_api_token' ~ user.id)}) }}"
+                           class="btn btn-primary btn-sm">
+                            <i class="fe fe-lock"></i>
+                            {{ 'admin.user.api_key_regnerate'|trans }}
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-top-campaign">
+                        <tbody>
+                        <tr>
+                            <td>{{ 'admin.user.api_key'|trans }}</td>
+                            <td>{{ user.apiToken|default('admin.common.none'|trans) }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'admin.user.permission'|trans }}</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="form-group">
+                            {{ form_row(form.roles) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.groups) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ title }}</h3>
+                <div class="card-options">
+                    {% if user.isEnabled %}
+                        {{ form_widget(form.enabled, { 'attr': { 'checked': 'checked' }}) }}
+                    {% else %}
+                        {{ form_widget(form.enabled) }}
+                    {% endif %}
+                </div>
+            </div>
+
+            {{ form_errors(form) }}
+            {% for type, message in app.session.flashbag.get('user_modified') %}
+                <div class="card-alert alert alert-success mb-0">
+                    <i class="fas fa-exclamation-circle mr-2" aria-hidden="true"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.firstName) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.lastName) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.email) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.emailSecondary) }}
+                        </div>
+                    </div>
+                    {% if (form.plainPassword is defined) %}
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ form_row(form.plainPassword) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.billingAddress.company) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.billingAddress.phone) }}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4">
+                        <div class="form-group">
+                            {{ form_row(form.billingAddress.city) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="form-group">
+                            {{ form_row(form.billingAddress.zipCode) }}
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            {{ form_row(form.billingAddress.country) }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {{ form_row(form.billingAddress.address) }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {{ form_row(form.billingAddress.secondaryAddress) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.billingAddress.TVA) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.language) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'admin.user.account_info'|trans }}</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="form-group">
+                            {{ form_row(form.organization) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.type) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            {{ form_row(form.wallet) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>

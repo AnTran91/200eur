@@ -1,0 +1,11 @@
+#####################################################
+#                                                   #
+#        Promo configuration file                   #
+#                                                   #
+#####################################################
+parameters:
+    promo_type_options:
+      promo.type.assign_to_all_customers:                 promo.type.assign_to_all_customers
+      promo.type.assign_to_specific_customers:            promo.type.assign_to_specific_customers
+      promo.type.assign_to_network:                       promo.type.assign_to_network
+      promo.type.assign_to_agency:                        promo.type.assign_to_agency

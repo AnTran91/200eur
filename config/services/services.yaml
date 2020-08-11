@@ -1,0 +1,85 @@
+#############################################################
+#                                                           #
+#                 main service configuration                #
+#                                                           #
+#############################################################
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        bind:
+          # Roles
+          $adminRoles: '%admin_roles%'
+          $residenceRoles: '%residence_roles%'
+          $emmobilierRoles: '%emmobilier_roles%'
+          # applications types
+          $applicationsTypes: '%application_type_options%'
+          # system pay status
+          $systemPayStatus : '%system_pay_status%'
+          # API configs
+          $apiVersion: '%api_version%'
+          $bodyListenerConfigs: '%body_listener%'
+          # payment service provider parameters
+          $systemPayConfigs: '%system_pay_config%'
+          # invoice pdf parameters
+          $fpdfConfigs: '%fpdf_config%'
+          # invoice payment
+          $paymentPeriod: '%payment_period%'
+          $userPaymentType: '%user_payment_type%'
+          # admin paginator
+          $adminPaginatorItemPerPage: '%admin_paginator_item_per_page%'
+          # file upload parameters
+          $uploadConfigs: '%uploader_configs%'
+          $requestConfigs: '%uploader_request%'
+          $thumbConfigs: '%thumbnail_configs%'
+          $validationConfigs: '%validation_configs%'
+          # security roles
+          $roleHierarchy: '%role_hierarchy%'
+          # dynamic fields parameters
+          $dynamicFormConstraints: '%dynamic_form_constraints%'
+          $dynamicFormTypeOptions: '%dynamic_form_types%'
+          $dynamicFormType: '%form_type%'
+          $dynamicFormPostion: '%position%'
+          # mailer
+          $senderAddress: '%sender_address%'
+          # default parameters
+          $defaultLocale: '%default_locale%' # default local
+          $booleanOptions: '%bool_options%' # boolean form options
+          $placementOptions: '%placement_options%' # placement form options
+          $languageOptions: '%language_options%' # language form options
+          $monthOptions: '%month_options%' # month form options
+          $userInChargeOnTheOrderSection: '%user_in_charge_on_the_order_section%'
+          $promoTypes: '%promo_type_options%'
+          #$deliveryTimeOptions: '%order_delivery_time_options%'
+          #$defaultDeliveryTime: '%default_order_time%'
+          $orderStatusFilterOptions: '%order_filter_status_options%'
+          $orderStatusOptions: '%order_filter_status_options%'
+          $paymentCardOptions: '%payment_card_options%'
+          $walletAmountOptions: '%wallet_amount_options%'
+          $walletThreshold: '%wallet_configs_threshold%'
+          $countryTaxList: '%order_country_tax%'
+          $pictureStatusOptions: '%picture_status_options%'
+          $orderDeliveryTimeUnit: '%order_delivery_unit_time_options%'
+          $paramsValidationType: '%params_validation%'
+        autowire:         true         # Automatically injects dependencies in your services.
+        autoconfigure:    true         # Automatically registers your services as commands, event subscribers, etc.
+        public:           false        # Allows optimizing the container by removing unused services; this also means
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource:         '%kernel.project_dir%/src/*'
+        exclude:          '%kernel.project_dir%/src/{Entity,Utils,Exception,Events,Migrations,Tests,Kernel.php,FPDF}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource:         '%kernel.project_dir%/src/Controller'
+        tags:             ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    # validation
+    App\EventListener\ExceptionListener:
+      arguments: ['@serializer', '@monolog.logger.immosquare_api_channel', '%exception_listener%']
+      tags:
+      - { name: kernel.event_listener, event: kernel.exception }

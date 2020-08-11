@@ -1,0 +1,7 @@
+# emmo_test.field_renovation_type
+-
+  id: 1
+  type_name: "Mur"
+-
+  id: 2
+  type_name: "Sol"

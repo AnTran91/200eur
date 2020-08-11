@@ -1,0 +1,61 @@
+# emmo_test.field_group_retouch
+-
+  field_group_id: 5
+  retouch_id: 1
+-
+  field_group_id: 5
+  retouch_id: 2
+-
+  field_group_id: 5
+  retouch_id: 6
+-
+  field_group_id: 5
+  retouch_id: 7
+-
+  field_group_id: 7
+  retouch_id: 2
+-
+  field_group_id: 9
+  retouch_id: 8
+-
+  field_group_id: 10
+  retouch_id: 5
+-
+  field_group_id: 10
+  retouch_id: 8
+-
+  field_group_id: 11
+  retouch_id: 5
+-
+  field_group_id: 12
+  retouch_id: 9
+-
+  field_group_id: 13
+  retouch_id: 2
+-
+  field_group_id: 14
+  retouch_id: 1
+-
+  field_group_id: 14
+  retouch_id: 6
+-
+  field_group_id: 14
+  retouch_id: 7
+-
+  field_group_id: 15
+  retouch_id: 1
+-
+  field_group_id: 15
+  retouch_id: 5
+-
+  field_group_id: 15
+  retouch_id: 6
+-
+  field_group_id: 15
+  retouch_id: 7
+-
+  field_group_id: 15
+  retouch_id: 8
+-
+  field_group_id: 16
+  retouch_id: 6

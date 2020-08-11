@@ -1,0 +1,47 @@
+{% trans_default_domain 'admin' %}
+
+{% form_theme form with['_shared_components/form_layout.html.twig', '_shared_components/form_switch_layout.html.twig'] %}
+
+{{ form_start(form) }}
+<div class="card">
+  <div class="card-header">
+    <strong>{{'admin.delivery_time.delivery_time'|trans}}</strong>
+    <div class="card-options">
+        {{ form_widget(form.appType) }}
+    </div>
+  </div>
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+          <div class="card-alert alert alert-success mb-0">
+            <i class="fe fe-bell mr-2" aria-hidden="true"></i>
+              {{ message }}
+          </div>
+        {% endfor %}
+    {% endfor %}
+  <div id="dynamic-body" class="card-body">
+    <div class="form-row">
+      <div class="col-md-5 mb-3">
+          {{ form_row(form.time) }}
+      </div>
+      <div class="col-md-5 mb-3">
+          {{ form_row(form.unit) }}
+      </div>
+
+    </div>
+    {% if (form.orderDeliveryCode is defined) %}
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+          {{ form_row(form.orderDeliveryCode) }}
+      </div>
+    </div>
+    {% endif %}
+    {{ form_rest(form) }}
+  </div>
+  <div class="card-footer">
+    <div class=" text-right">
+      <a href="{{ path('admin_delivery_time_list') }}" class="btn btn-link">{{ button_label|default('admin.link.back'|trans) }}</a>
+      <button type="submit" class="btn btn-primary ml-auto">{{ button_label|default('admin.form.save'|trans) }}</button>
+    </div>
+  </div>
+</div>
+{{ form_end(form) }}

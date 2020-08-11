@@ -1,0 +1,33 @@
+#####################################################
+#                                                   #
+#        Doctrine Extension configuration           #
+#                                                   #
+#####################################################
+services:
+  gedmo.listener.softdeleteable:
+      class: Gedmo\SoftDeleteable\SoftDeleteableListener
+      tags:
+          - { name: doctrine.event_subscriber, connection: default }
+      calls:
+          - [ setAnnotationReader, [ "@annotation_reader" ] ]
+  gedmo.listener.translatable:
+      class: Gedmo\Translatable\TranslatableListener
+      tags:
+          - { name: doctrine.event_subscriber, connection: default }
+      calls:
+          - [ setAnnotationReader, [ "@annotation_reader" ] ]
+          - [ setDefaultLocale, [ "%default_locale%" ] ]
+          - [ setTranslatableLocale, [ "%default_locale%" ] ]
+          - [ setTranslationFallback, [ true ] ]
+  gedmo.listener.loggable:
+        class: Gedmo\Loggable\LoggableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+  gedmo.listener.sortable:
+        class: Gedmo\Sortable\SortableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]

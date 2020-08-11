@@ -1,0 +1,88 @@
+<article id="js-picture-card-{{ orderDetail.id }}" class="js-picture-card command-card {% if orderDetail.returnedPicture.status == constant('\\App\\Entity\\Picture::REFUSED') %}command-card-disabled{% endif %}">
+  <header class="pb-4">
+    <h4>{{ orderDetail.picture.pictureName }} <small>({{ orderDetail.retouch.title|upper }})</small></h4>
+  </header>
+  <div class="image-check-container">
+    {# <a href="{{ orderDetail.returnedPicture.picturePath }}" class="image-check js-img-popup">
+      <img src="{{ orderDetail.returnedPicture.picturePathThumb }}">
+    </a> #}
+    {% if orderDetail.returnedGifPicture is not null and orderDetail.returnedGifPicture.status == constant('\\App\\Entity\\Picture::VALIDATED') %}
+      <a href="{{ orderDetail.returnedPicture.picturePath }}" class="image-check js-img-popup">
+        <img src="{{ orderDetail.returnedPicture.picturePathThumb }}">
+      </a>
+    {% else %}
+      <a href="{{ orderDetail.returnedPicture.watermarkedPicturePath }}" class="image-check js-img-popup">
+        <img src="{{ orderDetail.returnedPicture.picturePathThumb }}">
+      </a>
+    {% endif %}
+    <div class="text-center">
+      <span class="small-text">{{ orderDetail.returnedPicture.pictureName }}</span>
+      {% if orderDetail.returnedPicture.status == constant('\\App\\Entity\\Picture::VALIDATED') %}
+        <span class="pr-2 pl-2">|</span>
+        <a target="_blank" href="{{ orderDetail.returnedPicture.picturePath }}" download="{{ orderDetail.returnedPicture.pictureName }}" class="small-text small-link">{{ 'orders.verify.download'|trans }}</a>
+      {% endif %}
+    </div>
+    {# MP4 #}
+    {# <a href="{{ orderDetail.returnedMP4Picture.picturePath }}" class="image-check js-img-popup">
+      <iframe src="{{ orderDetail.returnedMP4Picture.picturePathThumb }}" frameborder="0" allowfullscreen></iframe>
+    </a> #} 
+    {% if orderDetail.returnedMP4Picture is not null and orderDetail.returnedMP4Picture.picturePath is not null %}
+      {% if orderDetail.returnedMP4Picture.status == constant('\\App\\Entity\\Picture::VALIDATED') %}
+        <div class="show-vimeo">
+          <a href="{{ orderDetail.returnedMP4Picture.picturePath }}" class="popup-vimeo image-check">
+          </a>
+          <iframe src="{{ orderDetail.returnedMP4Picture.picturePathThumb }}" frameborder="0"></iframe>
+        </div>
+        
+      {% else %}
+        <div class="show-vimeo">
+          <a class="popup-vimeo image-check" href="{{orderDetail.returnedMP4Picture.watermarkedPicturePath}}"></a>
+          <iframe src="{{ orderDetail.returnedMP4Picture.picturePathThumb }}" frameborder="0"></iframe>
+        </div>
+      {% endif %}
+      <div class="text-center">
+        <span class="small-text">{{ orderDetail.returnedMP4Picture.pictureName }}</span>
+        {% if orderDetail.returnedMP4Picture.status == constant('\\App\\Entity\\Picture::VALIDATED') %}
+          <span class="pr-2 pl-2">|</span>
+          <a target="_blank" href="{{ orderDetail.returnedMP4Picture.picturePath }}" download="{{ orderDetail.returnedMP4Picture.pictureName }}" class="small-text small-link">{{ 'orders.verify.download'|trans }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if orderDetail.returnedGifPicture is not null and orderDetail.returnedGifPicture.picturePath is not null %}
+      {# <a href="{{ orderDetail.returnedGifPicture.picturePathThumb }}" class="image-check js-img-popup">
+          <img src="{{ orderDetail.returnedGifPicture.picturePathThumb }}">
+      </a> #}
+      {% if orderDetail.returnedGifPicture.status == constant('\\App\\Entity\\Picture::VALIDATED') %}
+        <a href="{{ orderDetail.returnedGifPicture.picturePath }}" class="image-check js-img-popup">
+          <img src="{{ orderDetail.returnedGifPicture.picturePathThumb }}">
+        </a>
+      {% else %}
+        <a href="{{ orderDetail.returnedGifPicture.watermarkedPicturePath }}" class="image-check js-img-popup">
+          <img src="{{ orderDetail.returnedGifPicture.picturePathThumb }}">
+        </a>
+      {% endif %}
+      <div class="text-center">
+        <span class="small-text">{{ orderDetail.returnedGifPicture.pictureName }}</span>
+        {% if orderDetail.returnedGifPicture.status == constant('\\App\\Entity\\Picture::VALIDATED') %}
+          <span class="pr-2 pl-2">|</span>
+          <a target="_blank" href="{{ orderDetail.returnedGifPicture.picturePath }}" download="{{ orderDetail.returnedGifPicture.pictureName }}" class="small-text small-link">{{ 'orders.verify.download'|trans }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if orderDetail.returnedPicture.status == constant('\\App\\Entity\\Picture::AWAITING_FOR_VERIFICATION') %}
+      <div class="js-picture-verify">
+        <div class="text-center pt-3">
+          <a href="#" data-picture-detail-id="{{ orderDetail.id }}" data-token="{{ csrf_token('picture_confirm' ~ orderDetail.returnedPicture.id)}}" data-id="{{ orderDetail.returnedPicture.id }}" class="js-confirm-picture confirm-link">
+            <i class="fas fa-check"></i>
+            {{ 'orders.verify.confirm'|trans }}
+          </a>
+          <a href="#" data-picture-detail-id="{{ orderDetail.id }}" data-id="{{ orderDetail.returnedPicture.id }}" class="js-refuse-picture refuse-link">
+            <i class="fas fa-times"></i>
+            {{ 'orders.verify.refuse'|trans }}
+          </a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.1/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="tests/bootstrap.php"
+>
+    <php>
+        <ini name="error_reporting" value="-1" />
+        <!-- ###+ beelab/recaptcha2-bundle ### -->
+        <env name="APP_RECAPTCHA_SITE_KEY" value="6Ldn8VQUAAAAALYqXyVTAr4P1hl3oFfUdnd_uLZd"/>
+        <env name="APP_RECAPTCHA_SECRET" value="6Ldn8VQUAAAAAL9TXmDwOBCe_1bnL8QRD3q9ImRK"/>
+        <!-- ###- beelab/recaptcha2-bundle ### -->
+
+        <!-- ###+ symfony/framework-bundle ### -->
+        <env name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="APP_DEBUG" value="1" />
+        <env name="SHELL_VERBOSITY" value="-1" />
+        <env name="APP_ENV" value="test"/>
+        <env name="APP_SECRET" value="fb3de83a29d6b536e56a99baa53a0d6f"/>
+        <!-- env name="TRUSTED_PROXIES" value="127.0.0.1,127.0.0.2" -->
+        <!-- env name="TRUSTED_HOSTS" value="localhost,example.com" -->
+        <!-- define your env variables for the test env here -->
+        <env name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
+        <!-- ###- symfony/framework-bundle ### -->
+
+        <!-- ###+ doctrine/doctrine-bundle ### -->
+        <!-- Format described at http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url -->
+        <!-- For an SQLite database, use: "sqlite:///%kernel.project_dir%/var/data.db" -->
+        <!-- Configure your db driver and server_version in config/packages/doctrine.yaml -->
+        <env name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/tests/Resources/db/app.db"/>
+        <!-- ###- doctrine/doctrine-bundle ### -->
+
+        <!-- ###+ symfony/swiftmailer-bundle ### -->
+        <!-- For Gmail as a transport, use: "gmail://username:password@localhost" -->
+        <!-- For a generic SMTP server, use: "smtp://localhost:25?encryption=&auth_mode=" -->
+        <!-- Delivery is disabled by default via "null://localhost" -->
+        <env name="MAILER_URL" value="smtp://smtp.sendgrid.net:587?encryption=tls&username=simatai&password=$$simatai2017!!"/>
+        <!-- ###- symfony/swiftmailer-bundle ### -->
+
+        <!-- ###+ sentry/sentry-symfony ### -->
+        <env name="SENTRY_DSN" value="http://15218a58ef55411389dde1c5e23b31ee:5b9abc181e45427ea63ddc3fbad02735@sentry.theghouls.io/9"/>
+        <!-- ###- sentry/sentry-symfony ### -->
+    </php>
+
+    <testsuites>
+        <testsuite name="Functional Tests">
+            <directory>tests/FunctionalTests</directory>
+        </testsuite>
+    </testsuites>
+
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory>tests/UnitTests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>./src/</directory>
+        </whitelist>
+    </filter>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
+</phpunit>

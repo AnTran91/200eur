@@ -1,0 +1,26 @@
+{% trans_default_domain 'admin' %}
+
+  {{ form_start(form) }}
+<div class="card">
+  <div class="card-header">
+    <strong>{{ title }}</strong>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-8">
+        {{ form_row(form.name) }}
+        {{ form_row(form.owner) }}
+      </div>
+      <div class="col-md-4 border-left">
+        {{ form_row(form.registrationCode)}}
+      </div>
+    </div>
+    {{ form_row(form.agencies) }}
+    {{ form_row(form.employees) }}
+  </div>
+  <div class="card-footer text-right">
+    <a href="{{ path('network_index') }}" class="btn btn-link">{{ button_label|default('admin.link.back'|trans) }}</a>
+    <button type="submit" class="btn btn-primary ml-auto">{{ button_label|default('admin.form.save'|trans) }}</button>
+  </div>
+</div>
+{{ form_end(form) }}

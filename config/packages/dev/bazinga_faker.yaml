@@ -1,0 +1,7 @@
+bazinga_faker:
+    orm: doctrine
+    entities:
+        App\Entity\Params:
+            custom_formatters:
+                id: { method: randomElement }
+                paramKey: { method: randomElement, parameters: [ [ 'font', 'color', 'format' ] ] }

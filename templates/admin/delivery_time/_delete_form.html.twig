@@ -1,0 +1,5 @@
+<form class="item" method="post" action="{{ path('admin_delivery_time_delete', {'id': deliveryTime.id}) }}">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ deliveryTime.id) }}">
+    <button class="btn delete-btn  js-confirm-alert"><i class="zmdi zmdi-delete"></i></button>
+</form>

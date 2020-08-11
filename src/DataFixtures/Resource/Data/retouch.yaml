@@ -1,0 +1,91 @@
+# emmo_test.retouch
+-
+  id: 1
+  title: "PERTINENCE 360°"
+  description: "<p>Pour les photos d’intérieur.</p><p>Rangement virtuel :</p><p>- Nous rangeons les effets personnels,</p><p>- Nous équilibrons chromie &amp; lumière, </p><p>- Nous récupérons les vues extérieures.</p><p>- Pas de correction des distorsions optiques.</p>"
+  order_number: 3
+  app_type: "application.type.emmobilier"
+-
+  id: 2
+  title: "PHOTO-STAGING 2D"
+  description: "<p>Vider / rénover</p><p>- Nous vidons intégralement la pièce, Nous enlevons les rideaux uniquement quand la vue extérieure et les huisseries sont visibles, pour reconstituer.</p><p>- Nous rénovons sols, murs et plafonds, suivant vos demandes, celles de vos clients ou des échantillons présélectionnés.</p><p>- Vous pouvez désormais vous projeter dans le bien actuel, vidé de son contenu, avec vos futurs choix de couleur et de matière.</p>"
+  order_number: 6
+  app_type: "application.type.emmobilier"
+-
+  id: 3
+  title: "ÉQUILIBRAGE"
+  description: "<p>Le contenu de votre photo est bon, mais le rendu de l’image insatisfaisant :</p><p>* Nous équilibrons la chromie, la lumière.</p><p>* Nous corrigeons les distorsions optiques.</p><p>* Nous récupérons (débouchons) les vues extérieures.</p><p>* Le contenu de l’image n’est pas retouché.</p>"
+  order_number: 5
+  app_type: "application.type.emmobilier"
+-
+  id: 5
+  title: "PHOTO-STAGING VIRTUEL"
+  description: ""
+  order_number: 7
+  app_type: "application.type.emmobilier"
+-
+  id: 6
+  title: "PERTINENCE « INTÉRIEUR »"
+  description: "<p>Pour les photos d’intérieur.</p><p>Rangement et désencombrement virtuels :</p><p>- Nous rangeons les effets personnels,</p><p>- Nous désencombrons l’agencement intérieur,</p><p>- Nous équilibrons chromie &amp; lumière,</p><p><span style=\"font-size: 0.9375rem;\">- Nous corrigeons les distorsions optiques,</span></p><p><span style=\"font-size: 0.9375rem;\">- Nous récupérons les vues extérieures.</span><br></p><p><span style=\"font-size: 0.9375rem;\">Cette prestation a ses limites, elle nécessite de pouvoir reconstituer les matières, les formes, le style, le design du mobilier …</span><br></p>"
+  order_number: 1
+  app_type: "application.type.emmobilier"
+-
+  id: 7
+  title: "PERTINENCE « EXTÉRIEUR »"
+  description: "<p>Pour les photos d’extérieur.Rangement et désencombrement virtuels :</p><p>- Nous rangeons les effets personnels,</p><p>- Nous désencombrons l’agencement extérieur,</p><p>- Nous équilibrons chromie &amp; lumière, </p><p>- Nous corrigeons les distorsions optiques,</p>"
+  order_number: 2
+  app_type: "application.type.emmobilier"
+-
+  id: 8
+  title: "AMÉNAGEMENT « EXTÉRIEUR »"
+  description: "<p>Pour les photos d’extérieur.</p><p>-    Nous aménageons vos espaces extérieurs suivant vos demandes,</p><p>-    Nous créons les pelouses inexistantes,</p><p>-    Nous agrémentons vos espaces d’ornementation florale, d’arbustes,</p><p>-    Nous incrustons les mobiliers de jardin,</p><p>-    Nous travaillons les façades des biens,</p>"
+  order_number: 4
+  app_type: "application.type.emmobilier"
+-
+  id: 9
+  title: "AMBIANCE de CRÉPUSCULE"
+  description: "<p>Photos d’extérieur.</p><p>Pour des ambiances raffinées, ou cosy de fin de journée.</p><p>-    Nous appliquons un ciel de tombée du jour,</p><p>-    Nous adaptons la chromie aux reflets : vitrages, rivières, fleuves, mers...</p><p>-    Nous allumons vos luminaires extérieurs,</p><p>-    Nous mettons en valeur vos piscines.</p>"
+  order_number: 9
+  app_type: "application.type.emmobilier"
+-
+  id: 10
+  title: "CIEL BLEU"
+  description: "<p>Météo à la grisaille, pluvieuse ou ciel fade ?</p><p>- Nous appliquons un ciel bleu de saison.</p><p>- Nous adaptons la chromie aux reflets : vitrages, rivières, fleuves, mers...</p><p>- Nous « séchons » les terrasses ou trottoirs...</p>"
+  retouch_code: "CIEL_BLEU"
+  app_type: "application.type.immosquare"
+-
+  id: 11
+  title: "CIEL BLEU 360°"
+  description: "<p>Météo à la grisaille, pluvieuse ou ciel fade ?</p><p>- Nous appliquons un ciel bleu de saison.</p><p>- Nous adaptons la chromie aux reflets : vitrages, rivières, fleuves, mers...</p><p>- Nous « séchons » les terrasses ou trottoirs...</p>"
+  order_number: 8
+  app_type: "application.type.emmobilier"
+-
+  id: 12
+  title: "PERTINENCE « INTÉRIEUR »"
+  description: "<p>Pour les photos d’intérieur.</p><p>Rangement et désencombrement virtuels :</p><p>- Nous rangeons les effets personnels,</p><p><span style=\"font-size: 0.9375rem;\">- Nous désencombrons l’agencement intérieur,</span><br></p><p>- Nous équilibrons chromie &amp; lumière,</p><p>- Nous corrigeons les distorsions optiques,</p><p>- Nous récupérons les vues extérieures.</p><p>Cette prestation a ses limites, elle nécessite de pouvoir reconstituer les matières, les formes, le style, le design du mobilier …</p>"
+  retouch_code: "PERTINENCE_INTERIEUR"
+  app_type: "application.type.immosquare"
+-
+  id: 13
+  title: "PERTINENCE « EXTÉRIEUR »"
+  description: "<p>Pour les photos d’extérieur.&nbsp;<span style=\"font-size: 0.9375rem;\">Rangement et désencombrement virtuels :</span></p><p>- Nous rangeons les effets personnels,</p><p>- Nous désencombrons l’agencement extérieur,</p><p>- Nous équilibrons chromie &amp; lumière,</p><p>- Nous corrigeons les distorsions optiques,</p>"
+  retouch_code: "PERTINENCE_EXTERIEUR"
+  app_type: "application.type.immosquare"
+-
+  id: 14
+  title: "PHOTO-STAGING 2D"
+  description: "<p>Vider / rénover</p><p><span style=\"font-size: 0.9375rem;\">- Nous vidons intégralement la pièce, Nous enlevons les rideaux uniquement quand la vue extérieure et les huisseries sont visibles, pour reconstituer.</span></p><p>- Nous rénovons sols, murs et plafonds, suivant vos demandes, celles de vos clients ou des échantillons présélectionnés.</p><p>Vous pouvez désormais vous projeter dans le bien actuel, vidé de son contenu, avec vos futurs choix de couleur et de matière.</p>"
+  retouch_code: "PHOTO_STAGING_2D"
+  app_type: "application.type.immosquare"
+-
+  id: 15
+  title: "ÉQUILIBRAGE"
+  description: "<p>Le contenu de votre photo est bon, mais le rendu de l’image insatisfaisant :</p><p>* Nous équilibrons la chromie, la lumière.</p><p>* Nous corrigeons les distorsions optiques.</p><p>* Nous récupérons (débouchons) les vues extérieures.</p><p>* Le contenu de l’image n’est pas retouché.</p>"
+  retouch_code: "EQUILIBRAGE"
+  app_type: "application.type.immosquare"
+-
+  id: 16
+  title: "CIEL BLEU"
+  description: "<p>Météo à la grisaille, pluvieuse ou ciel fade ?</p><p>-    Nous appliquons un ciel bleu de saison.</p><p>-    Nous adaptons la chromie aux reflets : vitrages, rivières, fleuves, mers...</p><p>-    Nous « séchons » les terrasses ou trottoirs...</p>"
+  order_number: 10
+  app_type: "application.type.emmobilier"

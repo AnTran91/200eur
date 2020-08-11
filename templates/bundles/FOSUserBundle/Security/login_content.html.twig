@@ -1,0 +1,72 @@
+<div class="col-md-4 form-container">
+  <form novalidate="novalidate" action="{{ path('fos_user_security_check') }}" method="post">
+    {% if csrf_token %}
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+    {% endif %}
+
+    <div class="form-group">
+      <label for="username">{% trans from "FOSUserBundle" %}security.login.username{% endtrans %}</label>
+      <input type="text" class="form-control form-input lt-input" id="username" name="_username" value="{{ last_username }}" required="required">
+    </div>
+
+    <div class="form-group">
+      <label for="password">{% trans from "FOSUserBundle" %}security.login.password{% endtrans %}</label>
+      <input type="password" class="form-control form-input lt-input" id="password" name="_password" required="required">
+    </div>
+    <div class="center-login">
+
+      <div class="remember-me">
+        <label for="remember_me" class="control-login control--checkbox boxy-text-color">
+          <input type="checkbox" id="remember_me" name="_remember_me"/>
+          {% trans from "FOSUserBundle" %}security.login.remember_me{% endtrans %}
+          <div class="control__indicator"></div>
+        </label>
+      </div>
+
+      <button type="submit" id="_submit" name="_submit" class="btn btn-prime">{% trans from "FOSUserBundle" %}security.login.submit{% endtrans %}</button>
+
+      <div class="password-lost">
+        <a href="{{ path('fos_user_resetting_request') }}">{{ 'login.help.forgot_password'|trans }}</a>
+        <p>{{ 'login.help.create_accout'|trans }}
+          <a href="{{ path('fos_user_registration_register') }}">{{ 'login.create_accout'|trans }}</a>
+        </p>
+      </div>
+
+    </div>
+  </form>
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal body -->
+        <div class="container-fluid">
+          <div class="row">
+            <div class="modal-body col-sm-8">
+              <h5 class="modal-title">{{ title | raw }}</h5>
+              <p>{{ content | raw }}</p>
+            </div>
+            <div class="logo-container center-login col-sm-4">
+              <img src="{{ asset('emmobilier-logo.png', 'local_icons') }}" class="logo-img"/>
+            </div>
+          </div>
+        </div>
+        <button class="close-popup">x</button>
+        
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var show = '{{ show }}';
+    $(window).on('load',function(){
+      // console.log('show: ', show);
+      if (show){
+        $('#myModal').modal('show');
+      }
+    });
+    $('button.close-popup').click(function(){
+      $('#myModal').modal("hide");
+    });
+  </script>
+</div>

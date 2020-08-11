@@ -1,0 +1,45 @@
+{% trans_default_domain 'admin' %}
+
+<!-- FILTER FORM -->
+{{ form_start(filter_form) }}
+<div class="card m-0">
+  <div class="card-header">
+    <h3 class="card-title">{{'admin.invoice.invoices_filter'|trans}}</h3>
+    <div class="card-options">
+      <a href="#" class="card-options-collapse" data-toggle="card-collapse">
+        <i class="fas fa-chevron-up"></i>
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        {{ form_row(filter_form.invoiceNumber) }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form_row(filter_form.creationDate) }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form_row(filter_form.type) }}
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        {{ form_row(filter_form.client) }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form_row(filter_form.organization) }}
+      </div>
+    </div>
+    {{ form_widget(filter_form) }}
+  </div>
+  <div class="card-footer">
+    <div class="float-right">
+      <button type="submit" class="btn btn-primary">{{ 'admin.form.filter'|trans }}</button>
+      <a id="js-clear-paginator" href="#" class="btn btn-danger">{{ 'admin.form.reset'|trans }}</a>
+    </div>
+  </div>
+</div>
+{{ form_end(filter_form) }}
+<!-- END FILTER FORM -->

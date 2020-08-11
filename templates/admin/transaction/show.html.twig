@@ -1,0 +1,104 @@
+{% extends 'admin/base.html.twig' %}
+{% trans_default_domain 'admin' %}
+{% block title %}{{ 'admin.transaction.transaction'|trans }}
+{% endblock %}
+
+{% block content %}
+    <!-- BREADCRUMB-->
+    <section class="au-breadcrumb m-t-75">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="au-breadcrumb-content">
+                            <div class="au-breadcrumb-left">
+                                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                    <li class="list-inline-item active">
+                                        <a href="{{ path('admin_transaction_index') }}"><i
+                                                    class="fe fe-home"></i> {{ 'admin.transaction.transaction_list'|trans }}
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item seprate">
+                                        <span>/</span>
+                                    </li>
+                                    <li class="list-inline-item">{{ 'admin.transaction.transaction_show'|trans({"%id%" : transaction.transactionNumber }) }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END BREADCRUMB-->
+
+    <section class="form-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        {% include 'admin/transaction/_user_info.html.twig' with {'user': transaction.client} %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">
+                                    {{ 'admin.transaction.transaction_show'|trans }}
+                                </strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-top-campaign">
+                                        <tbody>
+                                        <tr>
+                                            <td>{{ 'admin.transaction.amount'|trans }}</td>
+                                            <td>{{ transaction.amount }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ 'admin.common.date'|trans }}</td>
+                                            <td>{{ transaction.date ? transaction.date|date('d-m-Y H:i:s') : '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ 'admin.transaction.number'|trans }}</td>
+                                            <td>{{ transaction.transactionNumber }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ 'admin.common.status'|trans }}</td>
+                                            <td>{{ transaction.status }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ 'admin.transaction.card_number'|trans }}</td>
+                                            <td>{{ transaction.cardNumber }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ 'admin.transaction.card_brand'|trans }}</td>
+                                            <td>{% if (transaction.cardBrand is not empty) %} <i
+                                                        class="payment payment-{{ transaction.cardBrand|lower }}"></i> {% endif %}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">
+                            {{ 'admin.transaction.log_response'|trans }}
+                        </strong>
+                    </div>
+                    <div class="card-body o-auto" style="height: 20rem">
+                        {% for key, response in transaction.logResponse %}
+                            <p class="text-wrap"> <span class="leading-tight">{{ key }}</span> : <span>{{ response }}</span></p>
+                        {% else %}
+                            <p class="text-wrap">{{ 'admin.transaction.log_response_not_found'|trans }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

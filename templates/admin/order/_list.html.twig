@@ -1,0 +1,89 @@
+{% trans_default_domain 'admin' %}
+
+{% for order in orders %}
+  <tr class="{% if order.deletedAt is not null %}text-danger{% endif %}">
+    <td>
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input js-select-ids" name="id[]" value="{{ order.id }}">
+        <span class="custom-control-label"></span>
+      </label>
+    </td>
+    <td>
+      {% if order.orderNumber %}
+        <a href="{{ path('admin_order_show', {'id': order.id}) }}">{{ "#%06s"|format(order.orderNumber) }}</a>
+      {% else %}
+        {{order.creationDate|time_ago_in_words}}
+      {% endif %}
+    </td>
+    <td>
+      <span class="badge badge-default">
+        {% if order is waiting_for_payment %}
+          {{ order.creationDate ? order.creationDate|date('d/m/Y H:i:s') : '' }}
+        {% else %}
+          {{ order.paymentDate ? order.paymentDate|date('d/m/Y H:i:s') : order.creationDate ? order.creationDate|date('d/m/Y H:i:s') : '' }}
+        {% endif %}
+      </span>
+    </td>
+    <td>
+      <div>{{ order.client.fullName }}</div>
+      <div class="small text-muted">
+        <span class="status-icon bg-success"></span> {{ order.client.lastLogin is null ? order.client.createdAt|time_ago_in_words : order.client.lastLogin|time_ago_in_words }}
+      </div>
+    </td>
+    <td>
+      <span class="badge {% if order is waiting_for_payment %}bg-orange{% elseif order is completed %}bg-green{% elseif order is in_production %}bg-red{% elseif order is awaiting_for_client_response %}bg-red{% elseif order is valid %}badge-info{% else %}bg-cyan{% endif %}">{{ order.orderStatus|trans }}</span></td>
+    <td>
+      {% if order.deliveryTime is not null %}
+        {{ order.deliveryTime.time ~ " " ~ order.deliveryTime.unit|trans }}
+      {% endif %}
+    </td>
+    <td>{{ order.pictures|length }}</td>
+    <td>
+      <span class="badge badge-info">{{ (order.totalAmount - order.totalReductionAmount)|price }}</span></td>
+    <td>{{ order.production.country|default('') }}</td>
+    <td>{{ order.affectedTo.getFormattedFullName()|default('') }}</td>
+    <td>
+      <i class="zmdi zmdi-mail-send zmdi-hc-fw {% if order.sendEmail %} text-success {% else %} text-danger {% endif %}"></i>
+    </td>
+    <td>
+      <div class="dropdown">
+        <button class="btn btn-sm btn-secondary dropdown-toggle {% if order.deletedAt is not null %}disabled{% endif %}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ 'admin.common.actions'|trans }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <a href="{{ path('admin_order_show', {'id': order.id}) }}" class="dropdown-item item" title="{{ 'admin.order.actions.show'|trans }}">
+            <i class="zmdi zmdi-eye"></i>
+            {{ 'admin.order.actions.show'|trans }}
+          </a>
+          <a href="{{ path('admin_order_edit', {'id': order.id}) }}" class="dropdown-item item" title="{{ 'admin.order.actions.edit'|trans }}">
+            <i class="fe fe-edit mr-1"></i>
+            {{ 'admin.order.actions.edit'|trans }}
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="{{ path('admin_order_todo_zip', {'id': order.id}) }}" class="dropdown-item item" title="{{ 'admin.order.actions.download_zip'|trans }}">
+            <i class="zmdi zmdi-download"></i>
+            {{ 'admin.order.actions.download_zip'|trans }}
+          </a>
+          {% for invoice in order.invoices %}
+            <a href="{{ path('admin_invoice_download', {'id': invoice.id}) }}"  class="dropdown-item item" title="{{ 'admin.order.actions.view_additional_invoice'|trans }}">
+              <i class="zmdi zmdi-collection-pdf"></i>
+                {% if invoice is additional %}
+                    {{ 'admin.order.actions.view_additional_invoice'|trans }}
+                {% elseif invoice is monthly_per_organization %}
+                    {{ 'admin.order.actions.view_monthly_organization_invoice'|trans }}
+                {% elseif invoice is monthly_per_user %}
+                    {{ 'admin.order.actions.view_monthly_user_invoice'|trans }}
+                {% else %}
+                    {{ 'admin.order.actions.view_invoice'|trans }}
+                {% endif %}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </td>
+  </tr>
+{% else %}
+  <tr class="odd">
+    <td valign="top" colspan="12" class="text-center">{{ 'admin.paginator.empty_table'|trans|raw }}</td>
+  </tr>
+{% endfor %}

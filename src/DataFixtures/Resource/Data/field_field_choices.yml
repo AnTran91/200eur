@@ -1,0 +1,31 @@
+# emmo_test.field_field_choices
+-
+  field_id: 1
+  field_choices_id: 1
+-
+  field_id: 1
+  field_choices_id: 2
+-
+  field_id: 4
+  field_choices_id: 3
+-
+  field_id: 4
+  field_choices_id: 4
+-
+  field_id: 5
+  field_choices_id: 5
+-
+  field_id: 5
+  field_choices_id: 6
+-
+  field_id: 5
+  field_choices_id: 7
+-
+  field_id: 5
+  field_choices_id: 10
+-
+  field_id: 10
+  field_choices_id: 8
+-
+  field_id: 10
+  field_choices_id: 9

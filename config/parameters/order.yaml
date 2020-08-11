@@ -1,0 +1,65 @@
+#####################################################
+#                                                   #
+#        OrderCreation configuration                        #
+#                                                   #
+#####################################################
+parameters:
+  ## form configuration
+  # order type
+  order_types:
+    order.type.emmobilier: order.type.emmobilier
+    order.type.immosquare: order.type.immosquare
+  # tax
+  order_country_tax:
+    options:
+        - { country: FR, rate: 20 }
+    default_rate: 00 # default calcule 1 * totalPrice
+  # order status
+  order_filter_status_options:
+    order.status.in_production: order.status.in_production
+    order.status.awaiting_for_payment: order.status.awaiting_for_payment
+    order.status.awaiting_for_client_response: order.status.awaiting_for_client_response
+#    order.status.awaiting_complete_by_client: order.status.awaiting_complete_by_client
+    order.status.send_to_client: order.status.send_to_client
+    order.status.delivery_short_time_ready: order.status.delivery_short_time_ready
+    order.status.completed: order.status.completed
+    order.status.partially_completed: order.status.partially_completed
+    order.status.declined_by_production: order.status.declined_by_production
+    order.status.error_cb: order.status.error_cb
+    order.status.approvisionnement_tirelire: order.status.approvisionnement_tirelire
+
+  order_status_options:
+    order.status.error_cb: order.status.error_cb
+#   order.status.pending: order.status.pending
+    order.status.awaiting_for_client_response: order.status.awaiting_for_client_response
+#   order.status.awaiting_for_payment: order.status.awaiting_for_payment
+    order.status.awaiting_for_verification: order.status.awaiting_for_verification
+    order.status.awaiting_for_verification_by_production: order.status.awaiting_for_verification_by_production
+#    order.status.awaiting_complete_by_client: order.status.awaiting_complete_by_client
+    order.status.partially_completed: order.status.partially_completed
+    order.status.cancelled: order.status.cancelled
+    order.status.cancelled_and_refound: order.status.cancelled_and_refound
+    order.status.cancelled_and_partially_refound: order.status.cancelled_and_partially_refound
+    order.status.declined_by_production: order.status.declined_by_production
+    order.status.declined_by_client: order.status.declined_by_client
+    order.status.in_production: order.status.in_production
+    order.status.completed: order.status.completed
+    order.status.approvisionnement_tirelire: order.status.approvisionnement_tirelire
+
+  order_admin_delivery_time:
+    - {24: 24, 48: 48}
+  # order delivery time
+  order_delivery_unit_time_options:
+    time.hour: time.hour
+    time.day: time.day
+    time.week: time.week
+    time.month: time.month
+    time.year: time.year
+  ## list of all order page
+  # order picture display number
+  picture_display_number: 3
+  # limit order per page
+  limit_order_per_page: 8
+  ## recap page
+  # default order time
+  default_order_time: 48

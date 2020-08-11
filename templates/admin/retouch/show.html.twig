@@ -1,0 +1,132 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{'admin.retouch.retouch'|trans}}
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('admin_retouch_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{ 'admin.retouch.retouches_list'|trans }}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                </ul>
+              </div>
+              <a href="{{ path('admin_retouch_edit', {'id': retouch.id}) }}" class="btn btn-pill btn-primary">
+                <i class="fe fe-edit mr-1"></i>{{'admin.form.edit'|trans}}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="form-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-header">
+            <strong class="card-title">
+              {{'admin.retouch.retouch'|trans }}:
+              {{ retouch.title }}
+            </strong>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="table-responsive">
+                  <table class="table table-top-campaign">
+                    <tbody>
+                      <tr>
+                        <td>{{'admin.retouch.title_fr'|trans}} ({{ 'language.fr'|trans }})</td>
+                        <td>{{ retouch.title }}</td>
+                      </tr>
+                      <tr>
+                        <td>{{'admin.retouch.description_en'|trans}} ({{ 'language.fr'|trans }})</td>
+                        <td>{{ retouch.description|raw }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-md-6 border-left">
+                <div class="table-responsive">
+                  <table class="table table-top-campaign">
+                    <tbody>
+                      <tr>
+                        <td>{{'admin.retouch.title_en'|trans}}</td>
+                        <td>
+                          {% if translations.title is defined and translations.title is not null %}
+                            {{ translations.title }}
+                          {% endif %}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>{{'admin.retouch.description_en'|trans}}</td>
+                        <td>
+                          {% if translations.description is defined and translations.description is not null %}
+                            {{ translations.description|raw }}
+                          {% endif %}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-md-12 border-top">
+                <div class="table-responsive">
+                  <table class="table table-top-campaign">
+                    <tbody>
+
+                      <tr>
+                        <td>{{'admin.retouch.order_number'|trans}}</td>
+                        <td>{{ retouch.orderNumber }}</td>
+                      </tr>
+                      <tr>
+                        <td>{{'admin.retouch.retouch_code'|trans}}</td>
+                        <td>{{ retouch.retouchCode }}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'admin.application.type'|trans }}</td>
+                        <td>{{ retouch.appType|trans }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3>{{'admin.retouch.pricings'|trans }}</h3>
+        <div class="row">
+          {% for pricing in retouch.pricings %}
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-body text-center">
+                  <div class="card-category">{{ 'admin.retouch.delivery'|trans({'%time' : pricing.orderDeliveryTime.time, '%unit': pricing.orderDeliveryTime.unit|trans}) }}</div>
+                  <div class="display-3 my-4">{{ pricing.price|price }}</div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

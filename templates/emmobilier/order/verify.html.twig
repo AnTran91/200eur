@@ -1,0 +1,68 @@
+{% extends 'emmobilier/base.html.twig' %}
+
+{% block title %}
+  {{ 'orders.title.verify'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent()}}
+  <!-- BEGIN PAGE STYLES -->
+  <link rel="stylesheet" href="{{ asset('css/all.css', 'fontawesome') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" />
+  <!-- END PAGE STYLES -->
+{% endblock %}
+
+{% block body %}
+  <section id="js-upload-section">
+    <section class="row main-title">
+      <div class="col-md-6">
+        <img src="{{ asset('icon_valider_image.svg', 'local_icons') }}" class="page-title-img">
+        <h2>{{ 'orders.title.verify'|trans }}</h2>
+      </div>
+    </section>
+
+    <section class="row lt-px-auto">
+      <div class="validation-info">
+        <p>
+          {{ 'orders.verify.sub_title'|trans|raw }}
+        </p>
+      </div>
+    </section>
+
+    <section class="row">
+      <article class="command-card">
+        {% include 'emmobilier/_shared_components/_order_verify.html.twig' with {
+          'order' : order
+        } %}
+      </article>
+    </section>
+
+    <section class="row">
+      {% for picture in order.pictures %}
+        {% for orderDetail in picture.pictureDetail if orderDetail.returnedPicture is not null and orderDetail.returnedPicture.picturePath is not null %}
+          {% include 'emmobilier/_shared_components/_picture_verify.html.twig' with {
+            'orderDetail' : orderDetail
+          } %}
+        {% endfor %}
+      {% endfor %}
+      {{ render(controller('App\\Controller\\Emmobilier\\PictureController::renderRefuseForm')) }}
+    </section>
+  </section>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <!-- START PAGE JS SCRIPTS -->
+  <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+  <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+  <script src="{{ asset('order-verify.js', 'local_js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+  <script>
+    (function($) {
+      var uploader = new OrderVerify({$wrapper: $("#js-upload-section"), validate_img_url: 'picture_confirm', refuse_img_url: 'picture_refuse', show_img_url: 'picture_detail_show'});
+    })(jQuery);
+  </script>
+  <!-- END PAGE JS SCRIPTS -->
+
+{% endblock %}

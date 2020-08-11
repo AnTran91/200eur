@@ -1,0 +1,14 @@
+<div id="accordion">
+  {% for retouch in retouchs %}
+    <div class="accordion" data-id="{{ retouch.id }}" data-uuid="{{ uuid }}">
+      <div class="accordion-header" id="js-heading-{{ retouch.id ~ "-" ~ uuid }}">
+        <a data-toggle="collapse" data-target="#js-collapse-{{ retouch.id ~ "-" ~ uuid }}" class="js-accordion-header collapsed" aria-expanded="true" aria-controls="js-collapse-{{ retouch.id ~ "-" ~ uuid }}">
+          {{ retouch.title|upper }}
+        </a>
+      </div>
+      <div id="js-collapse-{{ retouch.id ~ "-" ~ uuid }}" class="collapse" aria-labelledby="js-heading-{{ retouch.id ~ "-" ~ uuid }}" data-parent="#accordion">
+        <div class="accordion-content"></div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

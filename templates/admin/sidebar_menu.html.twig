@@ -1,0 +1,148 @@
+{% trans_default_domain 'admin' %}
+  <div class="logo">
+    <a href="#"  class="js-toggle-menu">
+      <img src="{{ asset('emmobilier-admin-logo.png', 'admin_images') }}"/>
+    </a>
+  </div>
+  <div class="menu-sidebar__content js-scrollbar1" id="js-sidebar-lg">
+    <nav class="navbar-sidebar2">
+      <div class="account2">
+        <div class="image img-cir img-120">
+          {% if app.user.imageName is not empty %}
+            <img class="side-menu-profile-img" src="{{ vich_uploader_asset(app.user, 'imageFile') }}"/>
+          {% else %}
+            <img class="side-menu-profile-img" src="{{ asset('default_profile.png', 'admin_images') }}"/>
+          {% endif %}
+        </div>
+        <h4 class="name">
+          {{ app.user.fullName()|trim|default(app.user.email) }}
+        </h4>
+      </div>
+      <ul class="list-unstyled navbar__list">
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <li class="has-sub">
+          <a class="js-arrow" href="#">
+            <i class="fas fa-tachometer-alt nav-elem"></i>
+            {{'admin.dashboard.dashboard_menu'|trans}}
+            <span class="arrow">
+              <i class="fas fa-angle-down"></i>
+            </span>
+          </a>
+          <ul class="list-unstyled navbar__sub-list js-sub-list">
+            <li>
+              <a href="{{ path('dashboard', {'app' : constant('App\\Entity\\ApplicationType::EMMOBILIER_TYPE')}) }}">
+                <i class="fas fa-tachometer-alt"></i>
+                {{'admin.dashboard.emmobilier'|trans}}
+              </a>
+            </li>
+            <li>
+              <a href="{{ path('dashboard', {'app' : constant('App\\Entity\\ApplicationType::IMMOSQUARE_TYPE')}) }}">
+                <i class="fas fa-tachometer-alt"></i>
+                {{'admin.dashboard.immosquare'|trans}}
+              </a>
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+        {% if is_granted('ROLE_ORDER_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('admin_order_index') }}">
+              <i class="fas fa-shopping-basket nav-elem"></i>{{'admin.order.order_menu'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_INVOICE_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('admin_invoice_index') }}">
+              <i class="fas fa-file-alt nav-elem"></i>{{'admin.invoice.invoice_menu'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_PROMO_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('admin_promo_index') }}">
+              <i class="fas fa-percent nav-elem"></i>{{'admin.promo.promo_menu'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_USER_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li class="has-sub">
+            <a class="js-arrow" href="#">
+              <i class="fas fa-users-cog"></i>
+              {{'admin.user.users_menu'|trans}}
+              <span class="arrow">
+                <i class="fas fa-angle-down"></i>
+              </span>
+            </a>
+            <ul class="list-unstyled navbar__sub-list js-sub-list">
+              <li>
+                <a href="{{ path('admin_user_index') }}">
+                  <i class="fas fa-users nav-elem"></i>{{'admin.user.user_menu'|trans}}</a>
+              </li>
+              <li>
+                <a href="{{ path('admin_group_index') }}">
+                  <i class="fas fa-user-shield"></i>{{'admin.group.group_menu'|trans}}</a>
+              </li>
+            </ul>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_AGENCY_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('agency_index') }}">
+              <i class="fas fa-store-alt nav-elem"></i>{{'admin.agency.agency_menu'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_NETWORK_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('network_index') }}">
+              <i class="fas fa-globe nav-elem"></i>{{'admin.network.network_menu'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_PRODUCTION_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('admin_production_index') }}">
+              <i class="fas fa-industry nav-elem"></i>{{'admin.production.production'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_HOLIDAYS_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('admin_holidays_index') }}">
+              <i class="fas fa-umbrella-beach nav-elem"></i>{{'admin.holidays.holiday_menu'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_DELIVERY_TIME_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('admin_delivery_time_list') }}">
+              <i class="fas fa-clock nav-elem"></i>{{'admin.delivery_time.delivery_time'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_RETOUCH_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('admin_retouch_index') }}">
+              <i class="fas fa-edit nav-elem"></i>{{'admin.retouch.retouch_menu'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('admin_field_group_index') }}">
+              <i class="fab fa-wpforms nav-elem"></i>{{'admin.param_form.param_form_menu'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_TRANSACTION_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('admin_transaction_index') }}">
+              <i class="fas fa-dollar-sign nav-elem"></i>{{'admin.transaction.transaction_menu'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_INVOICE_MANAGER')or is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('extract_index') }}">
+              <i class="fas fa-file-alt nav-elem"></i>{{'admin.extract.extract_menu'|trans}}</a>
+          </li>
+        {% endif %}
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+          <li>
+            <a href="{{ path('admin_announcement_check') }}">
+              <i class="fas fa-bullhorn nav-elem"></i>{{'admin.announcement.announcement'|trans}}</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>

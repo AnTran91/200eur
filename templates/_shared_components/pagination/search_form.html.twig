@@ -1,0 +1,10 @@
+{% trans_default_domain 'admin' %}
+
+<div class="float-right pb-3 clearfix">
+    <form class="form-header" method="GET" action="{{ url(route) }}">
+      <input class="au-input" type="text" name="search" placeholder="{{ 'admin.paginator.search'|trans|e('html')|raw }}">
+      <button class="btn btn-primary no-border-raduis" type="submit">
+        <i class="zmdi zmdi-search"></i>
+      </button>
+    </form>
+</div>

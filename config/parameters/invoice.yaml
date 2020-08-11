@@ -1,0 +1,24 @@
+#####################################################
+#                                                   #
+#        Invoice configuration                      #
+#                                                   #
+#####################################################
+parameters:
+    fpdf_config:
+        logoPath:                           '%kernel.project_dir%/public/fpdf/img/logo2.jpg'
+        media:                              '%kernel.project_dir%/public/invoices/files'
+    # user types
+    user_payment_type:
+        user.types.ordinary:                'user.types.ordinary'
+        user.types.monthly:                 'user.types.monthly'
+    # invoice types
+    payment_period:
+        invoice.types.organization_monthly: 'invoice.types.organization_monthly'
+        invoice.types.user_monthly:         'invoice.types.user_monthly'
+        invoice.types.ordinary:             'invoice.types.ordinary'
+        invoice.types.additional_invoice:   'invoice.types.additional_invoice'
+        invoice.types.wallet_invoice:       'invoice.types.wallet_invoice'
+        invoice.types.recharge_invoice:    'invoice.types.recharge_invoice'
+
+    # user monthly action name
+    monthly_type:                           'user.types.monthly'

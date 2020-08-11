@@ -1,0 +1,117 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{'admin.picture.pictures_list'|trans}}{% endblock %}
+
+{% block content %}
+<!-- BREADCRUMB-->
+<section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="au-breadcrumb-content">
+                        <div class="au-breadcrumb-left">
+                            <span class="au-breadcrumb-span">You are here:</span>
+                            <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                <li class="list-inline-item active">
+                                    <a href="#">Home</a>
+                                </li>
+                                <li class="list-inline-item seprate">
+                                    <span>/</span>
+                                </li>
+                                <li class="list-inline-item">Dashboard</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-pill btn-primary">
+                            <i class="fe fe-plus-circle"></i>add item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END BREADCRUMB-->
+
+<section class="list-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+                  <!-- DATA TABLE -->
+                  <h3 class="title-5 m-b-35">{{'admin.picture.pictures_list'|trans}}</h3>
+                  <div class="table-data__tool">
+                      <div class="table-data__tool-left">
+                          <div class="rs-select2--light rs-select2--md">
+                              <select class="js-select2" name="property">
+                                  <option selected="selected">All Properties</option>
+                                  <option value="">Option 1</option>
+                                  <option value="">Option 2</option>
+                              </select>
+                              <div class="dropDownSelect2"></div>
+                          </div>
+                          <div class="rs-select2--light rs-select2--sm">
+                              <select class="js-select2" name="time">
+                                  <option selected="selected">Today</option>
+                                  <option value="">3 Days</option>
+                                  <option value="">1 Week</option>
+                              </select>
+                              <div class="dropDownSelect2"></div>
+                          </div>
+                          <button class="au-btn-filter">
+                              <i class="zmdi zmdi-filter-list"></i>filters</button>
+                      </div>
+                      <div class="table-data__tool-right">
+                          <a href="{{ path('admin_picture_new') }}" class="btn btn-pill btn-primary au-btn--small">
+                              <i class="fe fe-plus-circle"></i>add item</a>
+                          <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                              <select class="js-select2" name="type">
+                                  <option selected="selected">Export</option>
+                                  <option value="">Option 1</option>
+                                  <option value="">Option 2</option>
+                              </select>
+                              <div class="dropDownSelect2"></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-responsive table-responsive-data2">
+                      <table class="table table-data2">
+                          <thead>
+                              <tr>
+                                  <th>{{'admin.picture.picture'|trans}}</th>
+                                  <th>{{'admin.picture.name'|trans}}</th>
+                                  <th>{{'admin.order.order'|trans}}</th>
+                                  <th>{{'admin.common.status'|trans}}</th>
+                                  <th></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            {% for picture in pictures %}
+                              <tr class="tr-shadow">
+                                  <td><img src="{{ picture.picturePath}}" alt="{{ picture.pictureName }}" height="80px" width="125px"/></td>
+                                  <td>{{ picture.pictureName }}</td>
+                                  <td>{{ picture.order }}
+                                  <td>{{ picture.status }}</td>
+                                  <td>
+                                      <div class="table-data-feature">
+                                          <a href="{{ path('admin_picture_edit', {'id': picture.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                              <i class="fe fe-edit mr-1"></i>
+                                          </a>
+                                          <a href="{{ path('admin_picture_show', {'id': picture.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="More">
+                                              <i class="zmdi zmdi-more"></i>
+                                          </a>
+                                      </div>
+                                  </td>
+                              </tr>
+                              <tr class="spacer"></tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+  </section>
+{% endblock %}

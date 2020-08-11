@@ -1,0 +1,41 @@
+<!-- search form -->
+{% trans_default_domain 'admin' %}
+<!-- DATA TABLE -->
+
+{% for promo in promos %}
+  <tr class="{% if promo.expired %}text-danger{% endif %}">
+    <td>
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input js-select-ids" name="id[]" value="{{ promo.id }}">
+        <span class="custom-control-label"></span>
+      </label>
+    </td>
+    <td>{{ promo.promoCode }}</td>
+    <td>
+        {% if promo is promo_with_discount %}
+          {{ 'admin.promo.type.discount'|trans }}
+        {% elseif promo is promo_with_counter %}
+           {{ 'admin.promo.type.counter'|trans }}
+        {% endif %}
+    </td>
+    <td>{{ promo.startDate|date('d/m/Y')}}</td>
+    <td>{{ promo.endDate|date('d/m/Y')}}</td>
+    <td>
+      <i class="{{ promo.expired ? 'fe fe-check' : 'fe fe-x' }}"></i>
+    </td>
+    <td>
+      <div class="table-data-feature">
+        <a href="{{ path('admin_promo_show', {'id': promo.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.show'|trans }}" data-original-title="More">
+          <i class="zmdi zmdi-eye"></i>
+        </a>
+        <a href="{{ path('admin_promo_edit', {'id': promo.id}) }}" class="item" data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.edit'|trans }}" data-original-title="More">
+          <i class="fe fe-edit mr-1"></i>
+        </a>
+      </div>
+    </td>
+  </tr>
+{% else %}
+  <tr class="odd">
+    <td valign="top" colspan="7" class="text-center">{{ 'admin.paginator.empty_table'|trans|raw }}</td>
+  </tr>
+{% endfor %}

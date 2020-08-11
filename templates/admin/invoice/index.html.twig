@@ -1,0 +1,101 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{ 'admin.invoice.invoice_list'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent()}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('daterangepicker.min.css', 'daterangepicker') }}"/>
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('admin_invoice_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.invoice.invoice_list'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="list-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid" id="js-invoice-list">
+        <!-- DATA TABLE -->
+        <h3 class="title-5 m-b-35">{{'admin.invoice.invoice_list'|trans}}</h3>
+
+        {% include 'admin/invoice/_filter_form.html.twig' %}
+
+        <!-- DATA TABLE -->
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table card-table table-vcenter text-nowrap" id="js-card-table">
+                <thead>
+                  <tr>
+                    <th>{{ js_sortable_render(invoices, 'admin.invoice.id'|trans, 'id') }}</th>
+                    <th>{{ js_sortable_render(invoices, 'admin.invoice.types'|trans, 'type') }}</th>
+                    <th>{{ js_sortable_render(invoices, 'admin.invoice.total_amount'|trans, 'totalAmount') }}</th>
+                    <th>{{ js_sortable_render(invoices, 'admin.invoice.tax'|trans, 'taxPercentage') }}</th>
+                    <th>{{ js_sortable_render(invoices, 'admin.invoice.payment_date'|trans, 'paymentDate') }}</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% include 'admin/invoice/_list.html.twig' with {
+                    'invoices' : invoices
+                  } %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="float-right">
+              {{ js_pagination_render(invoices) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('jquery.bootpag.min.js', 'admin_js') }}"></script>
+  <script src="{{ asset('selectize/selectize.min.js', 'admin_vendor') }}"></script>
+  <script src="{{ asset('moment.min.js', 'momentjs') }}"></script>
+  <script src="{{ asset('daterangepicker.min.js', 'daterangepicker') }}"></script>
+  <script src="{{ asset('paginator.min.js', 'admin_js') }}"></script>
+  <script>
+    (function($) {
+      // USE STRICT
+      "use strict";
+      var paginator = new Paginator($("#js-invoice-list"));
+      $(document).find('.js-datepicker').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY HH:mm:ss') + ' - ' + picker.endDate.format('DD/MM/YYYY HH:mm:ss'));
+      });
+    })(jQuery);
+  </script>
+{% endblock %}

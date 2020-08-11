@@ -1,0 +1,72 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}
+  {{'admin.promo.promo_with_picture_counter_new'|trans}}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent()}}
+  <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css', 'datetimepicker') }}"/>
+  <link rel="stylesheet" href="{{ asset('glyphicon.min.css', 'admin_css') }}"/>
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('admin_promo_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.promo.promos_list'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                  <li class="list-inline-item">{{'admin.promo.promo_with_picture_counter_new'|trans}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+  <section class="form-content">
+    <div class="section__content section__content--p30" id="js-new-promo-section">
+      <div class="container-fluid">
+        {{ include('admin/promo/_form_picture_counter.html.twig') }}
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <!-- Vendor JS -->
+  <script src="{{ asset('selectize/selectize.min.js', 'admin_vendor') }}"></script>
+  <!-- cdn -->
+  <script src="{{ asset('moment.min.js', 'momentjs') }}"></script>
+  <script src="{{ asset('locale/fr.js', 'momentjs') }}"></script>
+  <script src="{{ asset('js/bootstrap-datetimepicker.min.js', 'datetimepicker') }}"></script>
+  <!-- custom js -->
+  <script src="{{ asset('jquery.collection.min.js', 'admin_js') }}"></script>
+  <script src="{{ asset('promo-code.min.js', 'admin_js') }}"></script>
+  <!-- Main JS-->
+  <script>
+    (function($) {
+      // USE STRICT
+      "use strict";
+      var promo = new Promo($('#js-new-promo-section'));
+    })(jQuery);
+  </script>
+{% endblock %}

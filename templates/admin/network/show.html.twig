@@ -1,0 +1,188 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{'admin.network.network'|trans}}
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('network_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.network.network'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                  <li class="list-inline-item">{{'admin.network.network'|trans}}:
+                    {{ network.name }}</li>
+                </ul>
+              </div>
+              <a href="{{ path('network_edit', {'id': network.id}) }}" class="btn btn-pill btn-primary">
+                {{ 'admin.form.edit'|trans }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="form-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-4">
+            {% include 'admin/network/_user_info.html.twig' with {
+              'user' : network.owner
+            } %}
+          </div>
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-header">
+                <strong class="card-title">
+                  {{'admin.network.network'|trans }}:
+                  {{ network.name }}
+                </strong>
+              </div>
+              <div class="card-body">
+                <table class="table table-top-campaign">
+                  <tbody>
+                    <tr>
+                      <td>{{'admin.network.name'|trans}}</td>
+                      <td>{{ network.name }}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'admin.common.registration_code'|trans}}</td>
+                      <td>{{ network.registrationCode }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3>{{ 'admin.network.agencys'|trans }}</h3>
+        <div class="row pt-5">
+          {% for agency in network.agencies %}
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <strong class="card-title">
+                    {{'admin.agency.agency'|trans }}:
+                    {{ agency.name }}
+                  </strong>
+                  <div class="card-options">
+                    <a target="_blank" href="{{ path('agency_show', {'id': agency.id}) }}" class="btn btn-primary btn-sm">
+                      <i class="fe fe-eye"></i>
+                      {{ 'admin.common.action.show'|trans }}
+                    </a>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6 border-right">
+                      <div class="media">
+                        <span class="avatar avatar-xxl mr-5" style="background-image: url({{ vich_uploader_asset(agency.owner, 'imageFile')|default(asset('default_profile.png', 'admin_images')) }})"></span>
+                        <div class="media-body mb-4">
+                          <h4 class="m-3">{{'admin.agency.owner'|trans }}</h4>
+                          <p class="text-muted m-3">{{ agency.owner.email }}</p>
+                        </div>
+                      </div>
+                      <table class="table table-top-campaign">
+                        <tbody>
+                          <tr>
+                            <td>{{ 'admin.user.billing_address.first_name'|trans }}:</td>
+                            <td>{{ agency.owner.billingAddress.firstName|default('admin.user.empty_field'|trans) }}</td>
+                          </tr>
+                          <tr>
+                            <td>{{ 'admin.user.billing_address.last_name'|trans }}:</td>
+                            <td>{{ agency.owner.billingAddress.lastName|default('admin.user.empty_field'|trans) }}</td>
+                          </tr>
+                          <tr>
+                            <td>{{ 'admin.user.billing_address.address'|trans }}:</td>
+                            <td>{{ agency.owner.billingAddress.address|default('admin.user.empty_field'|trans) }}</td>
+                          </tr>
+                          <tr>
+                            <td>{{ 'admin.user.billing_address.phone'|trans }}:</td>
+                            <td>{{ agency.owner.billingAddress.phone|default('admin.user.empty_field'|trans) }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="media">
+                        <div class="media-body mb-4">
+                          <h4 class="m-3">{{'admin.agency.agency_show'|trans }}</h4>
+                          <p class="text-muted m-3">{{ agency.name }}</p>
+                        </div>
+                      </div>
+                      <table class="table table-top-campaign">
+                        <tbody>
+                          <tr>
+                            <td>{{'admin.agency.name'|trans}}</td>
+                            <td>{{ agency.name }}</td>
+                          </tr>
+                          <tr>
+                            <td>{{'admin.agency.phone'|trans}}</td>
+                            <td>{{ agency.phone }}</td>
+                          </tr>
+                          <tr>
+                            <td>{{'admin.agency.address'|trans}}</td>
+                            <td>{{ agency.address }}</td>
+                          </tr>
+                          <tr>
+                            <td>{{'admin.common.registration_code'|trans}}</td>
+                            <td>{{ agency.registrationCode }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <div class="col-md-12">
+              <p>{{'admin.network.no_agency'|trans}}</p>
+            </div>
+          {% endfor %}
+        </div>
+
+        <h3>{{ 'admin.network.agents'|trans }}</h3>
+        <div class="row pt-5">
+          {% for employee in employees %}
+            <div class="col-md-4">
+              {% include 'admin/agency/_user_info.html.twig' with {'user' : employee}%}
+            </div>
+          {% else %}
+            <p>{{'admin.agency.no_agent'|trans}}</p>
+          {% endfor %}
+          <div class="col-md-12">
+            <div class="d-flex align-items-center p-2">
+              <div class="mr-auto p-2">
+                {{ pagination_info(employees) }}
+              </div>
+              <div class="p-2">
+                {{ knp_pagination_render(employees) }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

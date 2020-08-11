@@ -1,0 +1,11 @@
+monolog:
+  channels:                  ['immosquare_api_channel']
+  handlers:
+    immosquare_api_handler:
+      type:              rotating_file
+      # log to var/log/(environment).log
+      path:              "%kernel.logs_dir%/immosquare_api_%kernel.environment%_log.log"
+      # log *all* messages (debug is lowest level)
+      max_files:         20
+      level:             info
+      channels:          ['immosquare_api_channel']

@@ -1,0 +1,33 @@
+monolog:
+    channels:                  ['immosquare_api_channel']
+    handlers:
+        main:
+            type: fingers_crossed
+            action_level: error
+            handler: nested
+            excluded_404s:
+                # regex: exclude all 404 errors from the logs
+                - ^/
+        immosquare:
+            type: fingers_crossed
+            action_level: error
+            handler: immosquare_api_handler
+            excluded_404s:
+            # regex: exclude all 404 errors from the logs
+                - ^/
+        nested:
+            type:             rotating_file
+            path:              "%kernel.logs_dir%/%kernel.environment%.log"
+            level:             debug
+            max_files:         30
+            channels:          ["!immosquare_api_channel"]
+        immosquare_api_handler:
+            type:              rotating_file
+            path:              "%kernel.logs_dir%/immosquare_api_%kernel.environment%_log.log"
+            max_files:         20
+            level:             debug
+            channels:          ['immosquare_api_channel']
+        console:
+            type:   console
+            process_psr_3_messages: false
+            channels: ["!event", "!doctrine"]

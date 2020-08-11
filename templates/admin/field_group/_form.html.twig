@@ -1,0 +1,45 @@
+{% trans_default_domain 'admin' %}
+
+{% form_theme form with['_shared_components/form_layout.html.twig', '_shared_components/form_switch_layout.html.twig'] %}
+
+{{ form_start(form) }}
+<div class="md-fab-wrapper">
+  <button role="button" type="submit" class="md-fab md-fab-accent md-fab-primary">
+    <i class="fas fa-save"></i>
+  </a>
+</div>
+<div class="card">
+  <div class="card-header">
+    <strong>{{ title }}</strong>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        {{ form_row(form.labelText) }}
+      </div>
+      <div class="col-md-6 border-left">
+        {{ form_row(form.labelTextEn) }}
+      </div>
+    </div>
+    <div class="border-top pt-5">
+      <div class="row">
+        <div class="col-md-6">
+          {{ form_row(form.position) }}
+        </div>
+        <div class="col-md-6">
+          {{ form_row(form.orderNumber) }}
+        </div>
+        <div class="col-md-12">
+          {{ form_row(form.retouch) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pt-2">
+  <h4 class="d-block pb-4">{{'admin.field.field_list'|trans}}</h4>
+
+  {{ form_row(form.fields) }}
+</div>
+{{ form_rest(form) }}
+{{ form_end(form) }}

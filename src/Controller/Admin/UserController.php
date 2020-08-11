@@ -1,0 +1,156 @@
+<?php
+
+namespace App\Controller\Admin;
+
+use App\Controller\Admin\Traits\ControllerTrait;
+use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Routing\Annotation\Route;
+
+use App\Repository\UserRepository;
+
+use App\Entity\User;
+
+use App\Form\Admin\UserType;
+use App\Form\Admin\Filters\UserFilterType;
+
+/**
+ * @Route("user")
+ * @Security("is_granted('ROLE_USER_MANAGER') or is_granted('ROLE_SUPER_ADMIN')")
+ */
+class UserController extends Controller
+{
+    use ControllerTrait;
+	
+	/**
+	 * @Route("/", name="admin_user_index", methods="GET|POST")
+	 *
+	 * @param Request $request
+	 * @return Response
+	 * @throws \Exception
+	 */
+    public function index(Request $request): Response
+    {
+        $users = $this->dynamicPaginator([
+          'filter' => $request->query->get('filter', []),
+          'page' => $request->query->get('page', 1)
+        ], User::class, ['wallet', 'organization', 'groups']);
+        foreach ($users as $user) {
+            $user->dateCreated = $user->getCreatedAt()->format('d/m/Y h:m:i');
+        }
+        if ($request->isXmlHttpRequest()) {
+            return $this->json([
+            'html' => $this->renderView('admin/user/_list.html.twig', ['users' => $users]),
+            'page' => $users->getPaginationData()['current'],
+            'params' => $users->getParams(),
+            'total_page' => $users->getPaginationData()['pageCount']
+          ]);
+        }
+        return $this->render('admin/user/index.html.twig', [
+          "users" => $users,
+          "filter_form" => $this->createForm(UserFilterType::class)->createView()
+        ]);
+    }
+	
+	/**
+	 * @Route("/new", name="admin_user_new", methods="GET|POST")
+	 *
+	 * @param Request $request
+	 * @return Response
+	 */
+    public function new(Request $request): Response
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $user->setUserDirectory($this->createUniqueUserDir($user));
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_user_index');
+        }
+
+        return $this->render('admin/user/new.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+	
+	/**
+	 * @Route("/{id}", name="admin_user_show", methods="GET")
+	 * @Security("(client.isSuperAdmin() && user.isSuperAdmin()) || !client.isSuperAdmin()")
+	 *
+	 * @param User $client
+	 * @return Response
+	 */
+    public function show(User $client): Response
+    {
+        return $this->render('admin/user/show.html.twig', ['user' => $client]);
+    }
+	
+	/**
+	 * @Route("/{id}/edit", name="admin_user_edit", methods="GET|POST")
+	 * @Security("(client.isSuperAdmin() && user.isSuperAdmin()) || !client.isSuperAdmin()")
+	 *
+	 * @param Request              $request
+	 * @param User                 $client
+	 * @param UserManagerInterface $userManager
+	 * @return Response
+	 */
+    public function edit(Request $request, User $client, UserManagerInterface $userManager): Response
+    {
+        $form = $this->createForm(UserType::class, $client);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (is_null($client->getUserDirectory()) || empty($client->getUserDirectory())){
+                $client->setUserDirectory($this->createUniqueUserDir($client));
+            }
+            
+	        $userManager->updateUser($client);
+
+            $this->addFlash('user_modified', $this->trans('admin.user.user_modified', [], 'admin'));
+            return $this->redirectToRoute('admin_user_edit', ['id' => $client->getId()]);
+        }
+
+        return $this->render('admin/user/edit.html.twig', [
+            'user' => $client,
+            'form' => $form->createView(),
+        ]);
+    }
+	
+	/**
+	 * @Route("/enabled", name="admin_user_bulk_enabled", methods="DELETE")
+	 *
+	 * @param Request $request
+	 * @param UserRepository $userRepository
+	 * @return Response
+	 */
+    public function enabled(Request $request, UserRepository $userRepository): Response
+    {
+        $isAjax = $request->isXmlHttpRequest();
+
+        $data = $request->request->get('data', []);
+        $token = $request->request->get('token');
+
+        if ($isAjax && !empty($data) && !empty($token)) {
+            if (!$this->isCsrfTokenValid('multiselect_user', $token)) {
+                throw new AccessDeniedHttpException('The CSRF token is invalid.');
+            }
+	
+	        if ($userRepository->disableOrEnableUsersByIds($data, $this->getUser()->isSuperAdmin())) {
+		        return $this->json(['msg' => $this->trans('admin.user.user_modified', [], 'admin'), 'success' => true]);
+	        }
+        }
+
+        return $this->json(['msg' => $this->trans('admin.common.error_msg', [], 'admin'), 'success' => false]);
+    }
+}

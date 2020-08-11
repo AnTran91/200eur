@@ -1,0 +1,211 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{ 'admin.promo.promo'|trans }}
+{% endblock %}
+
+{% block content %}
+    <!-- BREADCRUMB-->
+    <section class="au-breadcrumb m-t-75">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="au-breadcrumb-content">
+                            <div class="au-breadcrumb-left">
+                                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                    <li class="list-inline-item active">
+                                        <a href="{{ path('admin_promo_index') }}">
+                                            <i class="fe fe-home"></i>
+                                            {{ 'admin.promo.promos_list'|trans }}
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item seprate">
+                                        <span>/</span>
+                                    </li>
+                                    <li class="list-inline-item">{{ 'admin.promo.promo'|trans }}</li>
+                                </ul>
+                            </div>
+                            <a href="{{ path('admin_promo_edit', {'id': promo.id}) }}" class="btn btn-pill btn-primary">
+                                <i class="fe fe-edit mr-1"></i>
+                                {{ 'admin.form.edit'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END BREADCRUMB-->
+
+    <section class="form-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-4 col-lg-4">
+                        <div class="card p-3">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-pink mr-3">
+                                  <i class="fe fe-bell"></i>
+                                </span>
+                                <div>
+                                    <small class="text-muted">{{ 'admin.promo.promo_type'|trans }}</small>
+                                    <h4 class="m-0">
+                                        <a href="javascript:void(0)">
+                                            <small>{{ promo.promoType|trans }}</small>
+                                        </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-4">
+                        <div class="card p-3">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                  <i class="fe fe-users"></i>
+                                </span>
+                                <div>
+                                    <small class="text-muted">{{ 'admin.promo.number_of_use'|trans }}</small>
+                                    <h4 class="m-0">
+                                        <a href="javascript:void(0)">
+                                            <small>{{ numberOfUse }} {{ 'admin.common.unit.times'|trans }}</small>
+                                        </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-4">
+                        <div class="card p-3">
+                            <div class="d-flex align-items-center">
+                <span class="stamp stamp-md bg-red mr-3">
+                  <i class="fas fa-images"></i>
+                </span>
+                                <div>
+                                    <small class="text-muted">{{ 'admin.promo.number_of_pictures'|trans }}</small>
+                                    <h4 class="m-0">
+                                        <a href="javascript:void(0)">
+                                            <small>{{ numberOfPictures }} {{ 'admin.common.unit.image'|trans }}</small>
+                                        </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        {{ 'admin.promo.statistics'|trans }}
+                    </div>
+                    <div class="card-body">
+                        {% if statistics is not empty and numberOfUse > 1  and statistics|length > 1 %}
+                            <div class="echart-large" data-echarts-line="data-echarts-line" id="js-promo-echarts"
+                                 data-values='{{ statistics|array_column("values")|json_encode|raw }}'
+                                 data-dates='{{ statistics|array_column("dates")|json_encode|raw }}'></div>
+                        {% else %}
+                            <div class="echart-large text-center">
+                                <img alt='#' src="{{ asset('404.png', 'local_icons') }}"/>
+                                <p class="uk-text-large">{{ 'admin.promo.statistics.not_found'|trans }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        {{ 'admin.promo.promo'|trans }}
+                    </div>
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-top-campaign">
+                                <tbody>
+                                <tr>
+                                    <td>{{ 'admin.promo.code'|trans }}</td>
+                                    <td>
+                                        {{ promo.promoCode }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'admin.common.end_date'|trans }}</td>
+                                    <td>
+                                        {{ promo.endDate ? promo.endDate|date('d/m/Y') }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'admin.common.start_date'|trans }}</td>
+                                    <td>
+                                        {{ promo.startDate ? promo.startDate|date('d/m/Y') }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'admin.promo.expired'|trans }}</td>
+                                    <td>
+                                        <i class="{{ promo.expired ? 'fe fe-check' : 'fe fe-x' }}"></i>
+                                    </td>
+                                </tr>
+                                {% if promo.hasNumberOfUse is defined %}
+
+                                    {% if promo.hasNumberOfUse %}
+                                        <tr>
+                                            <td>{{ 'admin.promo.use_limit'|trans }}</td>
+                                            <td>
+                                                {{ promo.useLimit }}
+                                                {{ 'admin.common.unit.times'|trans }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ 'admin.promo.use_limit_pre_user'|trans }}</td>
+                                            <td>
+                                                {{ promo.useLimitPerUser|default(0) }}
+                                                {{ 'admin.common.unit.times'|trans }}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% if promo.promotionsPerRetouch is defined and not promo.promotionsPerRetouch.isEmpty() %}
+                    <h3 class="m-b-35">{{ 'admin.promo.promo_detail'|trans }}</h3>
+                    <div class="row">
+                        {% for promoDetail in promo.promotionsPerRetouch %}
+                            <div class="col-md-6">
+                                {% include 'admin/promo/_promo_detail.html.twig' %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if promo is promo_with_specific_client and not promo.clients.isEmpty() %}
+                    <h3 class="m-b-35">{{ 'admin.promo.client_detail'|trans }}</h3>
+                    <div class="row">
+                        {% for client in promo.clients %}
+                            <div class="col-md-6">
+                                {% include 'admin/promo/_client_info.html.twig' with {'user': client} %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if promo is promo_with_organization and promo.organization is not null %}
+                    <h3 class="m-b-35">{{ 'admin.promo.organization_detail'|trans }}</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% include 'admin/promo/_organization_detail.html.twig' with {'organization': promo.organization} %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('echarts/echarts.min.js', 'admin_vendor') }}"></script>
+    <script src="{{ asset('promo-chart.min.js', 'admin_js') }}"></script>
+{% endblock %}

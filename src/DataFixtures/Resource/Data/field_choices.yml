@@ -1,0 +1,41 @@
+# emmo_test.field_choices
+-
+  id: 1
+  choice_label: "Conserver les dimensions de l'image importée"
+  choice_value: "original"
+-
+  id: 2
+  choice_label: "Redimensionner l'image"
+  choice_value: "custom"
+-
+  id: 3
+  choice_label: "PX"
+  choice_value: "px"
+-
+  id: 4
+  choice_label: "CM"
+  choice_value: "cm"
+-
+  id: 5
+  choice_label: "Format original"
+  choice_value: "original"
+-
+  id: 6
+  choice_label: "Extension JPEG"
+  choice_value: "jpeg"
+-
+  id: 7
+  choice_label: "Extension PNG"
+  choice_value: "png"
+-
+  id: 8
+  choice_label: "À partir de cette image"
+  choice_value: "original"
+-
+  id: 9
+  choice_label: "Personnaliser"
+  choice_value: "custom"
+-
+  id: 10
+  choice_label: "Extension TIFF"
+  choice_value: "tiff"

@@ -1,0 +1,473 @@
+# ADMIN-BackOffice section
+language:                                   Language
+language.fr:                                Français
+language.en:                                Anglais
+
+ROLE_USER:                                  User
+ROLE_ADMIN:                                 Administrator
+ROLE_SUPER_ADMIN:                           Super Admin
+
+Year:                                       Year
+Month:                                      Month
+Day:                                        Day
+
+picture:
+  status:
+    pending:                                Pending
+    completed:                              Completed
+    refused:                                Refused
+    awaiting_for_verification:              Awaiting for Verification
+    cancel:                                 Cancel
+
+admin:
+    email:
+      title:                                Send a Mail
+      send:                                 Send
+      to:                                   To
+      subject:                              Subject
+    profile:
+        show:                               My Account
+        setting:                            Settings
+    paginator:
+        title:                              "Number of rows"
+        all:                                "All"
+        search:                             "Search&nbsp;:"
+        lengthPage:                         "Showing %total% &eacute;l&eacute;ments"
+        info:                               "Showing item %start% to %end% on %total% items"
+        info_empty:                         "Showing item 0 to 0 on 0 items"
+        zero_records:                       "No items to display"
+        empty_table:                        "No items in the table"
+    session:
+        login:                              Login
+        logout:                             Logout
+    form:
+        add:                                Add
+        save:                               Save
+        edit:                               Edit
+        delete:                             Delete
+        reset:                              Reset
+        filter:                             Filter
+    link:
+        next:                               Next
+        back:                               Back
+    param_form:
+        param_form:                         Parameters List
+        field:                              Form field
+        empty:                              Le paramètre actuel ne contient que des données par défaut
+        new:                                New Field
+        param_form_filter:                  Parameter Filter
+        param_form_menu:                    Parameters
+        edit:                               Edit Form Group
+        field_creation_info:                Information about this Field creation
+        field_info:                         Information about this Field
+        field_price_info:                   Field price
+        field_choices_info:                 Choices
+        field_renovation_info:              Renovations
+    renovation:
+        type_name:                          Group name (en français)
+        type_name_en:                       Group name (en anglais)
+    field_renovation_choice:
+        picture_path:                       File path
+    field_group:
+        label_text:                         Group name (en français)
+        label_text_en:                      Group name (en anglais)
+        position:                           Position
+        order_number:                       Display Ordre
+        retouch:                            Retouch list
+    field_choice:
+        choice_label:                       Text (en français)
+        choice_label_en:                    Text (en anglais)
+        choice_value:                       Value
+    field:
+        field_list:                         Field list
+        name:                               Field name
+        label_text:                         Field label (en français)
+        label_text_en:                      Field label (en anglais)
+        empty_data:                         Default value
+        mapped:                             Save field value?
+        price:                              Additional price
+        field_price_equal_to:               Add price when this field is equal to =
+        field_type:                         Field type
+        order_number:                       Display order
+        html_class:                         Custom css class
+        disabled:                           Deactivated by default
+        disabled_on:                        Deactivated when
+    common:
+        start_date:                         Start Date
+        end_date:                           End Date
+        status:                             Status
+        date:                               Date
+        start_date:                         Start Date
+        end_date:                           End Date
+        none:                               None
+        owner:                              Owner
+        actions:                            Actions
+        empty_field:                        Empty Field
+        show_all:                           All
+        delete_msg:                         Are you sure you want to delete this item?
+        un_delete_msg:                      Are you sure you want to re-activate this item?
+        mutiple_expire_msg:                 Set these elements to expired/active?
+        modal_title:                        Confirmation
+        default_name:                       No Name
+        all:                                All
+        all_except_wallet_invoice:          All bills
+    user:
+        user:                               User
+        users:                              Users List
+        user_menu:                          Users
+        users_menu:                         Users
+        users_filter:                       Filter Users
+        new_user:                           New User
+        picture:                            Profile Photo
+        upload:                             Download an image
+        permission:                         User's Permissions
+        user_list:                          Users List
+        edit_user:                          Edit User
+        user_modified:                      User Modified!
+        disabled_enabled:                   Activated / Deactivated User
+        username:                           login
+        first_name:                         first name
+        last_name:                          last name
+        language:                           language
+        email:                              email
+        email_secondary:                    secondary email
+        enabled:                            enabled
+        password:                           password
+        register_code:                      registration code
+        last_login:                         last login
+        image:                              Profile Picture
+        roles:                              roles
+        empty_field:                        Empty Field
+        updated_at:                         updated at
+        billing_address:
+            first_name:                     first name
+            last_name:                      last name
+            address:                        billing address
+            secondary_address:              secondary billing address
+            country:                        country
+            city:                           city
+            zip:                            zip code
+            phone:                          phone
+            company:                        company
+            network:                        network
+            corporate:                      corporate
+            vat:                            VAT
+        wallet:                             Wallet
+        extract_emails:                     Extract emails
+    group:
+        group_list:                         Groups List
+        group_show:                         More details about the group
+        group_new:                          Create New Group
+        group_menu:                         Group
+        group:                              Group
+        name:                               Group's Name
+        roles:                              Roles
+        count_roles:                        Roles number
+        flash:
+            updated:                        'Group Updated.'
+            created:                        'Group Created.'
+            deleted:                        'Group Deleted.'
+
+    dashboard:
+        dashboard_menu:                     Dashboard
+        emmobilier:                         Emmobilier
+        immosquare:                         Immosquare
+        residence:                          La Résidence
+        order_stats:                        More information about Orders
+        user_stats:                         More information about Users
+        profit_stats:                       More information about the Turnover of this year
+        user_active_this_week:              Active Users this week
+        user_active_this_month:             Active Users this month
+        user_active_this_year:              Active Users this year
+        year_profit:                        Turnover of this Year
+        month_profit:                       Turnover of this Month
+        week_profit:                        Turnover of this Week
+    promo:
+        promo:                              Promotion
+        promos_list:                        Promotions List
+        promo_new:                          New Promotion
+        code:                               code
+        promo_menu:                         Promotions
+        promo_filter:                       Filtre promotions
+        promo_with_picture_counter_new:     Add new Promotion(with counter)
+        promo_with_picture_discount_new:    Add new Promotion(with discount)
+        has_number_of_use:                  By number of use
+        use_limit_pre_user:                 Use limit per user
+        start_date:                         Start date
+        end_date:                           End date
+        reduction:                          reduction
+        use_limit:                          Use limit
+        user_use_limit:                     User use limit
+        image_limit:                        Image limit
+        user_image_limit:                   Image per user limit
+        expired:                            Expired
+        promo_type:                         Promo Type
+        generate_promo_code:                Generate Promo code
+        has_promo_detail:                   By a Retouch type or all Retouches
+        reduction:                          Reduction Percentage
+        number_of_pictures:                 Number of Pictures
+        image_limit_per_retouch:            Image Limite for a Retouch
+        user_image_limit:                   Image Limite for a user
+        clients:                            Add to specific users
+        clients_select:                     Select specific users
+        network:                            Add to a Network
+        network_select:                     Select a Network
+        agency:                             Add to an Agency
+        agency_select:                      Select an Agency
+        image_counter_limit_with_reduction: Image counter limit with reduction
+        image_counter_limit:                Image counter limit without reduction
+        image_counter_reduction:            Reduction on the image counter
+        retouchs:                           Retouches List
+        image_limit_pre_user:               Image limit per user
+        type:                               Promo type
+        type.counter:                       Promotion (with counter)
+        type.discount:                      Promotion (with discount)
+        actions:
+            expired:                        Expired / Active
+        msg:
+            edit:                           Promotion code successfully modified
+            new:                            Promotion code successfully created
+    params:
+        origin_size:                        Origin size
+        height:                             Height
+        width:                              Width
+        unit:                               Unit
+        format:                             Format
+        comment:                            Comment
+        logo:                               Logo
+        watermark:                          Watermark
+        watermark_text:                     Watermark text
+        animated_gif:                       Animated GIF
+        animated_gif_text:                  Animated GIF text
+        animated_gif_placement:             Animated GIF placement
+    order:
+        orders_list:                        Orders List
+        orders_filter:                      Filter Orders
+        orders_in_prod:                     In Production Orders List
+        order_edit:                         Edit OrderCreation
+        order:                              OrderCreation
+        order_menu:                         Orders
+        orders_list:                        Orders List
+        id:                                 OrderCreation Number
+        tax:                                Tax
+        pictures_number:                    Pictures number
+        amount:                             Amount
+        client_type:                        Client Type
+        payment_type:                       Payment Type
+        in_charge:                          In Charge
+        status:                             Status
+        time:                               Deadlines
+        creation_date:                      Creation Date
+        send_mail:                          Email Sent
+        updated_at:                         Updated At
+        unpaid:                             Unpaid
+        paid_by:                            Paid By
+        promo_used:                         Promo used
+        no_promo_used:                      No Promo used
+        affected_to:                        Affected to
+        not_affected:                       Nobody in charge
+        param_edit:                         Update parameter
+        actions:
+            download_delivered_picture:     Download the image delivered to the client
+            download_painted_picture:       Download the illustrative image
+            download_picture:               Download the client's image
+            paint_picture:                  Paint
+            show:                           More details
+            restore:                        Revert modification
+            generate_complementary_invoice: Generate Complementary Invoice
+            generate_invoice:               Generate Invoice
+            view_additional_invoice:        Download the Complementary Invoice
+            edit:                           Edition
+            delete:                         Delete
+            undelete:                       Restore
+            download_zip:                   Download images (zip)
+            view_invoice:                   Download Invoice
+            compare:                        Compare
+        done_today_list:                    Today's delivered Orders
+        done_this_week:                     This week delivered Orders
+        declined_list:                      Declined Orders
+    holidays:
+        holiday:                            Holiday
+        holidays_list:                      Holidays List
+        holiday_menu:                       Holidays
+        holiday_new:                        New Holidays
+        title:                              Title
+        type:                               Type
+    announcement:
+        title:                              Title
+        content:                            Content
+        announcement:                       Announcement
+        edit:                               Modification of announcement
+        flash:
+            updated:                        'Announcement Updated'
+            created:                        'Announcement Created'
+    transaction:
+        amount:                             Amount
+        transaction_list:                   Transactions List
+        transaction_menu:                   Transactions
+        transaction:                        Transaction
+        card_number:                        Card Number
+        card_brand:                         Card Brand
+        number:                             Transaction number
+    retouch:
+        retouch:                            Retouch
+        retouches_list:                     Retouches List
+        retouch_menu:                       Retouches
+        retouch_new:                        New Retouch
+        price:                              Price
+        order_delivery_time:                Delivery Time
+        title:                              Title
+        order:                              OrderCreation
+        description:                        Description
+        standard_price:                     48h Price
+        boosted_price:                      24h Price
+        order_number:                       Display position
+        flash:
+            updated:                        'Retouch Updated.'
+            created:                        'Retouch Created.'
+            deleted:                        'Retouch Deleted.'
+    picture:
+        pictures_list:                      Pictures list
+        picture_edit:                       Edit Picture
+        picture_menu:                       Pictures
+        picture:                            Picture
+        name:                               Name
+        commentary:                         Refusal reasons
+        status:                             Image status
+        picture_number:                     Image(s) number
+        picture_total_price:                Total Price
+        price:                              Price
+        msg:
+          edit:                             Image Successfully edited
+          delete:                           Image Successfully deleted
+          update_setting:                   Parameter Successfully updated
+          error_setting:                    Image settings non-valid
+    invoice:
+        invoice:                            Invoice
+        invoice_menu:                       Invoices
+        invoice_new:                        New Invoice
+        invoice_list:                       Invoices List
+        amount:                             Amount
+        creation_date:                      Création date
+    production:
+        productions_list:                   Production Areas List
+        production_new:                     New Production Area
+        production:                         Production
+        country:                            Country
+        empty_field:                        Production area not specified
+    delivery_time:
+        delivery_time_list:                 Delivery Time List
+        delivery_time_new:                  New Delivery Time
+        delivery_time:                      Delivery time
+        time:                               Time
+        unit:                               Unit
+        globals:                            Global
+        default:                            Default
+    network:
+        network_list:                       Network List
+        network_edit:                       Network Modification
+        network_new:                        New Network
+        network_menu:                       Networks
+        network:                            Network
+        name:                               Name
+        no_agency:                          No agency is in this Network
+        no_agent:                           No agent is in this Network
+        agents:                             Agents List
+        agencys:                            Agencies List
+        active_monthly_invoice:             Enable monthly billing to the Owner
+    agency:
+        agency_list:                        Agencies List
+        agency_new:                         New Agency
+        agency_edit:                        Agency Modification
+        agency_menu:                        Agencies
+        agency:                             Agency
+        name:                               Name
+        phone:                              Phone
+        address:                            Address
+        no_network:                         This agency is has no network
+        no_agent:                           This agency has no agent
+        agents:                             Agent List
+        registration_code:                  Registration Code
+        active_monthly_invoice:             Enable monthly billing to the Owner
+    payment:
+        types:                              Payment Type
+        ordinary:                           Regular
+        monthly:                            Monthly
+    extract:
+        extract_menu:                       Extractions
+pending:                                    Pending
+in_production:                              In Production
+completed:                                  Finished
+declined:                                   Declined
+
+promo:
+  type:
+    assign_to_all_customers:                Possibility to add to all customers
+    assign_to_specific_customers:           Possibility to add to specific customers
+    assign_to_network:                      Possibility to add to a Network
+    assign_to_agency:                       Possibility to add to an Agency
+
+orders:
+  time:
+    48_hours:                               48h Delivery
+    24_hours:                               24h Delivery
+  status:
+      all:                                  Display all
+      pending:                              Pending
+      awaiting_for_payment:                 Awaiting for payment
+      awaiting_for_client_response:         Awaiting for client response
+      awaiting_complete_by_client:          Awaiting for completion
+      awaiting_for_verification:            Awaiting for verification
+      in_production:                        In Production
+      completed:                            Completed
+      cancelled:                            Cancelled
+      declined:                             Declined
+      failed_payment:                       Failed Payment
+      approvisionnement_tirelire:           Piggy bank supply
+error_msg:
+    pagination:                             Something went wrong sorry about that. please try again later
+# Time
+time:
+    hour:                                   Hours
+    day:                                    Days
+    week:                                   Weeks
+    month:                                  Months
+    year:                                   Years
+# role
+ROLE_USER:                                  Simple User (Client)
+ROLE_SUPER_ADMIN:                           A super administrator can manage the previleges & permissions of other users.
+ROLE_AGENCY_MANAGER:                        d'agence (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_DELIVERY_TIME_MANAGER:                 de délai de livraison (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_HOLIDAYS_MANAGER:                      de vacances (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_INVOICE_MANAGER:                       de facture (vous permet télécharger le fichier PDF, lire, mettre à jour)
+ROLE_NETWORK_MANAGER:                       de réseau (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_ORDER_MANAGER:                         de commandes (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_PRODUCTION_MANAGER:                    de production (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_PROMO_MANAGER:                         de promo (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_RETOUCH_MANAGER:                       de retouche (vous permet créer, consulter, mettre à jour et supprimer)
+ROLE_TRANSACTION_MANAGER:                   de transaction (vous permet consulter)
+ROLE_USER_MANAGER:                          d'utilisateurs (vous permet créer, lire, mettre à jour et désactiver le utitlsateur)
+
+form:
+    position:
+        left:                               Left
+        right:                              Right
+    form_type:
+        text_no_label:                      Text field without label
+        text:                               Text field
+        number:                             Text field
+        textarea:                           TextArea
+        choice:                             Select
+        country:                            Country
+        language:                           Language
+        currency:                           Currency
+        date:                               Date
+        dateInterval:                       Date Interval
+        dateTime:                           Date / Hour Field
+        image:                              Upload image field
+        file:                               Upload file field
+        checkbox:                           Checkbox
+        radio:                              RadioButton
+        placement:                          Image placement field
+        boolean:                            RadioButton (yes ou no)
+        image_renovation:                   Image Renovation Field

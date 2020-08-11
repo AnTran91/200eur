@@ -1,0 +1,53 @@
+{% trans_default_domain 'admin' %}
+
+<div class="card">
+  <div class="card-header">
+    <strong class="card-title">
+      {% if organization is agency %}
+        {{'admin.agency.agency'|trans }}:
+      {% else %}
+        {{'admin.network.network'|trans }}:
+      {% endif %}
+      {{ organization.name }}
+    </strong>
+    <div class="card-options">
+      <a target="_blank" href="{% if organization is network %}{{ path('network_show', {'id': organization.id}) }}{% else %}{{ path('agency_show', {'id': organization.id}) }}{% endif %}" class="btn btn-primary btn-sm">
+        <i class="fe fe-eye"></i>
+        {{ 'admin.common.action.show'|trans }}
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-top-campaign">
+      <tbody>
+        {% if organization is network %}
+          <tr>
+            <td>{{'admin.network.name'|trans}}</td>
+            <td>{{ organization.name }}</td>
+          </tr>
+          <tr>
+            <td>{{'admin.common.registration_code'|trans}}</td>
+            <td>{{ organization.registrationCode }}</td>
+          </tr>
+        {% else %}
+          <tr>
+            <td>{{'admin.agency.name'|trans}}</td>
+            <td>{{ organization.name }}</td>
+          </tr>
+          <tr>
+            <td>{{'admin.agency.phone'|trans}}</td>
+            <td>{{ organization.phone }}</td>
+          </tr>
+          <tr>
+            <td>{{'admin.agency.address'|trans}}</td>
+            <td>{{ organization.address }}</td>
+          </tr>
+          <tr>
+            <td>{{'admin.common.registration_code'|trans}}</td>
+            <td>{{ organization.registrationCode }}</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>

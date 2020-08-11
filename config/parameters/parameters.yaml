@@ -1,0 +1,26 @@
+#########################################################################
+#                                                                       #
+#  Global configuration file control the settings of this application   #
+#                                                                       #
+#########################################################################
+parameters:
+  # default locale
+  default_locale:                 'fr'
+  locale:                         '%default_locale%'
+  # default contact mail
+  default_contact_mail:          contact@emmobilier.fr
+  # session Configuration
+  session_life_time:             3600
+  # Exception Configuration
+  exception:
+      enable:                    true
+  # supported locales
+  locale_supported:
+      - 'en'
+      - 'fr'
+  # dev version
+  version:                       1.1.19v
+  # asset version
+  asset_version:                 v1.1.19
+  # pagination
+  admin_paginator_item_per_page: 10

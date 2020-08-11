@@ -1,0 +1,30 @@
+#####################################################
+#                                                   #
+#        Transaction configuration file             #
+#                                                   #
+#####################################################
+parameters:
+  # payment card config "AMEX", "CB", "MASTERCARD", "VISA", "MAESTRO", "", "JCB"
+  payment_card_options:
+    options:
+    - {label: "transaction.field.payment_card.cb", img: "payment-cb", value: "CB"}
+    - {label: "transaction.field.payment_card.e_blue", img: "e-carte-bleue", value: "E-CARTEBLEUE"}
+    - {label: "transaction.field.payment_card.mestro", img: "mestro", value: "MAESTRO"}
+    - {label: "transaction.field.payment_card.master_card", img: "master-card", value: "MASTERCARD"}
+    - {label: "transaction.field.payment_card.visa", img: "visa", value: "VISA"}
+    - {label: "transaction.field.payment_card.visa_electron", img: "visa-electron", value: "VISA_ELECTRON"}
+    default: "CB"
+  # system pay status
+  system_pay_status:
+    system_pay_status.none : ""
+    system_pay_status.pending : PENDING
+    system_pay_status.authorised : AUTHORISED
+    system_pay_status.accepted : ACCEPTED
+    system_pay_status.abandonne : ABANDONNE
+    system_pay_status.refused : REFUSED
+    system_pay_status.waiting_manually_validated : WAITING_MANUALLY_VALIDATED
+    system_pay_status.waiting_for_authorisation : WAITING_FOR_AUTHORISATION
+    system_pay_status.expired : EXPIRED
+    system_pay_status.cancelled : CANCELLED
+    system_pay_status.waiting_for_authorisation_and_manually_validated: WAITING_FOR_AUTHORISATION_AND_MANUALLY_VALIDATED
+    system_pay_status.cashed: CASHED

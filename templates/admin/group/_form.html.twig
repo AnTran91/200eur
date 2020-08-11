@@ -1,0 +1,17 @@
+{% trans_default_domain 'admin' %}
+
+<div class="card">
+  {{ form_start(form) }}
+  <div class="card-header">
+    {{'admin.group.group'|trans}}
+  </div>
+  {{ form_errors(form) }}
+  <div class="card-body">
+    {{ form_rest(form) }}
+  </div>
+  <div class="card-footer text-right">
+    <a href="{{ path('admin_group_index') }}" class="btn btn-link">{{ button_label|default('admin.link.back'|trans) }}</a>
+    <button type="submit" class="btn btn-primary ml-auto">{{ button_label|default('admin.form.save'|trans) }}</button>
+  </div>
+  {{ form_end(form) }}
+</div>

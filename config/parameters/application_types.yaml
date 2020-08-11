@@ -1,0 +1,13 @@
+###########################################################
+#                                                         #
+#        Application types configuration                  #
+#                                                         #
+###########################################################
+parameters:
+  # applications types
+  application_type_options:
+    application.type.emmobilier: application.type.emmobilier
+    application.type.immosquare: application.type.immosquare
+  # dashboard route validation
+  application_type_options_validation: application.type.emmobilier|application.type.immosquare
+  application_type_options_defaults: application.type.emmobilier

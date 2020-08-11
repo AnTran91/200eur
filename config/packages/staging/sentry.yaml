@@ -1,0 +1,6 @@
+sentry:
+    dsn: '%env(resolve:SENTRY_DSN)%'
+    skip_capture:
+        - 'Symfony\Component\HttpKernel\Exception\HttpExceptionInterface'
+    options:
+        error_types: E_ALL & ~E_DEPRECATED & ~E_NOTICE

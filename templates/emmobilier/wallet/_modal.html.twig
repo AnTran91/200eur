@@ -1,0 +1,26 @@
+<!-- Modal -->
+<div class="modal fade" id="js-wallet-modal" tabindex="-1" role="dialog" aria-labelledby="js-modal-label" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered lt-modal" role="document">
+    <div class="modal-content lt-modal-tirelire">
+      <div class="modal-header">
+        <h5 class="modal-title" id="js-modal-label">{{ 'wallet.new.title'|trans }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {{ form_start(form) }}
+      <div class="modal-body lt-modal-body">
+        <div class="form-container">
+          <p>{{ 'wallet.field.select_amount'|trans }}</p>
+          {{ form_row(form.currentAmount) }}
+        </div>
+      </div>
+      <div class="modal-footer lt-modal-footer">
+        <button type="reset" class="btn btn-second" data-dismiss="modal">{{ 'wallet.field.reset'|trans }}</button>
+        <button type="submit" class="btn btn-prime btn-prime-modal">{{ 'wallet.field.submit'|trans }}</button>
+      </div>
+      {{ form_rest(form) }}
+      {{ form_end(form) }}
+    </div>
+  </div>
+</div>

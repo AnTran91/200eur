@@ -1,0 +1,7 @@
+# This trick is to use the http_basic authentication in your application firewall
+# but only in the configuration file used by tests
+security:
+    firewalls:
+        # replace 'main' by the name of your own firewall
+        main:
+            http_basic: ~

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 35 22" style="enable-background:new 0 0 35 22;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{clip-path:url(#SVGID_3_);fill:#FFFFFF;}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-111.2453" y1="206.3549" x2="-109.8131" y2="206.3549" gradientTransform="matrix(0 16.3228 0.5041 0 -86.5536 1815.8423)">
+	<stop  offset="0" style="stop-color:#23194A"/>
+	<stop  offset="0.3515" style="stop-color:#23194A"/>
+	<stop  offset="0.4754" style="stop-color:#314D8D"/>
+	<stop  offset="0.5515" style="stop-color:#396AB2"/>
+	<stop  offset="0.6079" style="stop-color:#386AAE"/>
+	<stop  offset="0.6616" style="stop-color:#3769A3"/>
+	<stop  offset="0.7142" style="stop-color:#346990"/>
+	<stop  offset="0.7661" style="stop-color:#316775"/>
+	<stop  offset="0.817" style="stop-color:#2C6652"/>
+	<stop  offset="0.8485" style="stop-color:#296539"/>
+	<stop  offset="1" style="stop-color:#296539"/>
+</linearGradient>
+<rect x="1.6" y="0" class="st0" width="31.7" height="22"/>
+<g>
+	<defs>
+		<path id="SVGID_2_" d="M3.3,0c0,0-1.7,0-1.7,1.7l0,18.6c0,0.1,0,1.7,1.7,1.7l28.3,0c0,0,1.7,0,1.7-1.7l0-18.6c0,0,0-1.7-1.7-1.7
+			L3.3,0z"/>
+	</defs>
+	<clipPath id="SVGID_3_">
+		<use xlink:href="#SVGID_2_"  style="overflow:visible;"/>
+	</clipPath>
+	<path class="st1" d="M11.3,11.2l6.8,0c-0.1-1.3-0.4-2.7-1.4-3.6c-1.2-1.1-3.4-1.5-5.3-1.5c-2,0-4.2,0.4-5.5,1.6
+		c-1.1,1-1.3,2.6-1.3,4c0,1.5,0.5,3.2,1.6,4.2c1.2,1.1,3.2,1.3,5.2,1.3c1.9,0,3.9-0.3,5.1-1.3c1.2-1,1.7-2.7,1.7-4.2v0l-6.8,0
+		L11.3,11.2z"/>
+	<path class="st1" d="M18.6,11.6l0,5.3l9.5,0v0c1.4-0.1,2.5-1.2,2.5-2.6c0-1.4-1.1-2.6-2.5-2.7v0L18.6,11.6z"/>
+	<path class="st1" d="M30.4,8.7c0-1.4-1.1-2.4-2.4-2.4c-0.1,0-0.2,0-0.3,0l-9.1,0l0,4.9l9.5,0C29.4,11.1,30.4,10,30.4,8.7"/>
+</g>
+</svg>

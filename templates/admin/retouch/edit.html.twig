@@ -1,0 +1,72 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{'admin.retouch.retouch'|trans}}:
+  {{retouch.title}}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent()}}
+  <!-- Include Editor style. -->
+  <link rel="stylesheet" href="{{ asset('trumbowyg/ui/trumbowyg.min.css', 'admin_vendor') }}"/>
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('admin_retouch_index') }}">{{ 'admin.retouch.retouches_list'|trans }}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                  <li class="list-inline-item">{{ 'admin.retouch.retouch_edit'|trans }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="form-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid" id="js-retouch-section">
+        {% include 'admin/retouch/_form.html.twig' with {
+          "title" : 'admin.retouch.retouch_edit' | trans
+        } %}
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <!-- cdn -->
+  <script src="{{ asset('jquery_chained/jquery.chained.min.js', 'admin_vendor') }}"></script>
+  <script src="{{ asset('trumbowyg/trumbowyg.min.js', 'admin_vendor') }}"></script>
+  <script src="{{ asset('trumbowyg/langs/fr.min.js', 'admin_vendor') }}"></script>
+  <!-- custom js -->
+  <script src="{{ asset('jquery.collection.min.js', 'admin_js') }}"></script>
+  <script src="{{ asset('retouch.min.js', 'admin_js') }}"></script>
+  <!-- Main JS-->
+  <script>
+    (function($) {
+      // USE STRICT
+      "use strict";
+
+      var $retouch = new Retouch($('#js-retouch-section'));
+    })(jQuery);
+  </script>
+{% endblock %}

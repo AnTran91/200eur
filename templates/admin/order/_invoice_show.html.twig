@@ -1,0 +1,47 @@
+{% trans_default_domain 'admin' %}
+
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      {{'admin.invoice.invoice'|trans}} : {{ invoice.type|trans}}
+    </h3>
+    <div class="card-options">
+      <div class="btn-list">
+        <a target="_blank" href="{{ path('admin_invoice_show', {'id': invoice.id}) }}" class="btn btn-primary btn-sm">
+          <i class="fe fe-eye"></i>
+          {{ 'admin.common.action.show'|trans }}
+        </a>
+        <a target="_blank" href="{{ path('admin_invoice_download', {'id': invoice.id}) }}" class="btn btn-primary btn-sm" title="{{ 'admin.order.actions.view_invoice'|trans }}">
+          <i class="zmdi zmdi-collection-pdf"></i>
+          {{ 'admin.order.actions.view_invoice'|trans }}
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-top-campaign">
+      <tbody>
+        <tr>
+          <td>{{ 'admin.invoice.id'|trans }}</td>
+          <td>{{ "%06s"|format(invoice.invoiceNumber) }}</td>
+        </tr>
+        <tr>
+          <td>{{'admin.invoice.payment_date'|trans}}</td>
+          <td>{{ invoice ? invoice.paymentDate|date('d/m/Y H:i:s') : 'admin.order.unpaid'|trans }}</td>
+        </tr>
+        <tr>
+          <td>{{'admin.invoice.tax'|trans}}</td>
+          <td>{{ invoice ? invoice.taxPercentage|default('00') ~ " %" : 'admin.order.unpaid'|trans }}</td>
+        </tr>
+        <tr>
+          <td>{{'admin.invoice.reduction'|trans}}</td>
+          <td>{{ invoice ? invoice.reductionPercentage|default('00') ~ " %" : 'admin.order.unpaid'|trans }}</td>
+        </tr>
+        <tr>
+          <td>{{'admin.invoice.amount'|trans}}</td>
+          <td>{{ invoice ? invoice.totalAmount|price : 'admin.order.unpaid'|trans }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="col-md-4 form-container">
+
+  {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+  {{ form_row(form.billingAddress.firstName) }}
+  {{ form_row(form.billingAddress.lastName) }}
+  {{ form_row(form.email) }}
+  {{ form_row(form.plainPassword) }}
+  {{ form_row(form.emailSecondary) }}
+  <div class="row rgpd-box">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{'registration.rgpd_title'|trans}}
+            <a href="https://fr.wikipedia.org/wiki/R%C3%A8glement_g%C3%A9n%C3%A9ral_sur_la_protection_des_donn%C3%A9es">Loi RGPD 2018</a>
+          </h5>
+          <p class="card-text">
+            {{'registration.rgpd_content_accept'|trans|raw}}
+          </p>
+          {{ form_row(form.acceptConditions) }}
+          <p class="card-text">
+            {{'registration.rgpd_content_receive'|trans|raw}}
+          </p>
+          {{ form_row(form.receiveNewsletter) }}
+          {{ form_row(form.receiveTargetedEmailsFromPromotion) }}
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ form_row(form.billingAddress.corporateName) }}
+  {{ form_row(form.billingAddress.company) }}
+  {{ form_row(form.billingAddress.networkName) }}
+  {{ form_row(form.billingAddress.address) }}
+  {{ form_row(form.billingAddress.secondaryAddress) }}
+
+  <div class="row">
+    <div class="col-md-4 form-group">
+      {{ form_row(form.billingAddress.zipCode) }}
+    </div>
+    <div class="col-md-8 form-group">
+      {{ form_row(form.billingAddress.city) }}
+    </div>
+  </div>
+  {{ form_row(form.billingAddress.country) }}
+  {{ form_row(form.billingAddress.TVA) }}
+  <p id="req-tva" class="small-text">{{ 'registration.tva_info'|trans }}</p>
+
+  <div class="form-group position-relative">
+      {{ form_label(form.billingAddress.phone) }}
+      {{ form_widget(form.billingAddress.phone, {"attr" : {"class" : "form-control js-phone-validation"}}) }}
+      <div id="js-phone-success-validation" class="valid-feedback feedback-icon hide">
+          <i class="fa fa-check"></i>
+      </div>
+      <div id="js-phone-error-validation" class="invalid-feedback feedback-icon hide">
+          <i class="fa fa-times"></i>
+      </div>
+      {{ form_errors(form.billingAddress.phone) }}
+  </div>
+
+  {{ form_row(form.organization) }}
+  {{ form_rest(form) }}
+  <div class="center-login">
+    <button id="js-registration-button" class="btn btn-prime" type="submit">{% trans from "FOSUserBundle" %}registration.submit{% endtrans %}</button>
+    <p class="boxy-text-color">
+        {{ 'user.registration.terms_part1'|trans|raw }}
+        <a href="{{ path('emmobilier_cgv') }}">{{ 'user.registration.terms_part2'|trans }}</a>
+    </p>
+  </div>
+  {{ form_end(form) }}
+
+</div>
+<div class="social-network mx-auto" style="display: none;">
+  <div class="row social-container mx-auto">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-3">
+          <img class="social-network-img" src="{# asset('FB-logo') #}">
+        </div>
+        <div class="col-md-6">
+          <span class="small-link align-middle">
+            {{ 'user.registration.fb_log'|trans }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-3">
+          <img class="social-network-img" src="{# asset('GP-logo') #}">
+        </div>
+        <div class="col-md-6">
+          <span class="small-link align-middle">
+            {{ 'user.registration.gp_log'|trans }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

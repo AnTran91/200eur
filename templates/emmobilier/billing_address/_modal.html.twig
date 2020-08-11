@@ -1,0 +1,42 @@
+<!-- Modal -->
+{{ form_start(form) }}
+<div class="modal fade" id="billing_address_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title center pl-5" id="exampleModalLongTitle">{{ 'transaction.billing_address.title'|trans }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-10 form-container">
+          {{ form_row(form.firstName) }}
+          {{ form_row(form.lastName) }}
+          {{ form_row(form.company) }}
+          {{ form_row(form.networkName) }}
+          {{ form_row(form.address) }}
+          {{ form_row(form.secondaryAddress) }}
+          <div class="row">
+            <div class="col-md-4 form-group">
+              {{ form_row(form.zipCode) }}
+            </div>
+            <div class="col-md-8 form-group">
+              {{ form_row(form.city) }}
+            </div>
+          </div>
+
+          {{ form_row(form.country) }}
+          {{ form_row(form.phone) }}
+          {{ form_row(form.corporateName) }}
+          {{ form_row(form.TVA) }}
+        </div>
+      </div>
+      <div class="modal-footer center lt-px-auto">
+        <button type="button" class="btn btn-second" data-dismiss="modal">{{ 'transaction.billing_address.modal.close'|trans }}</button>
+        <button id="submit_billing_address" type="button" class="btn btn-prime btn-prime-modal">{{ 'transaction.billing_address.modal.validate'|trans }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{ form_end(form) }}

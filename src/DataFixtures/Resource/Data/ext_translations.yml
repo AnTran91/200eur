@@ -1,0 +1,564 @@
+# emmo_test.ext_translations
+-
+  id: 1
+  locale: "en"
+  object_class: "AppEntityFieldChoices"
+  field: "choiceLabel"
+  foreign_key: 1
+  content: "Keep the dimensions of the imported image"
+-
+  id: 2
+  locale: "en"
+  object_class: "AppEntityFieldChoices"
+  field: "choiceLabel"
+  foreign_key: 2
+  content: "Resize the image"
+-
+  id: 3
+  locale: "en"
+  object_class: "AppEntityFieldChoices"
+  field: "choiceLabel"
+  foreign_key: 5
+  content: "Origine"
+-
+  id: 4
+  locale: "en"
+  object_class: "AppEntityFieldChoices"
+  field: "choiceLabel"
+  foreign_key: 6
+  content: "JEPEG extension"
+-
+  id: 5
+  locale: "en"
+  object_class: "AppEntityFieldChoices"
+  field: "choiceLabel"
+  foreign_key: 7
+  content: "PNG extension"
+-
+  id: 6
+  locale: "en"
+  object_class: "AppEntityFieldChoices"
+  field: "choiceLabel"
+  foreign_key: 8
+  content: "From this image"
+-
+  id: 7
+  locale: "en"
+  object_class: "AppEntityFieldChoices"
+  field: "choiceLabel"
+  foreign_key: 9
+  content: "Personalize"
+-
+  id: 8
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 1
+  content: "Size"
+-
+  id: 9
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 4
+  content: "GIF Animated before after"
+-
+  id: 10
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 5
+  content: "Additional information"
+-
+  id: 11
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 6
+  content: "Watermark"
+-
+  id: 12
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 7
+  content: "For 2D Photo-Staging, need to write:"
+-
+  id: 13
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 2
+  content: "Height"
+-
+  id: 14
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 3
+  content: "Width"
+-
+  id: 15
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 6
+  content: "Would you like to insert your logo ?"
+-
+  id: 16
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 7
+  content: "Choose your Logo"
+-
+  id: 17
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 8
+  content: "Choose the position of the logo"
+-
+  id: 18
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 9
+  content: "Would you like an animated GIF before-after of your image?"
+-
+  id: 19
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 11
+  content: "Tapez votre filigrane"
+-
+  id: 20
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 12
+  content: "Choose your Logo"
+-
+  id: 21
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 13
+  content: "Choose the position of the logo"
+-
+  id: 22
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 14
+  content: "if you had any special instructions to send us, write here:"
+-
+  id: 23
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 15
+  content: "Do you want to insert a watermark?"
+-
+  id: 24
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 16
+  content: "Type your watermark"
+-
+  id: 25
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 17
+  content: "Choose your watermark"
+-
+  id: 26
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 18
+  content: "Choose the position of the watermark"
+-
+  id: 27
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 19
+  content: "Non-contractual renovation proposal."
+-
+  id: 28
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 20
+  content: "Non-contractual renovation project."
+-
+  id: 29
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 5
+  content: "VIRTUAL PHOTO-STAGING"
+-
+  id: 30
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 5
+  content: "<p>For indoor photos. - Inlay of furniture / creation of Ambiance. - - Delivery delivered by default, to \"about 1 week\", even if included in 1 order in 48h or 24h.</p>"
+-
+  id: 31
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 6
+  content: "RELEVANCE « INTERIOR »"
+-
+  id: 32
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 6
+  content: "<p>For indoor photos.</p><p>Virtual storage and decluttering:</p><p>- We store personal belongings,</p><p>- We unclutter the interior layout,</p><p>- We balance chromie &amp; light,</p><p>- We correct the optical distortions,</p><p>- We recover the external views.</p><p>This service has its limits, it requires to be able to reconstitute the materials, the forms, the style, the design of the furniture ...</p>"
+-
+  id: 33
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 7
+  content: "RELEVANCE \"EXTERIOR\""
+-
+  id: 34
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 7
+  content: "<p>For outdoor photos.</p><p>Virtual storage and decluttering :</p><p>- We store personal belongings.</p><p>- We unclutter the exterior layout.</p><p>- We balance chromie &amp; light.</p><p>- We correct the optical distortions.</p>"
+-
+  id: 35
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 8
+  content: "\"OUTDOOR\" LAYOUT"
+-
+  id: 36
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 8
+  content: "<p>For outdoor photos.</p><p>- We arrange your outdoor spaces according to your requests,</p><p>- We create non-existent lawns,</p><p>- We decorate your spaces of floral ornamentation, shrubs,</p><p>- We encrust garden furniture,</p><p>- We work the facades of goods,</p>"
+-
+  id: 37
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 13
+  content: "For each image 1, define the wall and / or floor renovation choices that we have pre-selected for you."
+-
+  id: 38
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 29
+-
+  id: 39
+  locale: "en"
+  object_class: "AppEntityFieldRenovationType"
+  field: "typeName"
+  foreign_key: 1
+  content: "Wall"
+-
+  id: 40
+  locale: "en"
+  object_class: "AppEntityFieldRenovationType"
+  field: "typeName"
+  foreign_key: 2
+  content: "Sol"
+-
+  id: 41
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 14
+  content: "BULE SKY"
+-
+  id: 42
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 30
+  content: "Would you like a blue sky in season?"
+-
+  id: 43
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 0
+  content: "BLUE SKY"
+-
+  id: 44
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 0
+  content: "<p>For outdoor images.</p><p><strong>Only</strong> the sky is retouched.</p><p><br></p><p>&nbsp; Weather in grisaille, rainy or insipid sky?</p><p>- We apply a blue sky of season.</p><p>- We adapt the chromium to reflections: windows, rivers, rivers, seas ...</p><p><br></p>"
+-
+  id: 45
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 1
+  content: "RELEVANCE 360°"
+-
+  id: 46
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 1
+  content: "<p>For indoor photos.</p><p>Virtual storage:</p><p>- We store personal belongings,</p><p>- We balance chromie &amp; light,</p><p>- We recover the external views.</p><p>- No correction of optical distortions.</p>"
+-
+  id: 47
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 2
+  content: "2D PHOTO-STAGING"
+-
+  id: 48
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 2
+  content: "<p>Empty / renovate</p><p>- We completely empty the room, We remove the curtains only when the external view and door frames are visible, to restore.</p><p>- We renovate floors, walls and ceilings, according to your requests, those of your customers or pre-selected samples.</p><p>- You can now project yourself into the current good, emptied of its content, with your future choices of color and material.</p>"
+-
+  id: 49
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 3
+  content: "BALANCING"
+-
+  id: 50
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 3
+  content: "<p>The content of your photo is good, but the rendering of the image unsatisfactory:</p><p>* We balance the chromium, the light.</p><p>* We correct the optical distortions.</p><p>* We recover (uncork) the external views.</p><p>* The content of the image is not retouched.</p>"
+-
+  id: 51
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 9
+  content: "CREEPUSCULE'S ATMOSPHERE"
+-
+  id: 52
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 9
+  content: "<p>Outdoor photos.</p><p>For refined atmospheres, or cozy end of the day.</p><p>- We apply a sunset sky,</p><p>- We adapt the chromium to reflections: windows, rivers, rivers, seas ...</p><p>- We turn on your outdoor lights,</p><p>- We highlight your pools.</p>"
+-
+  id: 53
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 10
+-
+  id: 54
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 10
+-
+  id: 55
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 10
+-
+  id: 56
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 1
+-
+  id: 57
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 4
+-
+  id: 58
+  locale: "en"
+  object_class: "AppEntityFieldChoices"
+  field: "choiceLabel"
+  foreign_key: 3
+  content: "PX"
+-
+  id: 59
+  locale: "en"
+  object_class: "AppEntityFieldChoices"
+  field: "choiceLabel"
+  foreign_key: 4
+  content: "CM"
+-
+  id: 60
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 3
+  content: "Logo"
+-
+  id: 61
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 11
+  content: "BLUE SKY 360°"
+-
+  id: 62
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 11
+  content: "<p>Weather in grisaille, rainy or bleak sky?</p><p>- We apply a blue sky of season.</p><p>- We adapt the chromium to reflections: windows, rivers, rivers, seas ...</p><p>- We \"dry\" the terraces or sidewalks ...</p>"
+-
+  id: 63
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 12
+  content: "RELEVANCE « INTERIOR »"
+-
+  id: 64
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 12
+  content: "<p>For indoor photos.</p><p>Virtual storage and decluttering:</p><p>- We store personal belongings,</p><p>- We unclutter the interior layout,</p><p>- We balance chromie &amp; light,</p><p>- We correct the optical distortions,</p><p>- We recover the external views.</p><p>This service has its limits, it requires to be able to reconstitute the materials, the forms, the style, the design of the furniture ...</p>"
+-
+  id: 65
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 13
+  content: "RELEVANCE « EXTERIOR »"
+-
+  id: 66
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 13
+  content: "<p>For outdoor photos.&nbsp;<span style=\"font-size: 0.9375rem;\">Virtual storage and decluttering :</span></p><p>- We store personal belongings.</p><p>- We unclutter the exterior layout.</p><p>- We balance chromie &amp; light.</p><p>- We correct the optical distortions.</p>"
+-
+  id: 67
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 14
+  content: "PHOTO STAGING 2D"
+-
+  id: 68
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 14
+  content: "<p style=\"text-align: right;\"><font color=\"#4272d7\"><span style=\"font-size: 14px;\">Empty / renovate</span></font></p><p style=\"text-align: right;\"><font color=\"#4272d7\"><span style=\"font-size: 14px;\"><br></span></font></p><p style=\"text-align: right;\"><font color=\"#4272d7\"><span style=\"font-size: 14px;\">- We completely empty the room, We remove the curtains only when the external view and door frames are visible, to restore.</span></font></p><p style=\"text-align: right;\"><font color=\"#4272d7\"><span style=\"font-size: 14px;\"><br></span></font></p><p style=\"text-align: right;\"><font color=\"#4272d7\"><span style=\"font-size: 14px;\">- We renovate floors, walls and ceilings, according to your requests, those of your customers or pre-selected samples.</span></font></p><p style=\"text-align: right;\"><font color=\"#4272d7\"><span style=\"font-size: 14px;\"><br></span></font></p><p style=\"text-align: right;\"><font color=\"#4272d7\"><span style=\"font-size: 14px;\">You can now project yourself into the current good, emptied of its content, with your future choices of color and material.</span></font></p>"
+-
+  id: 69
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "title"
+  foreign_key: 15
+  content: "BALANCING"
+-
+  id: 70
+  locale: "en"
+  object_class: "AppEntityRetouch"
+  field: "description"
+  foreign_key: 15
+  content: "<p style=\"color: rgb(66, 114, 215); font-size: 14px; text-align: right;\">The content of your photo is good, but the rendering of the image unsatisfactory:</p><p style=\"color: rgb(66, 114, 215); font-size: 14px; text-align: right;\">* We balance the chromium, the light.</p><p style=\"color: rgb(66, 114, 215); font-size: 14px; text-align: right;\">* We correct the optical distortions.</p><p style=\"color: rgb(66, 114, 215); font-size: 14px; text-align: right;\">* We recover (uncork) the external views.</p><p style=\"color: rgb(66, 114, 215); font-size: 14px; text-align: right;\">* The content of the image is not retouched.</p>"
+-
+  id: 71
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 11
+  content: "For Virtual Photo-Staging, need to write:"
+-
+  id: 72
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 22
+-
+  id: 73
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 23
+-
+  id: 74
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 16
+  content: "Bed not done"
+-
+  id: 75
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 32
+-
+  id: 76
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 9
+  content: "For OUTDOOR DEVELOPMENT, need to write:"
+-
+  id: 77
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 24
+-
+  id: 78
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 25
+-
+  id: 79
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 12
+  content: "Outdoor pool"
+-
+  id: 80
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 28
+  content: "Do you want to brighten your pool?"
+-
+  id: 81
+  locale: "en"
+  object_class: "AppEntityFieldGroup"
+  field: "labelText"
+  foreign_key: 10
+  content: "Specifications"
+-
+  id: 82
+  locale: "en"
+  object_class: "AppEntityField"
+  field: "labelText"
+  foreign_key: 26
+  content: "Briefly describe your planning guidelines, 1 line per need."

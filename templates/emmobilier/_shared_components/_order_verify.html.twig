@@ -1,0 +1,32 @@
+<header id="js-order-header">
+  <div>
+    <h4>
+      {% if order.orderNumber %}
+        {{'orders.number'|trans}}
+        {{ "%04s"|format(order.orderNumber) }}
+      {% else %}
+        {{ order.creationDate|time_ago_in_words }}
+      {% endif %}
+    </h4>
+    <p>{{ 'orders.field.status'|trans }} :
+      <span class="color-orange">{{ order.orderStatus|trans|capitalize }}</span>
+    </p>
+  </div>
+  <div class="row command-info-container">
+    <div class="col-md-5 command-info">
+      <div class="command-option-btn ">
+        <i class="fa fa-calendar"></i>
+        {{ order.creationDate|date('d/m/Y') }}
+      </div>
+      <div class="center">
+        <i class="fa fa-image"></i>
+        {{ 'orders.index.nb_pictures'|trans({'%nb_img%': order.pictures|length })}}
+      </div>
+    </div>
+    <div class="col-md-7">
+      {% if order is completed %}
+        <a role="button" href="{{ path('order_done_zip', {'id': order.id})}}" class="details-btn float-right">{{ 'orders.verify.download_all'|trans }}</a>
+      {% endif %}
+    </div>
+  </div>
+</header>

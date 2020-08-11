@@ -1,0 +1,55 @@
+{% trans_default_domain 'admin' %}
+<!-- DATA TABLE -->
+<div class="card">
+    <div class="table-responsive">
+        <table class="table card-table table-vcenter text-nowrap">
+            <thead>
+            <tr>
+                <th class="w-2">{{ pagination_sortable(retouches, 'admin.retouch.title_fr'|trans, 'title') }}</th>
+                <th class="w-4">{{ pagination_sortable(retouches, 'admin.retouch.description_fr'|trans, 'description') }}</th>
+                <th class="w-4">{{ pagination_sortable(retouches, 'admin.retouch.retouch_type'|trans, 'appType') }}</th>
+                <th class="w-2"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for retouch in retouches %}
+                <tr>
+                    <td>{{ retouch.title }}</td>
+                    <td>{{ retouch.description|strip_tags|truncate(60) }}</td>
+                    <td>
+                        <span class="badge {% if (retouch is application_immosquare) %}badge-success{% elseif (retouch is application_emmobilier) %}badge-info{% endif %}">{{ retouch.appType|trans }}</span>
+                    </td>
+                    <td>
+                        <div class="table-data-feature">
+                            <a href="{{ path('admin_retouch_show', {'id': retouch.id}) }}" class="item"
+                               data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.show'|trans }}" data-original-title="More">
+                                <i class="zmdi zmdi-eye"></i>
+                            </a>
+                            <a href="{{ path('admin_retouch_edit', {'id': retouch.id}) }}" class="item"
+                               data-toggle="tooltip" data-placement="top" title="{{ 'admin.common.action.edit'|trans }}" data-original-title="More">
+                                <i class="fe fe-edit"></i>
+                            </a>
+                            {% include 'admin/retouch/_delete_form.html.twig' %}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr class="odd">
+                    <td valign="top" colspan="7" class="text-center">{{ 'admin.paginator.empty_table'|trans|raw }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer p-0">
+        <div class="d-flex align-items-center p-2">
+            <div class="mr-auto p-2">
+                {{ pagination_info(retouches) }}
+            </div>
+            <div class="p-2">
+
+                {{ knp_pagination_render(retouches) }}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+stages:
+  - production
+
+variables:
+  ###> symfony/framework-bundle ###
+  APP_ENV: prod
+  ###< symfony/framework-bundle ###
+
+  ###> symfony/swiftmailer-bundle ###
+  MAILER_URL: "test://localhost"
+  ###< symfony/swiftmailer-bundle ###
+
+  ###> doctrine/doctrine-bundle ###
+  DATABASE_URL: $DATABASE_URL
+  ###< doctrine/doctrine-bundle ###
+
+  ###> beelab/recaptcha2-bundle ###
+  APP_RECAPTCHA_SITE_KEY: ""
+  APP_RECAPTCHA_SECRET: ""
+  ###< beelab/recaptcha2-bundle ###
+
+  ###> sentry/sentry-symfony ###
+  SENTRY_DSN: ""
+  ###< sentry/sentry-symfony ###
+
+deploy_production:
+  stage: production
+  only:
+    - dev
+  tags: # `tags` is used to select specific Runners from the list of all Runners that are allowed to run this project.
+    - prod_emmo # dev, staging, prod, ...
+  script:
+    - sudo cp -Rf . $PROJECT_DIR
+    - cd $PROJECT_DIR 
+    - sudo mkdir -p public/uploads public/invoices public/extract
+    - sudo mkdir -p var/cache var/log
+    - sudo mkdir -p vendor/
+    - sudo mkdir -p public/bundles/fosjsrouting
+    - sudo setfacl -R -m u:www-data:rwX $PROJECT_DIR
+    - sudo setfacl -R -m u:www-data:rwX $PROJECT_DIR/public/assets $PROJECT_DIR/public/extract $PROJECT_DIR/public/invoices $PROJECT_DIR/public/uploads $PROJECT_DIR/var/cache $PROJECT_DIR/var/log
+    - sudo setfacl -dR -m u:www-data:rwX $PROJECT_DIR/public/assets $PROJECT_DIR/public/extract $PROJECT_DIR/public/invoices $PROJECT_DIR/public/uploads $PROJECT_DIR/var/cache $PROJECT_DIR/var/log
+    - sudo chown -R www-data:www-data .
+    - sudo APP_ENV=prod composer install --no-dev --verbose --optimize-autoloader --no-interaction --no-progress
+    - sudo php7.1 $PROJECT_DIR/bin/console --env=prod cache:clear
+    - sudo php7.1 $PROJECT_DIR/bin/console assets:install --env=prod --no-debug --symlink --relative
+  allow_failure: true

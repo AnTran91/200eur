@@ -1,0 +1,457 @@
+# language section
+language:
+    fr:                                        Français
+    en:                                        English
+# loading text
+loader_msg:                                    Veuillez patienter, cela peut prendre quelques secondes...
+# modal
+modal:
+    close:                                     Fermer
+# error pages
+error:
+    return_button:                             Aller à la page d'accueil
+    error_500:
+        msg:                                   Un problème est survenu, veuillez essayer plus tard
+    error_404:
+        status_text:                           Oups Page introuvable
+        msg:                                   La page que vous recherchez n'existe pas ou a été déplacée.
+    error_403:
+        status_text:                           Accès refusé
+        msg:                                   Vous n'avez pas la permission d'accéder à cette page.
+# fos user section
+# login section
+login:
+    help:
+      login:                                   Vous avez déjà un compte?
+      forgot_password:                         Mot de Passe oublié ?
+      create_accout:                           Vous n'avez pas de compte ?
+    create_accout:                             Créer un compte
+# resetting section
+resetting:
+    title:                                     Mot de passe oublié ?
+    info:                                      Nous avons pris soin de vous envoyer un lien par courriel, afin de réinitialiser votre mot de passe.
+    request:
+        username:                              'Nom d''utilisateur ou courriel'
+        submit:                                'Réinitialiser le mot de passe'
+# registration section
+registration:
+    registration:                              Enregistrement
+    back:                                      Retour
+    tutorial:                                  Tutoriel Inscription
+    email:                                     Courriel
+    tva_info:                                  Vous êtes client étranger et avez besoin d'une exoneration de TVA, le renseignement de ce champs est obligatoire.
+    rgpd_title:                                Protection des données
+    rgpd_content_accept:                              "<p class='text-justify'>La collecte des données personnelles est strictement encadrée par le <strong>RGPD</strong>.<br>Afin d'instaurer une relation de confiance avec nos clients face à la protection des données personnelles,
+                                               <strong>EMMOBILIER</strong> vous informe que la collecte des données à la création de votre <strong>Compte Client</strong> sert à :</p>
+                                               <ul class='list-group list-group-flush'>
+                                                  <li class='list-group-item'>
+                                                    La gestion de la facturation, inhérente à notre activité de Prestation de Service en ligne.
+                                                  </li>
+                                                  <li class='list-group-item'>
+                                                    Et à vous joindre pour le suivi de vos commandes.
+                                                  </li>
+                                               </ul><br>"
+    rgpd_content_receive:                      "<p class='text-justify'>Également, à recevoir le Bulletin d’informations d’<strong>EMMOBILIER</strong> et nos offres commerciales ciblées :</p>"
+# logout section
+logout:
+    title:                                     Se déconnecter ?
+    question:                                  Êtes-vous sûr de vouloir vous déconnecter ?
+    info:                                      Appuyez sur Rester connecté si vous voulez continuer à travailler. Appuyez sur Déconnexion pour vous déconnecter.
+    ok:                                        Déconnexion
+    cancel:                                    Rester connecté
+# Profile
+profile:
+    show:
+        username:                              'Courriel'
+        email:                                 'Courriel'
+# menu section
+menu:
+    order:                                     Commandes
+    edit_account:                              Mon Compte
+    admin_space:                               Espace d'administration
+    profile:                                   Profil
+    setting:                                   Changer le mot de passe
+    logout:                                    Déconnexion
+    wallet:                                    'Montant Tirelire %amount%'
+    exit:                                      'Sortie'
+# user section
+user:
+    profile:
+      title:                                   Mon Compte
+      account_info:                            Informations du compte
+      billing_address:                         Informations de facturation
+      wallet:                                  Montant de la Tirelire
+      change_password:                         Changer le mot de passe de votre compte
+    account:
+      picture:                                 Photo de Profil
+      upload:                                  Télecharger une image
+      change_password:                         Changer le mot de passe
+    field:
+      first_name:                              Nom
+      last_name:                               Prénom
+      email:                                   Courriel
+      email_secondary:                         Courriel secondaire
+      language:                                Langue
+      company:                                 Société
+      network_name:                            Réseau
+      address:                                 Adresse1
+      secondary_address:                       Adresse2
+      zip_code:                                Code Postal
+      city:                                    Ville
+      country:                                 Pays
+      phone:                                   Numéro de téléphone
+      corporate_name:                          Raison sociale
+      TVA:                                     TVA intracommunautaire
+      registerCode:                            Code inscription
+      empty_field:                             ''
+      submit:                                  Sauvegarder les modifications
+      acceptConditions:                        J'accepte les conditions de la loi RGPD 2018
+      receiveNewsletter:                       Je souhaite recevoir le Bulletin d'informations d'EMMOBILIER
+      receiveTargetedEmailsFromPromotion:      Je souhaite recevoir des courriels ciblés des promotions d'EMMOBILIER
+    registration:
+      terms_part1:                             En cliquant sur "S'inscrire" vous acceptez </br> Nos
+      terms_part2:                             conditions générales de vente.
+      fb_log:                                  Se connecter avec Facebook
+      gp_log:                                  Se connecter avec Google+
+# wallet section
+wallet:
+    field:
+      select_amount:                           Choisissez le montant de votre Tirelire
+      custom_amount:                           Montant personnalisé
+      not_refundable:                          La Tirelire n'est pas remboursable
+      submit:                                  Ajouter des Euros
+      reset:                                   Annuler
+      current_amount:                          Solde actuel
+      quantity:                                "Quantité d'€uros ajoutée"
+      total_amount:                            TOTAL de la TIRELIRE
+    new:
+      title:                                   Approvisionner la Tirelire
+      button:                                  Valider ce règlement
+# order section
+#		form
+redirection_to_gateway :                       "Redirection vers la plateforme de paiement"
+# orders
+orders:
+    number:                                    'N° Commande:'
+    msg:
+      new_wallet:                              Le paiement avec la Tirelire a été effectué avec succès.
+      new_transaction:                         Le paiement est accepté, la commande est confirmée.
+      error_transaction:                       "Le paiement a été abandonné. La commande n'est pas créée. Elle est en mémoire dans l'HISTORIQUE sous le statut : EN ATTENTE DE PAIEMENT"
+      new:                                     Votre commande est prête dans l'historique des commandes.
+      new_monthly_invoice:                     Votre commande en facturation fin de mois est validée. Vous la trouverez dans l’HISTORIQUE de vos commandes.
+      new_pay_later:                           Votre commande est mise en attente dans l'historique des commandes.
+      delete:                                  Votre commande a été supprimée avec succès.
+      token_error:                             Jeton CSRF manquant ou incorrect.
+      order_creation_error:                    Impossible de créer votre commande. La commande a été annulée ou une erreur de serveur s'est produite.
+      order_delete_error:                      Impossible de supprimer votre commande. La commande a été annulée ou une erreur de serveur s'est produite.
+      wallet_error:                            'Votre Tirelire est inférieur à %montant%.'
+      refused:                                 Cette image a été refusée.
+      validated:                               Validation effectuée.
+    confirm:
+        title:                                 Confirmation
+        deletemsg:                             Êtes-vous sûr de supprimer cette commande ?
+        continuemsg:                           Es-tu sûr de vouloir continuer?
+        ok:                                    Ok
+        cancel:                                Annuler
+    title:
+      recap:                                   Paiement
+      verify:                                  Validez et téléchargez vos images
+      list:                                    Historique des Commandes
+    button:
+      payment_by_wallet:                       Payer avec Tirelire
+      new:                                     Nouvelle commande
+      show:                                    Visualiser la commande
+      payment:                                 Payer
+      invoice:                                 Télecharger la Facture
+      disabled:                                Commande invalide
+      delete:                                  Supprimer
+      verify:                                  VALIDEZ LES IMAGES LIVRÉES #Validez vos images
+      download:                                Téléchargez vos images
+      no_invoice:                              Aucune facture (le type de paiement de cette commande est mensuel)
+      addition:                                Prestation(s) complementaires
+    upload:
+      title:                                   Téléchargez vos images
+      sub_title:                               1 - Glissez vos images dans l'espace ci-dessous. Ou chargez-les depuis votre ordinateur.
+      step_1:                                  1 - Glissez vos images dans l'espace ci-dessous. Ou chargez-les depuis votre ordinateur.
+      step_2:                                  2 - Sélectionnez pour chaque image la (ou les) prestation(s) de retouche dont vous avez besoin.
+      step_2_info:                             1 prestation = 1 image.
+      step_2_subs:                             "Définissez ensuite leurs paramètres et options dans "
+      contact_info:                            "Vous envisagez de nous confier plus de 50 images à la fois, contactez-nous sur <a class='small-link' href='mailto:%email%'>%email%</a>. Nous vous ouvrirons un autre mode de transfert."
+      param_select:                            Appliquez à toutes les images
+    verify:
+      sub_title:                               Voici la livraison du travail du graphiste sur vos images.<br>
+                                               Seule la validation des images retouchées permet leur téléchargement sur votre ordinateur.<br>
+                                               Si vous constatez un éventuel défaut sur une image, refusez-la. Elle repartira vers le graphiste pour correction et vous sera livrée dans les plus brefs délais.
+      download_all:                            Télécharger tout
+      download:                                Télécharger
+      confirm:                                 Valider et télécharger image
+      refuse:                                  Refuser
+    field:
+      status:                                  Statut de la commande
+      delivery:                                "Livraison %time"
+      info:                                    (hors samedi, dimanche, jours fériés et jours autres non travaillés)
+    index:
+      nb_pictures:                             "%nb_img% Image(s)"
+      nb_pictures_not_displayed:               "%nb_img% Image(s) de plus"
+    refuse_modal:
+      title:                                   Refus d'image
+      sub_title:                               Raison du refus
+      commentary:                              Écrire succinctement ici
+      close:                                   Fermer
+      confirm:                                 Confirmer
+    recap:
+      title:                                   Récapitulatif de votre commande
+      sub_title:                               "COMMANDE N° <span class='color-dark'>%order_num%</span>, le %date%"
+      sub_title_not_paid:                      Commande EN ATTENTE DE PAIEMENT, créée le %date%
+      info:                                    Votre image va être retouchée suivant les prestations suivantes.
+      info_mult:                               "Vos %nbr_img% images vont être retouchées suivant les prestations suivantes."
+      promo:
+        field:                                 code promo
+        question:                              Avez-vous un code promo?
+        submit_button:                         Appliquer
+        msg:
+          success:                             "Avantage Code Promo: %promo_code"
+          picture_counter:                     "Code promo prêt à l'emploi. Pour chaque %limitImage photo(s), vous obtiendrez %imagewithReduction photo(s) avec %reduction% réduction dessus."
+          error:                               Impossible de trouver le code promotionnel ou l'erreur du serveur rencontrés.
+          not_valid_promo:                     Ce code promo n'est pas valide.
+          valid_promo:                         Ce code promo est valide.
+          notFoundError:                       Le code promo n'existe pas.
+      submit:
+        free_order:                            Valider cette commande
+        transaction:                           Payer la commande
+        save:                                  Payer votre commande plus tard
+        monthly:                               Paiment Mensuel
+        wallet:                                Payer avec Tirelire
+      table:
+        payment_type:                          Type de Paiment
+        picture_total_number:                  Nombre total d'images commandées
+        picture_number:                        Nombre d'image(s) prestation %title%
+        unit_price:                            Prix unitaire (%title%)
+        total_price:                           Total HT (%title%)
+        retouch_total_price:                   Total HT
+        retouch_reduction:                     Pourcentage de réduction (%title%)
+        total_reduction_price:                 Total de réduction
+        total_reduction_pictures:              Nombre total d'images avec réduction
+        param_price:                           Nombre d'options %title%
+        total_price_ht:                        Prix Total de la Commande HT
+        total_price_tva:                       Total TVA
+        total_price_ttc:                       Prix Total de la Commande TTC
+        total_after_reduction_price_ttc:       Prix total de la Commande après réduction TTC
+        delivery:                              Livraison
+      wallet:
+        error:                                 Le montant de votre Tirelire est insuffisant
+        info1:                                 Merci de l'approvisionner maintenant,
+        info2:                                 afin de poursuivre votre commande.
+      holiday:
+        info:
+          title:                               Rappel <strong>CALENDRIER</strong>
+          message:                             <p>La livraison des commandes en dépendant, nous vous invitons à consulter le(s) jour(s) non travaillé(s) des graphistes.</p><br><strong>La Production</strong>.
+        cal_header:                            Calendrier des jours ouvrés
+        days_worked:                           '<span class="days-worked">En rose</span> =  les jours travaillés'
+        days_off:                              '<span class="days-off">En gris</span> =  les jours non travaillés (weekend, jours fériés et autres...)'
+# uploader section
+uploader:
+  msg:
+    setting:
+      success:                                 Le paramètre d'image a été mis à jour avec succès.
+      error:                                   Le réglage de l'image n'est pas valide.
+      validate:                                Vous devez choisir au moins une prestation par image.
+      validate_img:                            Vous devez choisir au moins une prestation pour cette image.
+    param:
+      success:                                 Les paramètres d'image ont été modifier avec succès.
+  template:
+    upload:                                    Parcourez les fichiers de votre ordinateur
+    select_all:                                Tout sélectionner
+    delete_all:                                Supprimer l'ensemble des images
+    dropzone:                                  Glissez et déposez directement vos images ici.
+    retry:                                     Recommencez
+    pause:                                     Pause
+    continue:                                  continuer
+    delete:                                    Supprimer
+    emptyError:                                '{file} est vide, veuillez sélectionner à nouveau les images.'
+    minSizeError:                              '{file} est trop petit, la taille minimale est {minSizeLimit}.'
+    noFilesError:                              Aucune image à télécharger.
+    onLeave:                                   Les images sont en cours de téléchargement, si vous partez maintenant le téléchargement sera annulé.
+    retryFailTooManyItemsError:                Réessayer a échoué - vous avez atteint la limite possible d'images.
+    sizeError:                                 "{file} est trop grand, la taille d'image maximale est {sizeLimit}."
+    tooManyItemsError:                         "Trop des photos ({netItems}) seront téléchargés. La limite d'image est {itemLimit}."
+    typeError:                                 '{file} a une extension invalide. Extension (s) valide (s): {extensions}.'
+    unsupportedBrowserIos8Safari:              "Erreur irrécupérable - ce navigateur ne permet pas le téléchargement de fichiers de toute sorte en raison de graves bugs dans iOS8 Safari. Veuillez utiliser iOS8 Chrome jusqu'à ce qu'Apple répare ces problèmes."
+    confirm:
+        title:                                 Confirmation
+        deletemsg:                             Êtes-vous sûr de supprimer cette image ?
+        multipledeletemsg:                     Êtes-vous sûr de vouloir supprimer ces images ?
+        ok:                                    Ok
+        cancel:                                Annuler
+  request:
+      error:                                   Les paramètres de la requête ne sont pas valides.
+  upload:
+      msg:
+        new:                                   Image ajoutée avec succès.
+        delete:                                image supprimée avec succès.
+        delete_error:                          Impossible de supprimer le fichier ou le repertoire est endommagé ou illisible.
+        deleteMultiple:                        Les images spécifiées ont été supprimées avec succès.
+        error:                                 Impossible d'enregistrer les images téléchargées. Le téléchargement a été annulé ou une erreur de serveur s'est produite.
+  validation:
+      request:                                 La demande est invalide.
+      params:                                  Les paramètres de la requête HTTP sont vides ou inexistants.
+      file:
+          not_found:                           Aucune image à télécharger.
+          error:                               Erreur de téléchargement
+          size:
+            empty:                             La taille de l'image sélectionné n'est pas valide.
+            large:                             L'image choisi est trop grand.
+          extension:                           L'image a une extension invalide.
+          thumb:
+            generate:                          Impossible de générer une miniature.
+            draw:                              Impossible de dessiner une image.
+settings:
+    submit:                                    Appliquer les paramètres
+    title:
+      retouch:                                 Réglage prestation
+      param_options:                           PARAMÈTRES et OPTIONS
+      param:                                   Cliquez sur « <span class="text-pink">+</span> » pour ouvrir et fermer les paramètres et options de chacune de vos prestations
+    msg:
+      error:                                   Vous devez sélectionner au moins une photo pour continuer.
+form:
+    type:
+        bool:
+          yes:                                 Oui
+          no:                                  Non
+        retouch:
+          small_duration:                      Délai %time%unit
+          long_duration:                       Délai environ %time %unit
+# transaction section
+transaction:
+  wallet:
+    transaction_success:                       L’approvisionnement de votre Tirelire a été effectué avec succès
+  order:
+    title:                                     Payer la commande
+    button:                                    Valider le paiement
+  billing_address:
+    title:                                     Adresse de facturation
+    edit:                                      Modifier
+    modal:
+        close:                                 Fermer
+        validate:                              Valider
+  field:
+    reference:                                 Nom du titulaire de la carte
+    card_number:                               Card number
+    expiry_year:                               Année
+    expiry_month:                              Expire fin
+    csc:                                       Cryptogramme
+    card_type:                                 "Choisissez votre moyen de paiement :"
+    submit:                                    Valider le paiement
+    payment_card:
+      master_card:                             MasterCard
+      cb:                                      CB
+      e_blue:                                  E-carte bleue
+      visa:                                    Visa
+      visa_electron:                           Visa Electron
+      mestro:                                  Maestro
+invoice:
+    types:
+      ordinary:                                Ordinaire
+      monthly:                                 Mensuel
+fpdf_invoice:
+    invoice:                                   FACTURE N° %num% DU %date%
+    wallet_invoice_title:                      COMMANDE TIRELIRE DU %date%
+    recharge_invoice:                          FACTURE TIRELIRE N° %num% DU %date%
+    recharge_wallet:                           Approvisionnement TIRELIRE
+    client:                                    Bénéficiaire
+    work:                                      Travaux réalisés
+    work_desc:                                 Retouche(s) De Photo(s) Immobilière(s)
+    user_tva_info:                             'N° de TVA : %num'
+    order:                                     COMMANDE
+    order_additional:                          Complément de la COMMANDE
+    order_info:                                'N°: %num%, Le: %date%'
+    Designation:                               Désignation
+    amount:                                    Qté
+    picture_number:                            Total d'images
+    order_num:                                 N° de commande
+    agent_name:                                Nom de l'agent
+    create_date:                               Date de création
+    promo_code:                                Code promotionnel
+    picture_unit:                              "%nb Image(s)"
+    unit_price:                                PU H.T.
+    vat:                                       TVA
+    total_wt:                                  Total H.T.
+    total_vat:                                 Total TVA
+    total_price:                               Total TTC
+    code_promo:                                'Payée avec ces codes Promo : %code_promo%'
+    total_reduction_price:                     Total réduction
+    total_reduction_picture:                   Total d'images avec réduction
+    rate:                                      Taux
+    payed_with:                                'Payée avec: %card_brand%  N° %card_number%'
+    selected_retouch:                          "Prestation de retouche: "
+    selected_retouch_paid:                     "Déjà payé Prestation de retouche: "
+    selected_param:                            "Paramètre complémentaire:"
+    currency:                                  Les prix indiqués sont en Euros.
+    footer1:                                   -SAS au capital de 10 000 euros-RCS Versailles 821 693 900 - N° TVA Intracommunautaire FR 51 821 693 900
+    footer2:                                   "Siège Social: 13bis, rue Gambetta 78600 Le Mesnil le Roi - Tel.: 01 85 39 05 43 Contact : contact@emmobilier.fr"
+    footer_prev_title:                         "Règlement par virement bancaire :"
+    footer_prev_sub:                           "BRED BOULOGNE M. SEMBAT      FR76 1010 7002 0500 4180 5312 963     BIC : BREDFRPPXXX"
+    footer_prev_sub_second:                    "Règlement à effectuer dès réception de la présente facture"
+    footer_prev:                               "En cas de paiement tardif, les pénalités de retard sont exigibles de plein droit sans qu’un rappel soit nécessaire. Le taux des pénalités est fixé à 3 fois le taux d’intérêt légal. Une indemnité forfaitaire pour frais de recouvrement de 40 €, par créance, est due à l’occasion de tout retard de paiement et est exigible dès le lendemain de la date d’échéance de la facture. Ces pénalités sont non soumises à TVA."
+    first_order_line:                          "Facture complémentaire , erreur de prestation, et/ou ajout de"
+    first_order_line_sub:                      "prestation de retouche ou d'option supplémentaire."
+    wallet_title:                              Règlement effectué avec la TIRELIRE
+    before_balance:                            Solde TIRELIRE initial
+    after_balance:                             Solde TIRELIRE après commande
+# Time
+time:
+    hour:                                      h
+    day:                                       jours
+    week:                                      semaine
+    month:                                     mois
+    year:                                      années
+# Months
+month:
+    april:                                     Avril
+    august:                                    Août
+    december:                                  Décembre
+    february:                                  Février
+    january:                                   Janvier
+    july:                                      Juillet
+    june:                                      Juin
+    march:                                     Mars
+    may:                                       Mai
+    november:                                  Novembre
+    october:                                   Octobre
+    september:                                 Septembre
+# Time ago in words
+less than %seconds seconds ago:                Il y a moins de% secondes secondes
+half a minute ago:                             Il y a une minute
+less than a minute ago:                        Il y a moins d'une minute
+1 minute ago:                                  Il y a une minute
+'%minutes minutes ago':                        "Il y a %minutes minutes"
+about 1 hour ago:                              Il ya environ une heure
+about %hours hours ago:                        Il y a environ %hours heures
+1 day ago:                                     Il y a un jour
+'%days days ago':                              "Il y a %days jours"
+"{1} 1 month ago |]1,Inf[ %months months ago": "{1} il ya 1 mois |] 1, Inf [il ya %months mois"
+"{1} 1 year ago |]1,Inf[ %years years ago":    "{1} il y a 1 an |] 1, Inf [il y a %years années"
+# order
+order:
+  status:
+    all:                                     Afficher tout
+    pending:                                 En attente
+    awaiting_for_payment:                    En attente de paiement
+    awaiting_for_verification:               En attente de vérification
+    awaiting_for_client_response:            En attente de réponse client
+    awaiting_for_verification_by_production: En attente de vérification par la production
+    awaiting_complete_by_client:             En attente de finalisation par le client
+    in_production:                           En Production
+    send_to_client:                          Livrée au client
+    delivery_short_time_ready:               Délai court livré, délai long prochainement
+    completed:                               Validée
+    partially_completed:                     Validation partielle
+    cancelled:                               Annulée
+    declined:                                Refusé
+    declined_by_client:                      Refusée par le Client
+    failed_payment:                          Erreur de paiement
+    error_cb:                                Erreur carte bancaire
+    declined_by_production:                  Refusée par la production
+    cancelled_and_refound:                   Annulée et remboursée en totalité
+    cancelled_and_partially_refound:         Annulée et remboursée partiellement
+    approvisionnement_tirelire:              Approvisionnement TIRELIRE

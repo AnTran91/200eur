@@ -1,0 +1,110 @@
+{% trans_default_domain 'admin' %}
+
+<div class="col-lg-12">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">{{ picture.pictureName|length > 50 ? picture.pictureName|slice(0, 50) ~ '...' : picture.pictureName }}</h3>
+      <div class="card-options">
+        <a target="_blank" href="{{ picture.picturePath }}" download="{{ picture.pictureName }}" class="btn btn-primary btn-sm">
+          <i class="fas fa-download"></i>
+          {{ 'admin.order.actions.download_picture'|trans }}
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <img class="h-10" src="{{ picture.picturePathThumb }}">
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table card-table table-striped table-vcenter">
+          <thead>
+            <tr>
+              <th class="text-nowrap">{{ 'admin.picture.picture'|trans }}</th>
+              <th class="text-nowrap">{{ 'admin.picture.painted'|trans }}</th>
+              <th>{{ 'admin.retouch.retouch'|trans }}</th>
+              <th>{{ 'admin.picture.status'|trans }}</th>
+              <th>{{ 'admin.picture.commentary'|trans }}</th>
+              <th>{{ 'admin.picture.price'|trans }}</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pictureDetail in picture.pictureDetail %}
+              <tr>
+                <td class="text-nowrap">
+                  {% if pictureDetail.returnedPicture is not null and pictureDetail.returnedPicture.picturePathThumb is not null %}
+                    <img src="{{ pictureDetail.returnedPicture.picturePathThumb }}" alt="{{ pictureDetail.returnedPicture.pictureName }}" class="h-8 img-thumbnail">
+                  {% else %}
+                    <img src="{{ asset('no-img.png', 'admin_images') }}" alt="{{ picture.pictureName }}" class="h-8 img-thumbnail">
+                  {% endif %}
+                </td>
+                <td class="text-nowrap">
+                  {% if pictureDetail.returnedPicture is not null and pictureDetail.returnedPicture.paintedPicturePathThumb is not null %}
+                    <img src="{{ pictureDetail.returnedPicture.paintedPicturePathThumb }}" alt="{{ pictureDetail.returnedPicture.pictureName }}" class="h-8 img-thumbnail">
+                  {% else %}
+                    <img src="{{ asset('no-img.png', 'admin_images') }}" alt="{{ picture.pictureName }}" class="h-8 img-thumbnail">
+                  {% endif %}
+                </td>
+                <td class="text-nowrap">
+                  {{ pictureDetail.retouch.title }}
+                </td>
+                <td class="text-nowrap">
+                  {{ pictureDetail.returnedPicture.status|default('admin.common.empty_field')|trans }}
+                </td>
+                <td class="text-nowrap">
+                  {{ pictureDetail.returnedPicture.commentary|default('admin.common.empty_field'|trans) }}
+                </td>
+                <td class="text-nowrap">
+                  {{ pictureDetail.price|price }}
+                </td>
+                <td class="text-nowrap">
+                  <ul class="list-unstyled leading-loose">
+                    <li>
+                      <a href="#" class="js-picture-detail-param" data-picture-detail-id="{{ pictureDetail.id }}" data-retouch-id="{{ pictureDetail.retouch.id }}">
+                        <i class="fe fe-settings  text-success mr-2"></i>
+                        {{ 'admin.order.param_show'|trans({}, 'admin') }}
+                      </a>
+                    </li>
+                    <li>
+                      <a target="_blank" href="{{ path('admin_picture_paint', {'id': pictureDetail.id}) }}">
+                        <i class="fas fa-paint-brush text-success mr-2"></i>
+                        {{ 'admin.order.actions.paint_picture'|trans }}
+                      </a>
+                    </li>
+                    <li>
+                      {% if pictureDetail.returnedPicture is not empty and pictureDetail.returnedPicture.paintedPicturePath is not empty %}
+                        <a href="{{ path('admin_delete_paint_picure', {'id_picture_detail': pictureDetail.id}) }}">
+                          <i class="fas fa-trash text-success mr-2"></i>
+                          {{ 'admin.order.actions.delete_paint_picture'|trans }}
+                        </a>
+                      {% endif %}
+                    </li>
+                    <li>
+                      {% if pictureDetail.returnedPicture is not empty and pictureDetail.returnedPicture.paintedPicturePath is not empty %}
+                        <a target="_blank" href="{{ pictureDetail.returnedPicture.paintedPicturePath }}" download="{{ pictureDetail.returnedPicture.paintedPicturePath|file_name }}">
+                          <i class="fas fa-download text-success mr-2"></i>
+                          {{ 'admin.order.actions.download_painted_picture'|trans }}
+                        </a>
+                      {% endif %}
+                    </li>
+                    <li>
+                      {% if pictureDetail.returnedPicture is not empty and pictureDetail.returnedPicture.picturePathThumb is not empty %}
+                        <a target="_blank" href="{{ pictureDetail.returnedPicture.picturePath }}" download="{{ picture.pictureName }}">
+                          <i class="fe fe-download text-success mr-2"></i>
+                          {{ 'admin.order.actions.download_delivered_picture'|trans }}
+                        </a>
+                      {% endif %}
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

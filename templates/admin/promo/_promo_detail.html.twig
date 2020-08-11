@@ -1,0 +1,56 @@
+{% trans_default_domain 'admin' %}
+
+<div class="card">
+  <div class="card-header">
+    {{ promoDetail.retouch.title }}
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-top-campaign">
+        <tbody>
+          <tr>
+            <td>{{'admin.retouch.title'|trans}}</td>
+            <td>{{ promoDetail.retouch.title }}</td>
+          </tr>
+          {% if promoDetail.reduction is defined and promoDetail.imageLimit is defined and promoDetail.imageLimitPerUser is defined %}
+            <tr>
+              <td>{{'admin.promo.reduction'|trans}}</td>
+              <td>{{ promoDetail.reduction }}
+                %</td>
+            </tr>
+            <tr>
+              <td>{{'admin.promo.image_limit'|trans}}</td>
+              <td>{{ promoDetail.imageLimit }}
+                {{ 'admin.common.unit.image'|trans }}</td>
+            </tr>
+            <tr>
+              <td>{{'admin.promo.image_limit_pre_user'|trans}}</td>
+              <td>{{ promoDetail.imageLimitPerUser|default('<i class="fas fa-infinity"></i>')|raw }}
+                {{ 'admin.common.unit.image'|trans }}
+              </td>
+            </tr>
+          {% endif %}
+
+          {% if promoDetail.imageCounterReduction is defined and promoDetail.imageCounterLimit is defined and promoDetail.imageCounterLimitWithReduction is defined %}
+            <tr>
+              <td>{{'admin.promo.image_counter_reduction'|trans}}</td>
+              <td>{{ promoDetail.imageCounterReduction }}
+                %</td>
+            </tr>
+            <tr>
+              <td>{{'admin.promo.image_counter_limit'|trans}}</td>
+              <td>{{ promoDetail.imageCounterLimit }}
+                {{ 'admin.common.unit.image'|trans }}</td>
+            </tr>
+            <tr>
+              <td>{{'admin.promo.image_counter_limit_with_reduction'|trans}}</td>
+              <td>{{ promoDetail.imageCounterLimitWithReduction }}
+                {{ 'admin.common.unit.image'|trans }}</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

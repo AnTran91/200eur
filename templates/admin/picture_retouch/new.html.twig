@@ -1,0 +1,11 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}New PictureDetails{% endblock %}
+
+{% block body %}
+    <h1>Create new PictureDetails</h1>
+
+    {{ include('admin/picture_retouch/_form.html.twig') }}
+
+    <a href="{{ path('admin_picture_retouch_index') }}">back to list</a>
+{% endblock %}

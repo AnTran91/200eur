@@ -1,0 +1,138 @@
+{% extends 'admin/base.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block title %}
+  {{'admin.user.users'|trans}}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent()}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('daterangepicker.min.css', 'daterangepicker') }}"/>
+{% endblock %}
+
+{% block content %}
+  <!-- BREADCRUMB-->
+  <section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="au-breadcrumb-content">
+              <div class="au-breadcrumb-left">
+                <ul class="list-unstyled list-inline au-breadcrumb__list">
+                  <li class="list-inline-item active">
+                    <a href="{{ path('admin_user_index') }}">
+                      <i class="fe fe-home"></i>
+                      {{'admin.user.user_list'|trans}}</a>
+                  </li>
+                  <li class="list-inline-item seprate">
+                    <span>/</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <a href="{{ path('admin_email_manually_send') }}" class="btn btn-pill btn-primary">
+                  <i class="fe fe-send"></i>
+                    {{'admin.user.send_emails'|trans}}</a>
+                <a href="{{ path('admin_extract_emails') }}" class="btn btn-pill btn-primary">
+                  <i class="fe fe-file-text"></i>
+                  {{'admin.user.extract_emails'|trans}}</a>
+                <a href="{{ path('admin_user_new') }}" class="btn btn-pill btn-primary">
+                  <i class="fe fe-plus-circle"></i>
+                  {{'admin.form.add'|trans}}</a>
+                <a href="{{ path('generate_current_wallet_amount') }}" class="btn btn-pill btn-primary">
+                  <i class="fe fe-file-text"></i>
+                  {{'Soldes TIRELIRE'}}</a>
+                <a href="{{ path('generate_last_login_since_v2') }}" class="btn btn-pill btn-primary">
+                  <i class="fe fe-file-text"></i>
+                  {{'Commandé au moins 1 fois depuis 01/2019'}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END BREADCRUMB-->
+
+  <section class="list-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid" id="js-user-list">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- DATA TABLE -->
+            <h3 class="title-5 m-b-35">{{'admin.user.user_list'|trans}}</h3>
+
+            <!-- ACTIONS -->
+            <div class="float-right pb-5 clearfix">
+              <button
+                type="button"
+                class="btn btn-danger"
+                id="js-delete-multiple-records"
+                data-href="{{ path('admin_user_bulk_enabled')}}"
+                data-token="{{ csrf_token('multiselect_user') }}"
+                data-title="{{ 'admin.common.modal_title'|trans }}"
+                data-msg="{{ 'admin.common.mutiple_expire_msg'|trans }}">
+                <i class="fas fa-lock mr-2"></i>{{ 'admin.user.disabled_enabled'|trans }}
+              </button>
+            </div>
+            <!-- END ACTIONS -->
+
+            <!--  FILTER FORM -->
+            {% include 'admin/user/_filter_form.html.twig' %}
+
+            <div class="card">
+              <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap" id="js-card-table">
+                  <thead>
+                    <tr>
+                      <th class="text-center w-1">
+                        <label class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="js-select-all">
+                          <span class="custom-control-label"></span>
+                        </label>
+                      </th>
+                      <th class="text-center w-1"></th>
+                      <th>{{ js_sortable_render(users, 'admin.user.username'|trans, 'username') }}</th>
+                      <th>{{ js_sortable_render(users, 'admin.user.first_name'|trans, 'firstName') }}</th>
+                      <th>{{ js_sortable_render(users, 'admin.user.last_name'|trans, 'lastName') }}</th>
+                      <th>{{ js_sortable_render(users, 'admin.user.activity'|trans, 'lastLogin') }}</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% include 'admin/user/_list.html.twig' with {
+                      'users' : users
+                    }
+                    only %}
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer">
+                <div class="float-right">
+                  {{ js_pagination_render(users) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('jquery.bootpag.min.js', 'admin_js') }}"></script>
+  <script src="{{ asset('selectize/selectize.min.js', 'admin_vendor') }}"></script>
+  <script src="{{ asset('moment.min.js', 'momentjs') }}"></script>
+  <script src="{{ asset('daterangepicker.min.js', 'daterangepicker') }}"></script>
+  <script src="{{ asset('paginator.min.js', 'admin_js') }}"></script>
+  <script>
+    (function($) {
+      // USE STRICT
+      "use strict";
+      var paginator = new Paginator($("#js-user-list"));
+    })(jQuery);
+  </script>
+{% endblock %}

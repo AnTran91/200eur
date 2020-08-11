@@ -1,0 +1,51 @@
+{% extends 'emmobilier/base.html.twig' %}
+
+{% block title %}
+  {{ 'wallet.new.title'|trans }}
+{% endblock %}
+
+{% block body %}
+  <section class="row main-title">
+    <div class="col-md-6">
+      <img class="page-title-img" src="{{ asset('icon_CB.svg', 'local_icons') }}">
+      <h2>{{ 'wallet.new.title'|trans }}</h2>
+    </div>
+  </section>
+
+  <section class="row lt-px-auto">
+    <div class="col-md-7">
+      <div class="lt-px-auto">
+        <table class="table table-hover price-table">
+          <tbody>
+            <tr>
+              <th scope="row">{{ 'wallet.field.quantity'|trans }}</th>
+              <td>{{ amount|price }}</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ 'wallet.field.total_amount'|trans }}</th>
+              <td>{{ (amount + app.user.wallet.currentAmount)|price }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="float-right">
+        <a href="{{ path('new_wallet_transaction', {'amount' : amount, '_token': csrf_token('update_wallet' ~ app.user.wallet.id ~ amount) }) }}" class="btn btn-prime-payment square">{{ 'wallet.new.button'|trans }}</a>
+      </div>
+    </div>
+    <div class="col-md-5 facturation-adr">
+      <h5>{{ 'transaction.billing_address.title'|trans }}</h5>
+      <button type="button" class="btn btn-second" data-toggle="modal" data-target="#billing_address_modal">{{ 'transaction.billing_address.edit'|trans }}</button>
+    </div>
+  </section>
+
+  {{ render(controller('App\\Controller\\Emmobilier\\BillingAddressController::renderForm')) }}
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <!-- START PAGE JS SCRIPTS -->
+  <script src="{{ asset('jquery.form.min.js', 'jquery_form') }}"></script>
+  <script src="{{ asset('billing_address.min.js', 'local_js') }}"></script>
+  <!-- END PAGE JS SCRIPTS -->
+{% endblock %}
