@@ -1,16 +1,1 @@
-#########################################################################
-#                                                                       #
-#  global configuration file control the settings of this application   #
-#                                                                       #
-#########################################################################
-parameters:
-  # Swiftmailer Configuration
-  mailer_transport: smtp
-  mailer_host:      smtp.sendgrid.net
-  mailer_port:      587
-  mailer_encryption: tls
-  mailer_user:      simatai
-  mailer_password:  "$$simatai2017!!"
-  # Mail sender
-  sender_address: 'production@emmobilier.fr'
-  sender_name:    'Emmobilier webmaster'
+
